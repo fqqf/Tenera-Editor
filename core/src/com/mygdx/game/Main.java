@@ -36,7 +36,7 @@ public class Main extends ApplicationLoop
   testLevel.addObject(new Dobject()
       .setSize(100,10)
       .setTexture(new Texture(Gdx.files.internal("map.png")))
-      .setVisibility(false)
+      .setVisibility(true)
     ,"map");
 
   testLevel.addObject(new Dobject()

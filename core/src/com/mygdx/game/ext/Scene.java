@@ -18,7 +18,7 @@ public class Scene
  private boolean once;
 
  // TODO: RENDER SCENE GRID
- float width=100, height=10;
+ float width=1000, height=10;
 
  public Scene(String name, Field field)
  {
