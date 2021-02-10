@@ -45,7 +45,7 @@ public class Main extends ApplicationLoop
       .setTexture(new Texture(Gdx.files.internal("badlogic.jpg")))
     ,"box3");
 
-  gameScreen.cameraController.move(1,2);
+  gameScreen.cameraController.move(0,0);
  }
 
  // Gdx.gl.glClearColor(0.7f, 0.7f, 0.7f, 1);
@@ -87,6 +87,5 @@ public class Main extends ApplicationLoop
  public void resize(int width, int height)
  {
   view.update(width, height);
-  gameScreen.cameraController.setStartPosition();
  }
 }

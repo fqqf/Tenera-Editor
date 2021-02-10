@@ -6,12 +6,10 @@ package com.mygdx.game.ext;
  * There is a static amount of units on one side,
  * and other is changing its amount to keep first static. */
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class Field
@@ -30,7 +28,7 @@ public class Field
 
  public float
    unitWidth, unitHeight,
-   nonCeiledUnitWidth;
+   notIntegerUnitWidth; // TODO: Find better name {unitWidth = Math.ceil(notIntegerUnitWidth)}
 
  public Field(String name, float unitHeight)
  {
@@ -40,7 +38,7 @@ public class Field
   
   calcFieldWidth();
 
-  viewport = new ExtendViewport(nonCeiledUnitWidth, unitHeight);
+  viewport = new ExtendViewport(notIntegerUnitWidth, unitHeight);
   camera = (OrthographicCamera) viewport.getCamera();
   batch = view.getBatch();
   liner = view.getLiner();
@@ -53,8 +51,8 @@ public class Field
 
  private void calcFieldWidth()
  {
-  nonCeiledUnitWidth = (view.pixelWidth * unitHeight) / view.pixelHeight;
-  unitWidth = (int) Math.ceil(nonCeiledUnitWidth);
+  notIntegerUnitWidth = (view.pixelWidth * unitHeight) / view.pixelHeight;
+  unitWidth = (int) Math.ceil(notIntegerUnitWidth);
  }
 
  public void debug(Color lines, Color center, Color lim)
@@ -71,11 +69,11 @@ public class Field
   for (int i = 0; i < unitHeight; i++) liner.line(0, i, unitWidth, i);
 
   liner.setColor(center);
-  liner.line(0,unitHeight/2,nonCeiledUnitWidth,unitHeight/2);
-  liner.line(nonCeiledUnitWidth/2,0,nonCeiledUnitWidth/2,unitHeight);
+  liner.line(0,unitHeight/2, notIntegerUnitWidth,unitHeight/2);
+  liner.line(notIntegerUnitWidth /2,0, notIntegerUnitWidth /2,unitHeight);
 
   liner.setColor(lim);
-  liner.line(nonCeiledUnitWidth,0,nonCeiledUnitWidth,unitHeight);
+  liner.line(notIntegerUnitWidth,0, notIntegerUnitWidth,unitHeight);
 
   liner.end();
  }
@@ -84,7 +82,7 @@ public class Field
  {
   calcFieldWidth();
 
-  viewport.setMinWorldWidth(nonCeiledUnitWidth);
+  viewport.setMinWorldWidth(notIntegerUnitWidth);
   viewport.update(view.pixelWidth, view.pixelHeight, false);
 
   cameraController.update(viewport.getMinWorldWidth(), viewport.getMinWorldHeight());

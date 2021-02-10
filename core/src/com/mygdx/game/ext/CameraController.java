@@ -9,7 +9,7 @@ public class CameraController
 
  private ExtendViewport viewport;
  private OrthographicCamera camera;
- private float VPC_X=1, VPC_Y=1; // viewportTransformationCoefficient
+ private float cameraX, cameraY;
  private final float originWidth, originHeight;
  private float curWidth, curHeight;
 
@@ -25,13 +25,14 @@ public class CameraController
 
  public void setPosition(float x, float y)
  {
-  camera.position.x = curWidth/2-x*VPC_X;
-  camera.position.y = curHeight/2-y*VPC_Y;
+  cameraX = x; cameraY = y;
+  camera.position.x = curWidth/2-x;
+  camera.position.y = curHeight/2-y;
  }
 
  public void move(float x, float y)
  {
-  camera.translate(-x*VPC_X,-y*VPC_Y);
+  cameraX += x; cameraY += y;
  }
 
  public void setStartPosition()
@@ -44,10 +45,8 @@ public class CameraController
  {
   curWidth = width;
   curHeight = height;
-  VPC_X = curWidth/originWidth;
-  VPC_Y = curHeight/originHeight;
 
- // setStartPosition();
+  setPosition(cameraX, cameraY);
  }
 
  public void setViewport(ExtendViewport viewport)
