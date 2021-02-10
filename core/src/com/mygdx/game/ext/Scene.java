@@ -22,17 +22,22 @@ public class Scene
 
  // field.camera.position.x = 100;
 
+
+  field.camera.update();
   field.liner.setProjectionMatrix(field.camera.combined);
  }
 
  /**Provides standart draw extrapolation system a-la: draw(curPos+speed*extrapolation)*/
  public void iterDraw(float extrapolation)
  {
+
   view.setField(field);
+
 
   batch.begin();
   dobjects.forEach((k,obj) -> obj.draw(extrapolation));
   batch.end();
+
  }
 
  public void iterPhys()
@@ -47,6 +52,8 @@ public class Scene
 
  public void updt()
  {
+  field.camera.position.x = 0;
+  field.camera.position.y = 0;
   //field.camera.position.x = field.camera.unproject(new Vector3(Gdx.input.getX(),0,0)).x;
  }
 

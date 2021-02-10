@@ -10,8 +10,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import java.util.ArrayList;
 
 /**
- * This view implementation
- * extends horizontal units, and keeps vertical the same */
+ * Manages different fields
+ * */
 
 public class View
 {
@@ -22,8 +22,6 @@ public class View
  public int
    pixelWidth = Gdx.graphics.getWidth(),
    pixelHeight = Gdx.graphics.getHeight();
-
- public float nonCeiledUnitWidth;
 
  public View()
  {
@@ -47,41 +45,21 @@ public class View
   this.pixelWidth = width;
   this.pixelHeight = height;
 
-  for (Field field : fields)
-  {
-   calcFieldWidth(field);
-
-   field.viewport.setMinWorldWidth(nonCeiledUnitWidth);
-   field.viewport.update(pixelWidth, pixelHeight, true);
-  }
+  for (Field field : fields) field.update();
  }
 
- Field field;
- public Field createField(String name, float unitHeight)
+ /* Being called automatically, when field is created */
+ public void addField(Field field)
  {
-  field = new Field(name, unitHeight, this);
-
-  calcFieldWidth(field);
-  field.viewport = new ExtendViewport(field.nonCeiledUnitWidth, field.unitHeight);
-  field.camera = (OrthographicCamera) field.viewport.getCamera();
-  field.batch = batch;
-  field.liner = liner;
-
   fields.add(field);
-  return field;
  }
-
- private void calcFieldWidth(Field field)
- {
-  field.nonCeiledUnitWidth = (pixelWidth * field.unitHeight) / pixelHeight;
-  field.unitWidth = (int) Math.ceil(field.nonCeiledUnitWidth);
- }
-
- public SpriteBatch getBatch() { return batch; }
 
  public void setField(Field field)
  {
   batch.setProjectionMatrix(field.camera.combined);
   liner.setProjectionMatrix(field.camera.combined);
  }
+
+ public SpriteBatch getBatch() { return batch; }
+ public ShapeRenderer getLiner() { return liner; }
 }

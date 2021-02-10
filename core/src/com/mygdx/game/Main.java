@@ -21,8 +21,8 @@ public class Main extends ApplicationLoop
   super.create();
 
   view = new View();
-  gameInterface = view.createField("Level Field", 25);
-  gameScreen = view.createField("Menu Field", 7);
+  gameInterface = new Field("Level Field", 25);
+  gameScreen = new Field("Menu Field", 7);
   testLevel = new Scene("Test Level", gameScreen);
   hero = new Hero()
     .setScene(testLevel, "hero")
@@ -44,6 +44,8 @@ public class Main extends ApplicationLoop
       .setSize(1,1)
       .setTexture(new Texture(Gdx.files.internal("badlogic.jpg")))
     ,"box3");
+
+
  }
 
  // Gdx.gl.glClearColor(0.7f, 0.7f, 0.7f, 1);
@@ -84,6 +86,5 @@ public class Main extends ApplicationLoop
  {
   super.resize(width, height);
   view.update(width, height);
-  testLevel.updt();
  }
 }

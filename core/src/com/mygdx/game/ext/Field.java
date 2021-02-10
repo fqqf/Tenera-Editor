@@ -15,12 +15,14 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class Field
 {
+ private String name;
+
  public View view;
 
  public ExtendViewport viewport;
  public OrthographicCamera camera;
 
- public String name;
+ public CameraController cameraController;
 
  public SpriteBatch batch;
  public ShapeRenderer liner;
@@ -31,25 +33,37 @@ public class Field
 
  Vector2 fieldPosition = new Vector2(0,0);
 
- public Field(String name, float unitHeight, View view)
+ public Field(String name, float unitHeight)
  {
-  this.view = view; this.name = name;
+  this.name = name;
   this.unitHeight = unitHeight;
+  this.view = Singletones.view;
+  
+  calcFieldWidth();
 
-  calcProportion();
-
-  viewport = new ExtendViewport(nonCeiledUnitWidth, unitHeight); // max scaling properties (1920:1080)
+  viewport = new ExtendViewport(nonCeiledUnitWidth, unitHeight);
   camera = (OrthographicCamera) viewport.getCamera();
+  batch = view.getBatch();
+  liner = view.getLiner();
+  cameraController = new CameraController(viewport);
 
+  view.addField(this);
   View.log.info("Field \""+name+"\" was created");
  }
 
- private void calcProportion()
+ public void update()
+ {
+  calcFieldWidth();
+
+  viewport.setMinWorldWidth(nonCeiledUnitWidth);
+  viewport.update(view.pixelWidth, view.pixelHeight, true);
+ }
+ 
+ private void calcFieldWidth()
  {
   nonCeiledUnitWidth = (view.pixelWidth * unitHeight) / view.pixelHeight;
   unitWidth = (int) Math.ceil(nonCeiledUnitWidth);
  }
-
 
  public void debug(Color lines, Color center, Color lim)
  {
