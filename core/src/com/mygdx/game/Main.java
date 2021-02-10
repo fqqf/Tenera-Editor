@@ -24,21 +24,33 @@ public class Main extends ApplicationLoop
  // gameInterface = new Field("Menu Field", 7);
   gameScreen = new Field("Level Field", 7);
   testLevel = new Scene("Test Level", gameScreen);
+
+
+
   hero = new Hero()
     .setScene(testLevel, "hero")
     .setPosition(1,0)
     .setSize(0.3f*2,0.8f*2)
     .setTexture(new Texture(Gdx.files.internal("hero.png")));
+
+  testLevel.addObject(new Dobject()
+      .setSize(100,10)
+      .setTexture(new Texture(Gdx.files.internal("map.png")))
+      .setVisibility(false)
+    ,"map");
+
   testLevel.addObject(new Dobject()
     .setPosition(3,0)
     .setSize(1,1)
     .setTexture(new Texture(Gdx.files.internal("badlogic.jpg")))
     ,"box1");
+
   testLevel.addObject(new Dobject()
       .setPosition(15,0)
       .setSize(6,8)
       .setTexture(new Texture(Gdx.files.internal("castle.png")))
     ,"castle");
+
   testLevel.addObject(new Dobject()
       .setPosition(8.15f-0.5f,3.5f-0.5f)
       .setSize(1,1)
