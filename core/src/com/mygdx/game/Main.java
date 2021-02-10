@@ -35,10 +35,10 @@ public class Main extends ApplicationLoop
     .setTexture(new Texture(Gdx.files.internal("badlogic.jpg")))
     ,"box1");
   testLevel.addObject(new Dobject()
-      .setPosition(6,0)
-      .setSize(2,1)
-      .setTexture(new Texture(Gdx.files.internal("badlogic.jpg")))
-    ,"box2");
+      .setPosition(15,0)
+      .setSize(6,8)
+      .setTexture(new Texture(Gdx.files.internal("castle.png")))
+    ,"castle");
   testLevel.addObject(new Dobject()
       .setPosition(8.15f-0.5f,3.5f-0.5f)
       .setSize(1,1)
@@ -63,7 +63,7 @@ public class Main extends ApplicationLoop
   testLevel.iterDraw(extrapolation);
 
   //gameInterface.debug(Color.BROWN, Color.BROWN, Color.BROWN);
-  gameScreen.debug(Color.LIME, Color.RED, Color.CYAN);
+  //gameScreen.debug(Color.LIME, Color.RED, Color.CYAN);
  }
 
  @Override

@@ -7,12 +7,12 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Dobject
 {
- private View view;
- private SpriteBatch batch;
- private Texture texture;
+ protected View view;
+ protected SpriteBatch batch;
+ protected Texture texture;
  public Vector2 speed, position;
  public float width, height;
- private boolean isVisible = true;
+ protected boolean isVisible = true;
 
  {
   this.view = Singletones.view;
