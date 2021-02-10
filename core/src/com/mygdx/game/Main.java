@@ -21,8 +21,8 @@ public class Main extends ApplicationLoop
   super.create();
 
   view = new View();
-  gameInterface = new Field("Level Field", 25);
-  gameScreen = new Field("Menu Field", 7);
+ // gameInterface = new Field("Menu Field", 7);
+  gameScreen = new Field("Level Field", 7);
   testLevel = new Scene("Test Level", gameScreen);
   hero = new Hero()
     .setScene(testLevel, "hero")
@@ -45,7 +45,7 @@ public class Main extends ApplicationLoop
       .setTexture(new Texture(Gdx.files.internal("badlogic.jpg")))
     ,"box3");
 
-
+  gameScreen.cameraController.move(1,2);
  }
 
  // Gdx.gl.glClearColor(0.7f, 0.7f, 0.7f, 1);
@@ -61,6 +61,8 @@ public class Main extends ApplicationLoop
   Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
   testLevel.iterDraw(extrapolation);
+
+  //gameInterface.debug(Color.BROWN, Color.BROWN, Color.BROWN);
   gameScreen.debug(Color.LIME, Color.RED, Color.CYAN);
  }
 
@@ -84,7 +86,7 @@ public class Main extends ApplicationLoop
  @Override
  public void resize(int width, int height)
  {
-  super.resize(width, height);
   view.update(width, height);
+  gameScreen.cameraController.setStartPosition();
  }
 }

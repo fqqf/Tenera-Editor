@@ -6,6 +6,7 @@ package com.mygdx.game.ext;
  * There is a static amount of units on one side,
  * and other is changing its amount to keep first static. */
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,8 +32,6 @@ public class Field
    unitWidth, unitHeight,
    nonCeiledUnitWidth;
 
- Vector2 fieldPosition = new Vector2(0,0);
-
  public Field(String name, float unitHeight)
  {
   this.name = name;
@@ -48,17 +47,10 @@ public class Field
   cameraController = new CameraController(viewport);
 
   view.addField(this);
-  View.log.info("Field \""+name+"\" was created");
+
+  View.log.info("Field \""+name+"\" was created ["+unitWidth+":"+unitHeight+"]");
  }
 
- public void update()
- {
-  calcFieldWidth();
-
-  viewport.setMinWorldWidth(nonCeiledUnitWidth);
-  viewport.update(view.pixelWidth, view.pixelHeight, true);
- }
- 
  private void calcFieldWidth()
  {
   nonCeiledUnitWidth = (view.pixelWidth * unitHeight) / view.pixelHeight;
@@ -86,5 +78,15 @@ public class Field
   liner.line(nonCeiledUnitWidth,0,nonCeiledUnitWidth,unitHeight);
 
   liner.end();
+ }
+
+ public void update()
+ {
+  calcFieldWidth();
+
+  viewport.setMinWorldWidth(nonCeiledUnitWidth);
+  viewport.update(view.pixelWidth, view.pixelHeight, false);
+
+  cameraController.update(viewport.getMinWorldWidth(), viewport.getMinWorldHeight());
  }
 }
