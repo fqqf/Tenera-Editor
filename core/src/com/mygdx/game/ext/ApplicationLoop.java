@@ -17,9 +17,9 @@ public class ApplicationLoop extends ApplicationAdapter
  Logger logger;
  public static final boolean DEBUG = false;
 
- private final long SECOND_IN_NANO = 1_000_000_000;
- private final long TICK_AMOUNT = 10;
- private final long TICK_IN_NANO = SECOND_IN_NANO / TICK_AMOUNT;
+ private static final float SECOND_IN_NANO = 1_000_000_000;
+ private static final float TICK_AMOUNT = 10;
+ private static final float TICK_IN_NANO = SECOND_IN_NANO / TICK_AMOUNT;
 
  public long realTime = TimeUtils.nanoTime(), renderDelta, inGameTime; // IN NANOSECONDS
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
@@ -33,7 +33,8 @@ public class ApplicationLoop extends ApplicationAdapter
   renderDelta = -(realTime - (realTime = TimeUtils.nanoTime())); // lastCallTime - curCallTime
 
   //TODO: Playing on 10 fps becomes not possible, because time stops
-  inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
+  //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
+  inGameTime += Math.min( renderDelta, TICK_IN_NANO );
 
   if (inGameTime > nextTickTime)
   {
@@ -43,7 +44,7 @@ public class ApplicationLoop extends ApplicationAdapter
    //logger.info("Calling Physics");
   }
 
-  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO))/(TICK_IN_NANO+0f);
+  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / TICK_IN_NANO;
   handleInput();
   drawGraphics();
 
@@ -81,6 +82,23 @@ public class ApplicationLoop extends ApplicationAdapter
  public void handleInput()
  {
 
+ }
+
+ private long pauseStartTime = 0;
+ @Override
+ public void resume()
+ {
+  long delta = TimeUtils.nanoTime() - pauseStartTime;
+  System.out.println("resume after pause: " + delta / SECOND_IN_NANO);
+  nextTickTime += delta;
+  inGameTime += delta;
+ }
+
+ @Override
+ public void pause()
+ {
+  System.out.println("pause");
+  pauseStartTime = TimeUtils.nanoTime();
  }
 }
 
