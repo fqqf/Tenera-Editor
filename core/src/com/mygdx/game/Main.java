@@ -33,7 +33,7 @@ public class Main extends ApplicationLoop
           .setTexture(new Texture(Gdx.files.internal("hero.png")));
 
   testLevel.addObject(new Dobject()
-                  .setDrawLayer(0)
+                  .setDrawLayer(1)
                   .setSize(100,10)
       .setTexture(new Texture(Gdx.files.internal("map.png")))
       .setVisibility(true)
@@ -47,7 +47,7 @@ public class Main extends ApplicationLoop
     ,"box1");
 
   testLevel.addObject(new Dobject()
-                  .setDrawLayer(2)
+                  .setDrawLayer(0)
       .setPosition(15,0)
       .setSize(6,8)
       .setTexture(new Texture(Gdx.files.internal("castle.png")))
