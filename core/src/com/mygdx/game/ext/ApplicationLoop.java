@@ -17,15 +17,18 @@ public class ApplicationLoop extends ApplicationAdapter
  Logger logger;
  public static final boolean DEBUG = false;
 
- private static final float SECOND_IN_NANO = 1_000_000_000;
- private static final float TICK_AMOUNT = 10;
- private static final float TICK_IN_NANO = SECOND_IN_NANO / TICK_AMOUNT;
+ private static final long SECOND_IN_NANO = 1_000_000_000;
+ private static final long TICK_AMOUNT = 10;
+ private static final long TICK_IN_NANO = SECOND_IN_NANO / TICK_AMOUNT;
+ //private static final float MAX_NANO_TIME_FOR_LOW_FPS = 50_000_000;
+ private static final long MAX_NANO_TIME_FOR_LOW_FPS = TICK_IN_NANO - TICK_IN_NANO/15;
 
  public long realTime = TimeUtils.nanoTime(), renderDelta, inGameTime; // IN NANOSECONDS
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
 
  protected float extrapolation = 0.5f;
-
+ private byte accum = 0;
+ private final static byte MAX_FRAME_IGNORE_LOW_FPS = 2;
  @Override
  public void render()
  {
@@ -34,7 +37,16 @@ public class ApplicationLoop extends ApplicationAdapter
 
   //TODO: Playing on 10 fps becomes not possible, because time stops
   //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
-  inGameTime += Math.min( renderDelta, TICK_IN_NANO );
+  if (renderDelta > MAX_NANO_TIME_FOR_LOW_FPS && ++accum > MAX_FRAME_IGNORE_LOW_FPS)
+  {
+   lowFpsHandler();
+   accum = MAX_FRAME_IGNORE_LOW_FPS;
+  }
+  else
+  {
+   if ( accum > MAX_FRAME_IGNORE_LOW_FPS ) accum = 0;
+   inGameTime += Math.min( renderDelta, TICK_IN_NANO );
+  }
 
   if (inGameTime > nextTickTime)
   {
@@ -44,7 +56,7 @@ public class ApplicationLoop extends ApplicationAdapter
    //logger.info("Calling Physics");
   }
 
-  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / TICK_IN_NANO;
+  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO+0f);
   handleInput();
   drawGraphics();
 
@@ -62,6 +74,7 @@ public class ApplicationLoop extends ApplicationAdapter
   if (DEBUG) logger.info("Time was frozen for "+renderDelta/1_000_000_000f+" sec"); return 0;
  }
 
+
  @Override
  public void create()
  {
@@ -69,20 +82,13 @@ public class ApplicationLoop extends ApplicationAdapter
   logger.info("Application cycle has launched successfully");
  }
 
- public void drawGraphics()
+ public void lowFpsHandler()
  {
-
+  System.out.println("low fps!");
  }
-
- public void calcPhysics()
- {
-
- }
-
- public void handleInput()
- {
-
- }
+ public void drawGraphics() { }
+ public void calcPhysics() { }
+ public void handleInput() { }
 
  private long pauseStartTime = 0;
  @Override
