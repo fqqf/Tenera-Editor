@@ -26,7 +26,7 @@ public class ApplicationLoop extends ApplicationAdapter
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
 
  protected float extrapolation = 0.5f;
- private byte accum = 0;
+ private byte lowFpsCounter = 0;
  private final static byte MAX_FRAME_IGNORE_LOW_FPS = 2;
  @Override
  public void render()
@@ -36,14 +36,14 @@ public class ApplicationLoop extends ApplicationAdapter
 
   //TODO: Playing on 10 fps becomes not possible, because time stops
   //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
-  if (renderDelta > MAX_NANO_TIME_FOR_LOW_FPS && ++accum > MAX_FRAME_IGNORE_LOW_FPS)
+  if (renderDelta > MAX_NANO_TIME_FOR_LOW_FPS && ++lowFpsCounter > MAX_FRAME_IGNORE_LOW_FPS)
   {
    lowFpsHandler();
-   accum = MAX_FRAME_IGNORE_LOW_FPS;
+   lowFpsCounter = MAX_FRAME_IGNORE_LOW_FPS;
   }
   else
   {
-   if ( accum > MAX_FRAME_IGNORE_LOW_FPS ) accum = 0;
+   if ( lowFpsCounter > MAX_FRAME_IGNORE_LOW_FPS ) lowFpsCounter = 0;
    inGameTime += Math.min( renderDelta, TICK_IN_NANO );
   }
 
