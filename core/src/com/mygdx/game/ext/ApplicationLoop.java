@@ -19,9 +19,8 @@ public class ApplicationLoop extends ApplicationAdapter
 
  private static final long SECOND_IN_NANO = 1_000_000_000;
  private static final long TICK_AMOUNT = 10;
- private static final long TICK_IN_NANO = SECOND_IN_NANO / TICK_AMOUNT;
- //private static final float MAX_NANO_TIME_FOR_LOW_FPS = 50_000_000;
- private static final long MAX_NANO_TIME_FOR_LOW_FPS = TICK_IN_NANO - TICK_IN_NANO/15;
+ private static final float TICK_IN_NANO = SECOND_IN_NANO / (float)TICK_AMOUNT;
+ private static final long MAX_NANO_TIME_FOR_LOW_FPS = (long)(TICK_IN_NANO - TICK_IN_NANO/15);
 
  public long realTime = TimeUtils.nanoTime(), renderDelta, inGameTime; // IN NANOSECONDS
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
@@ -56,7 +55,7 @@ public class ApplicationLoop extends ApplicationAdapter
    //logger.info("Calling Physics");
   }
 
-  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO+0f);
+  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
   handleInput();
   drawGraphics();
 
