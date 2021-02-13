@@ -5,16 +5,20 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class Scene
 {
+ public static final int MAX_DRAW_LAYERS = 127;
  private final String name;
  private final View view;
  private final Field field;
  private final SpriteBatch batch;
  private final ShapeRenderer liner;
- private HashMap<String, Dobject> dobjects = new HashMap<>();
+ private final Map<String, Dobject> dobjects = new HashMap<>();
+ private final List<Dobject> sortedDobjectsForDraw = new ArrayList<>();
+ private final List<Integer> layers = new ArrayList<>();
+
  private boolean once;
 
  // TODO: RENDER SCENE GRID
@@ -42,7 +46,10 @@ public class Scene
 
   batch.begin();
   //TODO: Add different layers support 0->128
-  dobjects.forEach((k,obj) -> obj.draw(extrapolation));
+  //dobjects.forEach((k,obj) -> obj.draw(extrapolation));
+
+  for (Dobject dobject : sortedDobjectsForDraw) dobject.draw(extrapolation);
+
   batch.end();
 
   field.cameraController.setPosition(-dobjects.get("hero").position.x-dobjects.get("hero").speed.x*extrapolation+4,0);
@@ -63,12 +70,20 @@ public class Scene
 
  public Dobject removeObject(String name)
  {
-  return dobjects.remove(name);
+  Dobject dobject = dobjects.remove(name);
+  if ( dobject != null )
+  {
+   sortedDobjectsForDraw.remove( dobject );
+   Collections.sort(sortedDobjectsForDraw, Comparator.comparingInt(dobject2 -> dobject2.drawLayerNumb));
+  }
+  return dobject;
  }
 
  public Dobject addObject(Dobject dobject, String name)
  {
   dobjects.put(name, dobject);
+  sortedDobjectsForDraw.add( dobject );
+  Collections.sort(sortedDobjectsForDraw, Comparator.comparingInt(dobject2 -> dobject2.drawLayerNumb));
   return dobject;
  }
 
