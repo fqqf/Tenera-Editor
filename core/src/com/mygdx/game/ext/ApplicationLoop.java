@@ -26,6 +26,7 @@ public class ApplicationLoop extends ApplicationAdapter
 
  protected float extrapolation = 0.5f;
 
+ /** If you feel the need to override this method, please call super.render() **/
  @Override
  public void render()
  {
@@ -81,6 +82,12 @@ public class ApplicationLoop extends ApplicationAdapter
  public void handleInput()
  {
 
+ }
+
+ @Override
+ public void resize(int width, int height)
+ {
+  Singletones.view.update(width, height);
  }
 }
 

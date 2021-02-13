@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.test1;
 
 import com.mygdx.game.ext.Dobject;
 import com.mygdx.game.ext.View;

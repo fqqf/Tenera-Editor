@@ -12,7 +12,9 @@ public class Dobject
  public Vector2 speed, position;
  public float width, height;
  protected boolean isVisible = true;
+ @Deprecated
  protected int drawLayerNumb = 0;
+
  {
   this.view = Singletones.view;
 
@@ -44,9 +46,12 @@ public class Dobject
  public Dobject setSize(float width, float height) { this.width = width; this.height = height; return this; }
  public Dobject setPosition(float x, float y) { this.position.x = x; this.position.y = y; return this;}
  public Dobject setScene(Scene scene, String name) {scene.addObject(this, name); return this;}
+
+ @Deprecated
  public Dobject setDrawLayer(int layerNumb)
  {
-  if ( layerNumb > Scene.MAX_DRAW_LAYERS ) throw new Error("Set drawLayer > Scene.MAX_DRAW_LAYERS! Set Scene.MAX_DRAW_LAYERS");
+  if ( layerNumb > Scene.MAX_DRAW_LAYERS )
+   throw new Error("Set drawLayer > Scene.MAX_DRAW_LAYERS! Set Scene.MAX_DRAW_LAYERS");
   drawLayerNumb = layerNumb;
   return this;
  }

@@ -1,7 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.test1;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.ext.*;
@@ -23,7 +22,7 @@ public class Main extends ApplicationLoop
   view = new View();
  // gameInterface = new Field("Menu Field", 7);
   gameScreen = new Field("Level Field", 7);
-  testLevel = new Scene("Test Level", gameScreen);
+  testLevel = new Scene("Test Level", gameScreen, 100, 100);
 
   hero = new Hero()
           .setDrawLayer(120)

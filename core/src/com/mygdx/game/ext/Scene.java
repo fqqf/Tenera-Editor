@@ -15,23 +15,27 @@ public class Scene
  private final Field field;
  private final SpriteBatch batch;
  private final ShapeRenderer liner;
- private final Map<String, Dobject> dobjects = new HashMap<>();
+
+ @Deprecated
+ protected final Map<String, Dobject> listDobjectsByName = new HashMap<>();
+ @Deprecated
  private final List<Dobject> sortedDobjectsForDraw = new ArrayList<>();
+ @Deprecated
  private final List<Integer> layers = new ArrayList<>();
 
- private boolean once;
+ public boolean drawGrid;
+
+ private float width, height;
 
  // TODO: RENDER SCENE GRID
- float width=1000, height=10;
 
- public Scene(String name, Field field)
+ public Scene(String name, Field field, float width, float height)
  {
-  this.name = name;
-  this.field = field;
-  this.view = field.view;
-  this.batch = field.batch;
-  this.liner = field.liner;
-  this.camera = field.camera;
+  this.name = name; this.field = field;
+  this.view = field.view; this.camera = field.camera;
+  this.batch = field.batch; this.liner = field.liner;
+  this.width = width; this.height = height;
+
   View.log.info("Scene \""+name+"\" was created");
 
   field.camera.update();
@@ -52,25 +56,21 @@ public class Scene
 
   batch.end();
 
-  field.cameraController.setPosition(-dobjects.get("hero").position.x-dobjects.get("hero").speed.x*extrapolation+4,0);
-  drawGrid();
+ // field.cameraController.setPosition(-dobjects.get("hero").position.x-dobjects.get("hero").speed.x*extrapolation+4,0);
+  if (drawGrid) drawGrid();
  }
 
  public void iterPhys()
  {
-  dobjects.forEach((k,obj) -> obj.behave());
-
-
+  listDobjectsByName.forEach((k, obj) -> obj.behave());
  }
 
- public void iterInput()
- {
+ public void iterInput() { }
 
- }
-
+ @Deprecated
  public Dobject removeObject(String name)
  {
-  Dobject dobject = dobjects.remove(name);
+  Dobject dobject = listDobjectsByName.remove(name);
   if ( dobject != null )
   {
    sortedDobjectsForDraw.remove( dobject );
@@ -79,12 +79,20 @@ public class Scene
   return dobject;
  }
 
+ @Deprecated
  public Dobject addObject(Dobject dobject, String name)
  {
-  dobjects.put(name, dobject);
+  listDobjectsByName.put(name, dobject);
   sortedDobjectsForDraw.add( dobject );
-  Collections.sort(sortedDobjectsForDraw, Comparator.comparingInt(dobject2 -> dobject2.drawLayerNumb));
+  sortedDobjectsForDraw.sort(Comparator.comparingInt(dobject2 -> dobject2.drawLayerNumb));
   return dobject;
+ }
+
+ @Deprecated
+ public void addObjects(HashMap<String, Dobject> dobjects)
+ {
+  dobjects.forEach((k,obj) -> {listDobjectsByName.put(k, obj); sortedDobjectsForDraw.add(obj);});
+  sortedDobjectsForDraw.sort(Comparator.comparingInt(dobject2 -> dobject2.drawLayerNumb));
  }
 
  OrthographicCamera camera;
@@ -98,7 +106,7 @@ public class Scene
 
   liner.begin(ShapeRenderer.ShapeType.Line);
 
-  liner.setColor(Color.BLACK);
+  liner.setColor(Color.RED);
   for (int i = 0; i < width; i++) liner.line(i, 0, i, height);
   for (int i = 0; i < height; i++) liner.line(0, i, width, i);
 
