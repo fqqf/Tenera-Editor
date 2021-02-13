@@ -41,11 +41,11 @@ public class Dobject
   position.x += speed.x; position.y += speed.y;
  }
 
- public Dobject setTexture(Texture texture) { this.texture = texture; return this; }
- public Dobject setVisibility(boolean visible) { isVisible = visible; return this; }
- public Dobject setSize(float width, float height) { this.width = width; this.height = height; return this; }
- public Dobject setPosition(float x, float y) { this.position.x = x; this.position.y = y; return this;}
- public Dobject setScene(Scene scene, String name) {scene.addObject(this, name); return this;}
+ public Dobject texture(Texture texture) { this.texture = texture; return this; }
+ public Dobject visibility(boolean visible) { isVisible = visible; return this; }
+ public Dobject size(float width, float height) { this.width = width; this.height = height; return this; }
+ public Dobject position(float x, float y) { this.position.x = x; this.position.y = y; return this;}
+ public Dobject scene(Scene scene, String name) {scene.addObject(this, name); return this;}
 
  @Deprecated
  public Dobject setDrawLayer(int layerNumb)

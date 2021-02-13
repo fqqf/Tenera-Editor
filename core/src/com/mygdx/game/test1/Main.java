@@ -26,37 +26,37 @@ public class Main extends ApplicationLoop
 
   hero = new Hero()
           .setDrawLayer(120)
-          .setScene(testLevel, "hero")
-          .setPosition(1,0)
-          .setSize(0.3f*2,0.8f*2)
-          .setTexture(new Texture(Gdx.files.internal("hero.png")));
+          .scene(testLevel, "hero")
+          .position(1,0)
+          .size(0.3f*2,0.8f*2)
+          .texture(new Texture(Gdx.files.internal("hero.png")));
 
   testLevel.addObject(new Dobject()
                   .setDrawLayer(1)
-                  .setSize(100,10)
-      .setTexture(new Texture(Gdx.files.internal("map.png")))
-      .setVisibility(true)
+                  .size(100,10)
+      .texture(new Texture(Gdx.files.internal("map.png")))
+      .visibility(true)
     ,"map");
 
   testLevel.addObject(new Dobject()
                   .setDrawLayer(1)
-                  .setPosition(3,0)
-    .setSize(1,1)
-    .setTexture(new Texture(Gdx.files.internal("badlogic.jpg")))
+                  .position(3,0)
+    .size(1,1)
+    .texture(new Texture(Gdx.files.internal("badlogic.jpg")))
     ,"box1");
 
   testLevel.addObject(new Dobject()
                   .setDrawLayer(0)
-      .setPosition(15,0)
-      .setSize(6,8)
-      .setTexture(new Texture(Gdx.files.internal("castle.png")))
+      .position(15,0)
+      .size(6,8)
+      .texture(new Texture(Gdx.files.internal("castle.png")))
     ,"castle");
 
   testLevel.addObject(new Dobject()
           .setDrawLayer( 2 )
-      .setPosition(8.15f-0.5f,3.5f-0.5f)
-      .setSize(1,1)
-      .setTexture(new Texture(Gdx.files.internal("badlogic.jpg")))
+      .position(8.15f-0.5f,3.5f-0.5f)
+      .size(1,1)
+      .texture(new Texture(Gdx.files.internal("badlogic.jpg")))
     ,"box3");
 
   gameScreen.cameraController.move(0,0);

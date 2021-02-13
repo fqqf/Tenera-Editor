@@ -25,9 +25,9 @@ public class DarkVillageLevel extends Scene
   //  проходить по каждому объекту в листе сцены, получая его значение name и сравнивая с данным
   //  , Map получается в сцене будет не нужен, удалить =)
 
-  new Dobject().setSize(5,1).setPosition(0,0).setTexture(red).setScene(this, "red");
-  new Dobject().setSize(4,1).setPosition(0,0).setTexture(blue).setScene(this, "blue");
-  new Dobject().setSize(2,1).setPosition(0,0).setTexture(purple).setScene(this, "purple");
+  new Dobject().size(5,1).position(0,0).texture(red).scene(this, "red");
+  new Dobject().size(4,1).position(0,0).texture(blue).scene(this, "blue");
+  new Dobject().size(2,1).position(0,0).texture(purple).scene(this, "purple");
 
 
 
