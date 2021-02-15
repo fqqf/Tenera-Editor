@@ -29,8 +29,6 @@ public class DarkVillageLevel extends Scene
   new Dobject().size(4,1).position(0,0).texture(blue).scene(this, "blue");
   new Dobject().size(2,1).position(0,0).texture(purple).scene(this, "purple");
 
-
-
   // TODO: опять же, все что писала выше, убрать сортировку, добавить нормальный метод, итд итп
   this.listDobjectsByName.get("red").setDrawLayer(1);
   this.listDobjectsByName.get("blue").setDrawLayer(0);

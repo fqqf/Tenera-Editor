@@ -11,7 +11,7 @@ public class NewMain extends ApplicationLoop
  {
   new View();
 
-  darkVillage = new DarkVillageLevel("dark-village", new Field("level-coordinate-grid",20), 15, 15);
+  darkVillage = new DarkVillageLevel("dark-village", new Field("level-coordinate-grid",25), 100, 25);
   darkVillage.drawGrid = true;
  }
 
