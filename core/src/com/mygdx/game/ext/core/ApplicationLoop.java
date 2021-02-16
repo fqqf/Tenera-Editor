@@ -3,7 +3,6 @@ package com.mygdx.game.ext.core;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.mygdx.game.ext.utils.Singletones;
 
 /**
  * This class stands for separation game loop in 3 parts:

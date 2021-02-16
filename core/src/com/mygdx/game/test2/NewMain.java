@@ -3,7 +3,6 @@ package com.mygdx.game.test2;
 import com.mygdx.game.ext.core.ApplicationLoop;
 import com.mygdx.game.ext.core.ExtendField;
 import com.mygdx.game.ext.core.Monitor;
-import com.mygdx.game.ext.utils.Singletones;
 
 public class NewMain extends ApplicationLoop
 {
