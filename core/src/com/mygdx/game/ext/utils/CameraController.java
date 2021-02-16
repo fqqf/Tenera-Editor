@@ -1,4 +1,4 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.utils;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;

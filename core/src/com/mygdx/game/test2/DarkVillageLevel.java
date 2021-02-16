@@ -1,17 +1,17 @@
-package com.mygdx.game;
+package com.mygdx.game.test2;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.ext.Dobject;
-import com.mygdx.game.ext.Field;
-import com.mygdx.game.ext.Scene;
+import com.mygdx.game.ext.scene.StandartActor;
+import com.mygdx.game.ext.core.ExtendField;
+import com.mygdx.game.ext.scene.StandartScene;
 
-public class DarkVillageLevel extends Scene
+public class DarkVillageLevel extends StandartScene
 {
  Texture red,blue,purple;
 
- public DarkVillageLevel(String name, Field field, float width, float height)
+ public DarkVillageLevel(String name, ExtendField field, float width, float height)
  {
   super(name, field, width, height);
   red = new Texture("red.png"); blue = new Texture("blue.png"); purple = new Texture("purple.png");
@@ -25,9 +25,9 @@ public class DarkVillageLevel extends Scene
   //  проходить по каждому объекту в листе сцены, получая его значение name и сравнивая с данным
   //  , Map получается в сцене будет не нужен, удалить =)
 
-  new Dobject().size(5,1).position(0,0).texture(red).scene(this, "red");
-  new Dobject().size(4,1).position(0,0).texture(blue).scene(this, "blue");
-  new Dobject().size(2,1).position(0,0).texture(purple).scene(this, "purple");
+  new StandartActor().size(5,1).position(0,0).texture(red).scene(this, "red");
+  new StandartActor().size(4,1).position(0,0).texture(blue).scene(this, "blue");
+  new StandartActor().size(2,1).position(0,0).texture(purple).scene(this, "purple");
 
   // TODO: опять же, все что писала выше, убрать сортировку, добавить нормальный метод, итд итп
   this.listDobjectsByName.get("red").setDrawLayer(1);

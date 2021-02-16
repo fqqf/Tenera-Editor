@@ -1,9 +1,8 @@
 package com.mygdx.game.test1;
 
-import com.mygdx.game.ext.Dobject;
-import com.mygdx.game.ext.View;
+import com.mygdx.game.ext.scene.StandartActor;
 
-public class Hero extends Dobject
+public class Hero extends StandartActor
 {
 
  public Hero()

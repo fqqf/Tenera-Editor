@@ -1,4 +1,4 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.utils;
 
 public class SceneData
  /** Stores Dobjects on Scene in serialized type **/

@@ -1,12 +1,15 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.scene;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.ext.core.Monitor;
+import com.mygdx.game.ext.utils.Singletones;
 
-public class Dobject
+@Deprecated
+public class StandartActor
 {
- protected View view;
+ protected Monitor monitor;
  protected SpriteBatch batch;
  protected Texture texture;
  public Vector2 speed, position;
@@ -16,11 +19,11 @@ public class Dobject
  protected int drawLayerNumb = 0;
 
  {
-  this.view = Singletones.view;
+  this.monitor = Monitor.instance;
 
   try
   {
-  this.batch = view.getBatch();
+  this.batch = monitor.getBatch();
   } catch (NullPointerException e) {throw new NullPointerException("Initialize View first!");}
 
   speed = new Vector2(); position = new Vector2();
@@ -41,16 +44,17 @@ public class Dobject
   position.x += speed.x; position.y += speed.y;
  }
 
- public Dobject texture(Texture texture) { this.texture = texture; return this; }
- public Dobject visibility(boolean visible) { isVisible = visible; return this; }
- public Dobject size(float width, float height) { this.width = width; this.height = height; return this; }
- public Dobject position(float x, float y) { this.position.x = x; this.position.y = y; return this;}
- public Dobject scene(Scene scene, String name) {scene.addObject(this, name); return this;}
+ public StandartActor texture(Texture texture) { this.texture = texture; return this; }
+ public StandartActor visibility(boolean visible) { isVisible = visible; return this; }
+ public StandartActor size(float width, float height) { this.width = width; this.height = height; return this; }
+ public StandartActor position(float x, float y) { this.position.x = x; this.position.y = y; return this;}
+ public StandartActor scene(StandartScene standartScene, String name) {
+  standartScene.addObject(this, name); return this;}
 
  @Deprecated
- public Dobject setDrawLayer(int layerNumb)
+ public StandartActor setDrawLayer(int layerNumb)
  {
-  if ( layerNumb > Scene.MAX_DRAW_LAYERS )
+  if ( layerNumb > StandartScene.MAX_DRAW_LAYERS )
    throw new Error("Set drawLayer > Scene.MAX_DRAW_LAYERS! Set Scene.MAX_DRAW_LAYERS");
   drawLayerNumb = layerNumb;
   return this;

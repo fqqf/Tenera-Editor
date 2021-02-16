@@ -1,7 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.test2;
 
-import com.mygdx.game.ext.*;
-import com.mygdx.game.ext.Scene;
+import com.mygdx.game.ext.core.ApplicationLoop;
+import com.mygdx.game.ext.core.ExtendField;
+import com.mygdx.game.ext.core.Monitor;
+import com.mygdx.game.ext.utils.Singletones;
 
 public class NewMain extends ApplicationLoop
 {
@@ -9,9 +11,9 @@ public class NewMain extends ApplicationLoop
 
  public void create()
  {
-  new View();
+  new Monitor();
 
-  darkVillage = new DarkVillageLevel("dark-village", new Field("level-coordinate-grid",25), 100, 25);
+  darkVillage = new DarkVillageLevel("dark-village", new ExtendField("level-coordinate-grid",25), 100, 25);
   darkVillage.drawGrid = true;
  }
 
@@ -20,5 +22,5 @@ public class NewMain extends ApplicationLoop
   darkVillage.iterDraw(extrapolation);
  }
 
- public void resize(int width, int height) { Singletones.view.update(width, height); }
+ public void resize(int width, int height) { Monitor.instance.update(width, height); }
 }

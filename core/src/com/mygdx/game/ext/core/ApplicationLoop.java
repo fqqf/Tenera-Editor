@@ -1,8 +1,9 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.core;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.ext.utils.Singletones;
 
 /**
  * This class stands for separation game loop in 3 parts:
@@ -87,7 +88,7 @@ public class ApplicationLoop extends ApplicationAdapter
  @Override
  public void resize(int width, int height)
  {
-  Singletones.view.update(width, height);
+  Monitor.instance.update(width, height);
  }
 }
 

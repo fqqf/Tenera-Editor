@@ -1,11 +1,10 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.core;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Logger;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.ext.utils.Singletones;
 
 import java.util.ArrayList;
 
@@ -13,9 +12,11 @@ import java.util.ArrayList;
  * Manages different fields
  * */
 
-public class View
+public class Monitor
 {
- ArrayList<Field> fields;
+ public static Monitor instance;
+
+ ArrayList<ExtendField> fields;
 
  public static final Logger log = new Logger("CORE", Logger.INFO);
 
@@ -23,16 +24,16 @@ public class View
    pixelWidth = Gdx.graphics.getWidth(),
    pixelHeight = Gdx.graphics.getHeight();
 
- public View()
+ public Monitor()
  {
   fields = new ArrayList<>();
 
   batch = new SpriteBatch();
   liner = new ShapeRenderer();
 
-  Singletones.view = this;
+  instance = this;
 
-  View.log.info("View system is active");
+  Monitor.log.info("View system is active");
  }
 
  private final ShapeRenderer liner;
@@ -40,21 +41,22 @@ public class View
 
  public void update(int width, int height)
  {
-  if (width==0 || height==0) {View.log.error("Incorrect window size, pausing"); return;}
+  if (width==0 || height==0) {
+   Monitor.log.error("Incorrect window size, pausing"); return;}
 
   this.pixelWidth = width;
   this.pixelHeight = height;
 
-  for (Field field : fields) field.update();
+  for (ExtendField field : fields) field.update();
  }
 
  /* Being called automatically, when field is created */
- public void addField(Field field)
+ public void addField(ExtendField field)
  {
   fields.add(field);
  }
 
- public void setField(Field field)
+ public void setField(ExtendField field)
  {
   batch.setProjectionMatrix(field.camera.combined);
   liner.setProjectionMatrix(field.camera.combined);

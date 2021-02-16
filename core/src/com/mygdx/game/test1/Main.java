@@ -3,26 +3,30 @@ package com.mygdx.game.test1;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.ext.*;
+import com.mygdx.game.ext.core.ApplicationLoop;
+import com.mygdx.game.ext.core.ExtendField;
+import com.mygdx.game.ext.core.Monitor;
+import com.mygdx.game.ext.scene.StandartActor;
+import com.mygdx.game.ext.scene.StandartScene;
 
 public class Main extends ApplicationLoop
 {
- View view;
- Field gameInterface, gameScreen;
+ Monitor monitor;
+ ExtendField gameInterface, gameScreen;
 
- Scene testLevel;
+ StandartScene testLevel;
 
- Dobject hero, monster;
+ StandartActor hero, monster;
 
  @Override
  public void create()
  {
   super.create();
 
-  view = new View();
+  monitor = new Monitor();
  // gameInterface = new Field("Menu Field", 7);
-  gameScreen = new Field("Level Field", 7);
-  testLevel = new Scene("Test Level", gameScreen, 100, 100);
+  gameScreen = new ExtendField("Level Field", 7);
+  testLevel = new StandartScene("Test Level", gameScreen, 100, 100);
 
   hero = new Hero()
           .setDrawLayer(120)
@@ -31,28 +35,28 @@ public class Main extends ApplicationLoop
           .size(0.3f*2,0.8f*2)
           .texture(new Texture(Gdx.files.internal("hero.png")));
 
-  testLevel.addObject(new Dobject()
+  testLevel.addObject(new StandartActor()
                   .setDrawLayer(1)
                   .size(100,10)
       .texture(new Texture(Gdx.files.internal("map.png")))
       .visibility(true)
     ,"map");
 
-  testLevel.addObject(new Dobject()
+  testLevel.addObject(new StandartActor()
                   .setDrawLayer(1)
                   .position(3,0)
     .size(1,1)
     .texture(new Texture(Gdx.files.internal("badlogic.jpg")))
     ,"box1");
 
-  testLevel.addObject(new Dobject()
+  testLevel.addObject(new StandartActor()
                   .setDrawLayer(0)
       .position(15,0)
       .size(6,8)
       .texture(new Texture(Gdx.files.internal("castle.png")))
     ,"castle");
 
-  testLevel.addObject(new Dobject()
+  testLevel.addObject(new StandartActor()
           .setDrawLayer( 2 )
       .position(8.15f-0.5f,3.5f-0.5f)
       .size(1,1)
@@ -100,6 +104,6 @@ public class Main extends ApplicationLoop
  @Override
  public void resize(int width, int height)
  {
-  view.update(width, height);
+  monitor.update(width, height);
  }
 }

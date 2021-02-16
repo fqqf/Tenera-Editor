@@ -1,13 +1,13 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.core;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.ext.core.ApplicationLoop;
 
 /**
  * @Deprecated , use {@link ApplicationLoop} instead

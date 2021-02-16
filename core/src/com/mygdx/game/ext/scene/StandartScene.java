@@ -1,25 +1,28 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.ext.core.ExtendField;
+import com.mygdx.game.ext.core.Monitor;
 
 import java.util.*;
 
-public class Scene
+@Deprecated
+public class StandartScene
 {
  public static final int MAX_DRAW_LAYERS = 127;
  private final String name;
- private final View view;
- private final Field field;
+ private final Monitor monitor;
+ private final ExtendField field;
  private final SpriteBatch batch;
  private final ShapeRenderer liner;
 
  @Deprecated
- protected final Map<String, Dobject> listDobjectsByName = new HashMap<>();
+ protected final Map<String, StandartActor> listDobjectsByName = new HashMap<>();
  @Deprecated
- private final List<Dobject> sortedDobjectsForDraw = new ArrayList<>();
+ private final List<StandartActor> sortedDobjectsForDraw = new ArrayList<>();
  @Deprecated
  private final List<Integer> layers = new ArrayList<>();
 
@@ -29,14 +32,14 @@ public class Scene
 
  // TODO: RENDER SCENE GRID
 
- public Scene(String name, Field field, float width, float height)
+ public StandartScene(String name, ExtendField field, float width, float height)
  {
   this.name = name; this.field = field;
-  this.view = field.view; this.camera = field.camera;
+  this.monitor = field.monitor; this.camera = field.camera;
   this.batch = field.batch; this.liner = field.liner;
   this.width = width; this.height = height;
 
-  View.log.info("Scene \""+name+"\" was created");
+  Monitor.log.info("Scene \""+name+"\" was created");
 
   field.camera.update();
   field.liner.setProjectionMatrix(field.camera.combined);
@@ -45,14 +48,14 @@ public class Scene
  /**Provides standard draw extrapolation system a-la: draw(curPos+speed*extrapolation)*/
  public void iterDraw(float extrapolation)
  {
-  view.setField(field);
+  monitor.setField(field);
 
 
   batch.begin();
   //TODO: Add different layers support 0->128
   //dobjects.forEach((k,obj) -> obj.draw(extrapolation));
 
-  for (Dobject dobject : sortedDobjectsForDraw) dobject.draw(extrapolation);
+  for (StandartActor standartActor : sortedDobjectsForDraw) standartActor.draw(extrapolation);
 
   batch.end();
 
@@ -68,28 +71,28 @@ public class Scene
  public void iterInput() { }
 
  @Deprecated
- public Dobject removeObject(String name)
+ public StandartActor removeObject(String name)
  {
-  Dobject dobject = listDobjectsByName.remove(name);
-  if ( dobject != null )
+  StandartActor standartActor = listDobjectsByName.remove(name);
+  if ( standartActor != null )
   {
-   sortedDobjectsForDraw.remove( dobject );
+   sortedDobjectsForDraw.remove(standartActor);
    Collections.sort(sortedDobjectsForDraw, Comparator.comparingInt(dobject2 -> dobject2.drawLayerNumb));
   }
-  return dobject;
+  return standartActor;
  }
 
  @Deprecated
- public Dobject addObject(Dobject dobject, String name)
+ public StandartActor addObject(StandartActor standartActor, String name)
  {
-  listDobjectsByName.put(name, dobject);
-  sortedDobjectsForDraw.add( dobject );
+  listDobjectsByName.put(name, standartActor);
+  sortedDobjectsForDraw.add(standartActor);
   sortedDobjectsForDraw.sort(Comparator.comparingInt(dobject2 -> dobject2.drawLayerNumb));
-  return dobject;
+  return standartActor;
  }
 
  @Deprecated
- public void addObjects(HashMap<String, Dobject> dobjects)
+ public void addObjects(HashMap<String, StandartActor> dobjects)
  {
   dobjects.forEach((k,obj) -> {listDobjectsByName.put(k, obj); sortedDobjectsForDraw.add(obj);});
   sortedDobjectsForDraw.sort(Comparator.comparingInt(dobject2 -> dobject2.drawLayerNumb));

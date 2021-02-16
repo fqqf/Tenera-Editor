@@ -1,22 +1,25 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.core;
 
 /**
- * A coordinate grid in unit system.
- *
+ * Standart implementation of coordinate grid in unit system.
  * There is a static amount of units on one side,
- * and other is changing its amount to keep first static. */
+ * and other is changing its amount to keep first static.
+ *
+ * */
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.ext.utils.CameraController;
+import com.mygdx.game.ext.utils.Singletones;
 
-public class Field
+public class ExtendField extends Field
 {
  private String name;
 
- public View view;
+ public Monitor monitor;
 
  public ExtendViewport viewport;
  public OrthographicCamera camera;
@@ -30,28 +33,28 @@ public class Field
    unitWidth, unitHeight,
    notIntegerUnitWidth; // TODO: Find better name {unitWidth = Math.ceil(notIntegerUnitWidth)}
 
- public Field(String name, float unitHeight)
+ public ExtendField(String name, float unitHeight)
  {
   this.name = name;
   this.unitHeight = unitHeight;
-  this.view = Singletones.view;
+  this.monitor = Monitor.instance;
   
   calcFieldWidth();
 
   viewport = new ExtendViewport(notIntegerUnitWidth, unitHeight);
   camera = (OrthographicCamera) viewport.getCamera();
-  batch = view.getBatch();
-  liner = view.getLiner();
+  batch = monitor.getBatch();
+  liner = monitor.getLiner();
   cameraController = new CameraController(viewport);
 
-  view.addField(this);
+  monitor.addField(this);
 
-  View.log.info("Field \""+name+"\" was created ["+unitWidth+":"+unitHeight+"]");
+  Monitor.log.info("Field \""+name+"\" was created ["+unitWidth+":"+unitHeight+"]");
  }
 
  private void calcFieldWidth()
  {
-  notIntegerUnitWidth = (view.pixelWidth * unitHeight) / view.pixelHeight;
+  notIntegerUnitWidth = (monitor.pixelWidth * unitHeight) / monitor.pixelHeight;
   unitWidth = (int) Math.ceil(notIntegerUnitWidth);
  }
 
@@ -83,7 +86,7 @@ public class Field
   calcFieldWidth();
 
   viewport.setMinWorldWidth(notIntegerUnitWidth);
-  viewport.update(view.pixelWidth, view.pixelHeight, false);
+  viewport.update(monitor.pixelWidth, monitor.pixelHeight, false);
 
   cameraController.update(viewport.getMinWorldWidth(), viewport.getMinWorldHeight());
  }
