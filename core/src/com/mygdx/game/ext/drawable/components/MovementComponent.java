@@ -4,9 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.drawable.Actor;
 import com.mygdx.game.ext.drawable.Component;
 
-import java.util.Vector;
-import java.util.function.Supplier;
-
 public class MovementComponent extends Component<MovementComponent>
 {
  public ComponentField<Vector2> speed;
