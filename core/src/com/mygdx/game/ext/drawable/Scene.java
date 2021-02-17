@@ -51,7 +51,7 @@ public abstract class Scene<T extends Scene<T>>
 
  public void iterPhys()
  {
-  for (Actor actor: actors) actor.behave();
+  for (Actor actor: actors) actor.calc();
  }
 
  protected OrthographicCamera camera;
@@ -75,7 +75,7 @@ public abstract class Scene<T extends Scene<T>>
  // TODO actor type from Actor<T> and replace ArrayList with group
  protected ArrayList<Actor<?>> actors = new ArrayList<>();
 
- protected T addActor(Actor<?>... actors) { this.actors.addAll(Arrays.asList(actors)); return (T) this; }
+ protected T actor(Actor<?>... actors) { this.actors.addAll(Arrays.asList(actors)); return (T) this; }
  protected Actor<?>[] removeActor(Actor<?>...actors) {this.actors.removeAll(Arrays.asList(actors)); return actors;}
 
  protected void addEvent() {}

@@ -11,8 +11,8 @@ public class Hero extends Actor<Hero>
  }
 
  @Override
- public void behave()
+ public void calc()
  {
-  super.behave();
+  super.calc();
  }
 }

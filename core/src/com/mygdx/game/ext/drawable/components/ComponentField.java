@@ -1,18 +1,17 @@
 package com.mygdx.game.ext.drawable.components;
 
-import java.lang.invoke.ClassSpecializer;
-
-public class ComponentField2<T>
+public class ComponentField<T>
 {
  T field;
 
- public ComponentField2()
+ public ComponentField()
  {
-  
+  // TODO : Find better way to create instance of generic-type
+  field = (T) new Object();
  }
 
  public T get()
  {
-  return
+  return field;
  }
 }

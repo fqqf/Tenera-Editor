@@ -6,25 +6,28 @@ import com.mygdx.game.ext.drawable.Component;
 
 public class MovementComponent extends Component<MovementComponent>
 {
- Vector2 speed;
- Vector2 acceleration;
+ public Vector2 speed;
+ public Vector2 acceleration;
 
  public MovementComponent()
  {
+  type = ComponentType.PHYSICS_COMPONENT; // todo: remove comptype class
+
   speed = new Vector2();
   acceleration = new Vector2();
  }
 
  @Override
- public void init(Actor<?> actor)
+ public void init()
  {
-  super.init(actor);
   speed.x = 0.1f;
  }
 
  @Override
- public void behave()
+ public void behave(Actor<?> actor)
  {
+  speed =
+
   speed.add(acceleration);
   actor.position.add(speed);
  }

@@ -5,5 +5,5 @@ import com.mygdx.game.ext.drawable.groups.Stackable;
 
 public abstract class Dobject implements Stackable
 {
- protected Vector2 position = new Vector2();
+ public Vector2 position = new Vector2();
 }

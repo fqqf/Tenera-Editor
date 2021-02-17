@@ -12,10 +12,13 @@ import com.badlogic.gdx.utils.TimeUtils;
  * Extrapolation value depends on TPS
  */
 
-public class ApplicationLoop extends ApplicationAdapter
+public abstract class ApplicationLoop<T> extends ApplicationAdapter
 {
- Logger logger;
- public static final boolean DEBUG = false;
+ // TODO : Interface, like View
+ public static ApplicationLoop instance;
+
+ private Logger logger;
+ private static final boolean DEBUG = false;
 
  private final long SECOND_IN_NANO = 1_000_000_000;
  private final long TICK_AMOUNT = 10;
@@ -30,6 +33,7 @@ public class ApplicationLoop extends ApplicationAdapter
  @Override
  public void render()
  {
+  if (instance == null) {logger.error("Call super.create() in create method first!"); System.exit(1);}
   FPS++;
   renderDelta = -(realTime - (realTime = TimeUtils.nanoTime())); // lastCallTime - curCallTime
 
@@ -65,8 +69,12 @@ public class ApplicationLoop extends ApplicationAdapter
  @Override
  public void create()
  {
-  logger = new Logger("GAMELOOP", Logger.INFO);
   logger.info("Application cycle has launched successfully");
+  instance = this;
+ }
+
+ {
+  logger = new Logger("GAMELOOP", Logger.INFO);
  }
 
  public void drawGraphics()
