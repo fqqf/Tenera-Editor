@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.scene;
+package com.mygdx.game.ext.drawable.groups;
 
 public interface Stackable
 {

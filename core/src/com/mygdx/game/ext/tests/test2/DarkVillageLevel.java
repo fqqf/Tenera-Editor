@@ -1,13 +1,13 @@
-package com.mygdx.game.test2;
+package com.mygdx.game.ext.tests.test2;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.ext.scene.StandartActor;
+import com.mygdx.game.ext.deprecated.StandartActor;
 import com.mygdx.game.ext.core.ExtendField;
-import com.mygdx.game.ext.scene.StandartScene;
+import com.mygdx.game.ext.drawable.Scene;
 
-public class DarkVillageLevel extends StandartScene
+public class DarkVillageLevel extends Scene<DarkVillageLevel>
 {
  Texture red,blue,purple;
 
@@ -30,9 +30,9 @@ public class DarkVillageLevel extends StandartScene
   new StandartActor().size(2,1).position(0,0).texture(purple).scene(this, "purple");
 
   // TODO: опять же, все что писала выше, убрать сортировку, добавить нормальный метод, итд итп
-  this.listDobjectsByName.get("red").setDrawLayer(1);
-  this.listDobjectsByName.get("blue").setDrawLayer(0);
-  this.listDobjectsByName.get("purple").setDrawLayer(2);
+ // this.listDobjectsByName.get("red").setDrawLayer(1);
+//  this.listDobjectsByName.get("blue").setDrawLayer(0);
+ // this.listDobjectsByName.get("purple").setDrawLayer(2);
   // TODO: + Как оказалось, система слоев вообще не работает после добавления их на сцену, т.к resort делается
   //  только после вызова addObject. Но опять же, тут всю систему переписывать надо, и от метода сортировки
   //  вообще избавиться, в остальном вроде бы все верно ;)

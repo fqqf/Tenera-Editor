@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.scene;
+package com.mygdx.game.ext.drawable;
 
 public abstract class Event extends Dobject
 {

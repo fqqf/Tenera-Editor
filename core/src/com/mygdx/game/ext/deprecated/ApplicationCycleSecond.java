@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.core;
+package com.mygdx.game.ext.deprecated;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

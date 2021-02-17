@@ -1,18 +1,18 @@
-package com.mygdx.game.test2;
+package com.mygdx.game.ext.tests.test3;
 
 import com.mygdx.game.ext.core.ApplicationLoop;
 import com.mygdx.game.ext.core.ExtendField;
 import com.mygdx.game.ext.core.Monitor;
 
-public class NewMain extends ApplicationLoop
+public class Main2 extends ApplicationLoop
 {
- private DarkVillageLevel darkVillage;
+ private DarkForest darkVillage;
 
  public void create()
  {
   new Monitor();
 
-  darkVillage = new DarkVillageLevel("dark-village", new ExtendField("level-coordinate-grid",25), 100, 25);
+  darkVillage = new DarkForest("dark-forest", new ExtendField("level-coordinate-grid",25f), 100, 25);
   darkVillage.drawGrid = true;
  }
 

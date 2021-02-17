@@ -1,13 +1,14 @@
-package com.mygdx.game.ext.scene;
+package com.mygdx.game.ext.deprecated;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.Monitor;
+import com.mygdx.game.ext.drawable.Actor;
 
 @Deprecated
-public class StandartActor
-{
+public class StandartActor extends Actor<StandartActor>
+{/*
  protected Monitor monitor;
  protected SpriteBatch batch;
  protected Texture texture;
@@ -48,14 +49,5 @@ public class StandartActor
  public StandartActor size(float width, float height) { this.width = width; this.height = height; return this; }
  public StandartActor position(float x, float y) { this.position.x = x; this.position.y = y; return this;}
  public StandartActor scene(StandartScene standartScene, String name) {
-  standartScene.addObject(this, name); return this;}
-
- @Deprecated
- public StandartActor setDrawLayer(int layerNumb)
- {
-  if ( layerNumb > StandartScene.MAX_DRAW_LAYERS )
-   throw new Error("Set drawLayer > Scene.MAX_DRAW_LAYERS! Set Scene.MAX_DRAW_LAYERS");
-  drawLayerNumb = layerNumb;
-  return this;
- }
+  standartScene.addObject(this, name); return this;}*/
 }
