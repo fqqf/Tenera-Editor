@@ -27,7 +27,7 @@ public abstract class ApplicationLoop<T> extends ApplicationAdapter
  public long realTime = TimeUtils.nanoTime(), renderDelta, inGameTime; // IN NANOSECONDS
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
 
- protected float extrapolation = 0.5f;
+ public float extrapolation = 0.5f;
 
  /** If you feel the need to override this method, please call super.render() **/
  @Override

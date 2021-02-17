@@ -72,7 +72,11 @@ public abstract class Actor<T extends Actor<T>> extends Dobject
  protected ArrayList<Component<?>> components = new ArrayList<>();
 
  @SuppressWarnings("unchecked")
- public T component(Component<?>... components) { this.components.addAll(Arrays.asList(components)); return (T) this; }
+ public T component(Component<?>... components)
+ {
+  for (Component<?> component : components) component.init(this);
+  this.components.addAll(Arrays.asList(components)); return (T) this;
+ }
 
  public Vector2 getDrawPosition()
  {

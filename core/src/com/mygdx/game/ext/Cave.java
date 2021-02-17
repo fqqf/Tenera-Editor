@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.ext.core.ExtendField;
 import com.mygdx.game.ext.drawable.Scene;
 import com.mygdx.game.ext.drawable.actors.BaseActor;
+import com.mygdx.game.ext.drawable.components.ExtrapolationComponent;
 import com.mygdx.game.ext.drawable.components.MovementComponent;
 
 public class Cave extends Scene<Cave>
@@ -18,7 +19,7 @@ public class Cave extends Scene<Cave>
   cube.texture(new Texture("cube.png")).size(4,4).position(3,0);
   table.texture(new Texture("table.png")).size(4,8).position(14,0);
 
-  cube.component(new MovementComponent());
+  cube.component(new MovementComponent(), new ExtrapolationComponent());
  }
 
 

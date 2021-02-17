@@ -7,6 +7,6 @@ public abstract class Component<T>
  // TODO : replace type and ComponentType, so Component can become interface
  protected int type;
 
- public abstract void init();
+ public abstract void init(Actor<?> actor);
  public abstract void behave(Actor<?> actor);
 }

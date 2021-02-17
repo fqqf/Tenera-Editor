@@ -4,31 +4,36 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.drawable.Actor;
 import com.mygdx.game.ext.drawable.Component;
 
+import java.util.Vector;
+import java.util.function.Supplier;
+
 public class MovementComponent extends Component<MovementComponent>
 {
- public Vector2 speed;
+ public ComponentField<Vector2> speed;
  public Vector2 acceleration;
 
  public MovementComponent()
  {
   type = ComponentType.PHYSICS_COMPONENT; // todo: remove comptype class
-
-  speed = new Vector2();
-  acceleration = new Vector2();
  }
 
  @Override
- public void init()
+ public void init(Actor<?> actor)
  {
-  speed.x = 0.1f;
+  if (actor.componentValues.get("speed") == null)
+  {
+   actor.componentValues.put("speed", new ComponentField<>(Vector2::new));
+  }
+
+  speed = actor.componentValues.get("speed");
+  speed.get().x = 0.1f;
  }
 
- @Override
+ @Override @SuppressWarnings("unchecked")
  public void behave(Actor<?> actor)
  {
-  speed =
+  speed = actor.componentValues.get("speed");
 
-  speed.add(acceleration);
-  actor.position.add(speed);
+  actor.position.add(speed.get());
  }
 }
