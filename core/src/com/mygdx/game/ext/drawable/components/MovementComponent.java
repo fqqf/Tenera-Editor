@@ -4,20 +4,28 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.drawable.Actor;
 import com.mygdx.game.ext.drawable.Component;
 
-public class MovementComponent extends Component
+public class MovementComponent extends Component<MovementComponent>
 {
- Actor actor;
- Vector2 position;
+ Vector2 speed;
+ Vector2 acceleration;
 
- public MovementComponent(Actor<?> actor)
+ public MovementComponent()
  {
-  super(actor);
+  speed = new Vector2();
+  acceleration = new Vector2();
  }
 
+ @Override
+ public void init(Actor<?> actor)
+ {
+  super.init(actor);
+  speed.x = 0.1f;
+ }
 
  @Override
  public void behave()
  {
-
+  speed.add(acceleration);
+  actor.position.add(speed);
  }
 }
