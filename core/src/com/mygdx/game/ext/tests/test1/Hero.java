@@ -1,6 +1,6 @@
 package com.mygdx.game.ext.tests.test1;
-
-import com.mygdx.game.ext.drawable.Actor;
+/*
+import com.mygdx.game.ext.deprecated.Actor;
 
 public class Hero extends Actor<Hero>
 {
@@ -11,8 +11,9 @@ public class Hero extends Actor<Hero>
  }
 
  @Override
- public void calc()
+ public void act()
  {
-  super.calc();
+  super.act();
  }
 }
+*/

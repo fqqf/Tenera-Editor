@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.TimeUtils;
  * Extrapolation value depends on TPS
  */
 
-public abstract class ApplicationLoop<T> extends ApplicationAdapter
+public abstract class ApplicationLoop extends ApplicationAdapter
 {
  // TODO : Interface, like View
  public static ApplicationLoop instance;

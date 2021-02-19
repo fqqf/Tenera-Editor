@@ -4,8 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.ext.core.ExtendField;
+import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.Monitor;
+import com.mygdx.game.ext.drawable.actors.Actor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,11 +21,11 @@ public abstract class Scene<T extends Scene<T>>
  protected final SpriteBatch batch;
  protected final ShapeRenderer liner;
 
- protected ExtendField field;
+ protected ExtendCoordinateGrid field;
  public boolean drawGrid;
  protected float width, height;
 
- public Scene(String name, ExtendField field, float width, float height)
+ public Scene(String name, ExtendCoordinateGrid field, float width, float height)
  {
   this.name = name; this.field = field;
   this.monitor = field.monitor; this.camera = field.camera;
@@ -51,7 +52,7 @@ public abstract class Scene<T extends Scene<T>>
 
  public void iterPhys()
  {
-  for (Actor actor: actors) actor.calc();
+  for (Actor<?> actor: actors) actor.act();
  }
 
  protected OrthographicCamera camera;

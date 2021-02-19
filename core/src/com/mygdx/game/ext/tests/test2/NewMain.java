@@ -1,9 +1,9 @@
 package com.mygdx.game.ext.tests.test2;
 
 import com.mygdx.game.ext.core.ApplicationLoop;
-import com.mygdx.game.ext.core.ExtendField;
+import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.Monitor;
-
+/*
 public class NewMain extends ApplicationLoop
 {
  private DarkVillageLevel darkVillage;
@@ -12,7 +12,7 @@ public class NewMain extends ApplicationLoop
  {
   new Monitor();
 
-  darkVillage = new DarkVillageLevel("dark-village", new ExtendField("level-coordinate-grid",25), 100, 25);
+  darkVillage = new DarkVillageLevel("dark-village", new ExtendCoordinateGrid("level-coordinate-grid",25), 100, 25);
   darkVillage.drawGrid = true;
  }
 
@@ -23,3 +23,4 @@ public class NewMain extends ApplicationLoop
 
  public void resize(int width, int height) { Monitor.instance.update(width, height); }
 }
+*/
