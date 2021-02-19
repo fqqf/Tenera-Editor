@@ -1,17 +1,17 @@
 package com.mygdx.game.ext.tests.test2;
-
+/*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.ext.deprecated.StandartActor;
-import com.mygdx.game.ext.core.ExtendField;
+import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.drawable.Scene;
 
 public class DarkVillageLevel extends Scene<DarkVillageLevel>
 {
  Texture red,blue,purple;
 
- public DarkVillageLevel(String name, ExtendField field, float width, float height)
+ public DarkVillageLevel(String name, ExtendCoordinateGrid field, float width, float height)
  {
   super(name, field, width, height);
   red = new Texture("red.png"); blue = new Texture("blue.png"); purple = new Texture("purple.png");
@@ -46,3 +46,4 @@ public class DarkVillageLevel extends Scene<DarkVillageLevel>
   super.iterDraw(extrapolation);
  }
 }
+*/

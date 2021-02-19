@@ -1,10 +1,13 @@
-package com.mygdx.game.ext.drawable;
-
+package com.mygdx.game.ext.deprecated;
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.Monitor;
-import com.mygdx.game.ext.drawable.components.ComponentField;
+import com.mygdx.game.ext.drawable.Component;
+import com.mygdx.game.ext.drawable.ComponentCaller;
+import com.mygdx.game.ext.drawable.Scene;
+import com.mygdx.game.ext.drawable.components.Field;
 import com.mygdx.game.ext.drawable.components.ComponentType;
 
 import java.util.ArrayList;
@@ -12,7 +15,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 // TODO: Cloneable
-public abstract class Actor<T extends Actor<T>> extends Dobject
+@Deprecated
+public abstract class actorcopy2<T extends actorcopy2<T>> extends ComponentCaller
 {
  protected final Monitor monitor;
  protected Texture texture;
@@ -22,9 +26,9 @@ public abstract class Actor<T extends Actor<T>> extends Dobject
  protected Vector2 drawPosition = new Vector2(), drawSize = new Vector2();
  protected Vector2 size = new Vector2();
 
- public HashMap<String, ComponentField> componentValues; // TODO: change integer with ComponentValue
+ public HashMap<String, Field> componentValues; // TODO: change integer with ComponentValue
 
- public Actor()
+ public actorcopy2()
  {
   this.monitor = Monitor.instance;
 
@@ -90,3 +94,4 @@ public abstract class Actor<T extends Actor<T>> extends Dobject
 }
 
 
+*/

@@ -1,36 +1,26 @@
 package com.mygdx.game.ext.drawable.components;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.drawable.Actor;
 import com.mygdx.game.ext.drawable.Component;
+import com.mygdx.game.ext.drawable.actors.Actor;
 
 public class MovementComponent extends Component<MovementComponent>
 {
- public ComponentField<Vector2> speed;
- public Vector2 acceleration;
-
- public MovementComponent()
- {
-  type = ComponentType.PHYSICS_COMPONENT; // todo: remove comptype class
- }
+ private Field<Vector2> position, velocity;
 
  @Override
  public void init(Actor<?> actor)
  {
-  if (actor.componentValues.get("speed") == null)
-  {
-   actor.componentValues.put("speed", new ComponentField<>(Vector2::new));
-  }
-
-  speed = actor.componentValues.get("speed");
-  speed.get().x = 0.1f;
+  if (actor.getField("velocity") == null) actor.addField("velocity", new Field<>(new Vector2(0.15f,0)));
+  if (actor.getField("position") == null) actor.addField("position", new Field<>(new Vector2()));
  }
 
- @Override @SuppressWarnings("unchecked")
+ @Override
  public void behave(Actor<?> actor)
  {
-  speed = actor.componentValues.get("speed");
+  position = actor.getField("position");
+  velocity = actor.getField("velocity");
 
-  actor.position.add(speed.get());
+  position.get().add(velocity.get());
  }
 }

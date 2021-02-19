@@ -3,9 +3,8 @@ package com.mygdx.game.ext;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.ext.core.ApplicationLoop;
-import com.mygdx.game.ext.core.ExtendField;
+import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.Monitor;
-import com.mygdx.game.ext.tests.test3.DarkForest;
 
 public class Main extends ApplicationLoop
 {
@@ -17,7 +16,7 @@ public class Main extends ApplicationLoop
 
   new Monitor();
 
-  cave = new Cave("cave-level", new ExtendField("level-coordinate-grid",10f), 100, 10);
+  cave = new Cave("cave-level", new ExtendCoordinateGrid("level-coordinate-grid",10f), 100, 10);
   cave.drawGrid = true;
  }
 

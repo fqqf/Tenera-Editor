@@ -1,6 +1,6 @@
 package com.mygdx.game.ext.core;
 
-public abstract class Field
+public abstract class CoordinateGrid
 {
 
 }
