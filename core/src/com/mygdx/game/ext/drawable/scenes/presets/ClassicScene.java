@@ -1,7 +1,7 @@
-package com.mygdx.game.ext.drawable.scenes;
+package com.mygdx.game.ext.drawable.scenes.presets;
 
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.drawable.Scene;
+import com.mygdx.game.ext.drawable.scenes.Scene;
 
 public class BaseScene extends Scene<BaseScene>
 {
