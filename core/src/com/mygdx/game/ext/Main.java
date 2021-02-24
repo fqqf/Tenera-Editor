@@ -15,7 +15,7 @@ public class Main extends ApplicationLoop
  {
   super.create();
 
-  new Monitor();
+  Monitor.init();
 
   city = new City("city-level", new ExtendCoordinateGrid("level-coordinate-grid", 10f), 100, 10);
  }

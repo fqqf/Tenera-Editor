@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.Monitor;
 import com.mygdx.game.ext.drawable.actors.Actor;
@@ -77,8 +78,8 @@ public abstract class Scene<T extends Scene<T>>
  protected Group actors = new Group();
 
  @SuppressWarnings("unchecked")
- protected T addActor(Actor<?>... actors) { this.actors.addAll(Arrays.asList(actors)); return (T) this; }
- protected Actor<?>[] remActor(Actor<?>...actors) {this.actors.removeAll(Arrays.asList(actors)); return actors;}
+ protected T addActor(Actor<?>... actors) { this.actors.addAll( actors ); return (T) this; }
+ protected Actor<?>[] remActor(Actor<?>...actors) {this.actors.removeAll( Array.with(actors), false ); return actors;}
 
  protected void addEvent() {}
 }

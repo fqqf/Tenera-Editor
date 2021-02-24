@@ -4,6 +4,8 @@ import com.mygdx.game.ext.drawable.actors.Actor;
 
 public class TreeMap extends java.util.TreeMap<Integer, Actor<?>>
 {
+
+ @Deprecated
  public TreeMap lay(Integer key, Actor<?> value)
  {
   put(key, value);

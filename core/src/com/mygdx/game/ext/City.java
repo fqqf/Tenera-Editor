@@ -1,10 +1,9 @@
 package com.mygdx.game.ext;
 
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.drawable.Component;
-import com.mygdx.game.ext.drawable.components.DrawingComponent;
-import com.mygdx.game.ext.drawable.components.ExtrapolationDrawingComponent;
-import com.mygdx.game.ext.drawable.components.MovementComponent;
+import com.mygdx.game.ext.drawable.Handler;
+import com.mygdx.game.ext.drawable.components.DrawingHandler;
+import com.mygdx.game.ext.drawable.components.MovementHandler;
 import com.mygdx.game.ext.drawable.groups.Group;
 import com.mygdx.game.ext.drawable.scenes.presets.GroupLayerScene;
 
@@ -37,11 +36,11 @@ public class City extends GroupLayerScene<City>
 
  private void initActors()
  {
-  Component<DrawingComponent> drawing = new DrawingComponent();
+  Handler<DrawingHandler> drawing = new DrawingHandler();
 
   addActor(cube1, cube2, platform);
-  actors.forEach(actor -> actor.addComp(drawing));
-  cube1.addComp(new MovementComponent());
+  actors.forEach(actor -> actor.addHandler(drawing));
+  cube1.addHandler(new MovementHandler());
  }
 
  private void loadActorTextures()

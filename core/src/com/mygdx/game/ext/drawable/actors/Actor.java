@@ -1,50 +1,70 @@
 package com.mygdx.game.ext.drawable.actors;
 
 import com.mygdx.game.ext.core.Monitor;
-import com.mygdx.game.ext.drawable.Component;
-import com.mygdx.game.ext.drawable.components.ComponentType;
+import com.mygdx.game.ext.drawable.Handler;
 import com.mygdx.game.ext.drawable.components.Field;
+import com.mygdx.game.ext.drawable.components.components_type.IActCp;
+import com.mygdx.game.ext.drawable.components.components_type.IDrawCp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 
 public abstract class Actor<T extends Actor<T>>
 {
  public void draw(float ext)
  {
-  for (Component<?> component : components)
-   if (component.getType() == ComponentType.GRAPHICS_COMPONENT)
-    component.behave(this);
+  drawHandlers.forEach(handler -> handler.behave( this ));
  }
 
  public void act()
  {
-  for (Component<?> component : components)
-   if (component.getType() == ComponentType.PHYSICS_COMPONENT)
-    component.behave(this);
+  actHandlers.forEach(handler -> handler.behave(this));
  }
 
  public void handleInput()
  {
-  for (Component<?> component : components)
-   if (component.getType() == ComponentType.INPUT_COMPONENT)
-    component.behave(this);
+  inputHandlers.forEach(handler -> handler.behave(this));
  }
 
  // TODO: 3 components lists
- protected ArrayList<Component<?>> components = new ArrayList<>();
+ protected ArrayList<Handler<?>> drawHandlers = new ArrayList<>();
+ protected ArrayList<Handler<?>> actHandlers = new ArrayList<>();
+ protected ArrayList<Handler<?>> inputHandlers = new ArrayList<>();
+
+ protected Collection<Handler<?>> getCollectionFor(Class<? extends Handler> type)
+ {
+  if ( IDrawCp.class.isAssignableFrom( type ) ) return drawHandlers;
+  else if ( IActCp.class.isAssignableFrom( type ) ) return actHandlers;
+  else return inputHandlers;
+ }
+ protected Collection<Handler<?>> getCollectionFor(Handler<?> handler)
+ { return getCollectionFor( handler.getClass() ); }
 
  @SuppressWarnings("unchecked")
- public T addComp(Component<?>... components)
+ public T addHandler(Handler<?>... handlers)
  {
-  for (Component<?> component : components) component.init(this);
-  this.components.addAll(Arrays.asList(components)); return (T) this;
+  for (Handler<?> handler : handlers)
+  {
+   handler.init( this );
+   getCollectionFor( handler ).add(handler);
+  }
+  return (T) this;
  }
 
  @SuppressWarnings("unchecked")
- public T remComp(Component<?>... components)
- { this.components.removeAll(Arrays.asList(components)); return (T) this; }  // TODO: Add names to components remComp("name")
+ public T remHandler(Handler<?>... handlers)
+ {
+  for (Handler<?> handler : handlers) getCollectionFor(handler.getClass()).remove(handler);
+  return (T) this;
+ }
+ public T remHandler(Handler<?> handler)
+ {
+  getCollectionFor(handler).remove(handler);
+  return (T) this;
+ }
+
+ // TODO: Add names to components remComp("name")
 
  public HashMap<String, Field<?>> componentsFields = new HashMap<>();;
 
@@ -61,8 +81,6 @@ public abstract class Actor<T extends Actor<T>>
  {
   return componentsFields.get(name);
  }
-
-
 
  // TODO: addField must create field by itself, and get just simple object
  public Actor<T> addField(String name, Field<?> field)

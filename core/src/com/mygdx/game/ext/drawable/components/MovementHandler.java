@@ -1,10 +1,11 @@
 package com.mygdx.game.ext.drawable.components;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.drawable.Component;
+import com.mygdx.game.ext.drawable.Handler;
 import com.mygdx.game.ext.drawable.actors.Actor;
+import com.mygdx.game.ext.drawable.components.components_type.IActCp;
 
-public class MovementComponent extends Component<MovementComponent>
+public class MovementHandler extends Handler<MovementHandler> implements IActCp
 {
  private Field<Vector2> position, velocity;
 

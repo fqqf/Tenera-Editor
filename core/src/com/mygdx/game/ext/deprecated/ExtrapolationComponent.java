@@ -1,9 +1,5 @@
 package com.mygdx.game.ext.deprecated;
 
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.drawable.Component;
-import com.mygdx.game.ext.drawable.components.ComponentType;
-import com.mygdx.game.ext.drawable.components.Field;
 /*
 public class ExtrapolationComponent extends Component<ExtrapolationComponent>
 {

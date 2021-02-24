@@ -14,7 +14,7 @@ public class Main extends ApplicationLoop
  {
   super.create();
 
-  new Monitor();
+  Monitor.init();
 
   cave = new Cave("cave-level", new ExtendCoordinateGrid("level-coordinate-grid",10f), 100, 10);
  }

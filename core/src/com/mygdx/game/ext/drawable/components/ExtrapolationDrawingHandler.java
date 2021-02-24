@@ -2,10 +2,9 @@ package com.mygdx.game.ext.drawable.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.ApplicationLoop;
-import com.mygdx.game.ext.core.Monitor;
 import com.mygdx.game.ext.drawable.actors.Actor;
 
-public class ExtrapolationDrawingComponent extends DrawingComponent
+public class ExtrapolationDrawingHandler extends DrawingHandler
 {
 
  private Field<Vector2> velocity;

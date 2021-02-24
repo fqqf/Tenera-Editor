@@ -14,6 +14,12 @@ import java.util.ArrayList;
 public class Monitor
 {
  public static Monitor instance;
+ public static Monitor init()
+ {
+  if (instance != null) return instance;
+  instance = new Monitor();
+  return instance;
+ }
 
  ArrayList<ExtendCoordinateGrid> fields;
 
@@ -23,7 +29,8 @@ public class Monitor
    pixelWidth = Gdx.graphics.getWidth(),
    pixelHeight = Gdx.graphics.getHeight();
 
- public Monitor()
+
+ private Monitor()
  {
   fields = new ArrayList<>();
 
