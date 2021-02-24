@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.core;
+package com.mygdx.game.ext;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.Logger;
@@ -12,33 +12,40 @@ import com.badlogic.gdx.utils.TimeUtils;
  * Extrapolation value depends on TPS
  */
 
-public abstract class ApplicationLoop extends ApplicationAdapter
+public class ApplicationLoop extends ApplicationAdapter
 {
- // TODO : Interface, like View
- public static ApplicationLoop instance;
+ Logger logger;
+ public static final boolean DEBUG = false;
 
- private Logger logger;
- private static final boolean DEBUG = false;
-
- private final long SECOND_IN_NANO = 1_000_000_000;
- private final long TICK_AMOUNT = 10;
- private final long TICK_IN_NANO = SECOND_IN_NANO / TICK_AMOUNT;
+ private static final long SECOND_IN_NANO = 1_000_000_000;
+ private static final long TICK_AMOUNT = 10;
+ private static final float TICK_IN_NANO = SECOND_IN_NANO / (float)TICK_AMOUNT;
+ private static final long MAX_NANO_TIME_FOR_LOW_FPS = (long)(TICK_IN_NANO - TICK_IN_NANO/15);
 
  public long realTime = TimeUtils.nanoTime(), renderDelta, inGameTime; // IN NANOSECONDS
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
 
- public float extrapolation = 0.5f;
-
- /** If you feel the need to override this method, please call super.render() **/
+ protected float extrapolation = 0.5f;
+ private byte lowFpsCounter = 0;
+ private final static byte MAX_FRAME_IGNORE_LOW_FPS = 2;
  @Override
  public void render()
  {
-  if (instance == null) {logger.error("Call super.create() in create method first!"); System.exit(1);}
   FPS++;
   renderDelta = -(realTime - (realTime = TimeUtils.nanoTime())); // lastCallTime - curCallTime
 
   //TODO: Playing on 10 fps becomes not possible, because time stops
-  inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
+  //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
+  if (renderDelta > MAX_NANO_TIME_FOR_LOW_FPS && ++lowFpsCounter > MAX_FRAME_IGNORE_LOW_FPS)
+  {
+   lowFpsHandler();
+   lowFpsCounter = MAX_FRAME_IGNORE_LOW_FPS;
+  }
+  else
+  {
+   if ( lowFpsCounter > MAX_FRAME_IGNORE_LOW_FPS ) lowFpsCounter = 0;
+   inGameTime += Math.min( renderDelta, TICK_IN_NANO );
+  }
 
   if (inGameTime > nextTickTime)
   {
@@ -48,7 +55,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
    //logger.info("Calling Physics");
   }
 
-  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO))/(TICK_IN_NANO+0f);
+  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
   handleInput();
   drawGraphics();
 
@@ -66,36 +73,37 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   if (DEBUG) logger.info("Time was frozen for "+renderDelta/1_000_000_000f+" sec"); return 0;
  }
 
+
  @Override
  public void create()
  {
-  logger.info("Application cycle has launched successfully");
-  instance = this;
- }
-
- {
   logger = new Logger("GAMELOOP", Logger.INFO);
+  logger.info("Application cycle has launched successfully");
  }
 
- public void drawGraphics()
+ public void lowFpsHandler()
  {
-
+  System.out.println("low fps!");
  }
+ public void drawGraphics() { }
+ public void calcPhysics() { }
+ public void handleInput() { }
 
- public void calcPhysics()
+ private long pauseStartTime = 0;
+ @Override
+ public void resume()
  {
-
- }
-
- public void handleInput()
- {
-
+  long delta = TimeUtils.nanoTime() - pauseStartTime;
+  System.out.println("resume after pause: " + delta / SECOND_IN_NANO);
+  nextTickTime += delta;
+  inGameTime += delta;
  }
 
  @Override
- public void resize(int width, int height)
+ public void pause()
  {
-  Monitor.instance.update(width, height);
+  System.out.println("pause");
+  pauseStartTime = TimeUtils.nanoTime();
  }
 }
 
