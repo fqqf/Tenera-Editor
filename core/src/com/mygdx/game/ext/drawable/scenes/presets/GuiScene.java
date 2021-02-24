@@ -1,2 +1,6 @@
-package com.mygdx.game.ext.drawable.scenes.presets;public class GuiScene {
+package com.mygdx.game.ext.drawable.scenes.presets;
+
+// TODO
+public class GuiScene
+{
 }

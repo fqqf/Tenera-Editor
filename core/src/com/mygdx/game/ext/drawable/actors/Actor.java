@@ -1,8 +1,7 @@
 package com.mygdx.game.ext.drawable.actors;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.ext.core.Monitor;
 import com.mygdx.game.ext.drawable.Component;
-import com.mygdx.game.ext.drawable.Scene;
 import com.mygdx.game.ext.drawable.components.ComponentType;
 import com.mygdx.game.ext.drawable.components.Field;
 
@@ -33,6 +32,7 @@ public abstract class Actor<T extends Actor<T>>
     component.behave(this);
  }
 
+ // TODO: 3 components lists
  protected ArrayList<Component<?>> components = new ArrayList<>();
 
  @SuppressWarnings("unchecked")
@@ -46,9 +46,23 @@ public abstract class Actor<T extends Actor<T>>
  public T remComp(Component<?>... components)
  { this.components.removeAll(Arrays.asList(components)); return (T) this; }  // TODO: Add names to components remComp("name")
 
- protected HashMap<String, Field<?>> componentsFields = new HashMap<>();;
+ public HashMap<String, Field<?>> componentsFields = new HashMap<>();;
 
- public Field getField(String name) { return componentsFields.get(name); }
+
+ private Field field;
+
+ public Field getField(String name, boolean log)
+ {
+  if (log && (field=componentsFields.get(name))==null) Monitor.log.error("There is no field named \""+name+"\" in your actor");
+  return componentsFields.get(name);
+ }
+
+ public Field getField(String name)
+ {
+  return componentsFields.get(name);
+ }
+
+
 
  // TODO: addField must create field by itself, and get just simple object
  public Actor<T> addField(String name, Field<?> field)

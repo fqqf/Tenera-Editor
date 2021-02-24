@@ -1,13 +1,16 @@
 package com.mygdx.game.ext.drawable.components;
 
-public class Field<T>
+public class Field<INSTANCE_TYPE>
 {
- T field;
+ public INSTANCE_TYPE instance;
 
- public Field(T object) { field = object; }
-
- public T get()
+ public Field(INSTANCE_TYPE object)
  {
-  return field;
+  instance = object;
+ }
+
+ public INSTANCE_TYPE get()
+ {
+  return instance;
  }
 }

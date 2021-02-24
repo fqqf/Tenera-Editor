@@ -1,14 +1,10 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.tests.test4;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.ext.core.ApplicationLoop;
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.Monitor;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.TreeMap;
 
 public class Main extends ApplicationLoop
 {
@@ -21,11 +17,6 @@ public class Main extends ApplicationLoop
   new Monitor();
 
   cave = new Cave("cave-level", new ExtendCoordinateGrid("level-coordinate-grid",10f), 100, 10);
-  cave.drawGrid = true;
-
-  //ArrayList<String> layers = new ArrayList<>();
-
- // ArrayList<String> layers = new ArrayList<>();
  }
 
  public void drawGraphics()

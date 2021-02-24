@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.drawable;
+package com.mygdx.game.ext.drawable.scenes;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.Monitor;
 import com.mygdx.game.ext.drawable.actors.Actor;
+import com.mygdx.game.ext.drawable.groups.Group;
+import com.mygdx.game.ext.drawable.scenes.presets.ClassicScene;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +24,6 @@ public abstract class Scene<T extends Scene<T>>
  protected final ShapeRenderer liner;
 
  protected ExtendCoordinateGrid field;
- public boolean drawGrid;
  protected float width, height;
 
  public Scene(String name, ExtendCoordinateGrid field, float width, float height)
@@ -40,14 +41,13 @@ public abstract class Scene<T extends Scene<T>>
 
  public void iterDraw(float extrapolation)
  {
+  camera.update();
   monitor.setField(field);
 
-  batch.begin();
+//  batch.begin();
   //TODO: Add different layers support via group
-  for (Actor actor: actors) actor.draw(extrapolation);
-  batch.end();
-
-  if (drawGrid) drawGrid();
+  //for (Actor<?> actor: actors) actor.draw(extrapolation);
+  //batch.end();
  }
 
  public void iterPhys()
@@ -57,7 +57,7 @@ public abstract class Scene<T extends Scene<T>>
 
  protected OrthographicCamera camera;
 
- private void drawGrid()
+ protected void drawGrid()
  {
   camera.update();
 
@@ -74,10 +74,11 @@ public abstract class Scene<T extends Scene<T>>
  }
 
  // TODO actor type from Actor<T> and replace ArrayList with group
- protected ArrayList<Actor<?>> actors = new ArrayList<>();
+ protected Group actors = new Group();
 
- protected T actor(Actor<?>... actors) { this.actors.addAll(Arrays.asList(actors)); return (T) this; }
- protected Actor<?>[] removeActor(Actor<?>...actors) {this.actors.removeAll(Arrays.asList(actors)); return actors;}
+ @SuppressWarnings("unchecked")
+ protected T addActor(Actor<?>... actors) { this.actors.addAll(Arrays.asList(actors)); return (T) this; }
+ protected Actor<?>[] remActor(Actor<?>...actors) {this.actors.removeAll(Arrays.asList(actors)); return actors;}
 
  protected void addEvent() {}
 }

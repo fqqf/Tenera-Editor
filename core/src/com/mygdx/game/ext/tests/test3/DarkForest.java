@@ -1,9 +1,5 @@
 package com.mygdx.game.ext.tests.test3;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.drawable.Scene;
-import com.mygdx.game.ext.drawable.actors.presets.ClassicActor;
 /*
 public class DarkForest extends Scene<DarkForest>
 {
