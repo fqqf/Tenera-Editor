@@ -11,7 +11,7 @@ import com.mygdx.game.ext.drawable.components.presets.ExtrapolationDrawingCompon
 import com.mygdx.game.ext.drawable.components.Field;
 import com.mygdx.game.ext.drawable.components.presets.MovementComponent;
 
-public class Cave extends Scene<Cave>
+public class Cave extends Scene
 {
  ClassicActor cube = new ClassicActor(), table = new ClassicActor();
 

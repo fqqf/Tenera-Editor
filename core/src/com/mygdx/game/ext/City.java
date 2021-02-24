@@ -7,7 +7,7 @@ import com.mygdx.game.ext.drawable.components.presets.MovementComponent;
 import com.mygdx.game.ext.drawable.groups.Group;
 import com.mygdx.game.ext.drawable.scenes.presets.GroupLayerScene;
 
-public class City extends GroupLayerScene<City>
+public class City extends GroupLayerScene
 {
  ProActor cube1 = new ProActor(), cube2 = new ProActor(), platform = new ProActor();
 

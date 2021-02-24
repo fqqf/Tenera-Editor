@@ -7,7 +7,7 @@ import com.mygdx.game.ext.drawable.scenes.Scene;
 
 import java.util.Arrays;
 
-public class ClassicScene<T extends Scene<T>> extends Scene<T>
+public class ClassicScene extends Scene
 {
  public ClassicScene(String name, ExtendCoordinateGrid field, float width, float height)
  {

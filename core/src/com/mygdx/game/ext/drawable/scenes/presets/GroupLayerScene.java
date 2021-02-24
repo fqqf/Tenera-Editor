@@ -8,7 +8,7 @@ import com.mygdx.game.ext.drawable.scenes.Scene;
 import java.util.TreeMap;
 
 
-public class GroupLayerScene<T extends Scene<T>> extends Scene<T>
+public class GroupLayerScene extends Scene
 {
  protected TreeMap<Integer, Group> layers = new TreeMap<>();
 

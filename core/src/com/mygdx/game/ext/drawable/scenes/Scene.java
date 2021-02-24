@@ -13,7 +13,7 @@ import com.mygdx.game.ext.drawable.scenes.presets.ClassicScene;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class Scene<T extends Scene<T>>
+public abstract class Scene
 {
  //ArrayList<Section> layers; // Слои, отрисовываются по группам (упорядоченно)
 // ArrayList<Section> dobjects; // Все объекты на сцене
@@ -77,7 +77,7 @@ public abstract class Scene<T extends Scene<T>>
  protected Group actors = new Group();
 
  @SuppressWarnings("unchecked")
- protected T addActor(Actor... actors) { this.actors.addAll(Arrays.asList(actors)); return (T) this; }
+ protected Scene addActor(Actor... actors) { this.actors.addAll(Arrays.asList(actors)); return this; }
  protected Actor[] remActor(Actor...actors) {this.actors.removeAll(Arrays.asList(actors)); return actors;}
 
  protected void addEvent() {}

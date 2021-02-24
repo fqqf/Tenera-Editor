@@ -9,9 +9,9 @@ import com.mygdx.game.ext.drawable.scenes.Scene;
 import java.util.TreeMap;
 
 
-public class LayerScene<T extends Scene<T>> extends Scene<T>
+public class LayerScene extends Scene
 {
- protected TreeMap<Integer, Actor> layers = new TreeMap();
+ protected TreeMap<Integer, Actor> layers = new TreeMap<>();
 
  public LayerScene(String name, ExtendCoordinateGrid field, float width, float height)
  {
@@ -29,7 +29,7 @@ public class LayerScene<T extends Scene<T>> extends Scene<T>
  }
 
  @Override
- protected T addActor(Actor... actors)
+ protected Scene addActor(Actor... actors)
  {
   return super.addActor(actors);
  }
