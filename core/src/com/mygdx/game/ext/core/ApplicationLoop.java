@@ -1,4 +1,4 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.ext.core;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.Logger;
@@ -14,8 +14,14 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class ApplicationLoop extends ApplicationAdapter
 {
+ public static ApplicationLoop instance;
  Logger logger;
  public static final boolean DEBUG = false;
+ protected ApplicationLoop()
+ {
+  ApplicationLoop.instance = this;
+ }
+
 
  private static final long SECOND_IN_NANO = 1_000_000_000;
  private static final long TICK_AMOUNT = 10;
@@ -25,7 +31,7 @@ public class ApplicationLoop extends ApplicationAdapter
  public long realTime = TimeUtils.nanoTime(), renderDelta, inGameTime; // IN NANOSECONDS
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
 
- protected float extrapolation = 0.5f;
+ public float extrapolation = 0.5f;
  private byte lowFpsCounter = 0;
  private final static byte MAX_FRAME_IGNORE_LOW_FPS = 2;
  @Override
@@ -104,6 +110,12 @@ public class ApplicationLoop extends ApplicationAdapter
  {
   System.out.println("pause");
   pauseStartTime = TimeUtils.nanoTime();
+ }
+
+ @Override
+ public void dispose()
+ {
+  instance = null;
  }
 }
 
