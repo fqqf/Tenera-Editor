@@ -19,6 +19,7 @@ public class ApplicationLoop extends ApplicationAdapter
  public static final boolean DEBUG = false;
  protected ApplicationLoop()
  {
+  if (ApplicationLoop.instance != null)ApplicationLoop.instance.dispose();
   ApplicationLoop.instance = this;
  }
 
