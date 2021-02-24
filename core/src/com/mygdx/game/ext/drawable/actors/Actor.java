@@ -44,11 +44,10 @@ public abstract class Actor
  public HashMap<String, Field<?>> fields = new HashMap<>(); // fields from components
 
 
- private Field<?> field;
-
  public Field getField(String name, boolean log)
  {
-  if (log && (field= fields.get(name))==null) Monitor.log.error("There is no field named \""+name+"\" in your actor");
+  Field<?> field;
+  if (log && (field = fields.get(name))==null) Monitor.log.error("There is no field named \""+name+"\" in your actor");
   return fields.get(name);
  }
 

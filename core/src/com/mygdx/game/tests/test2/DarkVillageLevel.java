@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.tests.test2;
+package com.mygdx.game.tests.test2;
 /*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;

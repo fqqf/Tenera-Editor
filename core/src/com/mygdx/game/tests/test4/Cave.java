@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.tests.test4;
+package com.mygdx.game.tests.test4;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;

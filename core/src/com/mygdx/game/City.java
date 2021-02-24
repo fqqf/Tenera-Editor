@@ -1,4 +1,4 @@
-package com.mygdx.game.ext;
+package com.mygdx.game;
 
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.drawable.components.Component;

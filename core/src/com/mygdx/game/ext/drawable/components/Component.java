@@ -23,7 +23,7 @@ public abstract class Component<T>
 
  protected abstract void initFields();
  protected abstract void loadFields(); // TODO : Use annotation override @SupressWarnings("unchecked")
- protected abstract void behave();
+ protected abstract void behave(); // TODO : Use getV2 implementation in hard-coded components
 
  public static final int PHYSICS_COMPONENT = 1;
  public static final int INPUT_COMPONENT = 2;

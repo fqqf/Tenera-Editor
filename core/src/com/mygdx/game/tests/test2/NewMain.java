@@ -1,8 +1,5 @@
-package com.mygdx.game.ext.tests.test2;
+package com.mygdx.game.tests.test2;
 
-import com.mygdx.game.ext.core.ApplicationLoop;
-import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.Monitor;
 /*
 public class NewMain extends ApplicationLoop
 {

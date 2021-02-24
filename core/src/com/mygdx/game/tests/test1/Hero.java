@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.tests.test1;
+package com.mygdx.game.tests.test1;
 /*
 import com.mygdx.game.ext.deprecated.Actor;
 

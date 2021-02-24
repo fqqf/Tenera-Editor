@@ -1,15 +1,14 @@
-package com.mygdx.game.ext;
+package com.mygdx.game.tests.test4;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.ext.core.ApplicationLoop;
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.Monitor;
-import com.mygdx.game.ext.tests.test4.Cave;
 
 public class Main extends ApplicationLoop
 {
- City city;
+ private Cave cave;
 
  public void create()
  {
@@ -17,22 +16,21 @@ public class Main extends ApplicationLoop
 
   new Monitor();
 
-  city = new City("city-level", new ExtendCoordinateGrid("level-coordinate-grid", 10f), 100, 10);
+  cave = new Cave("cave-level", new ExtendCoordinateGrid("level-coordinate-grid",10f), 100, 10);
  }
 
- @Override
  public void drawGraphics()
  {
   Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
   Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-  city.iterDraw(extrapolation);
+  cave.iterDraw(extrapolation);
  }
 
  @Override
  public void calcPhysics()
  {
-  city.iterPhys();
+  cave.iterPhys();
  }
 
  public void resize(int width, int height) { Monitor.instance.update(width, height); }
