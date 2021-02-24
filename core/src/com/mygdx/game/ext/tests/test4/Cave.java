@@ -3,13 +3,13 @@ package com.mygdx.game.ext.tests.test4;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.drawable.Component;
+import com.mygdx.game.ext.drawable.components.Component;
 import com.mygdx.game.ext.drawable.scenes.Scene;
 import com.mygdx.game.ext.drawable.actors.presets.ClassicActor;
-import com.mygdx.game.ext.drawable.components.DrawingComponent;
-import com.mygdx.game.ext.drawable.components.ExtrapolationDrawingComponent;
+import com.mygdx.game.ext.drawable.components.presets.DrawingComponent;
+import com.mygdx.game.ext.drawable.components.presets.ExtrapolationDrawingComponent;
 import com.mygdx.game.ext.drawable.components.Field;
-import com.mygdx.game.ext.drawable.components.MovementComponent;
+import com.mygdx.game.ext.drawable.components.presets.MovementComponent;
 
 public class Cave extends Scene<Cave>
 {

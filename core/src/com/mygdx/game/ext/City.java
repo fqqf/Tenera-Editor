@@ -1,10 +1,9 @@
 package com.mygdx.game.ext;
 
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.drawable.Component;
-import com.mygdx.game.ext.drawable.components.DrawingComponent;
-import com.mygdx.game.ext.drawable.components.ExtrapolationDrawingComponent;
-import com.mygdx.game.ext.drawable.components.MovementComponent;
+import com.mygdx.game.ext.drawable.components.Component;
+import com.mygdx.game.ext.drawable.components.presets.DrawingComponent;
+import com.mygdx.game.ext.drawable.components.presets.MovementComponent;
 import com.mygdx.game.ext.drawable.groups.Group;
 import com.mygdx.game.ext.drawable.scenes.presets.GroupLayerScene;
 

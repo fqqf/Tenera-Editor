@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.Monitor;
-import com.mygdx.game.ext.drawable.Component;
+import com.mygdx.game.ext.drawable.components.Component;
 import com.mygdx.game.ext.drawable.ComponentCaller;
 import com.mygdx.game.ext.drawable.scenes.Scene;
 import com.mygdx.game.ext.drawable.components.Field;

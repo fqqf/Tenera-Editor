@@ -20,7 +20,7 @@ public class ClassicScene<T extends Scene<T>> extends Scene<T>
   super.iterDraw(extrapolation);
 
   batch.begin();
-  for (Actor<?> actor: actors) actor.draw(extrapolation);
+  for (Actor actor: actors) actor.draw(extrapolation);
   batch.end();
  }
 }

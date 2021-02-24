@@ -4,13 +4,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.ext.core.ExtendCoordinateGrid;
 import com.mygdx.game.ext.drawable.actors.Actor;
-import com.mygdx.game.ext.utils.TreeMap;
 import com.mygdx.game.ext.drawable.scenes.Scene;
+
+import java.util.TreeMap;
 
 
 public class LayerScene<T extends Scene<T>> extends Scene<T>
 {
- protected TreeMap layers = new TreeMap();
+ protected TreeMap<Integer, Actor> layers = new TreeMap();
 
  public LayerScene(String name, ExtendCoordinateGrid field, float width, float height)
  {
@@ -28,13 +29,13 @@ public class LayerScene<T extends Scene<T>> extends Scene<T>
  }
 
  @Override
- protected T addActor(Actor<?>... actors)
+ protected T addActor(Actor... actors)
  {
   return super.addActor(actors);
  }
 
  @Override
- protected Actor<?>[] remActor(Actor<?>... actors)
+ protected Actor[] remActor(Actor... actors)
  {
   return super.remActor(actors);
  }

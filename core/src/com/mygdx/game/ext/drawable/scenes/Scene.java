@@ -52,7 +52,7 @@ public abstract class Scene<T extends Scene<T>>
 
  public void iterPhys()
  {
-  for (Actor<?> actor: actors) actor.act();
+  for (Actor actor: actors) actor.act();
  }
 
  protected OrthographicCamera camera;
@@ -77,8 +77,8 @@ public abstract class Scene<T extends Scene<T>>
  protected Group actors = new Group();
 
  @SuppressWarnings("unchecked")
- protected T addActor(Actor<?>... actors) { this.actors.addAll(Arrays.asList(actors)); return (T) this; }
- protected Actor<?>[] remActor(Actor<?>...actors) {this.actors.removeAll(Arrays.asList(actors)); return actors;}
+ protected T addActor(Actor... actors) { this.actors.addAll(Arrays.asList(actors)); return (T) this; }
+ protected Actor[] remActor(Actor...actors) {this.actors.removeAll(Arrays.asList(actors)); return actors;}
 
  protected void addEvent() {}
 }

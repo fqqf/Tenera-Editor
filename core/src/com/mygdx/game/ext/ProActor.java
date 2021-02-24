@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.drawable.actors.Actor;
 import com.mygdx.game.ext.drawable.components.Field;
 
-public class ProActor extends Actor<ProActor>
+public class ProActor extends Actor
 {
  public void texture(String path)
  {
