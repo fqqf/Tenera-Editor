@@ -3,6 +3,7 @@ package com.mygdx.game.ext.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Monitor
 {
  public static Monitor instance;
 
- ArrayList<ExtendCoordinateGrid> fields;
+ Array<ExtendCoordinateGrid> fields;
 
  public static final Logger log = new Logger("CORE", Logger.INFO);
 
@@ -25,7 +26,7 @@ public class Monitor
 
  public Monitor()
  {
-  fields = new ArrayList<>();
+  fields = new Array<>();
 
   batch = new SpriteBatch();
   liner = new ShapeRenderer();
