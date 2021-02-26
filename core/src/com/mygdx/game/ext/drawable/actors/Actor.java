@@ -11,42 +11,16 @@ import java.util.HashMap;
 public abstract class Actor
 {
  private int updateStartIndex, inputStartIndex, inputEndIndex;
- private int getComponentIndex( final int componentType)
- {
-  if ( componentType == Component.GRAPHICS_COMPONENT ) return 0;
-  else if ( componentType == Component.PHYSICS_COMPONENT ) return updateStartIndex;
-  else if ( componentType == Component.INPUT_COMPONENT ) return inputStartIndex;
-  throw new IllegalArgumentException("неизвестный тип компонента componentType="+componentType);
- }
+ private int getComponentIndex( final int componentType) { return componentType == Component.GRAPHICS_COMPONENT ? 0 : componentType == Component.PHYSICS_COMPONENT ? updateStartIndex : inputStartIndex; }
  protected void updateIndexAfterInsertComponentType( final int insertType )
  {
-  if ( insertType == Component.GRAPHICS_COMPONENT )
-  {
-   updateStartIndex++;
-   inputStartIndex++;
-  }
-  else if (insertType == Component.PHYSICS_COMPONENT )
-  {
-   inputStartIndex++;
-  }
-  else if ( insertType == Component.INPUT_COMPONENT ) {} //не нужно тут трогать, я значю что можно сделать подругому, но это уже когда архитектура устоится
-  else throw new IllegalArgumentException("неизвестный тип компонента componentType="+insertType);
-  inputEndIndex = components.size-1;
+  if ( insertType == Component.GRAPHICS_COMPONENT ) {updateStartIndex++; inputStartIndex++;}
+  else if (insertType == Component.PHYSICS_COMPONENT) inputStartIndex++; inputEndIndex = components.size-1;
  }
  protected void updateIndexAfterRemoveComponentType( final int removeType )
  {
-  if ( removeType == Component.GRAPHICS_COMPONENT )
-  {
-   updateStartIndex--;
-   inputStartIndex--;
-  }
-  else if (removeType == Component.PHYSICS_COMPONENT )
-  {
-   inputStartIndex--;
-  }
-  else if ( removeType == Component.INPUT_COMPONENT ) {} //не нужно тут трогать, я значю что можно сделать подругому, но это уже когда архитектура устоится
-  else throw new IllegalArgumentException("неизвестный тип компонента componentType="+removeType);
-  inputEndIndex = components.size-1;
+  if ( removeType == Component.GRAPHICS_COMPONENT ) {updateStartIndex--; inputStartIndex--;}
+  else if ( removeType == Component.PHYSICS_COMPONENT) inputStartIndex--; inputEndIndex = components.size-1;
  }
 
  public void draw(float ext) { handleComponents( 0, updateStartIndex ); }

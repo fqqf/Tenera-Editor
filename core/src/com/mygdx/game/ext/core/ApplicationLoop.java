@@ -30,8 +30,8 @@ public abstract class ApplicationLoop extends ApplicationAdapter
 
  public float extrapolation = 0.5f;
 
- private byte lowFpsCounter = 0;
- private final static byte MAX_FRAME_IGNORE_LOW_FPS = 2;
+ private byte bigDeltaCounter = 0;
+ private final static byte MAX_FRAMES_WITH_BIG_DELTA_TO_CALL_LOWFPSHANDLER = 2;
  /** If you feel the need to override this method, please call super.render() **/
  @Override
  public void render()
@@ -42,14 +42,14 @@ public abstract class ApplicationLoop extends ApplicationAdapter
 
   //TODO: Playing on 10 fps becomes not possible, because time stops
   //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
-  if (renderDelta > MAX_NANO_TIME_FOR_LOW_FPS && ++lowFpsCounter > MAX_FRAME_IGNORE_LOW_FPS)
+  if (renderDelta > MAX_NANO_TIME_FOR_LOW_FPS && ++bigDeltaCounter > MAX_FRAMES_WITH_BIG_DELTA_TO_CALL_LOWFPSHANDLER)
   {
    lowFpsHandler();
-   lowFpsCounter = MAX_FRAME_IGNORE_LOW_FPS;
+   bigDeltaCounter = MAX_FRAMES_WITH_BIG_DELTA_TO_CALL_LOWFPSHANDLER;
   }
   else
   {
-   if ( lowFpsCounter > MAX_FRAME_IGNORE_LOW_FPS ) lowFpsCounter = 0;
+   if ( bigDeltaCounter > MAX_FRAMES_WITH_BIG_DELTA_TO_CALL_LOWFPSHANDLER) bigDeltaCounter = 0;
    inGameTime += Math.min( renderDelta, TICK_IN_NANO );
   }
 
@@ -107,6 +107,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   System.out.println("resume after pause: " + delta / SECOND_IN_NANO);
   nextTickTime += delta;
   inGameTime += delta;
+  bigDeltaCounter = 0;
  }
 
  @Override
