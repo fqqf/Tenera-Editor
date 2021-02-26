@@ -30,9 +30,9 @@ public abstract class ApplicationLoop extends ApplicationAdapter
 
  public float extrapolation = 0.5f;
 
- /** If you feel the need to override this method, please call super.render() **/
  private byte lowFpsCounter = 0;
  private final static byte MAX_FRAME_IGNORE_LOW_FPS = 2;
+ /** If you feel the need to override this method, please call super.render() **/
  @Override
  public void render()
  {
@@ -114,7 +114,6 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  {
   System.out.println("pause");
   pauseStartTime = TimeUtils.nanoTime();
-
  }
 
  @Override
