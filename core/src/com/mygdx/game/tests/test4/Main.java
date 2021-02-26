@@ -2,9 +2,9 @@ package com.mygdx.game.tests.test4;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.mygdx.game.ext.core.ApplicationLoop;
-import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.Monitor;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
+import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.drawing.view.Monitor;
 
 public class Main extends ApplicationLoop
 {

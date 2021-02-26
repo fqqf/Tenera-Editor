@@ -1,6 +1,6 @@
 package com.mygdx.game.tests.test1;
 
-import com.mygdx.game.ext.core.ApplicationLoop;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 
 public class Main extends ApplicationLoop
 {/*

@@ -2,8 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.drawable.actors.Actor;
-import com.mygdx.game.ext.drawable.components.Field;
+import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.component.Field;
 
 // TODO: Перенести реализацию ProActor в scene
 public class ProActor extends Actor
