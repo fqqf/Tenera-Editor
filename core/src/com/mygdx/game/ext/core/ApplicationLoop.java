@@ -17,7 +17,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  // TODO : Interface, like View
  public static ApplicationLoop instance;
 
- private Logger logger;
+ private final Logger logger;
  private static final boolean DEBUG = false;
 
  private static final long SECOND_IN_NANO = 1_000_000_000;
