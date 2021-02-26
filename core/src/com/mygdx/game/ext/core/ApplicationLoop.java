@@ -104,7 +104,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  public void resume()
  {
   long delta = TimeUtils.nanoTime() - pauseStartTime;
-  System.out.println("resume after pause: " + delta / SECOND_IN_NANO);
+  System.out.println("resume after pause: " + delta/1_000_000_000f);
   nextTickTime += delta;
   inGameTime += delta;
   bigDeltaCounter = 0;
