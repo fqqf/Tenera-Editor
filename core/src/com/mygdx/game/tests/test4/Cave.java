@@ -2,18 +2,18 @@ package com.mygdx.game.tests.test4;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.drawable.components.Component;
-import com.mygdx.game.ext.drawable.scenes.Scene;
-import com.mygdx.game.ext.drawable.actors.presets.ClassicActor;
-import com.mygdx.game.ext.drawable.components.presets.DrawingComponent;
-import com.mygdx.game.ext.drawable.components.presets.ExtrapolationDrawingComponent;
-import com.mygdx.game.ext.drawable.components.Field;
-import com.mygdx.game.ext.drawable.components.presets.MovementComponent;
+import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.component.Component;
+import com.mygdx.game.ext.core.scene.Scene;
+import com.mygdx.game.ext.core.actor.presets.DullActor;
+import com.mygdx.game.ext.core.component.presets.DrawingComponent;
+import com.mygdx.game.ext.core.component.presets.ExtrapolationDrawingComponent;
+import com.mygdx.game.ext.core.component.Field;
+import com.mygdx.game.ext.core.component.presets.MovementComponent;
 
 public class Cave extends Scene
 {
- ClassicActor cube = new ClassicActor(), table = new ClassicActor();
+ DullActor cube = new DullActor(), table = new DullActor();
 
  Field<Vector2> position, size;
 

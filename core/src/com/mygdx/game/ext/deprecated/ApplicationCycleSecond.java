@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.mygdx.game.ext.core.ApplicationLoop;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 
 /**
  * @Deprecated , use {@link ApplicationLoop} instead
