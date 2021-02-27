@@ -1,15 +1,14 @@
-package com.mygdx.game.ext.drawable.scenes;
+package com.mygdx.game.ext.core.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.ext.core.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.Monitor;
-import com.mygdx.game.ext.drawable.actors.Actor;
-import com.mygdx.game.ext.drawable.groups.Group;
-import com.mygdx.game.ext.drawable.scenes.presets.ClassicScene;
+import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.drawing.view.Monitor;
+import com.mygdx.game.ext.core.group.Group;
 
 import java.util.ArrayList;
 import java.util.Arrays;

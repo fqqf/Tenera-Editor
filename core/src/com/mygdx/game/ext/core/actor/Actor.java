@@ -1,9 +1,9 @@
-package com.mygdx.game.ext.drawable.actors;
+package com.mygdx.game.ext.core.actor;
 
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.ext.core.Monitor;
-import com.mygdx.game.ext.drawable.components.Component;
-import com.mygdx.game.ext.drawable.components.Field;
+import com.mygdx.game.ext.core.component.Component;
+import com.mygdx.game.ext.core.component.Field;
+import com.mygdx.game.ext.core.drawing.view.Monitor;
 
 import java.util.HashMap;
 

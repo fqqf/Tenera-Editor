@@ -1,10 +1,7 @@
 package com.mygdx.game.ext.core.group;
 
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.ext.drawable.actors.Actor;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.mygdx.game.ext.core.actor.Actor;
 
 public class Group extends Array<Actor>
 {
