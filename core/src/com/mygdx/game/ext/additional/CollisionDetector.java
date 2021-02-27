@@ -8,7 +8,7 @@ import com.mygdx.game.ext.core.group.Group;
 
 public class CollisionDetector
 {
- Group actors; //managed by another class
+ Group actors = new Group(); //managed by another class
 
  public void calc()
  {

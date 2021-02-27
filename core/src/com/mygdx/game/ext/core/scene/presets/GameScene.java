@@ -2,6 +2,7 @@ package com.mygdx.game.ext.core.scene.presets;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.ext.additional.CollisionDetector;
+import com.mygdx.game.ext.additional.CollisionManager;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.scene.Scene;
 
@@ -14,6 +15,7 @@ public class GameScene extends GroupLayerScene
  //  You dont need a component for actor like CollisionComponent. All calculations are happening in collisionDetector
  //  In collisiondetector you should have method addActor, which does: actor.compute(AABBsize, Vector2) actor.compute(AABBposition, Vector2)
  CollisionDetector collisionDetector = new CollisionDetector();
+ CollisionManager collisionManager = new CollisionManager();
 
 
  // TODO: CHECK IF PLAYERS POSITION IS NEAR EVENT BOUNDNINGBOX COMPONENT
