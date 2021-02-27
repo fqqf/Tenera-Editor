@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.drawable.groups;
+package com.mygdx.game.ext.core.group;
 
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.drawable.actors.Actor;
