@@ -23,15 +23,16 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  private static final long SECOND_IN_NANO = 1_000_000_000;
  private static final long TICK_AMOUNT = 10;
  private static final float TICK_IN_NANO = SECOND_IN_NANO / (float)TICK_AMOUNT;
- private static final long MAX_NANO_TIME_FOR_LOW_FPS = (long)(TICK_IN_NANO - TICK_IN_NANO/15);
+
+ private static final long ESTIMATED_MAX_FRAME_CALL = (long)(TICK_IN_NANO - TICK_IN_NANO/15);
+ private final static byte MAX_TOLERATED_LATE_FRAMES = 5;
 
  public long realTime = TimeUtils.nanoTime(), renderDelta, inGameTime; // IN NANOSECONDS
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
 
  public float extrapolation = 0.5f;
+ private byte lateFramesAmount = 0;
 
- private byte bigDeltaCounter = 0;
- private final static byte MAX_FRAMES_WITH_BIG_DELTA_TO_CALL_LOWFPSHANDLER = 2;
  /** If you feel the need to override this method, please call super.render() **/
  @Override
  public void render()
@@ -42,14 +43,14 @@ public abstract class ApplicationLoop extends ApplicationAdapter
 
   //TODO: Playing on 10 fps becomes not possible, because time stops
   //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
-  if (renderDelta > MAX_NANO_TIME_FOR_LOW_FPS && ++bigDeltaCounter > MAX_FRAMES_WITH_BIG_DELTA_TO_CALL_LOWFPSHANDLER)
+  if (renderDelta > ESTIMATED_MAX_FRAME_CALL && ++lateFramesAmount > MAX_TOLERATED_LATE_FRAMES)
   {
-   lowFpsHandler();
-   bigDeltaCounter = MAX_FRAMES_WITH_BIG_DELTA_TO_CALL_LOWFPSHANDLER;
+   logger.error("Big delta call time detected (Perhaps resources are not available for this process)");
+   lateFramesAmount = 0;
   }
   else
   {
-   if ( bigDeltaCounter > MAX_FRAMES_WITH_BIG_DELTA_TO_CALL_LOWFPSHANDLER) bigDeltaCounter = 0;
+   if ( lateFramesAmount > MAX_TOLERATED_LATE_FRAMES) lateFramesAmount = 0;
    inGameTime += Math.min( renderDelta, TICK_IN_NANO );
   }
 
@@ -91,31 +92,23 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   logger = new Logger("GAMELOOP", Logger.INFO);
  }
 
- public void lowFpsHandler()
- {
-  System.out.println("low fps!");
- }
  public void drawGraphics() { }
  public void calcPhysics() { }
  public void handleInput() { }
 
  private long pauseStartTime = 0;
+
  @Override
  public void resume()
  {
   long delta = TimeUtils.nanoTime() - pauseStartTime;
-  System.out.println("resume after pause: " + delta/1_000_000_000f);
   nextTickTime += delta;
   inGameTime += delta;
-  bigDeltaCounter = 0;
+  lateFramesAmount = 0;
  }
 
  @Override
- public void pause()
- {
-  System.out.println("pause");
-  pauseStartTime = TimeUtils.nanoTime();
- }
+ public void pause() { pauseStartTime = TimeUtils.nanoTime(); }
 
  @Override
  public void resize(int width, int height)
