@@ -15,9 +15,6 @@ import java.util.Arrays;
 
 public abstract class Scene
 {
- //ArrayList<Section> layers; // Слои, отрисовываются по группам (упорядоченно)
-// ArrayList<Section> dobjects; // Все объекты на сцене
-
  protected final String name;
  protected final Monitor monitor;
  protected final SpriteBatch batch;
@@ -73,13 +70,9 @@ public abstract class Scene
   liner.end();
  }
 
- // TODO actor type from Actor<T> and replace ArrayList with group
  protected Group actors = new Group();
 
- @SuppressWarnings("unchecked")
- protected Scene addActor(Actor... actors) { this.actors.addAll( actors ); return this; }
- private static Array<Actor> tmpArray = new Array<>(true,8);//not thread safe!
- protected Actor[] remActor(Actor...actors) { tmpArray.addAll( actors );this.actors.removeAll( tmpArray, true );tmpArray.clear();return actors;}
-
- protected void addEvent() {}
+ //private static Array<Actor> tmpArray = new Array<>(true,8);//not thread safe!
+ protected Scene addActor(Actor... actors) { this.actors.addAll(Array.with(actors)); return this; }
+ protected Actor[] remActor(Actor...actors) {this.actors.removeAll(Array.with(actors),true); return actors;}
 }
