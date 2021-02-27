@@ -43,8 +43,7 @@ public abstract class Actor
 
  private void updateIndexOnChange(final int insertType, int value )
  {
-  if ( insertType == Component.GRAPHICS_COMPONENT ) {
-   drawEndIndex+=value; actEndIndex+=value;}
+  if ( insertType == Component.GRAPHICS_COMPONENT ) { drawEndIndex+=value; actEndIndex+=value;}
   else if (insertType == Component.PHYSICS_COMPONENT) actEndIndex+=value; inputEndIndex = components.size-1;
  }
 
