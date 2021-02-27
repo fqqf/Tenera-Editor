@@ -41,19 +41,19 @@ public abstract class Actor
  private int getComponentIndex( final int componentType)
  { return componentType == Component.GRAPHICS_COMPONENT ? 0 : componentType == Component.PHYSICS_COMPONENT ? drawEndIndex : actEndIndex; }
 
- protected void updateIndexAfterInsertComponentType( final int insertType )
+ private void updateIndexOnChange(final int insertType, int value )
  {
   if ( insertType == Component.GRAPHICS_COMPONENT ) {
-   drawEndIndex++; actEndIndex++;}
-  else if (insertType == Component.PHYSICS_COMPONENT) actEndIndex++; inputEndIndex = components.size-1;
+   drawEndIndex+=value; actEndIndex+=value;}
+  else if (insertType == Component.PHYSICS_COMPONENT) actEndIndex+=value; inputEndIndex = components.size-1;
  }
 
- protected void updateIndexAfterRemoveComponentType( final int removeType )
- {
-  if ( removeType == Component.GRAPHICS_COMPONENT ) {
-   drawEndIndex--; actEndIndex--;}
-  else if ( removeType == Component.PHYSICS_COMPONENT) actEndIndex--; inputEndIndex = components.size-1;
- }
+// private void updateIndexAfterRemoveComponentType( final int removeType )
+// {
+//  if ( removeType == Component.GRAPHICS_COMPONENT ) {
+//   drawEndIndex--; actEndIndex--;}
+//  else if ( removeType == Component.PHYSICS_COMPONENT) actEndIndex--; inputEndIndex = components.size-1;
+// }
 
  private void handleComponents(final int startIndewx, final int endIndex)
  { for (int i = startIndewx; i < endIndex; i++) components.get(i).handle(this); }
@@ -70,14 +70,14 @@ public abstract class Actor
   component.init( this );
   int index = getComponentIndex( component.getType() );
   components.insert( index, component );
-  updateIndexAfterInsertComponentType( component.getType() );
+  updateIndexOnChange( component.getType(), 1 );
   return this;
  }
 
  public Actor remComp(Component<?>... components) { this.components.forEach( this::remComp ); return this; }  // TODO: Add names to components remComp("name")
  public Actor remComp(Component<?> component)
  {
-  if ( components.removeValue( component, true ) )updateIndexAfterRemoveComponentType( component.getType() );
+  if ( components.removeValue( component, true ) )updateIndexOnChange( component.getType(), -1 );
   return this;
  }
 }
