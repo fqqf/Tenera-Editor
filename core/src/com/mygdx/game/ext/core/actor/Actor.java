@@ -1,45 +1,17 @@
-package com.mygdx.game.ext.core.actor;
+package com.mygdx.game.ext.drawable.actors;
 
-import com.mygdx.game.ext.core.drawing.view.Monitor;
-import com.mygdx.game.ext.core.component.Component;
-import com.mygdx.game.ext.core.component.Field;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.ext.core.Monitor;
+import com.mygdx.game.ext.drawable.components.Component;
+import com.mygdx.game.ext.drawable.components.Field;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public abstract class Actor
 {
- public void draw(float ext)
- {
-  for (Component<?> component : components)
-   if (component.getType() == Component.GRAPHICS_COMPONENT)
-    component.handle(this);
- }
-
- public void act()
- {
-  for (Component<?> component : components)
-   if (component.getType() == Component.PHYSICS_COMPONENT)
-    component.handle(this);
- }
-
- public void handleInput()
- {
-  for (Component<?> component : components)
-   if (component.getType() == Component.INPUT_COMPONENT)
-    component.handle(this);
- }
-
- protected ArrayList<Component<?>> components = new ArrayList<>();
-
- public Actor addComp(Component<?>... components)
- {
-  for (Component<?> component : components) component.init(this);
-  this.components.addAll(Arrays.asList(components)); return this;
- }
-
- public Actor remComp(Component<?>... components) { this.components.removeAll(Arrays.asList(components)); return this; }  // TODO: Add names to components remComp("name")
+ public void draw(float ext) { handleComponents( 0, drawEndIndex); }
+ public void act() { handleComponents(drawEndIndex, actEndIndex); }
+ public void handleInput() { handleComponents(actEndIndex, inputEndIndex ); }
 
  public HashMap<String, Field<?>> fields = new HashMap<>(); // fields from components
 
@@ -60,9 +32,52 @@ public abstract class Actor
 
  public void computeField(String name, Field<?> field) { if (getField(name) == null) addField(name, field); }
 
- // Used by Scene to determine call Actor methods or not
- public boolean doDrawing = true, doActing = true, doInputHandling = true;
+ public boolean doDrawing = true, doActing = true, doInputHandling = true;  // Used by Scene to determine call Actor methods or not
 
  public void pause() { doDrawing = false;doActing = false;doInputHandling = false; }
  public void resume() { doDrawing = true;doActing = true;doInputHandling = true; }
+
+ private int drawEndIndex, actEndIndex, inputEndIndex;
+ private int getComponentIndex( final int componentType)
+ { return componentType == Component.GRAPHICS_COMPONENT ? 0 : componentType == Component.PHYSICS_COMPONENT ? drawEndIndex : actEndIndex; }
+
+ protected void updateIndexAfterInsertComponentType( final int insertType )
+ {
+  if ( insertType == Component.GRAPHICS_COMPONENT ) {
+   drawEndIndex++; actEndIndex++;}
+  else if (insertType == Component.PHYSICS_COMPONENT) actEndIndex++; inputEndIndex = components.size-1;
+ }
+
+ protected void updateIndexAfterRemoveComponentType( final int removeType )
+ {
+  if ( removeType == Component.GRAPHICS_COMPONENT ) {
+   drawEndIndex--; actEndIndex--;}
+  else if ( removeType == Component.PHYSICS_COMPONENT) actEndIndex--; inputEndIndex = components.size-1;
+ }
+
+ private void handleComponents(final int startIndewx, final int endIndex)
+ { for (int i = startIndewx; i < endIndex; i++) components.get(i).handle(this); }
+
+ protected Array<Component<?>> components = new Array<>();
+
+ public Actor addComp(Component<?>... components)
+ {
+  for (Component<?> component : components) addComp( component );
+  return this;
+ }
+ public Actor addComp(Component<?> component)
+ {
+  component.init( this );
+  int index = getComponentIndex( component.getType() );
+  components.insert( index, component );
+  updateIndexAfterInsertComponentType( component.getType() );
+  return this;
+ }
+
+ public Actor remComp(Component<?>... components) { this.components.forEach( this::remComp ); return this; }  // TODO: Add names to components remComp("name")
+ public Actor remComp(Component<?> component)
+ {
+  if ( components.removeValue( component, true ) )updateIndexAfterRemoveComponentType( component.getType() );
+  return this;
+ }
 }

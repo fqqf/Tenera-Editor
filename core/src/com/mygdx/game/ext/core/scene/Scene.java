@@ -1,14 +1,17 @@
-package com.mygdx.game.ext.core.scene;
+package com.mygdx.game.ext.drawable.scenes;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.drawing.view.Monitor;
-import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.group.Group;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.ext.core.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.Monitor;
+import com.mygdx.game.ext.drawable.actors.Actor;
+import com.mygdx.game.ext.drawable.groups.Group;
+import com.mygdx.game.ext.drawable.scenes.presets.ClassicScene;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class Scene
@@ -75,8 +78,9 @@ public abstract class Scene
  protected Group actors = new Group();
 
  @SuppressWarnings("unchecked")
- protected Scene addActor(Actor... actors) { this.actors.addAll(Arrays.asList(actors)); return this; }
- protected Actor[] remActor(Actor...actors) {this.actors.removeAll(Arrays.asList(actors)); return actors;}
+ protected Scene addActor(Actor... actors) { this.actors.addAll( actors ); return this; }
+ private static Array<Actor> tmpArray = new Array<>(true,8);//not thread safe!
+ protected Actor[] remActor(Actor...actors) { tmpArray.addAll( actors );this.actors.removeAll( tmpArray, true );tmpArray.clear();return actors;}
 
  protected void addEvent() {}
 }

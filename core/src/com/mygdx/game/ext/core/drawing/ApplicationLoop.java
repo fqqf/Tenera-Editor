@@ -18,17 +18,21 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  // TODO : Interface, like View
  public static ApplicationLoop instance;
 
- private Logger logger;
+ private final Logger logger;
  private static final boolean DEBUG = false;
 
- private final long SECOND_IN_NANO = 1_000_000_000;
- private final long TICK_AMOUNT = 10;
- private final long TICK_IN_NANO = SECOND_IN_NANO / TICK_AMOUNT;
+ private static final long SECOND_IN_NANO = 1_000_000_000;
+ private static final long TICK_AMOUNT = 10;
+ private static final float TICK_IN_NANO = SECOND_IN_NANO / (float)TICK_AMOUNT;
+
+ private static final long ESTIMATED_MAX_FRAME_CALL = (long)(TICK_IN_NANO - TICK_IN_NANO/15);
+ private final static byte MAX_TOLERATED_LATE_FRAMES = 5;
 
  public long realTime = TimeUtils.nanoTime(), renderDelta, inGameTime; // IN NANOSECONDS
  public long tick, nextTickTime, nextSecondTime, TPS, FPS;
 
  public float extrapolation = 0.5f;
+ private byte lateFramesAmount = 0;
 
  /** If you feel the need to override this method, please call super.render() **/
  @Override
@@ -39,7 +43,17 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   renderDelta = -(realTime - (realTime = TimeUtils.nanoTime())); // lastCallTime - curCallTime
 
   //TODO: Playing on 10 fps becomes not possible, because time stops
-  inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
+  //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
+  if (renderDelta > ESTIMATED_MAX_FRAME_CALL && ++lateFramesAmount > MAX_TOLERATED_LATE_FRAMES)
+  {
+   logger.error("Big delta call time detected (Perhaps resources are not available for this process)");
+   lateFramesAmount = 0;
+  }
+  else
+  {
+   if ( lateFramesAmount > MAX_TOLERATED_LATE_FRAMES) lateFramesAmount = 0;
+   inGameTime += Math.min( renderDelta, TICK_IN_NANO );
+  }
 
   if (inGameTime > nextTickTime)
   {
@@ -49,7 +63,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
    //logger.info("Calling Physics");
   }
 
-  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO))/(TICK_IN_NANO+0f);
+  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
   handleInput();
   drawGraphics();
 
@@ -67,6 +81,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   if (DEBUG) logger.info("Time was frozen for "+renderDelta/1_000_000_000f+" sec"); return 0;
  }
 
+
  @Override
  public void create()
  {
@@ -78,20 +93,23 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   logger = new Logger("GAMELOOP", Logger.INFO);
  }
 
- public void drawGraphics()
- {
+ public void drawGraphics() { }
+ public void calcPhysics() { }
+ public void handleInput() { }
 
+ private long pauseStartTime = 0;
+
+ @Override
+ public void resume()
+ {
+  long delta = TimeUtils.nanoTime() - pauseStartTime;
+  nextTickTime += delta;
+  inGameTime += delta;
+  lateFramesAmount = 0;
  }
 
- public void calcPhysics()
- {
-
- }
-
- public void handleInput()
- {
-
- }
+ @Override
+ public void pause() { pauseStartTime = TimeUtils.nanoTime(); }
 
  @Override
  public void resize(int width, int height)
