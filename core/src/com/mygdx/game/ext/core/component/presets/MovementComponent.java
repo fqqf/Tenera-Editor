@@ -15,8 +15,8 @@ public class MovementComponent extends Component
  @Override
  protected void initFields()
  {
-  actor.computeField("velocity", new Field<>(new Vector2(0.15f, 0)));
-  actor.computeField("position", new Field<>(new Vector2(0.15f, 0)));
+  actor.computeField("velocity", ()->new Field<>(new Vector2(0.15f, 0)));
+  actor.computeField("position", ()->new Field<>(new Vector2(0.15f, 0)));
  }
 
  @Override

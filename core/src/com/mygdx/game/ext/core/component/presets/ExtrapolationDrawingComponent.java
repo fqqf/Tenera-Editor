@@ -14,7 +14,7 @@ public class ExtrapolationDrawingComponent extends DrawingComponent
  public void init(Actor actor)
  {
   super.init(actor);
-  actor.computeField("velocity", new Field<>(new Vector2()));
+  actor.computeField("velocity", ()->new Field<>(new Vector2()));
  }
 
  @Override

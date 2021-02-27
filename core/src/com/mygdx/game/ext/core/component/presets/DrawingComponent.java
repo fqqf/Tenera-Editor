@@ -23,8 +23,8 @@ public class DrawingComponent extends Component
  {
   batch = Monitor.instance.getBatch();
 
-  actor.computeField("position", new Field<>(new Vector2()));
-  actor.computeField("size", new Field<>(new Vector2()));
+  actor.computeField("position", ()->new Field<>(new Vector2()) );
+  actor.computeField("size", ()->new Field<>(new Vector2()));
  }
 
  @Override

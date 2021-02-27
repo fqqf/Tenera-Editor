@@ -1,9 +1,11 @@
 package com.mygdx.game.ext.core.actor;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.component.Component;
 import com.mygdx.game.ext.core.component.Field;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
+import com.mygdx.game.ext.interfaces.Func;
 
 import java.util.HashMap;
 
@@ -30,7 +32,8 @@ public abstract class Actor
 
  public Actor addField(String name, Field<?> field) { fields.put(name, field); return this; }  // TODO: addField must create field by itself, and get just simple object
 
- public void computeField(String name, Field<?> field) { if (getField(name) == null) addField(name, field); }
+ //public void computeField(String name, Field<?> field) { if (getField(name) == null) addField(name, field); }
+ public void computeField(String name, Func<Field<?>> supplay) { if (getField(name) == null) addField(name, supplay.invoke() ); }
 
  public boolean doDrawing = true, doActing = true, doInputHandling = true;  // Used by Scene to determine call Actor methods or not
 
