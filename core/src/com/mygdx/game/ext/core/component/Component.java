@@ -3,10 +3,15 @@ package com.mygdx.game.ext.core.component;
 
 import com.mygdx.game.ext.core.actor.Actor;
 
-public abstract class Component<T>
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class Component
 {
  protected Actor actor;
  protected int type;
+
+ protected HashMap<String, Field<?>> fields = new HashMap<>();
 
  public void init(Actor actor)
  {

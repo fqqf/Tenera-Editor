@@ -7,7 +7,7 @@ import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.component.Component;
 import com.mygdx.game.ext.core.component.Field;
 
-public class DrawingComponent extends Component<DrawingComponent>
+public class DrawingComponent extends Component
 {
  {
   type = GRAPHICS_COMPONENT;

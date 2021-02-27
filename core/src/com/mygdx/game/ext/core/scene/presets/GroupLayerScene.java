@@ -24,5 +24,5 @@ public class GroupLayerScene extends Scene
   batch.end();
  }
 
- TreeMap<Integer, Group> layers = new TreeMap<>();
+ protected TreeMap<Integer, Group> layers = new TreeMap<>();
 }

@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.component.Component;
 import com.mygdx.game.ext.core.component.Field;
 
-public class MovementComponent extends Component<MovementComponent>
+public class MovementComponent extends Component
 {
  private Field<Vector2> position, velocity;
 

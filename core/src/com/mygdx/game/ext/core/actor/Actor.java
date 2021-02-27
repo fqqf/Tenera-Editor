@@ -57,14 +57,14 @@ public abstract class Actor
  private void handleComponents(final int startIndewx, final int endIndex)
  { for (int i = startIndewx; i < endIndex; i++) components.get(i).handle(this); }
 
- protected Array<Component<?>> components = new Array<>();
+ protected Array<Component> components = new Array<>();
 
- public Actor addComp(Component<?>... components)
+ public Actor addComp(Component... components)
  {
-  for (Component<?> component : components) addComp( component );
+  for (Component component : components) addComp( component );
   return this;
  }
- public Actor addComp(Component<?> component)
+ public Actor addComp(Component component)
  {
   component.init( this );
   int index = getComponentIndex( component.getType() );
@@ -73,8 +73,8 @@ public abstract class Actor
   return this;
  }
 
- public Actor remComp(Component<?>... components) { this.components.forEach( this::remComp ); return this; }  // TODO: Add names to components remComp("name")
- public Actor remComp(Component<?> component)
+ public Actor remComp(Component... components) { this.components.forEach( this::remComp ); return this; }  // TODO: Add names to components remComp("name")
+ public Actor remComp(Component component)
  {
   if ( components.removeValue( component, true ) )updateIndexOnChange( component.getType(), -1 );
   return this;

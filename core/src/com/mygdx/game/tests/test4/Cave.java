@@ -17,7 +17,7 @@ public class Cave extends Scene
 
  Field<Vector2> position, size;
 
- Component<?>
+ Component
    movement = new MovementComponent(), drawing = new DrawingComponent(),
    extrapolationDrawing = new ExtrapolationDrawingComponent();
 

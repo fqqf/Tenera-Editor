@@ -36,7 +36,7 @@ public class City extends GroupLayerScene
 
  private void initActors()
  {
-  Component<DrawingComponent> drawing = new DrawingComponent();
+  Component drawing = new DrawingComponent();
 
   addActor(cube1, cube2, platform);
   actors.forEach(actor -> actor.addComp(drawing));

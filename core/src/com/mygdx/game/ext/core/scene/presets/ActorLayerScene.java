@@ -24,5 +24,5 @@ public class ActorLayerScene extends Scene
   batch.end();
  }
 
- TreeMap<Integer, Actor> layers = new TreeMap<>();
+ protected TreeMap<Integer, Actor> layers = new TreeMap<>();
 }
