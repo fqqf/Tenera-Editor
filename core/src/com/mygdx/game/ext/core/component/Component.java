@@ -11,8 +11,6 @@ public abstract class Component
  protected Actor actor;
  protected int type;
 
- protected HashMap<String, Field<?>> fields = new HashMap<>();
-
  public void init(Actor actor)
  {
   this.actor = actor;

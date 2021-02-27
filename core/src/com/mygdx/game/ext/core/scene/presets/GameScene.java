@@ -22,10 +22,11 @@ public class GameScene extends GroupLayerScene
   super(name, field, width, height);
  }
 
- // In
+
  @Override
  public void iterPhys()
  {
   super.iterPhys();
+  collisionDetector.calc();
  }
 }
