@@ -1,10 +1,8 @@
 package com.mygdx.game.ext.core.scene.presets;
 
-import com.badlogic.gdx.Gdx;
-import com.mygdx.game.ext.additional.CollisionDetector;
-import com.mygdx.game.ext.additional.CollisionManager;
+import com.mygdx.game.ext.additional.collisionSystem.CollisionDetector;
+import com.mygdx.game.ext.additional.collisionSystem.CollisionManager;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.scene.Scene;
 
 /** This scene already includes AABB physics collision system, Event system, and drawing by layers */
 public class GameScene extends GroupLayerScene

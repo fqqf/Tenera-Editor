@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.interfaces;
+package com.mygdx.game.ext.core.actor.interfaces;
 
 @FunctionalInterface
 public interface Func<TResult>

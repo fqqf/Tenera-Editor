@@ -18,7 +18,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  // TODO : Interface, like View
  public static ApplicationLoop instance;
 
- private final Logger logger;
+ public static Logger logger;
  private static final boolean DEBUG = false;
 
  private static final long SECOND_IN_NANO = 1_000_000_000;
@@ -34,16 +34,23 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  public float extrapolation = 0.5f;
  private byte lateFramesAmount = 0;
 
+ @Override
+ public void create()
+ {
+  instance = this;
+  Monitor.instance = new Monitor();
+  logger = new Logger("APPLICATION LOOP");
+  logger.info("The application loop has started");
+ }
+
  /** If you feel the need to override this method, please call super.render() **/
  @Override
  public void render()
  {
-  if (instance == null) {logger.error("Call super.create() in create method first!"); System.exit(1);}
+  if (instance == null) throw new NullPointerException("Please call super.create() in your create() method first!");
   FPS++;
   renderDelta = -(realTime - (realTime = TimeUtils.nanoTime())); // lastCallTime - curCallTime
 
-  //TODO: Playing on 10 fps becomes not possible, because time stops
-  //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
   if (renderDelta > ESTIMATED_MAX_FRAME_CALL && ++lateFramesAmount > MAX_TOLERATED_LATE_FRAMES)
   {
    logger.error("Big delta call time detected (Perhaps resources are not available for this process)");
@@ -60,7 +67,6 @@ public abstract class ApplicationLoop extends ApplicationAdapter
    nextTickTime += TICK_IN_NANO;
    tick++; TPS++;
    calcPhysics();
-   //logger.info("Calling Physics");
   }
 
   extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
@@ -75,27 +81,9 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   }
  }
 
- // FREEZES IN-GAME TIME, BUT RENDERING CONTINUES
- public int freeze()
- {
-  if (DEBUG) logger.info("Time was frozen for "+renderDelta/1_000_000_000f+" sec"); return 0;
- }
-
-
- @Override
- public void create()
- {
-  logger.info("Application cycle has launched successfully");
-  instance = this;
- }
-
- {
-  logger = new Logger("GAMELOOP", Logger.INFO);
- }
-
- public void drawGraphics() { }
- public void calcPhysics() { }
- public void handleInput() { }
+ public void drawGraphics() {}
+ public void calcPhysics() {}
+ public void handleInput() {}
 
  private long pauseStartTime = 0;
 
@@ -118,6 +106,14 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  }
 }
 
+/*
+ // FREEZES IN-GAME TIME, BUT RENDERING CONTINUES
+ //inGameTime += (renderDelta < 100_000_000) ? renderDelta : freeze(); // if window was on hold more for than a 0.1 sec, it freezes time for that moment
+ private int freeze()
+ {
+  if (DEBUG) logger.info("Time was frozen for "+renderDelta/1_000_000_000f+" sec"); return 0;
+ }
+ */
 
 /* EXAMPLE OF EXTRAPOLATION */
  /*

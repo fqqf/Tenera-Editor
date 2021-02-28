@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.tests.test5;
 
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.component.Component;
@@ -6,7 +6,7 @@ import com.mygdx.game.ext.core.component.presets.DrawingComponent;
 import com.mygdx.game.ext.core.component.presets.MovementComponent;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.scene.presets.GroupLayerScene;
-
+/*
 public class City extends GroupLayerScene
 {
  ProActor cube1 = new ProActor(), cube2 = new ProActor(), platform = new ProActor();
@@ -68,3 +68,4 @@ public class City extends GroupLayerScene
   layers.put(0, players);
  }
 }
+*/

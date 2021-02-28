@@ -1,11 +1,10 @@
 package com.mygdx.game.ext.core.actor;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.component.Component;
 import com.mygdx.game.ext.core.component.Field;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
-import com.mygdx.game.ext.interfaces.Func;
+import com.mygdx.game.ext.core.actor.interfaces.Func;
 
 import java.util.HashMap;
 
