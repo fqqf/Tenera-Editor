@@ -33,7 +33,7 @@ public abstract class Actor
  public Actor addField(String name, Field<?> field) { fields.put(name, field); return this; }  // TODO: addField must create field by itself, and get just simple object
 
  //public void computeField(String name, Field<?> field) { if (getField(name) == null) addField(name, field); }
- public void computeField(String name, Func<Field<?>> supplay) { if (getField(name) == null) addField(name, supplay.invoke() ); }
+ public void computeField(String name, Func<Field<?>> supply) { if (getField(name) == null) addField(name, supply.invoke() ); }
 
  public boolean doDrawing = true, doActing = true, doInputHandling = true;  // Used by Scene to determine call Actor methods or not
 
@@ -64,22 +64,21 @@ public abstract class Actor
 
  public Actor addComp(Component... components)
  {
-  for (Component component : components) addComp( component );
+  for (Component component : components) addComp(component);
   return this;
  }
- public Actor addComp(Component component)
+
+ private void addComp(Component component)
  {
   component.init( this );
   int index = getComponentIndex( component.getType() );
   components.insert( index, component );
-  updateIndexOnChange( component.getType(), 1 );
-  return this;
+  updateIndexOnChange(component.getType(), 1);
  }
 
- public Actor remComp(Component... components) { this.components.forEach( this::remComp ); return this; }  // TODO: Add names to components remComp("name")
- public Actor remComp(Component component)
- {
-  if ( components.removeValue( component, true ) )updateIndexOnChange( component.getType(), -1 );
-  return this;
- }
+ public Actor remComp(Component... components)
+ { this.components.forEach(this::remComp); return this; }  // TODO: Add names to components remComp("name")
+
+ private void remComp(Component component)
+ { if (components.removeValue(component, true)) updateIndexOnChange(component.getType(), -1); }
 }

@@ -33,10 +33,13 @@ public class DrawingComponent extends Component
   position = actor.getField("position");
   size = actor.getField("size");
   texture = actor.getField("texture");
+
+  if (texture == null) {throw new NullPointerException("Calling drawing component on null-texture actor. Please call actor.addField((\"texture\"), new Field<>(new Texture()))"); }
  }
 
  protected void behave()
  {
+
   // TODO: Also try to make it more simpler, remove get();
   batch.draw(texture.get(), position.get().x, position.get().y, size.get().x, size.get().y);
  }

@@ -41,6 +41,7 @@ public abstract class Scene
   camera.update();
   monitor.setField(field);
 
+
 //  batch.begin();
   //TODO: Add different layers support via group
   //for (Actor<?> actor: actors) actor.draw(extrapolation);

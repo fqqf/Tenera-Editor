@@ -32,7 +32,7 @@ public class ExtendCoordinateGrid extends CoordinateGrid
    unitWidth, unitHeight,
    notIntegerUnitWidth; // TODO: Find better name {unitWidth = Math.ceil(notIntegerUnitWidth)}
 
- public ExtendCoordinateGrid(String name, float unitHeight)
+ public ExtendCoordinateGrid(String name, float unitHeight) // TODO: move main functionality to CoordinateGrid
  {
   this.name = name;
   this.unitHeight = unitHeight;
@@ -48,7 +48,7 @@ public class ExtendCoordinateGrid extends CoordinateGrid
 
   monitor.addField(this);
 
-  Monitor.log.info("Field \""+name+"\" was created ["+unitWidth+":"+unitHeight+"]");
+  Monitor.log.info("Coordinate grid \""+name+"\" was created ["+unitWidth+":"+unitHeight+"]");
  }
 
  private void calcFieldWidth()

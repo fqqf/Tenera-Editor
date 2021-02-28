@@ -1,13 +1,17 @@
 package com.mygdx.game.ext.core.component;
 
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Logger;
 import com.mygdx.game.ext.core.actor.Actor;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Component
 {
+ protected static Logger logger = new Logger("COMPONENT");
  protected Actor actor;
  protected int type;
 
