@@ -27,6 +27,5 @@ public class DelightfulLocation extends GameScene
 
   super.iterDraw(extrapolation);
 
-  drawGrid();
  }
 }

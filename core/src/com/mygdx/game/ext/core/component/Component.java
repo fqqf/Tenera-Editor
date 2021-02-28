@@ -23,7 +23,6 @@ public abstract class Component
 
  public void handle(Actor actor)
  {
-  System.out.println(type);
   this.actor = actor;
   loadFields();
   behave();
