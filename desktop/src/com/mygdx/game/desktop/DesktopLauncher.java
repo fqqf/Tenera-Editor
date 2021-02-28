@@ -2,7 +2,7 @@ package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.Main;
+import com.mygdx.game.AwesomeGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -14,6 +14,7 @@ public class DesktopLauncher {
 		config.backgroundFPS = -1;
 		config.foregroundFPS = 60;
 
-		new LwjglApplication(new Main(), config);
+		// TODO : create abstraction over LwjglAplication, so you wont have to set config by yourself and call super.create() in ApplicationLoop
+		new LwjglApplication(new AwesomeGame(), config);
 	}
 }

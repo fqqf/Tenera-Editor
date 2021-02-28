@@ -34,20 +34,20 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  public float extrapolation = 0.5f;
  private byte lateFramesAmount = 0;
 
- @Override
+ @Override // TODO: USE WITHOUT super.create() lwjgl application check in desktop launcher
  public void create()
  {
+  logger = new Logger("APPLICATION LOOP", Logger.INFO);
+  logger.info("The application loop has started");
   instance = this;
   Monitor.instance = new Monitor();
-  logger = new Logger("APPLICATION LOOP");
-  logger.info("The application loop has started");
  }
 
  /** If you feel the need to override this method, please call super.render() **/
  @Override
  public void render()
  {
-  if (instance == null) throw new NullPointerException("Please call super.create() in your create() method first!");
+  checkInitialization();
   FPS++;
   renderDelta = -(realTime - (realTime = TimeUtils.nanoTime())); // lastCallTime - curCallTime
 
@@ -81,6 +81,11 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   }
  }
 
+ private void checkInitialization()
+ {
+  if (instance == null) throw new NullPointerException("Please call super.create() in your create() method first!");
+ }
+
  public void drawGraphics() {}
  public void calcPhysics() {}
  public void handleInput() {}
@@ -99,9 +104,10 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  @Override
  public void pause() { pauseStartTime = TimeUtils.nanoTime(); }
 
- @Override
+ @Override // TODO: USE WITHOUT super.resize() lwjgl application check in desktop launcher
  public void resize(int width, int height)
  {
+  checkInitialization();
   Monitor.instance.update(width, height);
  }
 }

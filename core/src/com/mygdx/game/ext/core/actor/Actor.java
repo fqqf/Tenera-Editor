@@ -6,13 +6,14 @@ import com.mygdx.game.ext.core.component.Field;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.actor.interfaces.Func;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public abstract class Actor
 {
- public void draw(float ext) { handleComponents( 0, drawEndIndex); }
- public void act() { handleComponents(drawEndIndex, actEndIndex); }
- public void handleInput() { handleComponents(actEndIndex, inputEndIndex ); }
+ public void draw(float ext) { callComponents( 0, drawEndIndex); }
+ public void act() { callComponents(drawEndIndex, actEndIndex);   }
+ public void handleInput() { callComponents(actEndIndex, inputEndIndex); }
 
  public HashMap<String, Field<?>> fields = new HashMap<>(); // fields from components
 
@@ -29,7 +30,7 @@ public abstract class Actor
   return fields.get(name);
  }
 
- public Actor addField(String name, Field<?> field) { fields.put(name, field); return this; }  // TODO: addField must create field by itself, and get just simple object
+ public Actor addField(String name, Field<?> field) { fields.put(name, field); return this; }
 
  //public void computeField(String name, Field<?> field) { if (getField(name) == null) addField(name, field); }
  public void computeField(String name, Func<Field<?>> supply) { if (getField(name) == null) addField(name, supply.invoke() ); }
@@ -56,10 +57,10 @@ public abstract class Actor
 //  else if ( removeType == Component.PHYSICS_COMPONENT) actEndIndex--; inputEndIndex = components.size-1;
 // }
 
- private void handleComponents(final int startIndewx, final int endIndex)
+ private void callComponents(final int startIndewx, final int endIndex)
  { for (int i = startIndewx; i < endIndex; i++) components.get(i).handle(this); }
 
- protected Array<Component> components = new Array<>();
+ private final Array<Component> components = new Array<>();
 
  public Actor addComp(Component... components)
  {

@@ -9,6 +9,8 @@ import java.util.TreeMap;
 
 public class ActorLayerScene extends Scene
 {
+ protected TreeMap<Integer, Actor> layers = new TreeMap<>();
+
  public ActorLayerScene(String name, ExtendCoordinateGrid field, float width, float height)
  {
   super(name, field, width, height);
@@ -24,5 +26,15 @@ public class ActorLayerScene extends Scene
   batch.end();
  }
 
- protected TreeMap<Integer, Actor> layers = new TreeMap<>();
+ @Override
+ public void iterPhys()
+ {
+  layers.forEach((key, layer) -> layer.act());
+ }
+
+ @Override
+ public void iterInput()
+ {
+  layers.forEach((key, layer) -> layer.handleInput());
+ }
 }

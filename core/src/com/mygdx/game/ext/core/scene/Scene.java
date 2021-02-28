@@ -53,6 +53,8 @@ public abstract class Scene
   for (Actor actor: actors) actor.act();
  }
 
+ public void iterInput() { for (Actor actor: actors) actor.handleInput();}
+
  protected OrthographicCamera camera;
 
  protected void drawGrid()
