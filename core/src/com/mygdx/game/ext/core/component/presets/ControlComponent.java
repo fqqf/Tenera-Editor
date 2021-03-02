@@ -32,7 +32,6 @@ public class ControlComponent extends Component
  @Override
  protected void behave()
  {
-  System.out.println("d");
   if (Gdx.input.isKeyPressed(Input.Keys.W)) velocity.get().add(0,0.02f);
   if (Gdx.input.isKeyPressed(Input.Keys.A)) velocity.get().add(-0.02f, 0);
   if (Gdx.input.isKeyPressed(Input.Keys.S)) velocity.get().add(0,-0.02f);
