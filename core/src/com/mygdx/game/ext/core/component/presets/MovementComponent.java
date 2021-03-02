@@ -9,7 +9,7 @@ public class MovementComponent extends Component
  private Field<Vector2> position, velocity;
 
  {
-  type = PHYSICS_COMPONENT;
+  type = Type.PHYSICS_COMPONENT;// PHYSICS_COMPONENT;
  }
 
  @Override

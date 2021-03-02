@@ -6,14 +6,14 @@ import com.mygdx.game.ext.core.component.Field;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.actor.interfaces.Func;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public abstract class Actor
 {
- public void draw(float ext) { callComponents( 0, drawEndIndex); }
- public void act() { callComponents(drawEndIndex, actEndIndex);   }
- public void handleInput() { callComponents(actEndIndex, inputEndIndex); }
+ public void draw(float ext) { callComponents( 0, actStartIndex); }
+ public void act() { callComponents(actStartIndex, inputStartIndex);   }
+ public void handleInput() {
+  callComponents(inputStartIndex, components.size); }
 
  public HashMap<String, Field<?>> fields = new HashMap<>(); // fields from components
 
@@ -40,22 +40,17 @@ public abstract class Actor
  public void pause() { doDrawing = false;doActing = false;doInputHandling = false; }
  public void resume() { doDrawing = true;doActing = true;doInputHandling = true; }
 
- private int drawEndIndex, actEndIndex, inputEndIndex;
- private int getComponentIndex( final int componentType)
- { return componentType == Component.GRAPHICS_COMPONENT ? 0 : componentType == Component.PHYSICS_COMPONENT ? drawEndIndex : actEndIndex; }
-
- private void updateIndexOnChange(final int insertType, int value )
+ private int actStartIndex, inputStartIndex;
+ private int getComponentIndex( final Component.Type componentType)
  {
-  if ( insertType == Component.GRAPHICS_COMPONENT ) { drawEndIndex+=value; actEndIndex+=value;}
-  else if (insertType == Component.PHYSICS_COMPONENT) actEndIndex+=value; inputEndIndex = components.size-1;
+   return componentType == Component.Type.GRAPHICS_COMPONENT ? 0 : componentType == Component.Type.PHYSICS_COMPONENT ? actStartIndex : inputStartIndex;
  }
 
-// private void updateIndexAfterRemoveComponentType( final int removeType )
-// {
-//  if ( removeType == Component.GRAPHICS_COMPONENT ) {
-//   drawEndIndex--; actEndIndex--;}
-//  else if ( removeType == Component.PHYSICS_COMPONENT) actEndIndex--; inputEndIndex = components.size-1;
-// }
+ private void updateIndexOnChange(final Component.Type insertType, int value )
+ {
+  if ( insertType == Component.Type.GRAPHICS_COMPONENT ) { actStartIndex +=value; inputStartIndex +=value;}
+  else if (insertType == Component.Type.PHYSICS_COMPONENT) inputStartIndex +=value;
+ }
 
  private void callComponents(final int startIndewx, final int endIndex)
  { for (int i = startIndewx; i < endIndex; i++) components.get(i).handle(this); }
@@ -70,10 +65,11 @@ public abstract class Actor
 
  private void addComp(Component component)
  {
+  System.out.println( "add type " + component.getType());
   component.init( this );
   int index = getComponentIndex( component.getType() );
   components.insert( index, component );
-  updateIndexOnChange(component.getType(), 1);
+  updateIndexOnChange( component.getType(), 1);
  }
 
  public Actor remComp(Component... components)
