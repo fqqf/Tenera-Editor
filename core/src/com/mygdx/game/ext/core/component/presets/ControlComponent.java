@@ -9,8 +9,6 @@ import com.mygdx.game.ext.core.component.Field;
 public class ControlComponent extends Component
 {
  private Field<Vector2> position, velocity;
-
- // TODO: set INPUT_COMPONENT
  {
   type = Type.INPUT_COMPONENT;//INPUT_COMPONENT;//GRAPHICS_COMPONENT;
  }
