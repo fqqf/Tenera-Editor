@@ -31,7 +31,6 @@ public abstract class Actor
  }
 
  public Actor addField(String name, Field<?> field) { fields.put(name, field); return this; }
-
  //public void computeField(String name, Field<?> field) { if (getField(name) == null) addField(name, field); }
  public void computeField(String name, Func<Field<?>> supply) { if (getField(name) == null) addField(name, supply.invoke() ); }
 
