@@ -10,7 +10,7 @@ import com.mygdx.game.ext.core.component.Field;
 public class DrawingComponent extends Component
 {
  {
-  type = GRAPHICS_COMPONENT;
+  type = Type.GRAPHICS_COMPONENT;//GRAPHICS_COMPONENT;
  }
 
  protected SpriteBatch batch;
