@@ -19,7 +19,7 @@ public class Hero extends Actor
 
   addField("texture", new Field<>(new Texture("hero.png")));
 
-  addField("collision", new Field<>(CollisionType.BODY));
+  addField("box", new Field<>(CollisionType.BODY));
  }
 
  Field<Vector2> vector2;

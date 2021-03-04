@@ -3,9 +3,11 @@ package com.mygdx.game.ext.core.actor;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.component.Component;
 import com.mygdx.game.ext.core.component.Field;
+import com.mygdx.game.ext.core.component.FieldType;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.actor.interfaces.Func;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 public abstract class Actor
@@ -15,9 +17,9 @@ public abstract class Actor
  public void handleInput() {
   callComponents(inputStartIndex, components.size); }
 
- public HashMap<String, Field<?>> fields = new HashMap<>(); // fields from components
+ public HashMap<String, Field<? extends Object>> fields = new HashMap<>(); // fields from components
 
-
+ @SuppressWarnings("unchecked")
  public Field getField(String name, boolean log)
  {
   Field<?> field;

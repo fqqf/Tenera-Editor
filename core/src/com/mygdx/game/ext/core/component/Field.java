@@ -9,6 +9,7 @@ public class Field<INSTANCE_TYPE>
   instance = object;
  }
 
+ @SuppressWarnings("unchecked")
  public INSTANCE_TYPE get()
  {
   return instance;

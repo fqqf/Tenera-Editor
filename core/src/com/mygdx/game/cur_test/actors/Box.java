@@ -19,7 +19,7 @@ public class Box extends Actor
 
   addField("texture", new Field<>(new Texture("box.png")));
 
-  addField("collision", new Field<>(CollisionType.SOLID));
+  addField("box", new Field<>(CollisionType.SOLID));
  }
 
  Field<Vector2> vector2;
