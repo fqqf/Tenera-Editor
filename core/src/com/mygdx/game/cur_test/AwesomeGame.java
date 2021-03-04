@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.cur_test;
 
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;

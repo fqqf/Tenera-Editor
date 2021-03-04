@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.cur_test.components;
 
 import com.mygdx.game.ext.core.component.Component;
 import com.mygdx.game.ext.core.component.presets.ControlComponent;

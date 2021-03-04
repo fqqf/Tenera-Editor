@@ -30,9 +30,9 @@ public class CollisionManager
 	{
 		for (Actor actor : actors)
 		{
-			// TODO: replace compute, because even if actor has no this field it will create object
 			actor.computeField("position", () -> new Field<>(new Vector2(0, 0)));
 			actor.computeField("size", () -> new Field<>(new Vector2(0, 0)));
+			actor.computeField("collision", () -> new Field<>(CollisionType.SOLID));
 
 			Field<Vector2> position = actor.getField("position"), size = actor.getField("size");
 
@@ -50,12 +50,20 @@ public class CollisionManager
 		return rectangle1.overlaps(rectangle2);
 	}
 
+	// TODO: В этом методе находится switch-case, который определяет по типу двух коллизий,
+	//  куда их отправить, к примеру body-body -> handleBodyBody();
+	//  (т.е, все как расписано в ComponentType
+	//  Тебе нужно реализовать простейшую bodySolid, где body выталкивает вектор из solid
 	private void handleCollision(Actor actor1, Actor actor2)
 	{
 		Vector2 speed1 = getSpeed(actor1);
 		Vector2 speed2 = getSpeed(actor2);
 		
 	}
+
+	private void handleBodyBody(){}
+	private void handleBodySolid(){}
+	private void handleBodyLiquid(){}
 
 	private void setRectangleData(Actor actor, Rectangle rectangle)
 	{

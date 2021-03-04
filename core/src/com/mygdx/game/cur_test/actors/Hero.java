@@ -1,9 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.cur_test.actors;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.cur_test.components.MyComponents;
+import com.mygdx.game.ext.additional.collisionSystem.CollisionType;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.component.Component;
 import com.mygdx.game.ext.core.component.Field;
 
 public class Hero extends Actor
@@ -17,6 +18,8 @@ public class Hero extends Actor
   vector2 = getField("size"); vector2.get().x = 3; vector2.get().y = 3;
 
   addField("texture", new Field<>(new Texture("hero.png")));
+
+  addField("collision", new Field<>(CollisionType.BODY));
  }
 
  Field<Vector2> vector2;
