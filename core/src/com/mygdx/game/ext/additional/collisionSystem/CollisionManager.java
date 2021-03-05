@@ -75,12 +75,12 @@ public class CollisionManager
 
         if (Math.abs(deltaX) < Math.abs(deltaY))
         {
-            getV2(actorBody, "position").y += vector3.y * 0.1f; //deltaY * 0.1f;// * Math.abs(getV2(actorBody,"velocity").y);
+            getV2(actorBody, "position").y += vector3.y; //deltaY * 0.1f;// * Math.abs(getV2(actorBody,"velocity").y);
             getV2(actorBody, "velocity").y *= 0;
         }
         else
         {
-            getV2(actorBody, "position").x += vector3.x * 0.1f;//deltaX * 0.1f;// * Math.abs(getV2(actorBody,"velocity").x);
+            getV2(actorBody, "position").x += vector3.x; //deltaX * 0.1f;// * Math.abs(getV2(actorBody,"velocity").x);
             getV2(actorBody, "velocity").x *= 0;
         }
 
