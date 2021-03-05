@@ -3,8 +3,8 @@ package com.mygdx.game.tests.test6.actors;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.cur_test.components.MyComponents;
-import com.mygdx.game.ext.core.components.presets.collisionSystem.BoundingBox;
-import com.mygdx.game.ext.core.components.presets.collisionSystem.CollisionType;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.Component;
 

@@ -11,7 +11,7 @@ public class ControlSystem extends System
 {
  public ControlSystem()
  {
-  type = Type.INPUT_SYSTEM;
+  type = Type.GRAPHICS_SYSTEM;
  }
 
  private Vector2 position, velocity;
@@ -19,7 +19,7 @@ public class ControlSystem extends System
  @Override
  protected void loadFields()
  {
-  BasePhysicsComponent basePhysicsComponent = new BasePhysicsComponent(actor);
+  BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
 
   position = basePhysicsComponent.position;
   velocity = basePhysicsComponent.velocity;

@@ -8,17 +8,18 @@ import com.mygdx.game.ext.core.components.ComputeableHashMap;
 public class DrawingComponent extends Component<DrawingComponent>
 {
  private static final ComputeableHashMap<DrawingComponent> childList = new ComputeableHashMap<>();
+ private static final Texture nullTexture = new Texture("box.png");
 
  public Texture texture;
 
  public DrawingComponent(Texture texture, Actor actor)
  {
   super(actor);
-  this.texture = texture;
  }
 
  public static DrawingComponent get(Actor actor)
  {
-  return childList.compute(actor, () -> new DrawingComponent(new Texture("box.png"), actor));
+ // System.out.println(childList.compute(actor, () -> new DrawingComponent(nullTexture, actor)));
+  return childList.compute(actor, () -> new DrawingComponent(nullTexture, actor));
  }
 }

@@ -3,9 +3,7 @@ package com.mygdx.game.ext.core.components;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.actor.interfaces.Func;
 
-import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
-import java.util.function.BiFunction;
 
 public class ComputeableHashMap<T> extends HashMap<Actor, T>
 {
@@ -14,7 +12,12 @@ public class ComputeableHashMap<T> extends HashMap<Actor, T>
  public T compute(Actor actor, Func<T> supply)
  {
   t = this.get(actor);
-  if (t == null) this.put(actor, supply.invoke());
+  if (t == null)
+  {
+   put(actor, supply.invoke());
+   t = this.get(actor);
+  }
+
   return t;
  }
 }

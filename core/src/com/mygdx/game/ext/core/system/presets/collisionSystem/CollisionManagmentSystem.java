@@ -1,11 +1,10 @@
-package com.mygdx.game.ext.core.components.presets.collisionSystem;
+package com.mygdx.game.ext.core.system.presets.collisionSystem;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
-import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.system.System;
 
 public class CollisionManagmentSystem extends System

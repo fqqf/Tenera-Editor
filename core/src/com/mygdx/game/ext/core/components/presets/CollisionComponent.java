@@ -1,7 +1,7 @@
 package com.mygdx.game.ext.core.components.presets;
 
-import com.mygdx.game.ext.core.components.presets.collisionSystem.BoundingBox;
-import com.mygdx.game.ext.core.components.presets.collisionSystem.CollisionType;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;

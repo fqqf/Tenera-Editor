@@ -13,12 +13,5 @@ public abstract class Component<T extends Component<T>>
  public Component(Actor actor)
  {
   this.actor = actor;
-
-  if (motherListPointer == null) throw new NullPointerException("" +
-    "Set pointer of " +
-    "[" + MethodHandles.lookup().lookupClass().asSubclass(this.getClass()).getName() + "]" +
-    " to motherlist first!");
-
-  motherListPointer.compute(actor, () -> (T)this);
  }
 }

@@ -10,13 +10,14 @@ public class BasePhysicsComponent extends Component<BasePhysicsComponent>
 {
  private static final ComputeableHashMap<BasePhysicsComponent> childList = new ComputeableHashMap<>();
 
- public Vector2 position = new Vector2();
- public Vector2 size = new Vector2();
- public Vector2 velocity = new Vector2();
+ public Vector2 position = new Vector2(1,1);
+ public Vector2 size = new Vector2(1,1);
+ public Vector2 velocity = new Vector2(0,0); // TODO: Remove from physics component
 
  public BasePhysicsComponent(Actor actor)
  {
   super(actor);
+
  }
 
  public static BasePhysicsComponent get(Actor actor)

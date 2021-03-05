@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.core.components.presets.collisionSystem;
+package com.mygdx.game.ext.core.system.presets.collisionSystem;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;

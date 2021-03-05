@@ -1,7 +1,5 @@
 package com.mygdx.game.ext.core.scene.presets;
 
-import com.mygdx.game.ext.core.components.presets.collisionSystem.CollisionManagmentSystem;
-import com.mygdx.game.ext.core.components.presets.collisionSystem.CollisionDetector;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.scene.Scene;
 

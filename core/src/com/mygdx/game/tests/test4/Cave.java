@@ -1,15 +1,5 @@
 package com.mygdx.game.tests.test4;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.system.System;
-import com.mygdx.game.ext.core.scene.Scene;
-import com.mygdx.game.ext.core.actor.presets.DullActor;
-import com.mygdx.game.ext.core.system.presets.DrawingSystem;
-import com.mygdx.game.ext.core.system.presets.ExtrapolationDrawingSystem;
-import com.mygdx.game.ext.core.components.Component;
-import com.mygdx.game.ext.core.system.presets.MovementSystem;
 /*
 public class Cave extends Scene
 {

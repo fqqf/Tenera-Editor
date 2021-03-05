@@ -6,7 +6,7 @@ import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.system.System;
 
-public class MovementSystem extends System
+public class PhysicsSystem extends System
 {
  private Vector2 position, velocity;
  private BoundingBox box;
@@ -32,6 +32,8 @@ public class MovementSystem extends System
  {
 
   position.add(velocity);
+  if (position.y>0) velocity.y-=0.05f; else {velocity.y = 0; position.y = 0; } // TODO: disable extrapolation in here
+  if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x)/10;else velocity.x = 0;
   box.setPosition(position);
  }
 }

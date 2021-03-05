@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.system.System;
@@ -28,10 +29,10 @@ public class DrawingSystem extends System
 
  public void handle()
  {
-  layers.forEach((key,layer) -> layer.forEach((actor -> calc())));
+  layers.forEach((key,layer) -> layer.forEach((this::calc)));
  }
 
- private void calc()
+ private void calc(Actor actor)
  {
   this.actor = actor;
 
@@ -51,6 +52,8 @@ public class DrawingSystem extends System
  protected void behave()
  {
   loadFields();
+  batch.begin();
   batch.draw(texture, position.x, position.y, size.x, size.y);
+  batch.end();
  }
 }
