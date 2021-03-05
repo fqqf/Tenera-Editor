@@ -3,7 +3,6 @@ package com.mygdx.game.ext.core.components.presets.collisionSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.group.Group;
@@ -16,16 +15,15 @@ public class CollisionManagmentSystem extends System
   type = Type.PHYSICS_SYSTEM;
  }
 
- private BoundingBox boxA, boxB;
- private Group actors = new Group(); // Due to be managed by another class
+ private BoundingBox boxA, boxB;// Due to be managed by another class
 
  public void handle()
  {
-  for (int i = 0; i < actors.size; i++)
+  for (int i = 0; i < assignedActors.size; i++)
   {
-   Actor actorA = actors.get(i);
+   Actor actorA = assignedActors.get(i);
    boxA = getBox(actorA);
-   for (Actor actorB : actors)
+   for (Actor actorB : assignedActors)
    {
     if (actorA == actorB) continue;
     boxB = getBox(actorB);
@@ -38,20 +36,6 @@ public class CollisionManagmentSystem extends System
 
  private BasePhysicsComponent physics;
  private CollisionComponent collision;
-
- @Override
- protected void loadFields()
- {
-
- }
-
-
- @Override
- protected void behave()
- {
-
- }
-
 
  private void handleCollision(Actor actorA, Actor actorB)
  {
@@ -103,9 +87,4 @@ public class CollisionManagmentSystem extends System
  }
 
  BoundingBox rectangleComponent;
-
- public void addActor(Actor... actors)
- {
-  this.actors.addAll(actors);
- }
 }
