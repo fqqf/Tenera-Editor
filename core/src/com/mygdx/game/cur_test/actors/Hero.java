@@ -12,7 +12,7 @@ public class Hero extends Actor
 {
  public Hero()
  {
-  addComp(MyComponents.extrapolationDrawing, MyComponents.movement, MyComponents.control);
+  addComp(MyComponents.drawing, MyComponents.movement, MyComponents.control);
 
   vector2 = getField("position"); vector2.get().x = 5;
 

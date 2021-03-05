@@ -1,5 +1,6 @@
 package com.mygdx.game.ext.additional.collisionSystem;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.cur_test.components.MyComponents;
@@ -68,24 +69,19 @@ public class CollisionManager
         float deltaX = centerA.x - centerB.x;
         float deltaY = centerA.y - centerB.y;
 
-        vector3.x = (boxA.width - Math.abs(deltaX)) * Math.abs(deltaX)/deltaX;
-        vector3.y = (boxA.height - Math.abs(deltaY)) * Math.abs(deltaY)/deltaY;
-
-        //Scene.instance.field.camera.unproject(vector3);
+        vector3.x = (boxA.width - Math.abs(deltaX)) * Math.signum(deltaX);
+        vector3.y = (boxA.height - Math.abs(deltaY)) * Math.signum(deltaY);
 
         if (Math.abs(deltaX) < Math.abs(deltaY))
         {
-            getV2(actorBody, "position").y += vector3.y; //deltaY * 0.1f;// * Math.abs(getV2(actorBody,"velocity").y);
+            getV2(actorBody, "position").y += vector3.y;
             getV2(actorBody, "velocity").y *= 0;
         }
         else
         {
-            getV2(actorBody, "position").x += vector3.x; //deltaX * 0.1f;// * Math.abs(getV2(actorBody,"velocity").x);
+            getV2(actorBody, "position").x += vector3.x;
             getV2(actorBody, "velocity").x *= 0;
         }
-
-        // if (Math.abs( deltaX ) < Math.abs( deltaY )) getV2(actorBody,"velocity").x = deltaX/5;
-        // else getV2(actorBody,"velocity").y = deltaY/5;
     }
 
     private void handleBodyLiquid(Actor actorBody, Actor actorLiquid)
