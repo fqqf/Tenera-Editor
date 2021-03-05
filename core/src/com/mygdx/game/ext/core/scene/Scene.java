@@ -15,12 +15,14 @@ import java.util.Arrays;
 
 public abstract class Scene
 {
+ public static Scene instance;
+
  protected final String name;
  protected final Monitor monitor;
  protected final SpriteBatch batch;
  protected final ShapeRenderer liner;
 
- protected ExtendCoordinateGrid field;
+ public ExtendCoordinateGrid field;
  protected float width, height;
 
  public Scene(String name, ExtendCoordinateGrid field, float width, float height)
@@ -34,6 +36,7 @@ public abstract class Scene
 
   field.camera.update();
   field.liner.setProjectionMatrix(field.camera.combined);
+  Scene.instance = this; // костыль
  }
 
  public void iterDraw(float extrapolation)

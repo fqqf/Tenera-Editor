@@ -1,9 +1,14 @@
 package com.mygdx.game.ext.additional.collisionSystem;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.cur_test.components.MyComponents;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.component.Field;
+import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
+import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
+import com.mygdx.game.ext.core.scene.Scene;
 
 public class CollisionManager
 {
@@ -52,6 +57,7 @@ public class CollisionManager
 
     private void handleBodyBody() {}
 
+    private final Vector3 vector3 = new Vector3();
     private void handleBodySolid(Actor actorBody, Actor actorSolid)
     {
         boxA = getBox(actorBody);
@@ -61,16 +67,18 @@ public class CollisionManager
 
         float deltaX = centerA.x - centerB.x;
         float deltaY = centerA.y - centerB.y;
-
+        vector3.x = deltaX;
+        vector3.y = deltaY;
+        Scene.instance.field.camera.unproject(vector3);
         if (Math.abs(deltaX) < Math.abs(deltaY))
         {
-            getV2(actorBody, "position").y += deltaY * 0.1f;// * Math.abs(getV2(actorBody,"velocity").y);
-            getV2(actorBody, "velocity").y *= 0;
+            getV2(actorBody, "position").y += vector3.y; //deltaY * 0.1f;// * Math.abs(getV2(actorBody,"velocity").y);
+            getV2(actorBody, "velocity").y *= -1;
         }
         else
         {
-            getV2(actorBody, "position").x += deltaX * 0.1f;// * Math.abs(getV2(actorBody,"velocity").x);
-            getV2(actorBody, "velocity").x *= 0;
+            getV2(actorBody, "position").x += vector3.x;//deltaX * 0.1f;// * Math.abs(getV2(actorBody,"velocity").x);
+            getV2(actorBody, "velocity").x *= -1;
         }
 
         // if (Math.abs( deltaX ) < Math.abs( deltaY )) getV2(actorBody,"velocity").x = deltaX/5;
@@ -103,7 +111,7 @@ public class CollisionManager
 
         actor.computeField("position", () -> new Field<>(new Vector2(0, 0)));
         actor.computeField("size", () -> new Field<>(new Vector2(0, 0)));
-        actor.computeField("box", () -> new Field<>(new BoundingBox(CollisionType.NONE)));
+        actor.computeField("box", () -> new Field<>(new BoundingBox(CollisionType.SOLID)));
 
         BoundingBox box = getBox(actor);
 
