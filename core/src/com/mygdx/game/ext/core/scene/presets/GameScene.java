@@ -12,7 +12,7 @@ public class GameScene extends GroupLayerScene
  //  Collision Manager creates that array (just takes all actors near player)
  //  You dont need a component for actor like CollisionComponent. All calculations are happening in collisionDetector
  //  In collisiondetector you should have method addActor, which does: actor.compute(AABBsize, Vector2) actor.compute(AABBposition, Vector2)
- CollisionManager collisionManager = new CollisionManager();
+ protected CollisionManager collisionManager = new CollisionManager();
  CollisionDetector collisionDetector = new CollisionDetector();
 
 

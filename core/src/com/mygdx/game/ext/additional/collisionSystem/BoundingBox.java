@@ -19,4 +19,11 @@ public class BoundingBox extends Rectangle
   set(position.x, position.y, size.x, size.y);
  }
 
+ public Vector2 getCenter(Vector2 vector)
+ {
+  vector.x = x + width/2;
+  vector.y = y + height/2;
+  return vector;
+ }
+
 }

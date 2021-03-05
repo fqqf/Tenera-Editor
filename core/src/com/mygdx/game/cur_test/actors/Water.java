@@ -21,6 +21,7 @@ public class Water extends Actor
   addField("texture", new Field<>(new Texture("water.png")));
 
   addField("box", new Field<>(new BoundingBox(CollisionType.LIQUID)));
+
  }
 
  Field<Vector2> vector2;

@@ -3,6 +3,7 @@ package com.mygdx.game.cur_test.actors;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.cur_test.components.MyComponents;
+import com.mygdx.game.ext.additional.collisionSystem.BoundingBox;
 import com.mygdx.game.ext.additional.collisionSystem.CollisionType;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.component.Field;
@@ -19,7 +20,7 @@ public class Box extends Actor
 
   addField("texture", new Field<>(new Texture("box.png")));
 
-  addField("box", new Field<>(CollisionType.SOLID));
+  addField("box", new Field<>(new BoundingBox(CollisionType.SOLID)));
  }
 
  Field<Vector2> vector2;

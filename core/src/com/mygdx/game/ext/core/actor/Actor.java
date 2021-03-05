@@ -74,8 +74,10 @@ public abstract class Actor
  }
 
  public Actor remComp(Component... components)
- { this.components.forEach(this::remComp); return this; }  // TODO: Add names to components remComp("name")
-
+ {
+  for (Component component : components) remComp(component);
+  return this;
+ }
  private void remComp(Component component)
  { if (components.removeValue(component, true)) updateIndexOnChange(component.getType(), -1); }
 }
