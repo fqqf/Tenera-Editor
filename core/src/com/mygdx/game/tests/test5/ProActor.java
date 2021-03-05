@@ -1,9 +1,5 @@
 package com.mygdx.game.tests.test5;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.component.Field;
 /*
 // TODO: Перенести реализацию ProActor в scene
 public class ProActor extends Actor

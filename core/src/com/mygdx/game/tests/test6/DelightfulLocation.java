@@ -1,5 +1,5 @@
-package com.mygdx.game.cur_test;
-
+package com.mygdx.game.tests.test6;
+/*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
@@ -7,8 +7,7 @@ import com.mygdx.game.cur_test.actors.Box;
 import com.mygdx.game.cur_test.actors.Hero;
 import com.mygdx.game.cur_test.actors.Water;
 import com.mygdx.game.cur_test.components.MyComponents;
-import com.mygdx.game.ext.additional.collisionSystem.CollisionManager;
-import com.mygdx.game.ext.core.component.Field;
+import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.scene.presets.GameScene;
@@ -24,8 +23,8 @@ public class DelightfulLocation extends GameScene
 
   // for test
   Hero hero = new Hero();
-  Field<Vector2> field1 = hero.getField("position");
-  field1.get().set( 5,5 );
+  Component<Vector2> component1 = hero.getComponent("position");
+  component1.get().set( 5,5 );
   hero.remComp(MyComponents.control);
   hero.remComp(MyComponents.movement);
 
@@ -48,3 +47,4 @@ public class DelightfulLocation extends GameScene
   super.iterDraw(extrapolation);
  }
 }
+*/

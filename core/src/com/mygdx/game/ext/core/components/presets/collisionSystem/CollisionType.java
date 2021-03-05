@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.additional.collisionSystem;
+package com.mygdx.game.ext.core.components.presets.collisionSystem;
 
 public class CollisionType
 {

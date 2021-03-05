@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
-
+/*
 public class Main extends ApplicationLoop
 {
  private Cave cave;
@@ -35,3 +35,4 @@ public class Main extends ApplicationLoop
 
  public void resize(int width, int height) { Monitor.instance.update(width, height); }
 }
+*/

@@ -6,17 +6,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public abstract class Scene
 {
- public static Scene instance;
-
  protected final String name;
  protected final Monitor monitor;
  protected final SpriteBatch batch;
@@ -36,7 +32,6 @@ public abstract class Scene
 
   field.camera.update();
   field.liner.setProjectionMatrix(field.camera.combined);
-  Scene.instance = this; // костыль
  }
 
  public void iterDraw(float extrapolation)
@@ -44,19 +39,68 @@ public abstract class Scene
   camera.update();
   monitor.setField(field);
 
+  callDrawSystems();
 
-//  batch.begin();
-  //TODO: Add different layers support via group
-  //for (Actor<?> actor: actors) actor.draw(extrapolation);
-  //batch.end();
+  draw(extrapolation);
  }
 
- public void iterPhys()
+ protected void draw(float extrapolation) {}
+ void act() {}
+ void handleInput() {}
+
+ public void iterPhys() { callPhysSystems(); act(); }
+
+ public void iterInput() { callInputSystems(); handleInput(); }
+
+ private int actStartIndex, inputStartIndex;
+
+ private int getSystemTypeIndex(final System.Type systemType)
+ { // TODO: Replace with normal switch-case
+  return systemType == System.Type.GRAPHICS_SYSTEM ? 0 : systemType == System.Type.PHYSICS_SYSTEM ? actStartIndex : inputStartIndex;
+ }
+
+ private void updateIndexOnChange(final System.Type insertType, int value)
  {
-  for (Actor actor: actors) actor.act();
+  if (insertType == System.Type.GRAPHICS_SYSTEM)
+  {
+   actStartIndex += value;
+   inputStartIndex += value;
+  } else if (insertType == System.Type.PHYSICS_SYSTEM) inputStartIndex += value;
  }
 
- public void iterInput() { for (Actor actor: actors) actor.handleInput();}
+ protected void callDrawSystems()
+ {
+  callSystems(0, actStartIndex);
+ }
+
+ protected void callPhysSystems()
+ {
+  callSystems(actStartIndex, inputStartIndex);
+ }
+
+ protected void callInputSystems()
+ {
+  callSystems(inputStartIndex, systems.size);
+ }
+
+ protected void callSystems(final int startIndewx, final int endIndex)
+ {
+  for (int i = startIndewx; i < endIndex; i++) systems.get(i).handle();
+ }
+
+ private final Array<System> systems = new Array<>();
+
+ public void addSystem(System... systems) { for (System system : systems) addSystem(system); }
+
+ private void addSystem(System system)
+ {
+  int index = getSystemTypeIndex(system.getType());
+  systems.insert(index, system);
+  updateIndexOnChange(system.getType(), 1);
+ }
+
+ public void remSystem(System... systems) { for (System system : systems) remSystem(system); }
+ private void remSystem(System system) { if (systems.removeValue(system, true)) updateIndexOnChange(system.getType(), -1); }
 
  protected OrthographicCamera camera;
 

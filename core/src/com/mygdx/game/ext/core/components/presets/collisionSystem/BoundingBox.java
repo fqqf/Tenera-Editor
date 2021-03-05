@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.additional.collisionSystem;
+package com.mygdx.game.ext.core.components.presets.collisionSystem;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -14,10 +14,7 @@ public class BoundingBox extends Rectangle
 
  public int getType() { return type; }
 
- public void set(Vector2 position, Vector2 size)
- {
-  set(position.x, position.y, size.x, size.y);
- }
+ public BoundingBox set(Vector2 position, Vector2 size) { set(position.x, position.y, size.x, size.y);return this; }
 
  public Vector2 getCenter(Vector2 vector)
  {

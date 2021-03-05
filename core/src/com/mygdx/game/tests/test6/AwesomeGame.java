@@ -1,8 +1,6 @@
-package com.mygdx.game.cur_test;
+package com.mygdx.game.tests.test6;
 
-import com.mygdx.game.ext.core.drawing.ApplicationLoop;
-import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
-
+/*
 public class AwesomeGame extends ApplicationLoop
 {
  DelightfulLocation location;
@@ -30,3 +28,4 @@ public class AwesomeGame extends ApplicationLoop
  @Override
  public void calcPhysics() { location.iterPhys(); }
 }
+*/
