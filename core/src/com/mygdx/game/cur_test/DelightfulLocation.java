@@ -22,6 +22,7 @@ public class DelightfulLocation extends GameScene
   super(name, field, width, height);
 
 
+  // for test
   Hero hero = new Hero();
   Field<Vector2> field1 = hero.getField("position");
   field1.get().set( 5,5 );
@@ -31,13 +32,11 @@ public class DelightfulLocation extends GameScene
   Hero hero1 = new Hero();
   Box box = new Box();
   Water water = new Water();
+  collisionManager.addActor( hero1,hero,box,water);
+  //
 
   entitiesLayer.addAll( hero1, water, box, hero );
-
-  collisionManager.addActor( hero1,hero,box,water);
-
   layers.put(1, entitiesLayer);
-
  }
 
  @Override

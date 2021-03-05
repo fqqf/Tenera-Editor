@@ -34,6 +34,7 @@ public class MovementComponent extends Component
  {
   position.get().add(velocity.get());
   box.get().setPosition( position.get() );
+  System.out.println("velocity: x=" + velocity.get().x + " y=" + velocity.get().y);
   System.out.println("position: x=" + position.get().x + " y=" + position.get().y);
  }
 }
