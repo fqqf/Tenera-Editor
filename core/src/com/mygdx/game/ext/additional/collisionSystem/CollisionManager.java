@@ -40,7 +40,6 @@ public class CollisionManager
     {
         int typeA = getBox(actorA).getType();
         if (typeA != CollisionType.BODY) return;
-        System.out.println("collision detect!");
         int typeB = getBox(actorB).getType();
         switch (typeB)
         {
@@ -75,12 +74,12 @@ public class CollisionManager
         if (Math.abs(deltaX) < Math.abs(deltaY))
         {
             getV2(actorBody, "position").y += vector3.y;
-            getV2(actorBody, "velocity").y *= 0;
+            getV2(actorBody, "velocity").y = 0;
         }
         else
         {
             getV2(actorBody, "position").x += vector3.x;
-            getV2(actorBody, "velocity").x *= 0;
+            getV2(actorBody, "velocity").x = 0;
         }
     }
 
