@@ -28,11 +28,11 @@ public class StickmanWorld extends GameScene
  }
 
  @Override
- public void iterInput()
+ public void iterDraw(float ext)
  {
   Gdx.gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
   Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-  super.iterInput();
+  super.iterDraw(ext);
  }
 
  public static CollisionManagmentSystem collisionManagmentSystem = new CollisionManagmentSystem();

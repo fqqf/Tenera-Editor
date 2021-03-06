@@ -11,7 +11,7 @@ public class ControlSystem extends System
 {
  public ControlSystem()
  {
-  type = Type.GRAPHICS_SYSTEM;
+  type = Type.INPUT_SYSTEM;
  }
 
  private Vector2 position, velocity;
