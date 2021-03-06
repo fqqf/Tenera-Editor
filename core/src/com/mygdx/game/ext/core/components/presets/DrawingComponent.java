@@ -12,6 +12,7 @@ public class DrawingComponent extends Component<DrawingComponent>
 
  public Texture texture;
  public boolean extrapolation = true;
+ public long extrapolationOffNano = 0;
 
  public DrawingComponent(Texture texture, Actor actor)
  {

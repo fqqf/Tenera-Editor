@@ -6,6 +6,7 @@ import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
 
 public class CollisionManagmentSystem extends System
@@ -57,7 +58,11 @@ public class CollisionManagmentSystem extends System
 
  private void handleBodySolid(Actor actorBody, Actor actorSolid)
  {
-  DrawingComponent.get(actorBody).extrapolation = false;
+  DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
+  drawingComponent.extrapolation = false;
+  drawingComponent.extrapolationOffNano = ApplicationLoop.TICK_IN_NANO_L;
+
+
   boxA.getCenter(centerA);
   boxB.getCenter(centerB);
 

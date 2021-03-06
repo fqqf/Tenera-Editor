@@ -28,6 +28,11 @@ public class ExtrapolationDrawingSystem extends DrawingSystem
    batch.draw(texture, position.x+velocity.x* extr, position.y+velocity.y* extr, size.x, size.y);
    batch.end();
   }
-  else { drawingComponent.extrapolation = true; super.behave(); }
+  else
+  {
+   super.behave();
+   drawingComponent.extrapolationOffNano -= System.nanoTime();
+   if ( drawingComponent.extrapolationOffNano <= 0 ) drawingComponent.extrapolation = true;
+  }
  }
 }

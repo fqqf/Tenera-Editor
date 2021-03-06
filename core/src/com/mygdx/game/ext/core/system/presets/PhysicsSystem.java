@@ -33,8 +33,7 @@ public class PhysicsSystem extends System
  {
 
   position.add(velocity);
-  if (position.y>0) velocity.y-=0.05f;
-  else { velocity.y = 0;position.y = 0;DrawingComponent.get(actor).extrapolation=false; } // TODO: disable extrapolation in here
+  if (position.y>0) velocity.y-=0.05f; else { velocity.y = 0;position.y = 0; } // TODO: disable extrapolation in here
   if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x)/10;else velocity.x = 0;
   box.setPosition(position);
  }
