@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
+import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.system.System;
 
 public class CollisionManagmentSystem extends System
@@ -56,6 +57,7 @@ public class CollisionManagmentSystem extends System
 
  private void handleBodySolid(Actor actorBody, Actor actorSolid)
  {
+  DrawingComponent.get(actorBody).extrapolation = false;
   boxA.getCenter(centerA);
   boxB.getCenter(centerB);
 

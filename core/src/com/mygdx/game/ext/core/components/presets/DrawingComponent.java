@@ -11,6 +11,7 @@ public class DrawingComponent extends Component<DrawingComponent>
  private static final Texture nullTexture = new Texture("box.png");
 
  public Texture texture;
+ public boolean extrapolation = true;
 
  public DrawingComponent(Texture texture, Actor actor)
  {
