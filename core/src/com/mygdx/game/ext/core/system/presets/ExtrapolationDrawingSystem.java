@@ -24,9 +24,7 @@ public class ExtrapolationDrawingSystem extends DrawingSystem
   if (drawingComponent.extrapolation)
   {
    float extr = ApplicationLoop.instance.extrapolation;
-   batch.begin();
-   batch.draw(texture, position.x+velocity.x* extr, position.y+velocity.y* extr, size.x, size.y);
-   batch.end();
+   batch.draw(texture, position.x+velocity.x*extr, position.y+velocity.y*extr, size.x, size.y);
   }
   else
   {

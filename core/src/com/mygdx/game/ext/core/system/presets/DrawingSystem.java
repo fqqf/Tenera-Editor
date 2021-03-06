@@ -29,13 +29,15 @@ public class DrawingSystem extends System
 
  public void handle()
  {
+
+  batch.begin();
   layers.forEach((key,layer) -> layer.forEach((this::calc)));
+  batch.end();
  }
 
  private void calc(Actor actor)
  {
   this.actor = actor;
-
   loadFields();
   behave();
  }
@@ -51,9 +53,6 @@ public class DrawingSystem extends System
 
  protected void behave()
  {
-  loadFields();
-  batch.begin();
   batch.draw(texture, position.x, position.y, size.x, size.y);
-  batch.end();
  }
 }
