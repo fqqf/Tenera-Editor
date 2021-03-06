@@ -40,12 +40,15 @@ public class CollisionManagmentSystem extends System
 
  private void handleCollision(Actor actorA, Actor actorB)
  {
+
   if (boxA.getType() != CollisionType.BODY) return;
+  logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
+  logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());
 
   switch (boxB.getType())
   {
    case CollisionType.SOLID:
-    handleBodySolid(actorA, actorB);
+    handleBodySolid(actorA);
     break;
    case CollisionType.LIQUID:
     handleBodyLiquid(actorA, actorB);
@@ -56,12 +59,11 @@ public class CollisionManagmentSystem extends System
  private final Vector2 centerA = new Vector2(), centerB = new Vector2();
  private final Vector3 vector3 = new Vector3();
 
- private void handleBodySolid(Actor actorBody, Actor actorSolid)
+ private void handleBodySolid(Actor actorBody)
  {
   DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
   drawingComponent.extrapolation = false;
   drawingComponent.extrapolationOffNano = ApplicationLoop.TICK_IN_NANO_L;
-
 
   boxA.getCenter(centerA);
   boxB.getCenter(centerB);

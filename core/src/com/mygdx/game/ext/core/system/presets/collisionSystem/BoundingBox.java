@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class BoundingBox extends Rectangle
 {
- private final int type;
+ private int type;
 
  public BoundingBox(int type)
  {
@@ -13,6 +13,7 @@ public class BoundingBox extends Rectangle
  }
 
  public int getType() { return type; }
+ public void setType(int type) {this.type = type;}
 
  public BoundingBox set(Vector2 position, Vector2 size) { set(position.x, position.y, size.x, size.y);return this; }
 
