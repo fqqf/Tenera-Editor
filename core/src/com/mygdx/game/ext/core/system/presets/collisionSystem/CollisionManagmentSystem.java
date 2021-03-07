@@ -57,7 +57,6 @@ public class CollisionManagmentSystem extends System
  }
 
  private final Vector2 centerA = new Vector2(), centerB = new Vector2();
- private final Vector3 vector3 = new Vector3();
 
  private void handleBodySolid(Actor actorBody)
  {
@@ -71,18 +70,15 @@ public class CollisionManagmentSystem extends System
   float deltaX = centerA.x - centerB.x;
   float deltaY = centerA.y - centerB.y;
 
-  vector3.x = (boxA.width - Math.abs(deltaX)) * Math.signum(deltaX);
-  vector3.y = (boxA.height - Math.abs(deltaY)) * Math.signum(deltaY);
-
   physics = BasePhysicsComponent.get(actorBody);
 
   if (Math.abs(deltaX) < Math.abs(deltaY))
   {
-   physics.position.y += vector3.y;
+   physics.position.y += ((boxB.height/2 + boxA.height/2) - Math.abs(deltaY)) * Math.signum(deltaY);
    physics.velocity.y = 0;
   } else
   {
-   physics.position.x += vector3.x;
+   physics.position.x += ((boxB.width/2 + boxA.width/2) - Math.abs(deltaX)) * Math.signum(deltaX);
    physics.velocity.x = 0;
   }
  }
