@@ -58,22 +58,23 @@ public class DrawingSystem extends System
  protected void behave()
  {
   if (drawingComponent.foreverNotExtra)batch.draw(texture, position.x, position.y, size.x, size.y);
-  else if (drawingComponent.extrapolation)
-  {
-   java.lang.System.out.println("Drawing extra " + actor.getClass().getSimpleName());
-   float extr = ApplicationLoop.instance.extrapolation;
-   batch.draw(texture, position.x+velocity.x*extr, position.y+velocity.y*extr, size.x, size.y);
-  }
   else
   {
-   java.lang.System.out.println("Drawing not exta " + actor.getClass().getSimpleName());
-   batch.draw(texture, position.x, position.y, size.x, size.y);
-   if (drawingComponent.extrapolationOffNano <= ApplicationLoop.instance.inGameTime)
+   float extr = ApplicationLoop.instance.extrapolation;
+   float valueX,valueY;
+   if (drawingComponent.extrapolationX) valueX = velocity.x*extr;
+   else
    {
-    java.lang.System.out.println(":::: End no extra");
-    drawingComponent.extrapolationOffNano = 0;
-    drawingComponent.extrapolation = true;
+    valueX = 0;
+    if (drawingComponent.extrapolationOffNanoX <= ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationX = true;
    }
+   if (drawingComponent.extrapolationY) valueY = velocity.y*extr;
+   else
+   {
+    valueY = 0;
+    if (drawingComponent.extrapolationOffNanoY <= ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
+   }
+   batch.draw(texture, position.x+valueX, position.y+valueY, size.x, size.y);
   }
  }
 }

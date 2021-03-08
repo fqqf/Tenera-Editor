@@ -63,8 +63,6 @@ public class CollisionManagmentSystem extends System
  {
   logger.info("handleBodySolid");
   DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
-  //drawingComponent.extrapolation = false;
-  drawingComponent.extrapolationOffNano = ApplicationLoop.instance.nextTickTime;
   boxA.getCenter(centerA);
   boxB.getCenter(centerB);
 
@@ -76,10 +74,16 @@ public class CollisionManagmentSystem extends System
   {
    physics.position.y += ((boxB.height/2 + boxA.height/2) - Math.abs(deltaY)) * Math.signum(deltaY);
    physics.velocity.y = 0;
+   drawingComponent.extrapolationY = false;
+   drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
+
   } else
   {
    physics.position.x += ((boxB.width/2 + boxA.width/2) - Math.abs(deltaX)) * Math.signum(deltaX);
    physics.velocity.x = 0;
+   drawingComponent.extrapolationX = false;
+   drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
+
   }
  }
 

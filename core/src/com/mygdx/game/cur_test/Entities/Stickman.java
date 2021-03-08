@@ -19,7 +19,6 @@ public class Stickman extends Actor
 
   drawingComponent.texture = new Texture("test7/stickman.png");
   drawingComponent.foreverNotExtra = false;
-  drawingComponent.extrapolation = true;
 
   physicsComponent.position.set(position);
   physicsComponent.size.set(3,6);

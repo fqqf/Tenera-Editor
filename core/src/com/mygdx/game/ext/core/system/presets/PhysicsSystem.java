@@ -31,12 +31,16 @@ public class PhysicsSystem extends System
  @Override
  protected void behave()
  {
-  logger.info("physic behave " + actor.getClass().getSimpleName());
-
-  if (position.y>0) velocity.y-=0.02f; else { velocity.y = 0;position.y = 0; } // TODO: disable extrapolation in here
-  if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x)/10;else velocity.x = 0;
 
   position.add(velocity);
+
+  if (position.y>0) velocity.y-=0.02f;
+  else { velocity.y = 0; position.y = 0; } // TODO: disable extrapolation in here
+
+  if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x) * 10f;
+  else velocity.x = 0;
+
   box.setPosition(position);
+
  }
 }
