@@ -20,7 +20,7 @@ public class CollisionManagmentSystem extends System
 
  public void handle()
  {
-  logger.info("Collision handle");
+  // logger.info("Collision handle");
   for (int i = 0; i < assignedActors.size; i++)
   {
    Actor actorA = assignedActors.get(i);
@@ -43,8 +43,8 @@ public class CollisionManagmentSystem extends System
  {
 
   if (boxA.getType() != CollisionType.BODY) return;
-  //logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
-  //logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());
+  // logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
+  // logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());
 
   switch (boxB.getType())
   {
@@ -61,7 +61,7 @@ public class CollisionManagmentSystem extends System
 
  private void handleBodySolid(Actor actorBody)
  {
-  logger.info("handleBodySolid");
+  // logger.info("handleBodySolid");
   DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
   boxA.getCenter(centerA);
   boxB.getCenter(centerB);
@@ -93,6 +93,4 @@ public class CollisionManagmentSystem extends System
 
   physics.velocity.scl(0.5f, 0.5f);
  }
-
- BoundingBox rectangleComponent;
 }
