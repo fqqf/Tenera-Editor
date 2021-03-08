@@ -37,7 +37,7 @@ public class PhysicsSystem extends System
   if (position.y>0) velocity.y-=0.02f;
   else { velocity.y = 0; position.y = 0; } // TODO: disable extrapolation in here
 
-  if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x) * 10f;
+  if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x) / 10f;
   else velocity.x = 0;
 
   box.setPosition(position);
