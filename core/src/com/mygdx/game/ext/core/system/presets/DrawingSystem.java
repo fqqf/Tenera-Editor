@@ -23,7 +23,8 @@ public class DrawingSystem extends System
 
  protected SpriteBatch batch;
  protected Texture texture;
- protected Vector2 position, size;
+ protected Vector2 position, size, velocity;
+ private DrawingComponent drawingComponent;
 
  public TreeMap<Integer, Group> layers = new TreeMap<>();
 
@@ -44,15 +45,35 @@ public class DrawingSystem extends System
 
  protected void loadFields()
  {
-  BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor); // TODO: separate in properties and texture;;
-  DrawingComponent drawingComponent = DrawingComponent.get(actor);
-
+  drawingComponent = DrawingComponent.get(actor);
   texture = drawingComponent.texture;
+
+
+  BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor); // TODO: separate in properties and texture;;
   position = basePhysicsComponent.position; size = basePhysicsComponent.size;
+  velocity = BasePhysicsComponent.get(actor).velocity;
+
  }
 
  protected void behave()
  {
-  batch.draw(texture, position.x, position.y, size.x, size.y);
+  if (drawingComponent.foreverNotExtra)batch.draw(texture, position.x, position.y, size.x, size.y);
+  else if (drawingComponent.extrapolation)
+  {
+   java.lang.System.out.println("Drawing extra " + actor.getClass().getSimpleName());
+   float extr = ApplicationLoop.instance.extrapolation;
+   batch.draw(texture, position.x+velocity.x*extr, position.y+velocity.y*extr, size.x, size.y);
+  }
+  else
+  {
+   java.lang.System.out.println("Drawing not exta " + actor.getClass().getSimpleName());
+   batch.draw(texture, position.x, position.y, size.x, size.y);
+   if (drawingComponent.extrapolationOffNano <= ApplicationLoop.instance.inGameTime)
+   {
+    java.lang.System.out.println(":::: End no extra");
+    drawingComponent.extrapolationOffNano = 0;
+    drawingComponent.extrapolation = true;
+   }
+  }
  }
 }

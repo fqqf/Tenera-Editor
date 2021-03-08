@@ -26,7 +26,7 @@ public class Wall extends Actor
   drawingComponent.texture = (x/y==0) ? new Texture("test7/wall.png") : new Texture("test7/wall2.png");
 
   StickmanWorld.collisionManagmentSystem.addActor(this);
-  StickmanWorld.physicsSystem.addActor(this);
+  // StickmanWorld.physicsSystem.addActor(this); Зачем movement система, которая тут зачем-то завется physics у стены????
   StickmanWorld.drawingSystem.addActor(this);
  }
 }

@@ -20,6 +20,7 @@ public class CollisionManagmentSystem extends System
 
  public void handle()
  {
+  logger.info("Collision handle");
   for (int i = 0; i < assignedActors.size; i++)
   {
    Actor actorA = assignedActors.get(i);
@@ -42,8 +43,8 @@ public class CollisionManagmentSystem extends System
  {
 
   if (boxA.getType() != CollisionType.BODY) return;
-  logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
-  logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());
+  //logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
+  //logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());
 
   switch (boxB.getType())
   {
@@ -60,10 +61,10 @@ public class CollisionManagmentSystem extends System
 
  private void handleBodySolid(Actor actorBody)
  {
+  logger.info("handleBodySolid");
   DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
-  drawingComponent.extrapolation = false;
-  drawingComponent.extrapolationOffNano = ApplicationLoop.TICK_IN_NANO_L;
-
+  //drawingComponent.extrapolation = false;
+  drawingComponent.extrapolationOffNano = ApplicationLoop.instance.nextTickTime;
   boxA.getCenter(centerA);
   boxB.getCenter(centerB);
 
@@ -71,7 +72,6 @@ public class CollisionManagmentSystem extends System
   float deltaY = centerA.y - centerB.y;
 
   physics = BasePhysicsComponent.get(actorBody);
-
   if (Math.abs(deltaX) < Math.abs(deltaY))
   {
    physics.position.y += ((boxB.height/2 + boxA.height/2) - Math.abs(deltaY)) * Math.signum(deltaY);

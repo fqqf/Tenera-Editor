@@ -23,7 +23,6 @@ public abstract class ApplicationLoop extends ApplicationAdapter
 
  private static final long SECOND_IN_NANO = 1_000_000_000;
  private static final long TICK_AMOUNT = 10;
- public static final long TICK_IN_NANO_L = SECOND_IN_NANO / TICK_AMOUNT;
  private static final float TICK_IN_NANO = SECOND_IN_NANO / (float)TICK_AMOUNT;
 
  private static final long ESTIMATED_MAX_FRAME_CALL = (long)(TICK_IN_NANO - TICK_IN_NANO/15);

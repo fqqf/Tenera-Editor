@@ -5,14 +5,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.cur_test.Entities.Stickman;
 import com.mygdx.game.cur_test.Environment.Wall;
-import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
-import com.mygdx.game.ext.core.group.Group;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionManagmentSystem;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.scene.presets.GameScene;
-import com.mygdx.game.ext.core.system.presets.ControlSystem;
-import com.mygdx.game.ext.core.system.presets.ExtrapolationDrawingSystem;
-import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
 
 public class StickmanWorld extends GameScene
 {
@@ -22,10 +17,9 @@ public class StickmanWorld extends GameScene
  {
   super(name, field, width, height);
 
-  playersLayer.add(new Stickman(new Vector2(4,0)));
+  playersLayer.add(new Stickman(new Vector2(10,4)));
   playersLayer.add(new Wall(10,0,5,2.5f));
-
-  extrapolationDrawingSystem.layers.put(1,playersLayer);
+  drawingSystem.layers.put(1,playersLayer);
  }
 
  @Override
