@@ -61,29 +61,29 @@ public class CollisionManagmentSystem extends System
 
  private void handleBodySolid(Actor actorBody)
  {
-  // logger.info("handleBodySolid");
   DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
   boxA.getCenter(centerA);
   boxB.getCenter(centerB);
 
-  float deltaX = centerA.x - centerB.x;
-  float deltaY = centerA.y - centerB.y;
+  float deltaCenterX = centerA.x - centerB.x;
+  float deltaCenterY = centerA.y - centerB.y;
+  float y = ((boxB.height/2 + boxA.height/2) - Math.abs(deltaCenterY)) * Math.signum(deltaCenterY);
+  float x = ((boxB.width/2 + boxA.width/2) - Math.abs(deltaCenterX)) * Math.signum(deltaCenterX);
 
   physics = BasePhysicsComponent.get(actorBody);
-  if (Math.abs(deltaX) < Math.abs(deltaY))
+  if (Math.abs(x) > Math.abs(y))
   {
-   physics.position.y += ((boxB.height/2 + boxA.height/2) - Math.abs(deltaY)) * Math.signum(deltaY);
+   physics.position.y += y;
    physics.velocity.y = 0;
    drawingComponent.extrapolationY = false;
    drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
-
-  } else
+  }
+  else
   {
-   physics.position.x += ((boxB.width/2 + boxA.width/2) - Math.abs(deltaX)) * Math.signum(deltaX);
+   physics.position.x += x;
    physics.velocity.x = 0;
    drawingComponent.extrapolationX = false;
    drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
-
   }
  }
 

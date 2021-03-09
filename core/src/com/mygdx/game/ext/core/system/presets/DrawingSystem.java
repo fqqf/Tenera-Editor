@@ -1,7 +1,10 @@
 package com.mygdx.game.ext.core.system.presets;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
@@ -10,15 +13,18 @@ import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.system.System;
+import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
+ ShapeDrawer shapeDrawer;
  public DrawingSystem()
  {
   batch = Monitor.instance.getBatch();
   type = Type.GRAPHICS_SYSTEM;
+  shapeDrawer = new ShapeDrawer(batch, new TextureRegion(new Texture(Gdx.files.internal("white.jpg"))));
  }
 
  protected SpriteBatch batch;
@@ -57,8 +63,7 @@ public class DrawingSystem extends System
 
  protected void behave()
  {
-  if (drawingComponent.foreverNotExtra)batch.draw(texture, position.x, position.y, size.x, size.y);
-  else
+  if (drawingComponent.useExtrapolation)
   {
    float extr = ApplicationLoop.instance.extrapolation;
    float valueX,valueY;
@@ -76,5 +81,11 @@ public class DrawingSystem extends System
    }
    batch.draw(texture, position.x+valueX, position.y+valueY, size.x, size.y);
   }
+  else batch.draw(texture, position.x, position.y, size.x, size.y);
+
+  shapeDrawer.setColor(Color.BLUE);
+  shapeDrawer.setDefaultLineWidth(0.02f);
+  shapeDrawer.rectangle( position.x, position.y, size.x, size.y);
+
  }
 }

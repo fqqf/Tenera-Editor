@@ -11,7 +11,7 @@ public class DrawingComponent extends Component<DrawingComponent>
  private static final Texture nullTexture = new Texture("box.png");
 
  public Texture texture;
- public boolean foreverNotExtra = true;
+ public boolean useExtrapolation = false;
  public boolean extrapolationX = true;
  public boolean extrapolationY = true;
  public long extrapolationOffNanoX = 0;

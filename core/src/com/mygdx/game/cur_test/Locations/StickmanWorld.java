@@ -18,7 +18,7 @@ public class StickmanWorld extends GameScene
   super(name, field, width, height);
 
   playersLayer.add(new Stickman(new Vector2(10,4)));
-  playersLayer.add(new Wall(10,0,5,2.5f));
+  playersLayer.add(new Wall(2,0,10,2.5f));
   drawingSystem.layers.put(1,playersLayer);
  }
 

@@ -40,6 +40,7 @@ public class PhysicsSystem extends System
   if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x) / 10f;
   else velocity.x = 0;
 
+
   box.setPosition(position);
 
  }

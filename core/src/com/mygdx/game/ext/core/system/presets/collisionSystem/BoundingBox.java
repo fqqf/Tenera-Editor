@@ -7,6 +7,7 @@ public class BoundingBox extends Rectangle
 {
  private int type;
 
+
  public BoundingBox(int type)
  {
   this.type = type;
