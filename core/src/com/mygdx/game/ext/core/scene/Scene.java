@@ -95,6 +95,14 @@ public abstract class Scene
  private void addSystem(System system)
  {
   int index = getSystemTypeIndex(system.getType());
+//  while (index < systems.size && systems.get(index).getType() == system.getType())
+//  {
+//   if (system.priority > systems.get(index).priority  && index < systems.size-1)
+//   {
+//    if (system.priority < systems.get(index +1).priority)break;
+//   }
+//   index++;
+//  }
   systems.insert(index, system);
   updateIndexOnChange(system.getType(), 1);
  }

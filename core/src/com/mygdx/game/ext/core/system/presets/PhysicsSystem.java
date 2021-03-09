@@ -14,6 +14,7 @@ public class PhysicsSystem extends System
 
  {
   type = Type.PHYSICS_SYSTEM; // PHYSICS_COMPONENT;
+  priority = 0;
  }
 
  @Override

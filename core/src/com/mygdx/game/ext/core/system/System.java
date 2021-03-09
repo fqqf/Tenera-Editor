@@ -10,6 +10,7 @@ public abstract class System
 {
  public static final Logger logger = new Logger("SYSTEM", Logger.INFO);
 
+ public int priority = 0;
  protected  Type type = Type.NONE;
  protected Actor actor;
  protected Group assignedActors = new Group(); // TODO: ADD Priority
