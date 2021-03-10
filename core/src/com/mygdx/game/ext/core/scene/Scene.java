@@ -2,7 +2,6 @@ package com.mygdx.game.ext.core.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
@@ -12,7 +11,10 @@ import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
 
 public abstract class Scene
 {
@@ -57,66 +59,59 @@ public abstract class Scene
 
  public void iterInput() { callInputSystems(); handleInput(); }
 
- private int actStartIndex=0, inputStartIndex=0, graphicsEndIndex=0, actEndIndex=0;
+ //private int actStartIndex=0, inputStartIndex=0, graphicsEndIndex=0, actEndIndex=0;
 
- private int getSystemTypeIndex(final System.Type systemType)
+ private Map<Integer,Array<System>> getSystemTypeMap(final System.Type systemType)
  { // TODO: Replace with normal switch-case
-  return systemType == System.Type.GRAPHICS_SYSTEM ? 0 : systemType == System.Type.PHYSICS_SYSTEM ? actStartIndex : inputStartIndex;
+  return systemType == System.Type.GRAPHICS_SYSTEM ? drawSystems : systemType == System.Type.PHYSICS_SYSTEM ? physicSystems : inputSystems;
  }
 
- private void updateIndexOnChange(final System.Type insertType, int value)
- {
-  if (insertType == System.Type.GRAPHICS_SYSTEM)
-  {
-   actStartIndex += value;
-   inputStartIndex += value;
-   graphicsEndIndex = actStartIndex-1;
-  } else if (insertType == System.Type.PHYSICS_SYSTEM) { inputStartIndex += value; actEndIndex = inputStartIndex-1; };
- }
+// private void updateIndexOnChange(final System.Type insertType, int value)
+// {
+//  if (insertType == System.Type.GRAPHICS_SYSTEM)
+//  {
+//   actStartIndex += value;
+//   inputStartIndex += value;
+//   graphicsEndIndex = actStartIndex-1;
+//  } else if (insertType == System.Type.PHYSICS_SYSTEM) { inputStartIndex += value; actEndIndex = inputStartIndex-1; };
+// }
 
  protected void callDrawSystems()
  {
-  callSystems(0, actStartIndex);
-
+  drawSystems.forEach((prio,collection)->collection.forEach(System::handle));
  }
 
  protected void callPhysSystems()
  {
-  callSystems(actStartIndex, inputStartIndex);
+  physicSystems.forEach((prio,collection)->collection.forEach(System::handle));
  }
 
  protected void callInputSystems()
  {
-  callSystems(inputStartIndex, systems.size);
+ inputSystems.forEach((prio,collection)->collection.forEach(System::handle));
  }
-
- protected void callSystems(final int startIndewx, final int endIndex)
- {
-  for (int i = startIndewx; i < endIndex; i++) systems.get(i).handle();
- }
-
- private final Array<System> systems = new Array<>();
+ private final Map<Integer, Array<System>> drawSystems = new TreeMap<>();
+ private final Map<Integer, Array<System>> physicSystems = new TreeMap<>();
+ private final Map<Integer, Array<System>> inputSystems = new TreeMap<>();
 
  public void addSystem(System... systems) { for (System system : systems) addSystem(system); }
 
 
  private void addSystem(System system)
  {
-  System.Type type = system.getType();
-  int index = getSystemTypeIndex(type);
-  int endIndex = type == System.Type.GRAPHICS_SYSTEM ? graphicsEndIndex : type == System.Type.PHYSICS_SYSTEM ? actEndIndex : systems.size - 1;
-
-  if (systems.size > 0)
-  {
-   for (; index <= endIndex; index++) if (system.priority < systems.get(index).priority) break;
-  }
-
-  systems.insert(index, system);
-  updateIndexOnChange(type, 1);
+  Map<Integer,Array<System>> sysMap = getSystemTypeMap( system.getType() );
+  Array<System> array;
+  if ( sysMap.containsKey(system.priority) ) array = sysMap.get(system.priority);
+  else { array = new Array<>(5);sysMap.put(system.priority,array); }
+  array.add(system);
  }
 
  public void remSystem(System... systems) { for (System system : systems) remSystem(system); }
- private void remSystem(System system) { if (systems.removeValue(system, true)) updateIndexOnChange(system.getType(), -1); }
+ private void remSystem(System system)
+ {
+  Map<Integer,Array<System>> sysMap = getSystemTypeMap(system.getType());
+  if ( sysMap.containsKey(system.priority) ) sysMap.get(system.priority).removeValue(system, true);
+ }
 
  protected OrthographicCamera camera;
 
