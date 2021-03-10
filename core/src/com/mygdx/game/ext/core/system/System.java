@@ -1,8 +1,11 @@
 package com.mygdx.game.ext.core.system;
 
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Logger;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
 
 
@@ -13,7 +16,9 @@ public abstract class System
  public int priority = 0;
  protected  Type type = Type.NONE;
  protected Actor actor;
- protected Group assignedActors = new Group(); // TODO: ADD Priority
+ protected Group assignedActors = new Group();
+
+ SpriteBatch batch;
 
  public void handle() //   layers.forEach((key,layer) -> layer.forEach((actor -> actor.draw(extrapolation))));
  {
@@ -23,11 +28,6 @@ public abstract class System
     loadFields();
     behave();
    }
- }
-
- public void setGroup(Group group) // Нужно добавить интерфейс типа Stackable, где PriorityGroup extends Stackable и Group extends Stackable
- {
-  assignedActors = group;
  }
 
  protected void loadFields() {};

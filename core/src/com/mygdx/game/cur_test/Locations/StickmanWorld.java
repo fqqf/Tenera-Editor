@@ -20,6 +20,7 @@ public class StickmanWorld extends GameScene
   playersLayer.add(new Stickman(new Vector2(10,4)));
   playersLayer.add(new Wall(2,0,10,2.5f));
   drawingSystem.layers.put(1,playersLayer);
+
  }
 
  @Override

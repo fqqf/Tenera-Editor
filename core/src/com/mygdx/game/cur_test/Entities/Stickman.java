@@ -11,10 +11,12 @@ import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 
 public class Stickman extends Actor
 {
+ public DrawingComponent drawingComponent;
+
  public Stickman(Vector2 position)
  {
   BasePhysicsComponent physicsComponent = BasePhysicsComponent.get(this);
-  DrawingComponent drawingComponent = DrawingComponent.get(this);
+  drawingComponent = DrawingComponent.get(this);
 
 
   drawingComponent.texture = new Texture("test7/stickman.png");
@@ -31,6 +33,5 @@ public class Stickman extends Actor
   StickmanWorld.collisionManagmentSystem.addActor(this);
   StickmanWorld.controlSystem.addActor(this);
   StickmanWorld.physicsSystem.addActor(this);
-  StickmanWorld.drawingSystem.addActor(this);
  }
 }

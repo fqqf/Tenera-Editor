@@ -1,7 +1,6 @@
 package com.mygdx.game.ext.core.system.presets.collisionSystem;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -16,7 +15,7 @@ public class CollisionManagmentSystem extends System
   type = Type.PHYSICS_SYSTEM;
  }
 
- private BoundingBox boxA, boxB;// Due to be managed by another class
+ private BoundingBox boxA, boxB;
 
  public void handle()
  {
@@ -41,7 +40,6 @@ public class CollisionManagmentSystem extends System
 
  private void handleCollision(Actor actorA, Actor actorB)
  {
-
   if (boxA.getType() != CollisionType.BODY) return;
   // logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
   // logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());

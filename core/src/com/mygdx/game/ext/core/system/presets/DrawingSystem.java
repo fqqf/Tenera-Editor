@@ -36,7 +36,6 @@ public class DrawingSystem extends System
 
  public void handle()
  {
-
   batch.begin();
   layers.forEach((key,layer) -> layer.forEach((this::calc)));
   batch.end();
@@ -58,7 +57,6 @@ public class DrawingSystem extends System
   BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor); // TODO: separate in properties and texture;;
   position = basePhysicsComponent.position; size = basePhysicsComponent.size;
   velocity = BasePhysicsComponent.get(actor).velocity;
-
  }
 
  protected void behave()
@@ -81,11 +79,13 @@ public class DrawingSystem extends System
    }
    batch.draw(texture, position.x+valueX, position.y+valueY, size.x, size.y);
   }
-  else batch.draw(texture, position.x, position.y, size.x, size.y);
+  else {
+
+   batch.draw(texture, position.x, position.y, size.x, size.y);
+  }
 
   shapeDrawer.setColor(Color.BLUE);
   shapeDrawer.setDefaultLineWidth(0.02f);
-  shapeDrawer.rectangle( position.x, position.y, size.x, size.y);
-
+  shapeDrawer.rectangle(position.x, position.y, size.x, size.y);
  }
 }

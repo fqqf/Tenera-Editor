@@ -2,6 +2,7 @@ package com.mygdx.game.ext.core.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
@@ -11,11 +12,14 @@ import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 
+import java.util.Arrays;
+
 public abstract class Scene
 {
+
  protected final String name;
  protected final Monitor monitor;
- protected final SpriteBatch batch;
+ protected SpriteBatch batch;
  protected final ShapeRenderer liner;
 
  public ExtendCoordinateGrid field;
@@ -48,7 +52,8 @@ public abstract class Scene
  void act() {}
  void handleInput() {}
 
- public void iterPhys() { callPhysSystems(); act(); }
+ public void iterPhys() { callPhysSystems(); act();
+ }
 
  public void iterInput() { callInputSystems(); handleInput(); }
 
@@ -72,6 +77,7 @@ public abstract class Scene
  protected void callDrawSystems()
  {
   callSystems(0, actStartIndex);
+
  }
 
  protected void callPhysSystems()
@@ -98,10 +104,13 @@ public abstract class Scene
  {
   System.Type type = system.getType();
   int index = getSystemTypeIndex(type);
-  int endIndex = type == System.Type.GRAPHICS_SYSTEM ? graphicsEndIndex : type == System.Type.PHYSICS_SYSTEM ? actEndIndex : systems.size-1;
+  int endIndex = type == System.Type.GRAPHICS_SYSTEM ? graphicsEndIndex : type == System.Type.PHYSICS_SYSTEM ? actEndIndex : systems.size - 1;
+
   if (systems.size > 0)
-   for (; index <= endIndex; index++)
-    if (system.priority < systems.get(index).priority) break;
+  {
+   for (; index <= endIndex; index++) if (system.priority < systems.get(index).priority) break;
+  }
+
   systems.insert(index, system);
   updateIndexOnChange(type, 1);
  }
