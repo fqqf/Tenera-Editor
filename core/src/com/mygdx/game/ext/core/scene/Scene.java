@@ -52,7 +52,7 @@ public abstract class Scene
 
  public void iterInput() { callInputSystems(); handleInput(); }
 
- private int actStartIndex, inputStartIndex;
+ private int actStartIndex=0, inputStartIndex=0, graphicsEndIndex=0, actEndIndex=0;
 
  private int getSystemTypeIndex(final System.Type systemType)
  { // TODO: Replace with normal switch-case
@@ -65,7 +65,8 @@ public abstract class Scene
   {
    actStartIndex += value;
    inputStartIndex += value;
-  } else if (insertType == System.Type.PHYSICS_SYSTEM) inputStartIndex += value;
+   graphicsEndIndex = actStartIndex-1;
+  } else if (insertType == System.Type.PHYSICS_SYSTEM) { inputStartIndex += value; actEndIndex = inputStartIndex-1; };
  }
 
  protected void callDrawSystems()
@@ -92,19 +93,17 @@ public abstract class Scene
 
  public void addSystem(System... systems) { for (System system : systems) addSystem(system); }
 
+
  private void addSystem(System system)
  {
-  int index = getSystemTypeIndex(system.getType());
-//  while (index < systems.size && systems.get(index).getType() == system.getType())
-//  {
-//   if (system.priority > systems.get(index).priority  && index < systems.size-1)
-//   {
-//    if (system.priority < systems.get(index +1).priority)break;
-//   }
-//   index++;
-//  }
+  System.Type type = system.getType();
+  int index = getSystemTypeIndex(type);
+  int endIndex = type == System.Type.GRAPHICS_SYSTEM ? graphicsEndIndex : type == System.Type.PHYSICS_SYSTEM ? actEndIndex : systems.size-1;
+  if (systems.size > 0)
+   for (; index <= endIndex; index++)
+    if (system.priority < systems.get(index).priority) break;
   systems.insert(index, system);
-  updateIndexOnChange(system.getType(), 1);
+  updateIndexOnChange(type, 1);
  }
 
  public void remSystem(System... systems) { for (System system : systems) remSystem(system); }
