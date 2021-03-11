@@ -73,19 +73,12 @@ public abstract class Scene
  protected void callDrawSystems()
  {
   // logger.info("callRenderSystems");
-  drawSystems.forEach(
-          (prio,array)->
-          {
-           //java.lang.System.out.println("call collections prio: " + prio);
-           array.forEach(System::handle);
-          } );
-
-  //drawSystems.forEach((prio,collection)->collection.forEach(System::handle));
+  drawSystems.forEach((prio,array)->array.forEach(System::handle) );
  }
 
  protected void callPhysSystems()
  {
-  physicSystems.forEach((prio,collection)->collection.forEach(System::handle));
+  physicSystems.forEach((prio,array)->array.forEach(System::handle));
  }
 
 // protected void callInputSystems()

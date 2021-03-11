@@ -15,17 +15,16 @@ public class Stickman extends Actor
 
  public Stickman(Vector2 position)
  {
-  BasePhysicsComponent physicsComponent = BasePhysicsComponent.get(this);
   drawingComponent = DrawingComponent.get(this);
-
-
   drawingComponent.texture = new Texture("test7/stickman.png");
   drawingComponent.useExtrapolation = true;
 
+  BasePhysicsComponent physicsComponent = BasePhysicsComponent.get(this);
   physicsComponent.position.set(position);
   physicsComponent.size.set(3,6);
 
   CollisionComponent collisionComponent = CollisionComponent.get(this);
+  collisionComponent.box.staticObject = false;
   collisionComponent.box.setType(CollisionType.BODY);
   collisionComponent.box.setPosition(position.x,position.y);
   collisionComponent.box.setSize(physicsComponent.size.x, physicsComponent.size.y);

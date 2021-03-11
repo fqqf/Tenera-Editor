@@ -31,6 +31,7 @@ public class CollisionManagmentSystem extends System
   {
    Actor actorA = assignedActors.get(i);
    boxA = getSynchronizedBox(actorA,extr);
+   if (boxA.staticObject)continue;
 
    for (Actor actorB : assignedActors)
    {
@@ -50,7 +51,7 @@ public class CollisionManagmentSystem extends System
  {
   return CollisionComponent.get(actor).box;
  }
- private BoundingBox getSynchronizedBox(Actor actor, float extr)
+ private BoundingBox getSynchronizedBox(final Actor actor, final float extr)
  {
   BoundingBox box = CollisionComponent.get(actor).box;
   BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);

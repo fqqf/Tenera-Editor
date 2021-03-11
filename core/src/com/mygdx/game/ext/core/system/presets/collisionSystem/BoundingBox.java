@@ -7,7 +7,7 @@ public class BoundingBox extends Rectangle
 {
  private int type;
  public float halfWidth,halfHeight;
-
+ public boolean staticObject = true;
 
  public BoundingBox(int type)
  {
