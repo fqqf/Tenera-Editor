@@ -1,5 +1,6 @@
 package com.mygdx.game.ext.core.components.presets;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
@@ -13,6 +14,8 @@ public class BasePhysicsComponent extends Component<BasePhysicsComponent>
  public Vector2 position = new Vector2(1,1);
  public Vector2 size = new Vector2(1,1);
  public Vector2 velocity = new Vector2(0,0); // TODO: Remove from physics component
+
+ public Color color = Color.GREEN; // for draw debug value
 
  public BasePhysicsComponent(Actor actor)
  {

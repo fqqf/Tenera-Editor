@@ -25,11 +25,11 @@ public class Main extends ApplicationLoop
   stickmanWorld.iterDraw(extrapolation);
  }
 
- @Override
- public void handleInput()
- {
-  stickmanWorld.iterInput();
- }
+// @Override
+// public void handleInput()
+// {
+//  stickmanWorld.iterInput();
+// }
 
  @Override
  public void calcPhysics() { stickmanWorld.iterPhys(); }

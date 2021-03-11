@@ -6,15 +6,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.group.Group;
-import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
+import com.mygdx.game.ext.core.group.Group;
+import com.mygdx.game.ext.core.system.System;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
+
+import static com.mygdx.game.ext.core.drawing.ApplicationLoop.logger;
 
 public abstract class Scene
 {
@@ -46,39 +46,41 @@ public abstract class Scene
   monitor.setField(field);
 
   callDrawSystems();
+  // draw(extrapolation);
 
-  draw(extrapolation);
  }
 
- protected void draw(float extrapolation) {}
+ // protected void draw(float extrapolation) {}
  void act() {}
- void handleInput() {}
+ // void handleInput() {}
 
  public void iterPhys() { callPhysSystems(); act();
  }
 
- public void iterInput() { callInputSystems(); handleInput(); }
-
+ // public void iterInput() { callInputSystems(); handleInput(); }
  //private int actStartIndex=0, inputStartIndex=0, graphicsEndIndex=0, actEndIndex=0;
 
  private Map<Integer,Array<System>> getSystemTypeMap(final System.Type systemType)
- { // TODO: Replace with normal switch-case
-  return systemType == System.Type.GRAPHICS_SYSTEM ? drawSystems : systemType == System.Type.PHYSICS_SYSTEM ? physicSystems : inputSystems;
+ {
+  switch ( systemType )
+  {
+   case RENDER_SYSTEM: return drawSystems;
+   case PHYSICS_SYSTEM: return physicSystems;
+  }
+  throw new IllegalArgumentException("такого быть не должно! " + systemType);
  }
-
-// private void updateIndexOnChange(final System.Type insertType, int value)
-// {
-//  if (insertType == System.Type.GRAPHICS_SYSTEM)
-//  {
-//   actStartIndex += value;
-//   inputStartIndex += value;
-//   graphicsEndIndex = actStartIndex-1;
-//  } else if (insertType == System.Type.PHYSICS_SYSTEM) { inputStartIndex += value; actEndIndex = inputStartIndex-1; };
-// }
 
  protected void callDrawSystems()
  {
-  drawSystems.forEach((prio,collection)->collection.forEach(System::handle));
+  // logger.info("callRenderSystems");
+  drawSystems.forEach(
+          (prio,array)->
+          {
+           //java.lang.System.out.println("call collections prio: " + prio);
+           array.forEach(System::handle);
+          } );
+
+  //drawSystems.forEach((prio,collection)->collection.forEach(System::handle));
  }
 
  protected void callPhysSystems()
@@ -86,13 +88,13 @@ public abstract class Scene
   physicSystems.forEach((prio,collection)->collection.forEach(System::handle));
  }
 
- protected void callInputSystems()
- {
- inputSystems.forEach((prio,collection)->collection.forEach(System::handle));
- }
+// protected void callInputSystems()
+// {
+// inputSystems.forEach((prio,collection)->collection.forEach(System::handle));
+// }
  private final Map<Integer, Array<System>> drawSystems = new TreeMap<>();
  private final Map<Integer, Array<System>> physicSystems = new TreeMap<>();
- private final Map<Integer, Array<System>> inputSystems = new TreeMap<>();
+ //private final Map<Integer, Array<System>> inputSystems = new TreeMap<>();
 
  public void addSystem(System... systems) { for (System system : systems) addSystem(system); }
 
@@ -124,7 +126,7 @@ public abstract class Scene
 
   liner.begin(ShapeRenderer.ShapeType.Line);
 
-  liner.setColor(Color.RED);
+  liner.setColor(Color.GRAY);
   for (int i = 0; i < width; i++) liner.line(i, 0, i, height);
   for (int i = 0; i < height; i++) liner.line(0, i, width, i);
 

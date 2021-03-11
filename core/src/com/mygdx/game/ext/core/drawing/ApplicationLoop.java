@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
+import com.mygdx.game.ext.core.scene.presets.GameScene;
 
 /**
  * This class stands for separation game loop in 3 parts:
@@ -59,18 +60,17 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   else
   {
    if ( lateFramesAmount > MAX_TOLERATED_LATE_FRAMES) lateFramesAmount = 0;
-   inGameTime += Math.min( renderDelta, TICK_IN_NANO );
+   inGameTime += renderDelta; //Math.min( renderDelta, TICK_IN_NANO );
   }
 
   if (inGameTime > nextTickTime)
   {
    nextTickTime += TICK_IN_NANO;
    tick++; TPS++;
+   extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
    calcPhysics();
-  }
-
-  extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
-  handleInput();
+  } else extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
+  // handleInput();
   drawGraphics();
 
   if (inGameTime > nextSecondTime)
@@ -88,7 +88,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
 
  public void drawGraphics() {}
  public void calcPhysics() {}
- public void handleInput() {}
+ // public void handleInput() {}
 
  private long pauseStartTime = 0;
 

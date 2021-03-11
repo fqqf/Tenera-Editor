@@ -19,12 +19,13 @@ import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
- ShapeDrawer shapeDrawer;
+ private final ShapeDrawer shapeDrawer;
  public DrawingSystem()
  {
   batch = Monitor.instance.getBatch();
-  type = Type.GRAPHICS_SYSTEM;
-  shapeDrawer = new ShapeDrawer(batch, new TextureRegion(new Texture(Gdx.files.internal("white.jpg"))));
+  type = Type.RENDER_SYSTEM;
+  priority = 100;
+  shapeDrawer = new ShapeDrawer(Monitor.instance.getBatch(), new TextureRegion(new Texture(Gdx.files.internal("white.jpg"))));
  }
 
  protected SpriteBatch batch;
@@ -36,6 +37,7 @@ public class DrawingSystem extends System
 
  public void handle()
  {
+  // logger.info("Drawing System");
   batch.begin();
   layers.forEach((key,layer) -> layer.forEach((this::calc)));
   batch.end();
@@ -53,7 +55,6 @@ public class DrawingSystem extends System
   drawingComponent = DrawingComponent.get(actor);
   texture = drawingComponent.texture;
 
-
   BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor); // TODO: separate in properties and texture;;
   position = basePhysicsComponent.position; size = basePhysicsComponent.size;
   velocity = BasePhysicsComponent.get(actor).velocity;
@@ -64,28 +65,35 @@ public class DrawingSystem extends System
   if (drawingComponent.useExtrapolation)
   {
    float extr = ApplicationLoop.instance.extrapolation;
-   float valueX,valueY;
-   if (drawingComponent.extrapolationX) valueX = velocity.x*extr;
-   else
-   {
-    valueX = 0;
-    if (drawingComponent.extrapolationOffNanoX <= ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationX = true;
-   }
-   if (drawingComponent.extrapolationY) valueY = velocity.y*extr;
-   else
-   {
-    valueY = 0;
-    if (drawingComponent.extrapolationOffNanoY <= ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
-   }
-   batch.draw(texture, position.x+valueX, position.y+valueY, size.x, size.y);
+//   float valueX,valueY;
+//   if (drawingComponent.extrapolationX) valueX = velocity.x*extr;
+//   else
+//   {
+//    color = Color.RED;
+//    valueX = 0;
+//    if (drawingComponent.extrapolationOffNanoX < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationX = true;
+//   }
+//   if (drawingComponent.extrapolationY) valueY = velocity.y*extr;
+//   else
+//   {
+//    color = Color.RED;
+//    valueY = 0;
+//    if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
+//   }
+   batch.draw(texture, position.x+velocity.x*extr, position.y+velocity.y*extr, size.x, size.y);
   }
-  else {
+  else batch.draw(texture, position.x, position.y, size.x, size.y);
 
-   batch.draw(texture, position.x, position.y, size.x, size.y);
-  }
-
-  shapeDrawer.setColor(Color.BLUE);
+  drawPhysicBox();
+ }
+ private void drawPhysicBox()
+ {
+  final BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
+  shapeDrawer.setColor(basePhysicsComponent.color);
+  basePhysicsComponent.color = Color.GREEN;
   shapeDrawer.setDefaultLineWidth(0.02f);
+  final Vector2 position = basePhysicsComponent.position;
+  final Vector2 size = basePhysicsComponent.size;
   shapeDrawer.rectangle(position.x, position.y, size.x, size.y);
  }
 }

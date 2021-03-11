@@ -14,7 +14,7 @@ public class PhysicsSystem extends System
 
  {
   type = Type.PHYSICS_SYSTEM; // PHYSICS_COMPONENT;
-  priority = 0;
+  priority = 1;
  }
 
  @Override
@@ -32,17 +32,15 @@ public class PhysicsSystem extends System
  @Override
  protected void behave()
  {
+  // logger.info("Physic System");
 
-  position.add(velocity);
-
-  // if (position.y>0) velocity.y-=0.02f;
-  // else { velocity.y = 0; position.y = 0; } // TODO: disable extrapolation in here
+  if (position.y>0) velocity.y-=0.02f;
+  else { velocity.y = 0; position.y = 0; } // TODO: disable extrapolation in here
 
   if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x) / 10f;
   else velocity.x = 0;
 
-
+  position.add(velocity);
   box.setPosition(position);
-
  }
 }

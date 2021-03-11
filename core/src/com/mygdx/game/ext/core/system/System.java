@@ -37,8 +37,7 @@ public abstract class System
  {
   NONE,
   PHYSICS_SYSTEM,
-  INPUT_SYSTEM,
-  GRAPHICS_SYSTEM;
+  RENDER_SYSTEM;
  }
 
  public Type getType() { if (type == Type.NONE) throw new NullPointerException("Please set type for your components!"); return type; }

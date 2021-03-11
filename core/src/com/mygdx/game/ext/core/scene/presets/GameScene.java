@@ -13,7 +13,7 @@ public class GameScene extends Scene
  public GameScene(String name, ExtendCoordinateGrid field, float width, float height)
  {
   super(name, field, width, height);
-  addSystem(collisionManagmentSystem, controlSystem, drawingSystem, physicsSystem);
+  addSystem(controlSystem, physicsSystem, collisionManagmentSystem, drawingSystem);
  }
 
 
