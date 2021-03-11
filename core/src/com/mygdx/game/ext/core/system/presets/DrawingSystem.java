@@ -65,21 +65,6 @@ public class DrawingSystem extends System
   if (drawingComponent.useExtrapolation)
   {
    float extr = ApplicationLoop.instance.extrapolation;
-//   float valueX,valueY;
-//   if (drawingComponent.extrapolationX) valueX = velocity.x*extr;
-//   else
-//   {
-//    color = Color.RED;
-//    valueX = 0;
-//    if (drawingComponent.extrapolationOffNanoX < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationX = true;
-//   }
-//   if (drawingComponent.extrapolationY) valueY = velocity.y*extr;
-//   else
-//   {
-//    color = Color.RED;
-//    valueY = 0;
-//    if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
-//   }
    batch.draw(texture, position.x+velocity.x*extr, position.y+velocity.y*extr, size.x, size.y);
   }
   else batch.draw(texture, position.x, position.y, size.x, size.y);
@@ -97,3 +82,21 @@ public class DrawingSystem extends System
   shapeDrawer.rectangle(position.x, position.y, size.x, size.y);
  }
 }
+
+/* COMMENT SECTION */
+
+//   float valueX,valueY;
+//   if (drawingComponent.extrapolationX) valueX = velocity.x*extr;
+//   else
+//   {
+//    color = Color.RED;
+//    valueX = 0;
+//    if (drawingComponent.extrapolationOffNanoX < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationX = true;
+//   }
+//   if (drawingComponent.extrapolationY) valueY = velocity.y*extr;
+//   else
+//   {
+//    color = Color.RED;
+//    valueY = 0;
+//    if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
+//   }

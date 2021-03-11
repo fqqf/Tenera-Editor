@@ -17,14 +17,15 @@ public class StickmanWorld extends GameScene
  {
   super(name, field, width, height);
 
-  playersLayer.add(new Stickman(new Vector2(5,4)));
-  playersLayer.add(new Wall(2,0,10,2.5f));
-  playersLayer.add(new Wall(2,9,10,2.5f));
-  playersLayer.add(new Wall(0,0,2.5f,10f));
-  playersLayer.add(new Wall(10,0,2.5f,10f));
+  playersLayer.addAll(
+    new Stickman(new Vector2(5, 4)),
+    new Wall(2, 0, 10, 2.5f),
+    new Wall(2, 9, 10, 2.5f),
+    new Wall(0, 0, 2.5f, 10f),
+    new Wall(10, 0, 2.5f, 10f)
+  );
 
   drawingSystem.layers.put(1,playersLayer);
-
  }
 
  @Override

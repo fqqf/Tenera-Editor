@@ -34,13 +34,12 @@ public class PhysicsSystem extends System
  {
   // logger.info("Physic System");
 
-  if (position.y>0) velocity.y-=0.02f;
-  else { velocity.y = 0; position.y = 0; } // TODO: disable extrapolation in here
+  //if (position.y>0) velocity.y-=0.02f;
+  //else { velocity.y = 0; position.y = 0; } // TODO: disable extrapolation in here
 
   if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x) / 10f;
   else velocity.x = 0;
 
   position.add(velocity);
-  box.setPosition(position);
  }
 }
