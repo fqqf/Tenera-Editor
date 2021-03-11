@@ -23,15 +23,13 @@ public class CollisionManagmentSystem extends System
  public void handle()
  {
   // logger.info("Collision System");
-
   float extr = ApplicationLoop.instance.extrapolation;
-
 
   for (int i = 0; i < assignedActors.size; i++)
   {
    Actor actorA = assignedActors.get(i);
    boxA = getSynchronizedBox(actorA,extr);
-   if (boxA.staticObject)continue;
+   if (boxA.getType()!=CollisionType.BODY) continue;
 
    for (Actor actorB : assignedActors)
    {

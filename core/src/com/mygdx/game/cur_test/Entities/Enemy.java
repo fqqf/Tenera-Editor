@@ -9,19 +9,19 @@ import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 
-public class Stickman extends Actor
+public class Enemy extends Actor
 {
  public DrawingComponent drawingComponent;
 
- public Stickman(Vector2 position)
+ public Enemy(Vector2 position)
  {
   drawingComponent = DrawingComponent.get(this);
-  drawingComponent.texture = new Texture("test7/hero.png");
+  drawingComponent.texture = new Texture("test7/enemy.png");
   drawingComponent.useExtrapolation = true;
 
   BasePhysicsComponent physicsComponent = BasePhysicsComponent.get(this);
   physicsComponent.position.set(position);
-  physicsComponent.size.set(1.56f,3.89f);
+  physicsComponent.size.set(3,6);
 
   CollisionComponent collisionComponent = CollisionComponent.get(this);
   collisionComponent.box.setType(CollisionType.BODY);
@@ -29,7 +29,7 @@ public class Stickman extends Actor
   collisionComponent.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
 
   StickmanWorld.collisionManagmentSystem.addActor(this);
-  StickmanWorld.controlSystem.addActor(this);
   StickmanWorld.physicsSystem.addActor(this);
+  StickmanWorld.simpleBehaviourSystem.addActor(this);
  }
 }

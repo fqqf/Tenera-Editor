@@ -9,22 +9,28 @@ import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 
-public class Wall extends Actor
+public abstract class EnvObject extends Actor
 {
- public Wall(float x, float y, float width, float height)
+ protected DrawingComponent drawingComponent;
+ protected CollisionComponent collisionComponent;
+ public EnvObject(float x, float y, float width, float height)
  {
   BasePhysicsComponent physicsComponent = BasePhysicsComponent.get(this);
-  DrawingComponent drawingComponent = DrawingComponent.get(this);
+  drawingComponent = DrawingComponent.get(this);
 
   physicsComponent.position.set(x,y);
   physicsComponent.size.set(width, height);
 
-  CollisionComponent collisionComponent = CollisionComponent.get(this);
+  collisionComponent = CollisionComponent.get(this);
   collisionComponent.box.setPosition(x,y);
   collisionComponent.box.setSize(width, height);
-
-  drawingComponent.texture = (x/y==0) ? new Texture("test7/wall.png") : new Texture("test7/wall2.png");
+  collisionComponent.box.setType(CollisionType.BODY);
 
   StickmanWorld.collisionManagmentSystem.addActor(this);
+ }
+
+ protected void setTexture(Texture texture)
+ {
+  drawingComponent.texture = texture;
  }
 }

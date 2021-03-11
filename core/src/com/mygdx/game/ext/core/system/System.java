@@ -22,12 +22,12 @@ public abstract class System
 
  public void handle() //   layers.forEach((key,layer) -> layer.forEach((actor -> actor.draw(extrapolation))));
  {
-   for (Actor actor : assignedActors)
-   {
-    this.actor = actor;
-    loadFields();
-    behave();
-   }
+  for (Actor actor : assignedActors)
+  {
+   this.actor = actor;
+   loadFields();
+   behave();
+  }
  }
 
  protected void loadFields() {};
@@ -45,6 +45,11 @@ public abstract class System
  public void addActor(Actor... actors)
  {
   assignedActors.addAll(actors);
+ }
+
+ public void remActor(Actor... actors)
+ {
+  assignedActors.remAll(actors);
  }
 }
 

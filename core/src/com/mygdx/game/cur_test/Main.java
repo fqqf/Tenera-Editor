@@ -16,7 +16,7 @@ public class Main extends ApplicationLoop
  {
   super.create();
 
-  stickmanWorld = new StickmanWorld("super-location",new ExtendCoordinateGrid("coordinate-grid", 10),100,100);
+  stickmanWorld = new StickmanWorld("super-location",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
  }
 
  @Override
