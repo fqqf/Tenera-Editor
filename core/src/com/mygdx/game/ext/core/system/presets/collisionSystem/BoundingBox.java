@@ -38,6 +38,12 @@ public class BoundingBox extends Rectangle
   this.offset = offset;
  }
 
+ public void setOffset(float x, float y)
+ {
+  this.offset.x = x;
+  this.offset.y = y;
+ }
+
  public float getTop() { return y + height; }
  public float getRight() { return x + width; }
 

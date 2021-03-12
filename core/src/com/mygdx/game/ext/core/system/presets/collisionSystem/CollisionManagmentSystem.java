@@ -54,8 +54,8 @@ public class CollisionManagmentSystem extends System
   BoundingBox box = CollisionComponent.get(actor).box;
   BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
   box.setPosition(
-          basePhysicsComponent.position.x + basePhysicsComponent.velocity.x * extr,
-          basePhysicsComponent.position.y + basePhysicsComponent.velocity.y * extr
+    basePhysicsComponent.position.x + basePhysicsComponent.velocity.x * extr,
+    basePhysicsComponent.position.y + basePhysicsComponent.velocity.y * extr
   );
   return box;
  }
@@ -65,8 +65,6 @@ public class CollisionManagmentSystem extends System
 
  private void handleCollision(Actor actorA, Actor actorB)
  {
-
-
   if (boxA.getType() != CollisionType.BODY) return;
   // logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
   // logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());
