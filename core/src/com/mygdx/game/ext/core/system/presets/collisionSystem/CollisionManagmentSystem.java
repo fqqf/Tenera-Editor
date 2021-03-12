@@ -104,6 +104,7 @@ public class CollisionManagmentSystem extends System
    physics.position.y = Math.signum(deltaCenterY) > 0 ? boxB.getTop() : boxB.y - boxA.height;
    physics.velocity.y = 0;
 
+
    // drawingComponent.extrapolationY = false;
    // drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
   }
@@ -112,7 +113,6 @@ public class CollisionManagmentSystem extends System
    // physics.position.x += absX * Math.signum(deltaCenterX);
    physics.position.x = Math.signum(deltaCenterX) > 0 ? boxB.getRight() : boxB.x - boxA.width;
    physics.velocity.x = 0;
-
    // drawingComponent.extrapolationX = false;
    // drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
   }

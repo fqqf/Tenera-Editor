@@ -9,7 +9,7 @@ import com.mygdx.game.ext.core.system.System;
 
 public class PhysicsSystem extends System
 {
- private Vector2 position, velocity;
+ private Vector2 position, velocity, speed;
 
  {
   type = Type.PHYSICS_SYSTEM; // PHYSICS_COMPONENT;
@@ -23,6 +23,7 @@ public class PhysicsSystem extends System
 
   position = basePhysicsComponent.position;
   velocity = basePhysicsComponent.velocity;
+  speed = basePhysicsComponent.speed;
  }
 
  @Override

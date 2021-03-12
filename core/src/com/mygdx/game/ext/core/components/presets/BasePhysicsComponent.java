@@ -14,6 +14,7 @@ public class BasePhysicsComponent extends Component<BasePhysicsComponent>
  public Vector2 position = new Vector2(1,1);
  public Vector2 size = new Vector2(1,1);
  public Vector2 velocity = new Vector2(0,0); // TODO: Remove from physics component
+ public Vector2 speed = new Vector2();
 
  public Color color = Color.GREEN; // for draw debug value
 

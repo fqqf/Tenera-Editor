@@ -13,7 +13,7 @@ public class ControlSystem extends System
   type = Type.RENDER_SYSTEM;
  }
 
- private Vector2 position, velocity;
+ private Vector2 position, velocity, speed;
 
  @Override
  protected void loadFields()
@@ -22,6 +22,7 @@ public class ControlSystem extends System
 
   position = basePhysicsComponent.position;
   velocity = basePhysicsComponent.velocity;
+  speed = basePhysicsComponent.speed;
  }
 
  @Override
@@ -29,9 +30,11 @@ public class ControlSystem extends System
  {
   // logger.info("Control System");
 
-  if (Gdx.input.isKeyPressed(Input.Keys.W)) velocity.add(0,0.02f);
-  if (Gdx.input.isKeyPressed(Input.Keys.S)) velocity.add(0, -0.02f);
-  if (Gdx.input.isKeyPressed(Input.Keys.A)) velocity.add(-0.02f, 0);
-  if (Gdx.input.isKeyPressed(Input.Keys.D)) velocity.add(0.02f, 0);
+  if (Gdx.input.isKeyPressed(Input.Keys.W)) speed.y =  0.3f;
+  if (Gdx.input.isKeyPressed(Input.Keys.S)) speed.y = -0.3f;
+  if (Gdx.input.isKeyPressed(Input.Keys.A)) speed.x = -0.3f;
+  if (Gdx.input.isKeyPressed(Input.Keys.D)) speed.x =  0.3f;
+
+  velocity.add(speed);
  }
 }
