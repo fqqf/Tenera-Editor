@@ -7,7 +7,8 @@ public class BoundingBox extends Rectangle
 {
  private int type;
  public float halfWidth,halfHeight;
- public boolean staticObject = true;
+
+ public Vector2 offset = new Vector2(0,0);
 
  public BoundingBox(int type)
  {
@@ -30,6 +31,11 @@ public class BoundingBox extends Rectangle
   super.set(x, y, width, height);
   refreshHalfSize();
   return this;
+ }
+
+ public void setOffset(Vector2 offset)
+ {
+  this.offset = offset;
  }
 
  public float getTop() { return y + height; }
@@ -87,5 +93,18 @@ public class BoundingBox extends Rectangle
  {
   halfWidth = this.width/2;
   halfHeight = this.height/2;
+ }
+
+
+ @Override
+ public Rectangle setPosition(float x, float y)
+ {
+  return super.setPosition(x+offset.x, y+offset.y);
+ }
+
+ @Override
+ public Rectangle setPosition(Vector2 position)
+ {
+  return super.setPosition(position.add(offset));
  }
 }

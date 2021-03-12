@@ -10,7 +10,6 @@ import com.mygdx.game.ext.core.system.System;
 public class PhysicsSystem extends System
 {
  private Vector2 position, velocity;
- private BoundingBox box;
 
  {
   type = Type.PHYSICS_SYSTEM; // PHYSICS_COMPONENT;
