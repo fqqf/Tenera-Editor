@@ -14,5 +14,7 @@ public class SpriteManager
   textures.put("long_grass", new Texture("test7/long_grass.png"));
   textures.put("castle", new Texture("test7/castle.png"));
   textures.put("platform", new Texture("test7/platform.png"));
+  textures.put("enemy", new Texture("test7/enemy.png"));
+  textures.put("hero", new Texture("test7/hero.png"));
  }
 }

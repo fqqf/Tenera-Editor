@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.cur_test.Entities.Enemy;
-import com.mygdx.game.cur_test.Entities.Stickman;
+import com.mygdx.game.cur_test.Entities.Hero;
 import com.mygdx.game.cur_test.Environment.Castle;
-import com.mygdx.game.cur_test.Environment.EnvObject;
 import com.mygdx.game.cur_test.Environment.Grass;
 import com.mygdx.game.cur_test.Environment.Platform;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
@@ -25,7 +24,7 @@ public class StickmanWorld extends GameScene
   super(name, field, width, height);
   addSystems();
 
-  playersLayer.add(new Stickman(new Vector2(0, 0)));
+  playersLayer.add(new Hero(new Vector2(0, 0)));
 
   objectsLayer.addAll(
     new Grass(0, 0),
