@@ -1,9 +1,9 @@
 package com.mygdx.game.ext.core.actor.interfaces;
 
 @FunctionalInterface
-public interface Action<T>
+public interface Action
 {
- void invoke(T arg);
+ void invoke();
  @FunctionalInterface
  interface Arg1<T>
  {

@@ -1,6 +1,7 @@
 package com.mygdx.game.cur_test.Locations;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.cur_test.Entities.Enemy;
@@ -23,6 +24,9 @@ public class StickmanWorld extends GameScene
  {
   super(name, field, width, height);
   addSystems();
+
+
+
 
   playersLayer.add(new Hero(new Vector2(0, 0)));
 
