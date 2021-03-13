@@ -18,8 +18,6 @@ public class StickmanWorld extends GameScene
 {
  public Group playersLayer = new Group(), objectsLayer = new Group(), creaturesLayer = new Group();
 
-
-
  public StickmanWorld(String name, ExtendCoordinateGrid field, float width, float height)
  {
   super(name, field, width, height);

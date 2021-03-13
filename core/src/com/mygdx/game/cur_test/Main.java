@@ -3,26 +3,27 @@ package com.mygdx.game.cur_test;
 import com.mygdx.game.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.scene.Scene;
 
 public class Main extends ApplicationLoop
 {
  // TODO : Система не проверяет, есть ли у актера n-ый компонент. Система проходится по своим внутренним актерам.
  //  Если у внутреннего актера системы нет компонента, он будет добавлен
 
- StickmanWorld stickmanWorld;
+ Scene scene;
 
  @Override
  public void create()
  {
   super.create();
 
-  stickmanWorld = new StickmanWorld("super-location",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
+  scene = new StickmanWorld("super-location",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
  }
 
  @Override
  public void drawGraphics()
  {
-  stickmanWorld.iterDraw(extrapolation);
+  scene.iterDraw(extrapolation);
  }
 
 // @Override
@@ -32,5 +33,5 @@ public class Main extends ApplicationLoop
 // }
 
  @Override
- public void calcPhysics() { stickmanWorld.iterPhys(); }
+ public void calcPhysics() { scene.iterPhys(); }
 }
