@@ -3,6 +3,7 @@ package com.mygdx.game.ext.core.drawing;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.cur_test.SpriteManager;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.scene.presets.GameScene;
 
@@ -109,6 +110,14 @@ public abstract class ApplicationLoop extends ApplicationAdapter
  {
   checkInitialization();
   Monitor.instance.update(width, height);
+ }
+
+ @Override
+ public void dispose()
+ {
+  //todo add disposable resource
+  SpriteManager.dispose();
+
  }
 }
 

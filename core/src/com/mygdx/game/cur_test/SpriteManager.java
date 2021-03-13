@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 public class SpriteManager
 {
- private static HashMap<String, Texture> textures0 = new HashMap<>();
- public static HashMap<String, TextureAtlas.AtlasRegion> textures = new HashMap<>();
+ private final static HashMap<String, Texture> textures0 = new HashMap<>();
+ public final static HashMap<String, TextureAtlas.AtlasRegion> textures = new HashMap<>();
 
  static
  {
@@ -26,5 +26,12 @@ public class SpriteManager
            textures.put(key, new TextureAtlas.AtlasRegion(value,0,0,value.getWidth(), value.getHeight()));
           });
 
+ }
+ public static void dispose()
+ {
+  textures0.forEach( (key,value)->value.dispose());
+  textures.forEach( (key,value)->value.getTexture().dispose());
+  textures.clear();
+  textures0.clear();
  }
 }
