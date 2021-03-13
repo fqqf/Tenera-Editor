@@ -1,6 +1,7 @@
 package com.mygdx.game.cur_test.Environment;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.ext.core.actor.Actor;
@@ -11,7 +12,7 @@ import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 
 public class EnvironmentObject extends Actor
 {
- public EnvironmentObject(float x, float y, float width, float height, Texture texture)
+ public EnvironmentObject(float x, float y, float width, float height, TextureAtlas.AtlasRegion texture)
  {
   BasePhysicsComponent physicsComponent = BasePhysicsComponent.get(this);
   DrawingComponent drawingComponent = DrawingComponent.get(this);

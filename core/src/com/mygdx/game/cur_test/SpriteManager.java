@@ -1,20 +1,30 @@
 package com.mygdx.game.cur_test;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.HashMap;
 
 public class SpriteManager
 {
- public static HashMap<String, Texture> textures = new HashMap<>();
+ private static HashMap<String, Texture> textures0 = new HashMap<>();
+ public static HashMap<String, TextureAtlas.AtlasRegion> textures = new HashMap<>();
 
  static
  {
-  textures.put("grass", new Texture("test7/grass.png"));
-  textures.put("long_grass", new Texture("test7/long_grass.png"));
-  textures.put("castle", new Texture("test7/castle.png"));
-  textures.put("platform", new Texture("test7/platform.png"));
-  textures.put("enemy", new Texture("test7/enemy.png"));
-  textures.put("hero", new Texture("test7/hero.png"));
+  textures0.put("grass", new Texture("test7/grass.png"));
+  textures0.put("long_grass", new Texture("test7/long_grass.png"));
+  textures0.put("castle", new Texture("test7/castle.png"));
+  textures0.put("platform", new Texture("test7/platform.png"));
+  textures0.put("enemy", new Texture("test7/enemy.png"));
+  textures0.put("hero", new Texture("test7/hero.png"));
+
+  textures0.forEach(
+          (key,value)->
+          {
+           textures.put(key, new TextureAtlas.AtlasRegion(value,0,0,value.getWidth(), value.getHeight()));
+          });
+
  }
 }

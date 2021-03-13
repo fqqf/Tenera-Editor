@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
@@ -31,7 +32,7 @@ public class DrawingSystem extends System
  }
 
  protected SpriteBatch batch;
- protected Texture texture;
+ protected TextureAtlas.AtlasRegion texture;
  protected Vector2 position, size, velocity;
  private DrawingComponent drawingComponent;
 
