@@ -3,14 +3,14 @@ package com.mygdx.game.ext.core.data;
 import com.badlogic.gdx.assets.AssetManager;
 import com.mygdx.game.ext.core.actor.interfaces.Action;
 
-public class AssetLoader
+class AssetLoader
 {
 	public static class Data
 	{
-		float loadedPercent;
+		int loadedPercent;
 		private Data setPercent(final float percent)
 		{
-			loadedPercent = percent;
+			loadedPercent = (int)percent;
 			return this;
 		}
 	}

@@ -14,8 +14,6 @@ import com.mygdx.game.ext.core.system.System;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static com.mygdx.game.ext.core.drawing.ApplicationLoop.logger;
-
 public abstract class Scene
 {
 
@@ -45,7 +43,7 @@ public abstract class Scene
   camera.update();
   monitor.setField(field);
 
-  callDrawSystems();
+  callRenderSystems();
   // draw(extrapolation);
 
  }
@@ -64,16 +62,16 @@ public abstract class Scene
  {
   switch ( systemType )
   {
-   case RENDER_SYSTEM: return drawSystems;
+   case RENDER_SYSTEM: return renderSystems;
    case PHYSICS_SYSTEM: return physicSystems;
   }
   throw new IllegalArgumentException("такого быть не должно! " + systemType);
  }
 
- protected void callDrawSystems()
+ protected void callRenderSystems()
  {
   // logger.info("callRenderSystems");
-  drawSystems.forEach((prio,array)->array.forEach(System::handle) );
+  renderSystems.forEach((prio, array)->array.forEach(System::handle) );
  }
 
  protected void callPhysSystems()
@@ -85,7 +83,7 @@ public abstract class Scene
 // {
 // inputSystems.forEach((prio,collection)->collection.forEach(System::handle));
 // }
- private final Map<Integer, Array<System>> drawSystems = new TreeMap<>();
+ private final Map<Integer, Array<System>> renderSystems = new TreeMap<>();
  private final Map<Integer, Array<System>> physicSystems = new TreeMap<>();
  //private final Map<Integer, Array<System>> inputSystems = new TreeMap<>();
 
