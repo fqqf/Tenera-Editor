@@ -16,5 +16,6 @@ public class Platform extends EnvironmentObject
   collisionComponent.box.setType(CollisionType.SOLID);
   collisionComponent.box.setOffset(0.25f, 0.3f);
   collisionComponent.box.setSize(collisionComponent.box.getWidth()-1.2f, collisionComponent.box.getHeight()-0.8f);
+  collisionComponent.box.setType(CollisionType.PLATFORM);
  }
 }

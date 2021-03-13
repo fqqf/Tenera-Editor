@@ -38,5 +38,6 @@ public class PhysicsSystem extends System
  // else velocity.x = 0;
 
   position.add(velocity);
+  // velocity.setZero();
  }
 }

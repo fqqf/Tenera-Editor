@@ -71,7 +71,15 @@ public class CollisionManagmentSystem extends System
 
   switch (boxB.getType())
   {
-   case CollisionType.SOLID:
+   case CollisionType.PLATFORM:
+    float speedY = BasePhysicsComponent.get(actorA).velocity.y;
+    float topPlatform = boxB.getTop();
+    if (boxA.y - speedY < topPlatform)
+    {
+     if (boxA.y - speedY * ApplicationLoop.instance.extrapolation > topPlatform) handleBodySolid(actorA);
+     break;
+    }
+    case CollisionType.SOLID:
     handleBodySolid(actorA);
     break;
    case CollisionType.LIQUID:

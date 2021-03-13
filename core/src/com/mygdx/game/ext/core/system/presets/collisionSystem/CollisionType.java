@@ -6,6 +6,7 @@ public class CollisionType
  public static final int LIQUID = 1; // жидкость (замедление времени)
  public static final int SOLID = 2; // стены, итд
  public static final int BODY = 3; // игрок, нпс, итд, все живое **
+ public static final int PLATFORM = 4; // Платформа, ведет себя как Solid только при контакте сверху
 
  /*
  ненужные: (не нужна реализация)

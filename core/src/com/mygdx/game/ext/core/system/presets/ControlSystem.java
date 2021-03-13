@@ -30,11 +30,16 @@ public class ControlSystem extends System
  {
   // logger.info("Control System");
 
-  if (Gdx.input.isKeyPressed(Input.Keys.W)) speed.y =  0.3f;
-  if (Gdx.input.isKeyPressed(Input.Keys.S)) speed.y = -0.3f;
-  if (Gdx.input.isKeyPressed(Input.Keys.A)) speed.x = -0.3f;
-  if (Gdx.input.isKeyPressed(Input.Keys.D)) speed.x =  0.3f;
+  if (Gdx.input.isKeyPressed(Input.Keys.W)) speed.y =  0.01f;
+  if (Gdx.input.isKeyPressed(Input.Keys.S)) speed.y = -0.01f;
+  if (Gdx.input.isKeyPressed(Input.Keys.A)) speed.x = -0.01f;
+  if (Gdx.input.isKeyPressed(Input.Keys.D)) speed.x =  0.01f;
 
-  velocity.add(speed);
+  if (!speed.isZero())
+  {
+   velocity.add(speed);
+   speed.setZero();
+  }
+
  }
 }

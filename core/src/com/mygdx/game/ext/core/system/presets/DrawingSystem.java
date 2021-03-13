@@ -71,9 +71,10 @@ public class DrawingSystem extends System
   }
   else batch.draw(texture, position.x, position.y, size.x, size.y);
 
-  drawPhysicBox();
+  // drawActorBox();
+  drawCollisionBox();
  }
- private void drawPhysicBox()
+ private void drawCollisionBox()
  {
   final CollisionComponent collisionComponent = CollisionComponent.get(actor);
   final BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
@@ -83,6 +84,13 @@ public class DrawingSystem extends System
   shapeDrawer.setDefaultLineWidth(0.02f);
   BoundingBox box = collisionComponent.box;
   shapeDrawer.rectangle(box.x, box.y, box.width, box.height);
+ }
+ private void drawActorBox()
+ {
+  final BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
+  shapeDrawer.setColor(Color.GRAY);
+  shapeDrawer.setDefaultLineWidth(0.02f);
+  shapeDrawer.rectangle(basePhysicsComponent.position.x, basePhysicsComponent.position.y, basePhysicsComponent.size.x, basePhysicsComponent.size.y);
  }
 }
 
