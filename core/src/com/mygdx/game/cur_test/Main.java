@@ -26,18 +26,18 @@ public class Main extends ApplicationLoop
   assetManager.load("test7/platform.png", Texture.class);
   assetManager.load("test7/hero.png", Texture.class);
 
-  scene = new AssetLoadScene( "super-location",new ExtendCoordinateGrid("coordinate-grid", 1),10,10 )
-          .assetManager( assetManager )
-          .setActionOnLoaded(
-                  arg ->
-                  {
-                   System.out.println("loaded!");
-                   assetManager.dispose();
-                   scene = new StickmanWorld("super-location",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
-                  })
-          .ready();
+//  scene = new AssetLoadScene( "super-location",new ExtendCoordinateGrid("coordinate-grid", 1),10,10 )
+//          .assetManager( assetManager )
+//          .setActionOnLoaded(
+//                  arg ->
+//                  {
+//                   System.out.println("loaded!");
+//                   assetManager.dispose();
+//                   scene = new StickmanWorld("super-location",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
+//                  })
+//          .ready();
 
-  // scene = new StickmanWorld("super-location",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
+  scene = new StickmanWorld("super-location",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
  }
 
  @Override

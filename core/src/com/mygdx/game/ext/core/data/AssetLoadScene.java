@@ -6,6 +6,7 @@ import com.mygdx.game.ext.core.actor.interfaces.Action;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.scene.Scene;
 
+@Deprecated
 public class AssetLoadScene extends Scene
 { //todo не хочу по 100 раз переписывать xD не зная как именно ты хочешь это имплементировать xD мож ты систему хочешь... хотя смысл
 	private Action.Arg1<AssetManager> onLoaded;
