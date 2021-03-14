@@ -108,19 +108,19 @@ public class CollisionManagmentSystem extends System
   float absY = Math.abs(y);
   if (absX > absY)
   {
-   // physics.position.y += absY * Math.signum(deltaCenterY);
-   physics.position.y = Math.signum(deltaCenterY) > 0 ? boxB.getTop() : boxB.y - boxA.height;
-   physics.velocity.y = 0;
-
-
+   float signum = Math.signum(deltaCenterY);
+   // physics.position.y += absY * signum;
+   physics.position.y = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
+   if (signum != Math.signum(physics.velocity.y))physics.velocity.y = 0;
    // drawingComponent.extrapolationY = false;
    // drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
   }
   else
   {
-   // physics.position.x += absX * Math.signum(deltaCenterX);
-   physics.position.x = Math.signum(deltaCenterX) > 0 ? boxB.getRight() : boxB.x - boxA.width;
-   physics.velocity.x = 0;
+   float signum = Math.signum(deltaCenterX);
+   // physics.position.x += absX * signum;
+   physics.position.x = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
+   if (signum != Math.signum(physics.velocity.x))physics.velocity.x = 0;
    // drawingComponent.extrapolationX = false;
    // drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
   }
