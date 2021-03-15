@@ -18,10 +18,6 @@ public class DrawingComponent extends Component<DrawingComponent>
 
  public TextureAtlas.AtlasRegion atlasRegion;
  public boolean useExtrapolation = false;
- public boolean extrapolationX = true;
- public boolean extrapolationY = true;
- public long extrapolationOffNanoX = 0;
- public long extrapolationOffNanoY = 0;
 
  public DrawingComponent(TextureAtlas.AtlasRegion atlasRegion, Actor actor)
  {

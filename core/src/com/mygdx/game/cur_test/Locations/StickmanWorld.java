@@ -36,7 +36,6 @@ public class StickmanWorld extends GameScene
     GameScene.actionSystem.remActor(actor);
     createWorld();
    }else System.out.println("Loaded..." + am.getProgress() * 100+"%");
-
   });
  }
 
