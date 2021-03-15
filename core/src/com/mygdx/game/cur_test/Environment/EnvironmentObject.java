@@ -1,8 +1,6 @@
 package com.mygdx.game.cur_test.Environment;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
@@ -20,7 +18,7 @@ public class EnvironmentObject extends Actor
 
   physicsComponent.position.set(x,y);
   physicsComponent.size.set(width, height);
-  drawingComponent.texture = texture;
+  drawingComponent.atlasRegion = texture;
 
   collisionComponent = CollisionComponent.get(this);
   collisionComponent.box.setPosition(x,y);

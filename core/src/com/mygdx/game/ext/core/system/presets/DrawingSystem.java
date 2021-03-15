@@ -56,7 +56,7 @@ public class DrawingSystem extends System
  protected void loadFields()
  {
   drawingComponent = DrawingComponent.get(actor);
-  texture = drawingComponent.texture;
+  texture = drawingComponent.atlasRegion;
 
   BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor); // TODO: separate in properties and texture;;
   position = basePhysicsComponent.position; size = basePhysicsComponent.size;

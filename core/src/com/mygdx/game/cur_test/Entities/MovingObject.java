@@ -1,6 +1,5 @@
 package com.mygdx.game.cur_test.Entities;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.cur_test.Locations.StickmanWorld;
@@ -15,7 +14,7 @@ public class MovingObject extends Actor
  public MovingObject(Vector2 position, Vector2 size, TextureAtlas.AtlasRegion texture)
  {
   DrawingComponent drawingComponent = DrawingComponent.get(this);
-  drawingComponent.texture = texture;
+  drawingComponent.atlasRegion = texture;
   drawingComponent.useExtrapolation = true;
 
   BasePhysicsComponent physicsComponent = BasePhysicsComponent.get(this);
