@@ -28,14 +28,14 @@ public class StickmanWorld extends GameScene
   final AssetManager am = getPreparedAM();
   new Worker(actor->
   {
-   System.out.println("Worker is work!");
+   //System.out.println("Worker is work!");
    if (am.update())
    {
     //todo нет нормальной реализации для удаления актера?
     // а как узнать в каких системах есть актер?
     GameScene.actionSystem.remActor(actor);
     createWorld();
-   }else System.out.println("Loaded..." + am.getProgress() * 100+"%");
+   }else {} //System.out.println("Loaded..." + am.getProgress() * 100+"%");
   });
  }
 
