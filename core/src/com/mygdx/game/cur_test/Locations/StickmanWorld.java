@@ -56,6 +56,7 @@ public class StickmanWorld extends GameScene
           new Grass(0, 0),
           new Grass(17.78f, 0),
           new Castle(12,0),
+          new Platform(4.5f,6.22f),
           new Platform(4.5f,6.22f)
   );
   creaturesLayer.add(new Enemy(new Vector2(15+9*(float)Math.random(),0)));
