@@ -11,15 +11,15 @@ public class AnimationComponent extends Component<AnimationComponent>
 {
  public static class Data
  {
-  final int frequency;
+  final long frequency;
   public final Array<TextureAtlas.AtlasRegion>frames;
-  public Data(int frequency, TextureAtlas.AtlasRegion ... frames)
+  public Data(long frequency, TextureAtlas.AtlasRegion ... frames)
   {
    if (frames.length == 0)throw new IllegalArgumentException("Animation cannot be empty!");
    this.frequency = frequency;
    this.frames = new Array<>(frames);
   }
-  public boolean next(int currentFrequencyAccum)
+  public boolean next(long currentFrequencyAccum)
   {
    return currentFrequencyAccum >= frequency;
   }
@@ -27,16 +27,17 @@ public class AnimationComponent extends Component<AnimationComponent>
  private static final ComputeableHashMap<AnimationComponent> childList = new ComputeableHashMap<>();
  public final ObjectMap<Integer,Data> animStates = new ObjectMap<>();
 
- public int currentFrequencyAcum,currentState,currentIndexAnim;
+ public int currentState,currentIndexAnim;
+ public long currentFrequencyAcum;
 
  public AnimationComponent(Actor actor)
  {
   super(actor);
  }
- public AnimationComponent addAnimation(int state, int frequency, TextureAtlas.AtlasRegion...frames)
+ public AnimationComponent addAnimation(int state, long nanoTime, TextureAtlas.AtlasRegion...frames)
  {
   if (animStates.containsKey(state))throw new IllegalArgumentException("there is already such a state, something went wrong ...");
-  animStates.put(state, new Data(frequency, frames));
+  animStates.put(state, new Data(nanoTime, frames));
   return this;
  }
  public void setAnimation(int animationState)
