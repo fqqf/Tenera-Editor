@@ -1,8 +1,7 @@
 package com.mygdx.game.new_test.creatures;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.cur_test.Locations.StickmanWorld;
+
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;

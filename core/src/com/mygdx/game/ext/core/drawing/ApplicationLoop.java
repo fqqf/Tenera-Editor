@@ -3,9 +3,9 @@ package com.mygdx.game.ext.core.drawing;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.mygdx.game.cur_test.SpriteManager;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.scene.presets.GameScene;
+import com.mygdx.game.new_test.SpriteManager;
 
 /**
  * This class stands for separation game loop in 3 parts:

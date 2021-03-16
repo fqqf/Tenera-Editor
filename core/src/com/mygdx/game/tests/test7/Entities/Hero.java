@@ -1,8 +1,8 @@
-package com.mygdx.game.cur_test.Entities;
-
+package com.mygdx.game.tests.test7.Entities;
+/*
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.cur_test.Locations.StickmanWorld;
-import com.mygdx.game.cur_test.SpriteManager;
+import com.mygdx.game.tests.cur_test.Locations.StickmanWorld;
+import com.mygdx.game.tests.cur_test.SpriteManager;
 
 public class Hero extends MovingObject
 {
@@ -14,3 +14,4 @@ public class Hero extends MovingObject
   StickmanWorld.controlSystem.addActor(this);
  }
 }
+*/

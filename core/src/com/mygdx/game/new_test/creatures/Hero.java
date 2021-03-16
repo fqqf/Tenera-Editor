@@ -1,7 +1,5 @@
 package com.mygdx.game.new_test.creatures;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.components.presets.AnimationComponent;
 import com.mygdx.game.new_test.SpriteManager;
 import com.mygdx.game.new_test.Systems;

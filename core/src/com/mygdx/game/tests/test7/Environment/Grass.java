@@ -1,7 +1,7 @@
-package com.mygdx.game.cur_test.Environment;
-
+package com.mygdx.game.tests.test7.Environment;
+/*
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.cur_test.SpriteManager;
+import com.mygdx.game.tests.cur_test.SpriteManager;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 
@@ -16,3 +16,4 @@ public class Grass extends EnvironmentObject
   collisionComponent.box.setSize(collisionComponent.box.getWidth(), collisionComponent.box.getHeight()-0.5f);
  }
 }
+*/

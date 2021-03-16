@@ -2,11 +2,10 @@ package com.mygdx.game.new_test.environment;
 
 import com.mygdx.game.ext.core.components.presets.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
 import com.mygdx.game.new_test.SpriteManager;
 import com.mygdx.game.new_test.Systems;
 
-public class Wind extends Static
+public class Wind extends Intangible
 {
  public Wind(float x, float y)
  {
@@ -20,6 +19,7 @@ public class Wind extends Static
     SpriteManager.textures.get("wind3"));
 
   Systems.collisionManagmentSystem.remActor(this);
+  CollisionComponent.remActor(this);
   Systems.animationSystem.addActor(this);
  }
 }

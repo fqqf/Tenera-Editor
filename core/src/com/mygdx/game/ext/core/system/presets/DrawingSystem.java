@@ -14,6 +14,7 @@ import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
+import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
 import space.earlygrey.shapedrawer.ShapeDrawer;
@@ -36,14 +37,20 @@ public class DrawingSystem extends System
  protected Vector2 position, size, velocity;
  private DrawingComponent drawingComponent;
 
- public TreeMap<Integer, Group> layers = new TreeMap<>();
+ public TreeMap<Integer, Layer> layers = new TreeMap<>();
 
  public void handle()
  {
   // logger.info("Drawing System");
   batch.begin();
-  layers.forEach((key,layer) -> layer.forEach((this::calc)));
+  layers.forEach((key,layer) -> iterateLayer(layer));
   batch.end();
+ }
+
+ private void iterateLayer(Layer layer)
+ {
+  batch.setProjectionMatrix(layer.getCoordinateGrid().camera.combined);
+  layer.forEach(this::calc);
  }
 
  private void calc(Actor actor)
@@ -87,7 +94,7 @@ public class DrawingSystem extends System
   else batch.draw(texture, position.x, position.y, size.x, size.y);
 
   // drawActorBox();
-  drawCollisionBox();
+  if (CollisionComponent.contains(actor)) drawCollisionBox();
  }
  private void drawCollisionBox()
  {

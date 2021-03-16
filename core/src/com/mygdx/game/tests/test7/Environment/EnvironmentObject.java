@@ -1,7 +1,7 @@
-package com.mygdx.game.cur_test.Environment;
-
+package com.mygdx.game.tests.test7.Environment;
+/*
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.mygdx.game.cur_test.Locations.StickmanWorld;
+import com.mygdx.game.tests.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -28,3 +28,4 @@ public class EnvironmentObject extends Actor
   StickmanWorld.collisionManagmentSystem.addActor(this);
  }
 }
+*/

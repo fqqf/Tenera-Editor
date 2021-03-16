@@ -1,8 +1,8 @@
-package com.mygdx.game.cur_test.Entities;
-
+package com.mygdx.game.tests.test7.Entities;
+/*
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.cur_test.Locations.StickmanWorld;
+import com.mygdx.game.tests.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -30,3 +30,4 @@ public class MovingObject extends Actor
   StickmanWorld.physicsSystem.addActor(this);
  }
 }
+*/

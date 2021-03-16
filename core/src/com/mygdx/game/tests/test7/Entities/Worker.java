@@ -1,5 +1,5 @@
-package com.mygdx.game.cur_test.Entities;
-
+package com.mygdx.game.tests.test7.Entities;
+/*
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.actor.interfaces.Action;
 import com.mygdx.game.ext.core.components.presets.ActionComponent;
@@ -13,3 +13,4 @@ public class Worker extends Actor
 		GameScene.actionSystem.addActor(this);
 	}
 }
+*/

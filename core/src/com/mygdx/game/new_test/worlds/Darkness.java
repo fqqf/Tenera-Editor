@@ -4,17 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
+import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.Group;
+import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.new_test.Systems;
 import com.mygdx.game.new_test.creatures.Hero;
 import com.mygdx.game.new_test.environment.Ground;
+import com.mygdx.game.new_test.environment.InvisibilityButton;
 import com.mygdx.game.new_test.environment.Platform;
+import com.mygdx.game.new_test.environment.Vignette;
 
 public class Darkness extends Scene
 {
- Group drawLayer = new Group();
+ Layer drawLayer, effectsLayer, interfaceLayer;
 
  public Darkness(String name, ExtendCoordinateGrid field, float width, float height)
  {
@@ -26,21 +30,30 @@ public class Darkness extends Scene
     Systems.animationSystem
   );
 
+  drawLayer = new Layer(field);
+  CoordinateGrid notMovingGrid = new ExtendCoordinateGrid("effect-coordinate-grid",10);
+  effectsLayer = new Layer(notMovingGrid);
+  interfaceLayer = new Layer(notMovingGrid);
+
   drawLayer.add(
           new Hero(2,5),
           new Ground(0,0),
-          new Ground(38.22f,0)
-  //        new Npc(15,0)
-  );//new Wind(3,2));
+          new Ground(38.22f,0));
+
   Platform platform = new Platform(2,4);
-  drawLayer.add(
-   //       new Wind(3,2),
-  //        new Gem(7,5),
+
+  drawLayer.add( // TODO: A position, where we want bounding box to be
           platform,
-          new Platform(BasePhysicsComponent.get(platform).position.x + BasePhysicsComponent.get(platform).size.x - CollisionComponent.get(platform).box.x,4)
+          new Platform(BasePhysicsComponent.get(platform).position.x +
+            BasePhysicsComponent.get(platform).size.x - CollisionComponent.get(platform).box.x,4)
   );
 
+  effectsLayer.add(new Vignette(0,10-4.06f));
+  interfaceLayer.add(new InvisibilityButton(notMovingGrid.unitWidth-10f,notMovingGrid.unitHeight-9.5f));
+
   Systems.drawingSystem.layers.put(1, drawLayer);
+  Systems.drawingSystem.layers.put(2, effectsLayer);
+  Systems.drawingSystem.layers.put(3, interfaceLayer);
  }
 
  @Override

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
@@ -22,10 +23,10 @@ public abstract class Scene
  protected SpriteBatch batch;
  protected final ShapeRenderer liner;
 
- public ExtendCoordinateGrid field;
+ public CoordinateGrid field;
  protected float width, height;
 
- public Scene(String name, ExtendCoordinateGrid field, float width, float height)
+ public Scene(String name, CoordinateGrid field, float width, float height)
  {
   this.name = name; this.field = field;
   this.monitor = field.monitor; this.camera = field.camera;

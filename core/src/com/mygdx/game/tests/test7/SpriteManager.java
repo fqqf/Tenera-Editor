@@ -1,11 +1,6 @@
-package com.mygdx.game.cur_test;
+package com.mygdx.game.tests.test7;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-import java.util.HashMap;
-
+/*
 public class SpriteManager
 {
  private final static HashMap<String, Texture> textures0 = new HashMap<>();
@@ -35,3 +30,4 @@ public class SpriteManager
   textures0.clear();
  }
 }
+*/

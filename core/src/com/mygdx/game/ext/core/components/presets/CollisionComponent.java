@@ -26,4 +26,14 @@ public class CollisionComponent extends Component<CollisionComponent>
  {
   return childList.compute(actor, () -> new CollisionComponent(actor));
  }
+
+ public static boolean contains(Actor actor)
+ {
+  return childList.containsKey(actor);
+ }
+
+ public static void remActor(Actor actor)
+ {
+  childList.remove(actor);
+ }
 }

@@ -8,7 +8,7 @@ public class BoundingBox extends Rectangle
  private int type;
  public float halfWidth,halfHeight;
 
- public Vector2 offset = new Vector2(0,0);
+ public Vector2 offset = new Vector2(0,0); // TODO : OFFSET У ТЕКСТУРЫ
 
  public BoundingBox(int type)
  {
@@ -42,6 +42,8 @@ public class BoundingBox extends Rectangle
  {
   this.offset.x = x;
   this.offset.y = y;
+
+  setPosition(this.x,this.y);
  }
 
  public float getTop() { return y + height; }
@@ -106,6 +108,32 @@ public class BoundingBox extends Rectangle
  public Rectangle setPosition(float x, float y)
  {
   return super.setPosition(x+offset.x, y+offset.y);
+ }
+
+ // TODO: INCAPSULATE X AND Y
+
+ @Override
+ public Rectangle setX(float x)
+ {
+  return super.setX(x+offset.x);
+ }
+
+ @Override
+ public Rectangle setY(float y)
+ {
+  return super.setY(y+offset.y);
+ }
+
+ @Override
+ public float getX()
+ {
+  return super.getX();
+ }
+
+ @Override
+ public float getY()
+ {
+  return super.getY();
  }
 
  @Override

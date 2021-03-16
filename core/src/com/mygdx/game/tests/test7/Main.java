@@ -1,8 +1,8 @@
-package com.mygdx.game.cur_test;
-
+package com.mygdx.game.tests.test7;
+/*
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.cur_test.Locations.StickmanWorld;
+import com.mygdx.game.tests.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.ext.core.data.AssetLoadScene;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
@@ -55,3 +55,4 @@ public class Main extends ApplicationLoop
  @Override
  public void calcPhysics() { scene.iterPhys(); }
 }
+*/

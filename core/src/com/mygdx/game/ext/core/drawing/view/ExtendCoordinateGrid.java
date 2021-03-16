@@ -16,25 +16,12 @@ import com.mygdx.game.ext.additional.CameraController;
 
 public class ExtendCoordinateGrid extends CoordinateGrid
 {
- private String name;
-
- public Monitor monitor;
-
- public ExtendViewport viewport;
- public OrthographicCamera camera;
-
  public CameraController cameraController;
 
- public SpriteBatch batch;
- public ShapeRenderer liner;
-
- public float
-   unitWidth, unitHeight,
-   notIntegerUnitWidth; // TODO: Find better name {unitWidth = Math.ceil(notIntegerUnitWidth)}
 
  public ExtendCoordinateGrid(String name, float unitHeight) // TODO: move main functionality to CoordinateGrid
  {
-  this.name = name;
+  super(name);
   this.unitHeight = unitHeight;
   this.monitor = Monitor.instance;
   
@@ -42,13 +29,12 @@ public class ExtendCoordinateGrid extends CoordinateGrid
 
   viewport = new ExtendViewport(notIntegerUnitWidth, unitHeight);
   camera = (OrthographicCamera) viewport.getCamera();
-  batch = monitor.getBatch();
-  liner = monitor.getLiner();
+
   cameraController = new CameraController(viewport);
 
   monitor.addField(this);
 
-  Monitor.log.info("Coordinate grid \""+name+"\" was created ["+unitWidth+":"+unitHeight+"]");
+  //Monitor.log.info("Coordinate grid \""+name+"\" was created ["+unitWidth+":"+unitHeight+"]");
  }
 
  private void calcFieldWidth()

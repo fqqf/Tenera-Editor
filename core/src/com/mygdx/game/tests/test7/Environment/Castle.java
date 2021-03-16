@@ -1,6 +1,6 @@
-package com.mygdx.game.cur_test.Environment;
-
-import com.mygdx.game.cur_test.SpriteManager;
+package com.mygdx.game.tests.test7.Environment;
+/*
+import com.mygdx.game.tests.cur_test.SpriteManager;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 
@@ -16,3 +16,4 @@ public class Castle extends EnvironmentObject
   collisionComponent.box.setSize(collisionComponent.box.getWidth()-1.7f, collisionComponent.box.getHeight()-0.8f);
  }
 }
+*/

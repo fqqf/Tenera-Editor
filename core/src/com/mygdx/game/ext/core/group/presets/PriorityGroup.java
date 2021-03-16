@@ -1,4 +1,4 @@
-package com.mygdx.game.ext.core.group;
+package com.mygdx.game.ext.core.group.presets;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Tree;

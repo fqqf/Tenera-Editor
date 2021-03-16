@@ -1,16 +1,17 @@
-package com.mygdx.game.cur_test.Locations;
+package com.mygdx.game.tests.test7.Locations;
 
+/*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.cur_test.Entities.Enemy;
-import com.mygdx.game.cur_test.Entities.Hero;
-import com.mygdx.game.cur_test.Entities.Worker;
-import com.mygdx.game.cur_test.Environment.Castle;
-import com.mygdx.game.cur_test.Environment.Grass;
-import com.mygdx.game.cur_test.Environment.Platform;
+import com.mygdx.game.tests.cur_test.Entities.Enemy;
+import com.mygdx.game.tests.cur_test.Entities.Hero;
+import com.mygdx.game.tests.cur_test.Entities.Worker;
+import com.mygdx.game.tests.cur_test.Environment.Castle;
+import com.mygdx.game.tests.cur_test.Environment.Grass;
+import com.mygdx.game.tests.cur_test.Environment.Platform;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.scene.presets.GameScene;
@@ -81,3 +82,4 @@ public class StickmanWorld extends GameScene
  }
 }
 
+*/

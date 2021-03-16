@@ -16,7 +16,7 @@ public class Monitor
 {
  public static Monitor instance;
 
- Array<ExtendCoordinateGrid> fields;
+ Array<CoordinateGrid> fields;
 
  public static final Logger log = new Logger("CORE", Logger.INFO);
 
@@ -47,16 +47,16 @@ public class Monitor
   this.pixelWidth = width;
   this.pixelHeight = height;
 
-  for (ExtendCoordinateGrid field : fields) field.update();
+  for (CoordinateGrid field : fields) field.update();
  }
 
  /* Being called automatically, when field is created */
- public void addField(ExtendCoordinateGrid field)
+ public void addField(CoordinateGrid field)
  {
   fields.add(field);
  }
 
- public void setField(ExtendCoordinateGrid field)
+ public void setField(CoordinateGrid field)
  {
   batch.setProjectionMatrix(field.camera.combined);
   liner.setProjectionMatrix(field.camera.combined);
