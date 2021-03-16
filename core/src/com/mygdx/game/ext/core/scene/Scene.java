@@ -114,9 +114,7 @@ public abstract class Scene
 
   liner.setProjectionMatrix(camera.combined);
   batch.setProjectionMatrix(camera.combined);
-
   liner.begin(ShapeRenderer.ShapeType.Line);
-
   liner.setColor(Color.GRAY);
   for (int i = 0; i < width; i++) liner.line(i, 0, i, height);
   for (int i = 0; i < height; i++) liner.line(0, i, width, i);

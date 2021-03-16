@@ -19,7 +19,6 @@ public class CollisionManagmentSystem extends System
  }
 
  private BoundingBox boxA, boxB;
-
  public void handle()
  {
   // logger.info("Collision System");
@@ -30,7 +29,6 @@ public class CollisionManagmentSystem extends System
    Actor actorA = assignedActors.get(i);
    boxA = getSynchronizedBox(actorA,extr);
    if (boxA.getType()!=CollisionType.BODY) continue;
-
    for (Actor actorB : assignedActors)
    {
     if (actorA == actorB) continue;
@@ -42,6 +40,7 @@ public class CollisionManagmentSystem extends System
      BasePhysicsComponent.get(actorB).color = Color.RED;
     }
    }
+
   }
  }
 
@@ -68,7 +67,6 @@ public class CollisionManagmentSystem extends System
   if (boxA.getType() != CollisionType.BODY) return;
   // logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
   // logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());
-
   switch (boxB.getType())
   {
    case CollisionType.PLATFORM:
@@ -94,7 +92,7 @@ public class CollisionManagmentSystem extends System
  {
   // logger.info("handleBodySolid");
 
-  // DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
+  DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
   boxA.getCenter(centerA);
   boxB.getCenter(centerB);
 
@@ -109,22 +107,22 @@ public class CollisionManagmentSystem extends System
   if (absX > absY)
   {
    float signum = Math.signum(deltaCenterY);
-   physics.position.y += absY * signum * ApplicationLoop.instance.extrapolation;
-   // physics.position.y = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
-   //boxA.y = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
-   //if (signum != Math.signum(physics.velocity.y))physics.velocity.y = 0;
-   // drawingComponent.extrapolationY = false;
-   // drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
+   // physics.position.y += absY * signum;
+   physics.position.y = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
+   boxA.y = physics.position.y;
+   if (signum != Math.signum(physics.velocity.y)) physics.velocity.y = 0;
+   drawingComponent.extrapolationY = false;
+   drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
   }
   else
   {
-   float signum = Math.signum(deltaCenterX);
-   physics.position.x += absX * signum * ApplicationLoop.instance.extrapolation;
-   // physics.position.x = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
-   //boxA.x = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
-   //if (signum != Math.signum(physics.velocity.x))physics.velocity.x = 0;
-   // drawingComponent.extrapolationX = false;
-   // drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
+    float signum = Math.signum(deltaCenterX);
+    // physics.position.x += absX * signum;
+    physics.position.x = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
+    boxA.x = physics.position.x;
+    if (signum != Math.signum(physics.velocity.x)) physics.velocity.x = 0;
+    drawingComponent.extrapolationX = false;
+    drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
   }
  }
 
