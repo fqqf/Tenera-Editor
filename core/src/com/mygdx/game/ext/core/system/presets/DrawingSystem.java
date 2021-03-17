@@ -105,7 +105,7 @@ public class DrawingSystem extends System
 
 
   // drawActorBox();
-  drawCollisionBox();
+  // drawCollisionBox();
  }
  private void drawCollisionBox()
  {

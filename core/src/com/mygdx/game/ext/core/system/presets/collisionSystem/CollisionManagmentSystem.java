@@ -1,18 +1,41 @@
 package com.mygdx.game.ext.core.system.presets.collisionSystem;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.dongbat.jbump.*;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
+import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.system.System;
+import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class CollisionManagmentSystem extends System
 {
+ private final World<Actor> world = new World<>();
+ private ShapeDrawer shapeDrawer = new ShapeDrawer(Monitor.instance.getBatch(), new TextureRegion(new Texture(Gdx.files.internal("white.jpg"))));
+ @Override
+ public void addActor(Actor... actors)
+ {
+  super.addActor(actors);
+  for (Actor actor1 : actors)
+  {
+   BasePhysicsComponent ph = BasePhysicsComponent.get(actor1);
+   Item<Actor> item = CollisionComponent.get(actor1).item;
+   float x = ph.position.x + CollisionComponent.get(actor1).box.offset.x;
+   float y = ph.position.y + CollisionComponent.get(actor1).box.offset.y;
+   float width = CollisionComponent.get(actor1).box.width;
+   float height = CollisionComponent.get(actor1).box.height;
+   world.add(item, x, y, width,height);
+  }
+ }
 
  public CollisionManagmentSystem()
  {
@@ -26,18 +49,38 @@ public class CollisionManagmentSystem extends System
  private BoundingBox boxA, boxB;
  public void handle()
  {
+  for (Item item : world.getItems())
+  {
+   shapeDrawer.setColor(Color.BLUE);
+   shapeDrawer.setDefaultLineWidth(0.01f);
+   Rect rect = world.getRect(item);
+   Monitor.instance.getBatch().begin();
+   shapeDrawer.rectangle(rect.x, rect.y, rect.w, rect.h);
+   Monitor.instance.getBatch().end();
+  }
   // logger.info("Collision System");
   float extr = ApplicationLoop.instance.extrapolation;
 
   for (int i = 0; i < assignedActors.size; i++)
   {
+
    Actor actorA = assignedActors.get(i);
    boxA = getSynchronizedBox(actorA,extr);
    if (boxA.getType()!=CollisionType.BODY) continue;
+
+   Item<Actor> item = CollisionComponent.get(actorA).item;
+   physics = BasePhysicsComponent.get(actor);
+   Response.Result r = world.move(item, physics.position.x, physics.position.y, CollisionFilter.defaultFilter );
+   java.lang.System.out.println("connect " +r.projectedCollisions.size());
+   physics.position.set(r.goalX,r.goalY);
+
+
+  if (true)continue;
    collisions.clear();
    for (Actor actorB : assignedActors)
    {
     if (actorA == actorB) continue;
+
     boxB = getSynchronizedBox(actorB,extr);
     if (boxA.overlaps(boxB))
     {

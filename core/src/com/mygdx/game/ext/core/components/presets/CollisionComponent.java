@@ -1,6 +1,7 @@
 package com.mygdx.game.ext.core.components.presets;
 
 import com.badlogic.gdx.math.Vector2;
+import com.dongbat.jbump.Item;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.ext.core.actor.Actor;
@@ -12,10 +13,12 @@ public class CollisionComponent extends Component<CollisionComponent>
  private static final ComputeableHashMap<CollisionComponent> childList = new ComputeableHashMap<>();
 
  public BoundingBox box;
+ public final Item<Actor> item;
 
  public CollisionComponent(Actor actor)
  {
   super(actor);
+  item = new Item<>(actor);
 
   BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
 
