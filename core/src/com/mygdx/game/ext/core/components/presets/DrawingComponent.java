@@ -2,6 +2,7 @@ package com.mygdx.game.ext.core.components.presets;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
@@ -13,10 +14,11 @@ public class DrawingComponent extends Component<DrawingComponent>
  static
  {
   Texture texture = new Texture("box.png");
-  nullAtlasRegion = new TextureAtlas.AtlasRegion( texture,0,0, texture.getWidth(), texture.getHeight());
+  nullAtlasRegion = new TextureAtlas.AtlasRegion( texture,0,0, 0, 0);
  }
 
  public TextureAtlas.AtlasRegion atlasRegion;
+ public final Array<AnimationComponent.Data> animations = new Array<>(5);
  public boolean useExtrapolation = false;
  public boolean extrapolationX = true;
  public boolean extrapolationY = true;

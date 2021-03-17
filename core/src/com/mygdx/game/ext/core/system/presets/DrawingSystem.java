@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.components.presets.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
@@ -37,10 +38,11 @@ public class DrawingSystem extends System
  private DrawingComponent drawingComponent;
 
  public TreeMap<Integer, Group> layers = new TreeMap<>();
-
+ private float deltaAccum;
  public void handle()
  {
   // logger.info("Drawing System");
+  deltaAccum += Gdx.graphics.getDeltaTime();
   batch.begin();
   layers.forEach((key,layer) -> layer.forEach((this::calc)));
   batch.end();
@@ -67,7 +69,7 @@ public class DrawingSystem extends System
  {
   if (drawingComponent.useExtrapolation)
   {
-   final float extr = ApplicationLoop.instance.extrapolation;
+   float extr = ApplicationLoop.instance.extrapolation;
    float valueX,valueY;
    if (drawingComponent.extrapolationX) valueX = velocity.x*extr;
    else
@@ -81,10 +83,26 @@ public class DrawingSystem extends System
     valueY = 0;
     if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
    }
+   float x = position.x + valueX;float y = position.y + valueY;
+   batch.draw(texture, x, y, size.x, size.y);
 
-   batch.draw(texture, position.x + valueX, position.y + valueY, size.x, size.y);
+   for (int i = 0; i < drawingComponent.animations.size; i++)
+   {
+    AnimationComponent.Data data = drawingComponent.animations.get(i);
+    batch.draw(data.getKeyFrame(deltaAccum), x + data.offsetX, y + data.offsetY, data.width, data.height);
+   }
   }
-  else batch.draw(texture, position.x, position.y, size.x, size.y);
+  else
+   {
+    batch.draw(texture, position.x, position.y, size.x, size.y);
+    for (int i = 0; i < drawingComponent.animations.size; i++)
+    {
+     AnimationComponent.Data data = drawingComponent.animations.get(i);
+     batch.draw( data.getKeyFrame(deltaAccum), position.x + data.offsetX, position.y + data.offsetY, data.width, data.height);
+    }
+   }
+
+
 
   // drawActorBox();
   drawCollisionBox();

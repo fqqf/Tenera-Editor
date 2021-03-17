@@ -1,5 +1,6 @@
 package com.mygdx.game.new_test.creatures;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.components.presets.AnimationComponent;
@@ -14,11 +15,14 @@ public class Hero extends Moveable
 
   AnimationComponent animationComponent = AnimationComponent.get(this);
 
-  animationComponent.addAnimation(0,60_000_000,
-    SpriteManager.textures.get("hero1"),
-    SpriteManager.textures.get("hero2"),
-    SpriteManager.textures.get("hero3")
-  );
+  animationComponent
+          .addAnimation(AnimationComponent.STATE_IDLE,
+                  new AnimationComponent.Data(2.10f,5.20f,0.2f, Animation.PlayMode.LOOP,
+                          SpriteManager.textures.get("hero1"),
+                          SpriteManager.textures.get("hero2"),
+                          SpriteManager.textures.get("hero3")
+                  ))
+          .setAnimation(AnimationComponent.STATE_IDLE);
 
   Systems.animationSystem.addActor(this);
   Systems.controlSystem.addActor(this);
