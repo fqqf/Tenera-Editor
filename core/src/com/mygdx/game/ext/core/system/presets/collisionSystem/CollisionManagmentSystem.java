@@ -91,23 +91,20 @@ public class CollisionManagmentSystem extends System
   }
  }
 
- private final Vector2 centerA = new Vector2(), centerB = new Vector2();// , vector2 = new Vector2();
+ private final Vector2 centerA = new Vector2(), centerB = new Vector2(), out = new Vector2(), result = new Vector2();
 
  private void handleBodySolid(Actor actorBody, Array<Actor> actors)
  {
-  Vector2 out = new Vector2();
-  Vector2 result = new Vector2();
-
   Vector2 velocity = BasePhysicsComponent.get(actorBody).velocity;
+  result.setZero();
   for (int i = 0; i < actors.size; i++)
   {
    getVectorOut( boxA, getBox(actors.get(i)), out);
-   if (Math.signum(velocity.x) > 0 && result.x < out.x) result.x = out.x;
-   else if (Math.signum(velocity.x) < 0 && result.x > out.x) result.x = out.x;
-   if (Math.signum(velocity.y) > 0 && result.y < out.y) result.y = out.y;
-   else if (Math.signum(velocity.y) < 0 && result.y > out.y) result.y = out.y;
+   if (Math.signum(velocity.x) < 0 && result.x < out.x) result.x = out.x;
+   else if (Math.signum(velocity.x) > 0 && result.x > out.x) result.x = out.x;
+   if (Math.signum(velocity.y) < 0 && result.y < out.y) result.y = out.y;
+   else if (Math.signum(velocity.y) > 0 && result.y > out.y) result.y = out.y;
   }
-
   BasePhysicsComponent.get(actorBody).position.add(result);
   getBox(actorBody).setPosition(BasePhysicsComponent.get(actorBody).position);
  }
@@ -122,8 +119,8 @@ public class CollisionManagmentSystem extends System
   float x = ((boxB.halfWidth + boxA.halfWidth) - Math.abs(deltaCenterX));
   float absX = Math.abs(x);
   float absY = Math.abs(y);
-  if (absX > absY) vector2.y = absY * Math.signum(deltaCenterY);
-  else vector2.x = absX * Math.signum(deltaCenterX);
+  if (absX > absY) out.y = absY * Math.signum(deltaCenterY);
+  else out.x = absX * Math.signum(deltaCenterX);
  }
 
  private void handleBodySolid(Actor actorBody)
