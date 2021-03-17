@@ -3,6 +3,7 @@ package com.mygdx.game.ext.core.system.presets.collisionSystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -19,6 +20,9 @@ public class CollisionManagmentSystem extends System
   priority = 99;
  }
 
+ private final Vector2 vector2 = new Vector2();
+ private final Array<Actor> collisions = new Array<>(5);
+
  private BoundingBox boxA, boxB;
  public void handle()
  {
@@ -30,7 +34,7 @@ public class CollisionManagmentSystem extends System
    Actor actorA = assignedActors.get(i);
    boxA = getSynchronizedBox(actorA,extr);
    if (boxA.getType()!=CollisionType.BODY) continue;
-
+   collisions.clear();
    for (Actor actorB : assignedActors)
    {
     if (actorA == actorB) continue;
@@ -42,6 +46,7 @@ public class CollisionManagmentSystem extends System
      BasePhysicsComponent.get(actorB).color = Color.RED;
     }
    }
+   if (!collisions.isEmpty()) handleBodySolid(actorA, collisions);
   }
  }
 
@@ -66,8 +71,6 @@ public class CollisionManagmentSystem extends System
  private void handleCollision(Actor actorA, Actor actorB)
  {
   if (boxA.getType() != CollisionType.BODY) return;
-  // logger.info("ACTOR A (BODY) "+boxA.getSize(new Vector2()).toString());
-  // logger.info("ACTOR B (SOLID) "+boxB.getSize(new Vector2()).toString());
   switch (boxB.getType())
   {
    case CollisionType.PLATFORM:
@@ -75,11 +78,12 @@ public class CollisionManagmentSystem extends System
     float topPlatform = boxB.getTop();
     if (boxA.y - speedY < topPlatform)
     {
-     if (boxA.y - speedY * ApplicationLoop.instance.extrapolation > topPlatform) handleBodySolid(actorA);
+     if (boxA.y - speedY > topPlatform) collisions.add(actorB);// handleBodySolid(actorA);
      break;
     }
     case CollisionType.SOLID:
-    handleBodySolid(actorA);
+    collisions.add(actorB);
+    // handleBodySolid(actorA);
     break;
    case CollisionType.LIQUID:
     handleBodyLiquid(actorA, actorB);
@@ -88,6 +92,37 @@ public class CollisionManagmentSystem extends System
  }
 
  private final Vector2 centerA = new Vector2(), centerB = new Vector2();// , vector2 = new Vector2();
+
+ private void handleBodySolid(Actor actorBody, Array<Actor> actors)
+ {
+  Vector2 out = new Vector2();
+  Vector2 result = new Vector2();
+  Vector2 velocity = BasePhysicsComponent.get(actorBody).velocity;
+  for (int i = 0; i < actors.size; i++)
+  {
+   getVectorOut( boxA, getBox(actors.get(i)), out);
+   if (Math.signum(velocity.x) > 0 && result.x < out.x) result.x = out.x;
+   else if (Math.signum(velocity.x) < 0 && result.x > out.x) result.x = out.x;
+   if (Math.signum(velocity.y) > 0 && result.y < out.y) result.y = out.y;
+   else if (Math.signum(velocity.y) < 0 && result.y > out.y) result.y = out.y;
+  }
+  BasePhysicsComponent.get(actorBody).position.add(result);
+  getBox(actorBody).setPosition(BasePhysicsComponent.get(actorBody).position);
+ }
+ private void getVectorOut(final BoundingBox boxA, final BoundingBox boxB, final Vector2 out)
+ {
+  out.setZero();
+  boxA.getCenter(centerA);
+  boxB.getCenter(centerB);
+  float deltaCenterX = centerA.x - centerB.x;
+  float deltaCenterY = centerA.y - centerB.y;
+  float y = ((boxB.halfHeight + boxA.halfHeight) - Math.abs(deltaCenterY));
+  float x = ((boxB.halfWidth + boxA.halfWidth) - Math.abs(deltaCenterX));
+  float absX = Math.abs(x);
+  float absY = Math.abs(y);
+  if (absX > absY) vector2.y = absY * Math.signum(deltaCenterY);
+  else vector2.x = absX * Math.signum(deltaCenterX);
+ }
 
  private void handleBodySolid(Actor actorBody)
  {
@@ -109,10 +144,12 @@ public class CollisionManagmentSystem extends System
   {
    float signum = Math.signum(deltaCenterY);
 
-   // physics.position.y += absY * signum;
+   if (Math.abs(vector2.y) < absY)
+    vector2.y = absY * signum;
+   //physics.position.y += absY * signum;
+   //physics.position.y = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
 
-   physics.position.y = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
-   boxA.setPosition( physics.position );
+   //boxA.setPosition( physics.position );
 
    //float positionY = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
    //if (vector2.y < positionY) vector2.y = positionY;
@@ -126,12 +163,13 @@ public class CollisionManagmentSystem extends System
   }
   else
   {
-    float signum = Math.signum(deltaCenterX);
-    // vector2.x += absX * signum;
+   float signum = Math.signum(deltaCenterX);
+   if (Math.abs(vector2.x) < absY)vector2.x = absX * signum;
+
     //physics.position.x += absX * signum;
 
-   physics.position.x = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
-   boxA.setPosition( physics.position );
+   //physics.position.x = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
+   //boxA.setPosition( physics.position );
 
    // vector2.x += signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
    // float positionX = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;

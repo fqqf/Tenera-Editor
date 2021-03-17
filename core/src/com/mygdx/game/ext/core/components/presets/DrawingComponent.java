@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
+import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 
 public class DrawingComponent extends Component<DrawingComponent>
 {
@@ -19,7 +20,7 @@ public class DrawingComponent extends Component<DrawingComponent>
 
  public TextureAtlas.AtlasRegion atlasRegion;
  public boolean showStatic = true;
- public final Array<AnimationComponent.Data> animations = new Array<>(5);
+ public final Array<AnimationData> animations = new Array<>(5);
  public boolean useExtrapolation = false;
  public boolean extrapolationX = true;
  public boolean extrapolationY = true;

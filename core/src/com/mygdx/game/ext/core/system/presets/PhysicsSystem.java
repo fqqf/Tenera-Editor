@@ -42,7 +42,7 @@ public class PhysicsSystem extends System
   if (Math.abs(velocity.y) > 1) velocity.y = Math.signum(velocity.y) * 1;
 
   position.add(velocity);
-  java.lang.System.out.println("Speed x="+velocity.x + ",y="+velocity.y);
+  // java.lang.System.out.println("Speed x="+velocity.x + ",y="+velocity.y);
   // velocity.setZero();
  }
 }

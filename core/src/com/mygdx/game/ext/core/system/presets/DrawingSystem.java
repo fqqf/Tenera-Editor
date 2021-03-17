@@ -8,10 +8,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.components.presets.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
@@ -88,8 +88,8 @@ public class DrawingSystem extends System
    if (drawingComponent.showStatic) batch.draw(texture, x, y, size.x, size.y);
    for (int i = 0; i < drawingComponent.animations.size; i++)
    {
-    AnimationComponent.Data data = drawingComponent.animations.get(i);
-    batch.draw(data.getKeyFrame(deltaAccum), x + data.offsetX, y + data.offsetY, data.width, data.height);
+    AnimationData animationData = drawingComponent.animations.get(i);
+    batch.draw(animationData.getKeyFrame(deltaAccum), x + animationData.offsetX, y + animationData.offsetY, animationData.width, animationData.height);
    }
   }
   else
@@ -97,8 +97,8 @@ public class DrawingSystem extends System
     if (drawingComponent.showStatic) batch.draw(texture, position.x, position.y, size.x, size.y);
     for (int i = 0; i < drawingComponent.animations.size; i++)
     {
-     AnimationComponent.Data data = drawingComponent.animations.get(i);
-     batch.draw( data.getKeyFrame(deltaAccum), position.x + data.offsetX, position.y + data.offsetY, data.width, data.height);
+     AnimationData animationData = drawingComponent.animations.get(i);
+     batch.draw( animationData.getKeyFrame(deltaAccum), position.x + animationData.offsetX, position.y + animationData.offsetY, animationData.width, animationData.height);
     }
    }
 

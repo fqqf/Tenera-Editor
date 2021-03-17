@@ -1,6 +1,6 @@
 package com.mygdx.game.ext.core.system.presets;
 
-import com.mygdx.game.ext.core.components.presets.AnimationComponent;
+import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.system.System;
 
@@ -22,12 +22,9 @@ public class AnimationSystem extends System
  }
  protected void behave()
  {
-  if (animationComponent.currentState != animationComponent.newState)
+  if (drawingComponent.animations.size == 0)
   {
-   animationComponent.currentState = animationComponent.newState;
-   drawingComponent.animations.clear();
-   drawingComponent.animations.addAll(animationComponent.animStates.get(animationComponent.currentState));
-   drawingComponent.showStatic = animationComponent.animStatesShowStatic.get(animationComponent.currentState);
+   drawingComponent.animations.addAll(animationComponent.animations);
   }
  }
 }
