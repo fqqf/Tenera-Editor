@@ -25,6 +25,7 @@ public class AnimationSystem extends System
   if (drawingComponent.animations.size == 0)
   {
    drawingComponent.animations.addAll(animationComponent.animations);
+   drawingComponent.showStatic = animationComponent.userStatic;
   }
  }
 }

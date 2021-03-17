@@ -25,6 +25,7 @@ public class AnimationComponent extends Component<AnimationComponent>
 // }
  private static final ComputeableHashMap<AnimationComponent> childList = new ComputeableHashMap<>();
  public final Array<AnimationData> animations = new Array<>();
+ public boolean userStatic = true;
 
  public AnimationComponent(Actor actor)
  {
@@ -35,7 +36,6 @@ public class AnimationComponent extends Component<AnimationComponent>
   this.animations.addAll(animations);
   return this;
  }
-
 
  public static AnimationComponent get(Actor actor)
  {

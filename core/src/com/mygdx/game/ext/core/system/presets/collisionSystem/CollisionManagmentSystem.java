@@ -97,6 +97,7 @@ public class CollisionManagmentSystem extends System
  {
   Vector2 out = new Vector2();
   Vector2 result = new Vector2();
+
   Vector2 velocity = BasePhysicsComponent.get(actorBody).velocity;
   for (int i = 0; i < actors.size; i++)
   {
@@ -106,6 +107,7 @@ public class CollisionManagmentSystem extends System
    if (Math.signum(velocity.y) > 0 && result.y < out.y) result.y = out.y;
    else if (Math.signum(velocity.y) < 0 && result.y > out.y) result.y = out.y;
   }
+
   BasePhysicsComponent.get(actorBody).position.add(result);
   getBox(actorBody).setPosition(BasePhysicsComponent.get(actorBody).position);
  }

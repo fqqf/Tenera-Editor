@@ -6,14 +6,12 @@ import com.badlogic.gdx.utils.Array;
 
 public class AnimationData extends Animation<TextureAtlas.AtlasRegion>
 {
- public boolean showStatic = true;
  public float offsetX,offsetY;
  public float width,height;
- public AnimationData(boolean showStatic, float width, float height, float frameDuration, PlayMode playMode, TextureAtlas.AtlasRegion... keyFrames)
+ public AnimationData(float width, float height, float frameDuration, PlayMode playMode, TextureAtlas.AtlasRegion... keyFrames)
  {
   super(frameDuration, new Array<>(keyFrames), playMode);
   setSize(width, height);
-  this.showStatic = showStatic;
  }
  public AnimationData setOffset(float offsetX, float offsetY)
  {

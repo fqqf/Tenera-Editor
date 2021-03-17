@@ -13,9 +13,9 @@ public class Hero extends Moveable
   super(x, y, 2.10f, 5.20f, SpriteManager.textures.get("hero1"));
 
   AnimationComponent animationComponent = AnimationComponent.get(this);
-
+  animationComponent.userStatic = false;
   animationComponent
-          .addAnimation(new AnimationData(false,2.10f,5.20f,0.2f, Animation.PlayMode.LOOP,
+          .addAnimation(new AnimationData(2.10f,5.20f,0.2f, Animation.PlayMode.LOOP,
                           SpriteManager.textures.get("hero1"),
                           SpriteManager.textures.get("hero2"),
                           SpriteManager.textures.get("hero3")
