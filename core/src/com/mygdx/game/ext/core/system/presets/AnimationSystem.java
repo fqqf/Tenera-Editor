@@ -27,6 +27,7 @@ public class AnimationSystem extends System
    animationComponent.currentState = animationComponent.newState;
    drawingComponent.animations.clear();
    drawingComponent.animations.addAll(animationComponent.animStates.get(animationComponent.currentState));
+   drawingComponent.showStatic = animationComponent.animStatesShowStatic.get(animationComponent.currentState);
   }
  }
 }

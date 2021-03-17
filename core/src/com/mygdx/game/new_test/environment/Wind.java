@@ -16,7 +16,7 @@ public class Wind extends Static
   AnimationComponent animationComponent = AnimationComponent.get(this);
 
   animationComponent
-          .addAnimation(AnimationComponent.STATE_IDLE,
+          .addAnimation(AnimationComponent.STATE_IDLE, false,
                   new AnimationComponent.Data(20.63f*1.2f,9.86f*1.2f, 0.3f, Animation.PlayMode.LOOP,
                           SpriteManager.textures.get("wind1"),
                           SpriteManager.textures.get("wind2"),

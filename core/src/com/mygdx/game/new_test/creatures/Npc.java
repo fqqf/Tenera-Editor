@@ -15,7 +15,7 @@ public class Npc extends Moveable
   AnimationComponent animationComponent = AnimationComponent.get(this);
 
   animationComponent
-          .addAnimation(AnimationComponent.STATE_IDLE,
+          .addAnimation(AnimationComponent.STATE_IDLE, false,
                   new AnimationComponent.Data(4.22f,7.22f,0.2f, Animation.PlayMode.LOOP,
                           SpriteManager.textures.get("npc1"),
                           SpriteManager.textures.get("npc2"),

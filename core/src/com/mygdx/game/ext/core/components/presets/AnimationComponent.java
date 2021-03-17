@@ -2,7 +2,6 @@ package com.mygdx.game.ext.core.components.presets;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.mygdx.game.ext.core.actor.Actor;
@@ -51,6 +50,7 @@ public class AnimationComponent extends Component<AnimationComponent>
 // }
  private static final ComputeableHashMap<AnimationComponent> childList = new ComputeableHashMap<>();
  public final ObjectMap<Integer,Array<Data>> animStates = new ObjectMap<>();
+ public final ObjectMap<Integer,Boolean> animStatesShowStatic = new ObjectMap<>();
 
  public int currentState = -1,newState = -1;
 
@@ -58,10 +58,11 @@ public class AnimationComponent extends Component<AnimationComponent>
  {
   super(actor);
  }
- public AnimationComponent addAnimation(int state, Data... animations)
+ public AnimationComponent addAnimation(int state, boolean showStatcTexture, Data... animations)
  {
   if (animStates.containsKey(state))throw new IllegalArgumentException("there is already such a state, something went wrong ...");
   animStates.put(state, new Array<>(animations) );
+  animStatesShowStatic.put(state,showStatcTexture);
   return this;
  }
  public void setAnimation(int animationState)

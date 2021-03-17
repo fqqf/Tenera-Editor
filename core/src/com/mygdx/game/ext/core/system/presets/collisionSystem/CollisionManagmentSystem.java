@@ -121,8 +121,8 @@ public class CollisionManagmentSystem extends System
 
    // if (signum != Math.signum(physics.velocity.y)) physics.velocity.y = 0;
 
-   drawingComponent.extrapolationY = false;
-   drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
+   //drawingComponent.extrapolationY = false;
+   //drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
   }
   else
   {
@@ -139,8 +139,8 @@ public class CollisionManagmentSystem extends System
 
    // if (signum != Math.signum(physics.velocity.x)) physics.velocity.x = 0;
 
-    drawingComponent.extrapolationX = false;
-    drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
+    //drawingComponent.extrapolationX = false;
+    //drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
   }
  }
 

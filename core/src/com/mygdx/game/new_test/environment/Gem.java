@@ -14,7 +14,7 @@ public class Gem extends Static
   AnimationComponent animationComponent = AnimationComponent.get(this);
 
   animationComponent
-          .addAnimation(AnimationComponent.STATE_IDLE,
+          .addAnimation(AnimationComponent.STATE_IDLE, false,
                   new AnimationComponent.Data(2.17f,4.06f,0.5f, Animation.PlayMode.LOOP,
                           SpriteManager.textures.get("gem1"),
                           SpriteManager.textures.get("gem2"),

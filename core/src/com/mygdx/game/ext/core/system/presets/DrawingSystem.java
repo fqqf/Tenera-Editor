@@ -84,8 +84,8 @@ public class DrawingSystem extends System
     if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
    }
    float x = position.x + valueX;float y = position.y + valueY;
-   batch.draw(texture, x, y, size.x, size.y);
 
+   if (drawingComponent.showStatic) batch.draw(texture, x, y, size.x, size.y);
    for (int i = 0; i < drawingComponent.animations.size; i++)
    {
     AnimationComponent.Data data = drawingComponent.animations.get(i);
@@ -94,7 +94,7 @@ public class DrawingSystem extends System
   }
   else
    {
-    batch.draw(texture, position.x, position.y, size.x, size.y);
+    if (drawingComponent.showStatic) batch.draw(texture, position.x, position.y, size.x, size.y);
     for (int i = 0; i < drawingComponent.animations.size; i++)
     {
      AnimationComponent.Data data = drawingComponent.animations.get(i);

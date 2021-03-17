@@ -18,6 +18,7 @@ public class DrawingComponent extends Component<DrawingComponent>
  }
 
  public TextureAtlas.AtlasRegion atlasRegion;
+ public boolean showStatic = true;
  public final Array<AnimationComponent.Data> animations = new Array<>(5);
  public boolean useExtrapolation = false;
  public boolean extrapolationX = true;

@@ -16,7 +16,7 @@ public class Hero extends Moveable
   AnimationComponent animationComponent = AnimationComponent.get(this);
 
   animationComponent
-          .addAnimation(AnimationComponent.STATE_IDLE,
+          .addAnimation(AnimationComponent.STATE_IDLE, false,
                   new AnimationComponent.Data(2.10f,5.20f,0.2f, Animation.PlayMode.LOOP,
                           SpriteManager.textures.get("hero1"),
                           SpriteManager.textures.get("hero2"),

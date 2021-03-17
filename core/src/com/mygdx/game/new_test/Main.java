@@ -14,7 +14,7 @@ public class Main extends ApplicationLoop
  {
   super.create();
 
-  darkness = new Darkness("dark-level",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
+  darkness = new Darkness("dark-level",new ExtendCoordinateGrid("coordinate-grid", 10),100,100);
 
   currentScene = darkness;
  }
