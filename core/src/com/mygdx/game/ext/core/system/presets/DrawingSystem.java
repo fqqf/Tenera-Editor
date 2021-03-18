@@ -85,7 +85,9 @@ public class DrawingSystem extends System
    }
    float x = position.x + valueX;float y = position.y + valueY;
 
-   if (drawingComponent.showStatic) batch.draw(texture, x, y, size.x, size.y);
+   if (drawingComponent.showStatic)
+    batch.draw(texture, x, y, size.x, size.y);
+
    for (int i = 0; i < drawingComponent.animations.size; i++)
    {
     AnimationData animationData = drawingComponent.animations.get(i);
@@ -94,7 +96,9 @@ public class DrawingSystem extends System
   }
   else
    {
-    if (drawingComponent.showStatic) batch.draw(texture, position.x, position.y, size.x, size.y);
+    if (drawingComponent.showStatic)
+     batch.draw(texture, position.x, position.y, size.x, size.y);
+
     for (int i = 0; i < drawingComponent.animations.size; i++)
     {
      AnimationData animationData = drawingComponent.animations.get(i);
