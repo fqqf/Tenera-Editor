@@ -1,6 +1,7 @@
 package com.mygdx.game.ext.core.system.presets.collisionSystem;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
@@ -14,13 +15,14 @@ public class CollisionManagmentSystem extends System
 
  public CollisionManagmentSystem()
  {
-  type = Type.RENDER_SYSTEM;
+  type = Type.PHYSICS_SYSTEM;
   priority = 99;
  }
 
  private final Vector2 vector2 = new Vector2();
 
  private BoundingBox boxA, boxB;
+ private final Rectangle resultBox = new Rectangle();
  public void handle()
  {
   // logger.info("Collision System");
@@ -29,26 +31,36 @@ public class CollisionManagmentSystem extends System
   for (int i = 0; i < assignedActors.size; i++)
   {
    Actor actorA = assignedActors.get(i);
+   CollisionComponent cc = CollisionComponent.get(actorA);
    boxA = getSynchronizedBox(actorA);
    if (boxA.getType()!=CollisionType.BODY) continue;
+
+   BasePhysicsComponent physics = BasePhysicsComponent.get(actorA);
+
+   float moveToX = physics.position.x + cc.box.offset.x;
+   float moveToY = physics.position.y + cc.box.offset.y;
+
+   resultBox.set(moveToX, moveToY, boxA.width,boxA.height);
+
    for (Actor actorB : assignedActors)
    {
     if (actorA == actorB) continue;
     boxB = getSynchronizedBox(actorB);
-    if (boxA.overlaps(boxB))
+    if (resultBox.overlaps(boxB))
     {
-     resultForBox.setZero();
-     handleCollision(actorA, actorB, resultForBox);
+     handleCollision(resultBox, actorA, actorB);
+     DrawingComponent drawingComponent = DrawingComponent.get(actorA);
 
-     boxA.x = resultForBox.x;
-     boxA.y = resultForBox.y;
+     if (resultBox.x != moveToX) { drawingComponent.extrapolationX = false; drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;}
+     if (resultBox.y != moveToY) { drawingComponent.extrapolationY = false; drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;}
 
      BasePhysicsComponent.get(actorA).color = Color.RED;
      BasePhysicsComponent.get(actorB).color = Color.RED;
+     boxA.setPosition(resultBox.x, resultBox.y);
     }
    }
-   BasePhysicsComponent.get(actorA).position.x = boxA.x - boxA.offset.x;
-   BasePhysicsComponent.get(actorA).position.y = boxA.y - boxA.offset.y;
+   BasePhysicsComponent.get(actorA).position.x = resultBox.x - boxA.offset.x;
+   BasePhysicsComponent.get(actorA).position.y = resultBox.y - boxA.offset.y;
   }
  }
 
@@ -63,12 +75,11 @@ public class CollisionManagmentSystem extends System
   return box;
  }
 
- private BasePhysicsComponent physics;
+ //private BasePhysicsComponent physics;
  private CollisionComponent collision;
 
- private void handleCollision(Actor actorA, Actor actorB, final Vector2 out)
+ private void handleCollision(final Rectangle resultBox, Actor actorA, Actor actorB)
  {
-  out.setZero();
   if (boxA.getType() != CollisionType.BODY) return;
   switch (boxB.getType())
   {
@@ -77,12 +88,12 @@ public class CollisionManagmentSystem extends System
     float topPlatform = boxB.getTop();
     if (boxA.y - speedY < topPlatform)
     {
-     if (boxA.y - speedY > topPlatform) handleBodySolid(actorA, out);// collisions.add(actorB);
+     if (boxA.y - speedY > topPlatform) handleBodySolid(resultBox, actorA);// collisions.add(actorB);
      break;
     }
     case CollisionType.SOLID:
     // collisions.add(actorB);
-    handleBodySolid(actorA, out);
+    handleBodySolid(resultBox, actorB);
     break;
    case CollisionType.LIQUID:
     handleBodyLiquid(actorA, actorB);
@@ -90,14 +101,14 @@ public class CollisionManagmentSystem extends System
   }
  }
 
- private final Vector2 centerA = new Vector2(), centerB = new Vector2(), resultForBox = new Vector2();
+ private final Vector2 centerA = new Vector2(), centerB = new Vector2();
 
- private void handleBodySolid(Actor actorBody, final Vector2 resultForBox)
+ private void handleBodySolid(final Rectangle resultBox, final Actor solidActor)
  {
   // logger.info("handleBodySolid");
+  //DrawingComponent drawingComponent = DrawingComponent.get(bodyActor);
 
-  DrawingComponent drawingComponent = DrawingComponent.get(actorBody);
-  boxA.getCenter(centerA);
+  resultBox.getCenter(centerA);
   boxB.getCenter(centerB);
 
   float deltaCenterX = centerA.x - centerB.x;
@@ -105,7 +116,8 @@ public class CollisionManagmentSystem extends System
   float y = ((boxB.halfHeight + boxA.halfHeight) - Math.abs(deltaCenterY));
   float x = ((boxB.halfWidth + boxA.halfWidth) - Math.abs(deltaCenterX));
 
-  physics = BasePhysicsComponent.get(actorBody);
+  //physics = BasePhysicsComponent.get(bodyActor);
+
   float absX = Math.abs(x);
   float absY = Math.abs(y);
   if (absX > absY)
@@ -117,7 +129,7 @@ public class CollisionManagmentSystem extends System
 
    // physics.position.y = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
 
-     resultForBox.y = signum > 0 ? boxB.getTop() : boxB.y - boxA.height;
+   resultBox.y = signum > 0 ? boxB.getTop() : boxB.y - resultBox.height;
 
    //boxA.y = (signum > 0 ? boxB.getTop() : boxB.y - boxA.height) + boxA.offset.y;
 
@@ -129,8 +141,8 @@ public class CollisionManagmentSystem extends System
 
    // if (signum != Math.signum(physics.velocity.y)) physics.velocity.y = 0;
 
-   drawingComponent.extrapolationY = false;
-   drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
+   //drawingComponent.extrapolationY = false;
+   //drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;
   }
   else
   {
@@ -141,7 +153,7 @@ public class CollisionManagmentSystem extends System
 
    //physics.position.x = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
 
-   resultForBox.x = signum > 0 ? boxB.getRight() : boxB.x - boxA.width;
+   resultBox.x = signum > 0 ? boxB.getRight() : boxB.x - resultBox.width;
 
    //boxA.x += (absX * signum) * ApplicationLoop.instance.extrapolation;
    //boxA.x = (signum > 0 ? boxB.getRight() : boxB.x - boxA.width) + boxA.offset.x;
@@ -153,14 +165,13 @@ public class CollisionManagmentSystem extends System
 
    // if (signum != Math.signum(physics.velocity.x)) physics.velocity.x = 0;
 
-    drawingComponent.extrapolationX = false;
-    drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
+    //drawingComponent.extrapolationX = false;
+    //drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;
   }
  }
 
  private void handleBodyLiquid(Actor actorBody, Actor actorLiquid)
  {
-  physics = BasePhysicsComponent.get(actorBody);
-  physics.velocity.scl(0.5f, 0.5f);
+  BasePhysicsComponent.get(actorBody).velocity.scl(0.5f, 0.5f);
  }
 }
