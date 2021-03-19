@@ -60,5 +60,6 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
 
         implementation "space.earlygrey:shapedrawer:$shapedrawerVersion"
+        implementation 'com.github.tommyettinger:jbump:v1.0.1'
     }
 }

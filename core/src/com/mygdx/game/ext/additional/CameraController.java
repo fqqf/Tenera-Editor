@@ -5,7 +5,6 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class CameraController
 {
-
  private ExtendViewport viewport;
  private OrthographicCamera camera;
  private float cameraX, cameraY;

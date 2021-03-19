@@ -1,5 +1,6 @@
 package com.mygdx.game.ext.core.components.presets;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
@@ -26,6 +27,8 @@ public class DrawingComponent extends Component<DrawingComponent>
  public boolean extrapolationY = true;
  public long extrapolationOffNanoX = 0;
  public long extrapolationOffNanoY = 0;
+ public Color debugCollisionColor = Color.PINK;
+
 
  public DrawingComponent(TextureAtlas.AtlasRegion atlasRegion, Actor actor)
  {

@@ -21,11 +21,10 @@ public class BasePhysicsComponent extends Component<BasePhysicsComponent>
  public BasePhysicsComponent(Actor actor)
  {
   super(actor);
-
  }
-
  public static BasePhysicsComponent get(Actor actor)
  {
   return childList.compute(actor, () -> new BasePhysicsComponent(actor));
  }
+ public static boolean has(Actor actor) { return childList.containsKey(actor); }
 }
