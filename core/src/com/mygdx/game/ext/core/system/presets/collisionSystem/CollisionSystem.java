@@ -68,8 +68,8 @@ public class CollisionSystem extends System
 
  public CollisionSystem()
  {
-  type = Type.RENDER_SYSTEM;
-  priority = 99;
+  type = Type.PHYSICS_SYSTEM;
+  priority = 2;
  }
  private BasePhysicsComponent physics;
  public void handle()
