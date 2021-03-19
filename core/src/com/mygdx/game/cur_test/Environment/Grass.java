@@ -1,6 +1,5 @@
 package com.mygdx.game.cur_test.Environment;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.cur_test.SpriteManager;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;

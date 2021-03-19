@@ -20,7 +20,8 @@ public class Wind extends Static
                           SpriteManager.textures.get("wind2"),
                           SpriteManager.textures.get("wind3"))
           );
-  Systems.collisionManagmentSystem.remActor(this);
+
+  Systems.collisionSystem.remActor(this);//todo wtf?
   Systems.animationSystem.addActor(this);
  }
 }

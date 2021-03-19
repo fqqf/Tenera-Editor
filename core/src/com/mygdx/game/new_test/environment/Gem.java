@@ -22,7 +22,7 @@ public class Gem extends Static
                   )
           );
 
-  Systems.collisionManagmentSystem.remActor(this);
+  Systems.collisionSystem.remActor(this);
   Systems.animationSystem.addActor(this);
  }
 }

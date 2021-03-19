@@ -1,7 +1,5 @@
 package com.mygdx.game.cur_test.Environment;
 
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.cur_test.SpriteManager;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;

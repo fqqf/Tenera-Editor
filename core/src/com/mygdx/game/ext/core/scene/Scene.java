@@ -5,11 +5,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
+import com.dongbat.jbump.Rect;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.system.System;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -46,8 +49,8 @@ public abstract class Scene
   callRenderSystems();
   // draw(extrapolation);
 
- }
 
+ }
  // protected void draw(float extrapolation) {}
  void act() {}
  // void handleInput() {}

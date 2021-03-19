@@ -22,7 +22,7 @@ public class Npc extends Moveable
                   )
           );
 
-  Systems.collisionManagmentSystem.remActor(this);
+  // Systems.collisionSystem.remActor(this);
   Systems.animationSystem.addActor(this);
  }
 }

@@ -1,8 +1,6 @@
 package com.mygdx.game.new_test.creatures;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -22,12 +20,12 @@ public abstract class Moveable extends Actor
   physicsComponent.position.set(x,y);
   physicsComponent.size.set(width, height);
 
-  CollisionComponent collisionComponent = CollisionComponent.get(this);
-  collisionComponent.box.setType(CollisionType.BODY);
-  collisionComponent.box.setPosition(x, y);
-  collisionComponent.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
+  CollisionComponent cc = CollisionComponent.get(this);
+  cc.box.setType(CollisionType.BODY);
+  cc.box.setPosition(x,y);
+  cc.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
 
   Systems.physicsSystem.addActor(this);
-  Systems.collisionManagmentSystem.addActor(this);
+  Systems.collisionSystem.addActor(this);
  }
 }

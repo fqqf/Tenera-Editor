@@ -2,8 +2,8 @@ package com.mygdx.game.new_test.worlds;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
-import com.mygdx.game.ext.core.components.presets.CollisionComponent;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.scene.Scene;
@@ -24,20 +24,20 @@ public class Darkness extends Scene
   super(name, field, width, height);
 
   addSystem(
-    Systems.collisionManagmentSystem, Systems.physicsSystem,
+    Systems.collisionSystem, Systems.physicsSystem,
     Systems.controlSystem, Systems.drawingSystem,
     Systems.animationSystem
   );
 
   drawLayer.add(
-          new Hero(5,5)
-          //new Ground(0,0),
-          //new Ground(38.22f,0)
-          //new Npc(15,0)
+          new Hero(5,5),
+          new Ground(0,0),
+          new Ground(38.22f,0),
+          new Npc(15,1)
   );//new Wind(3,2));
   drawLayer.add(
-          //new Wind(3,2),
-          //new Gem(7,5),
+          new Wind(3,2),
+          new Gem(7,5),
           new Platform(3,6),
           new Platform(7,6)
   );
