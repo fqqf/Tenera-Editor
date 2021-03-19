@@ -4,9 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
+import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.scene.Scene;
+import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
 import com.mygdx.game.new_test.Systems;
 import com.mygdx.game.new_test.creatures.Hero;
 import com.mygdx.game.new_test.creatures.Npc;
@@ -30,10 +33,10 @@ public class Darkness extends Scene
   );
 
   drawLayer.add(
-          new Hero(5,5),
+          new Hero(5,2),
           new Ground(0,0),
           new Ground(38.22f,0),
-          new Npc(15,1)
+          new Npc(15,3)
   );//new Wind(3,2));
   drawLayer.add(
           new Wind(3,2),
@@ -41,7 +44,6 @@ public class Darkness extends Scene
           new Platform(3,6),
           new Platform(7,6)
   );
-
   Systems.drawingSystem.layers.put(1, drawLayer);
  }
 

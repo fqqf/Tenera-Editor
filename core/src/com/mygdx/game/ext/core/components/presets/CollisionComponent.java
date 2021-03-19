@@ -14,7 +14,6 @@ public class CollisionComponent extends Component<CollisionComponent>
 
  public final BoundingBox box;
  public final Item<Actor> item;
- public final Vector2 size = new Vector2(0,0);
 
  public CollisionComponent(Actor actor)
  {

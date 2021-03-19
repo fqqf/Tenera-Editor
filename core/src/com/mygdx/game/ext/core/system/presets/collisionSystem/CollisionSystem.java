@@ -26,14 +26,8 @@ public class CollisionSystem extends System
      float topPlatform = otherRect.y + otherRect.h;
      if ( itemRect.y - speedY < topPlatform ) return Response.cross;
      else return Response.slide;
-
-     case CollisionType.LIQUID:
-     BasePhysicsComponent physics = BasePhysicsComponent.get((Actor)item.userData);
-     physics.velocity.scl(0.5f, 0.5f);
-     return Response.cross;
-
-     default:
-     return Response.slide;
+     case CollisionType.LIQUID: return Response.cross;
+     default: return Response.slide;
    }
   }
  };
@@ -78,22 +72,40 @@ public class CollisionSystem extends System
   for (int i = 0; i < assignedActors.size; i++)
   {
    Actor actorA = assignedActors.get(i);
+   physics = BasePhysicsComponent.get(actorA);
+   if (physics.velocity.isZero())continue;
+
    CollisionComponent cc = CollisionComponent.get(actorA);
    if (cc.box.getType() != CollisionType.BODY) continue;
 
    Item<Actor> item = CollisionComponent.get(actorA).item;
-   physics = BasePhysicsComponent.get(actorA);
+
 
    float moveToX = physics.position.x + cc.box.offset.x;
    float moveToY = physics.position.y + cc.box.offset.y;
 
    Response.Result result = world.move(item, moveToX, moveToY, collisionFilter );
-
    if ( !result.projectedCollisions.isEmpty() )
    {
+    result.projectedCollisions.others.forEach(
+            other->
+            {
+             Actor collisionActor = (Actor)other.userData;
+             CollisionComponent collisionComponent = CollisionComponent.get(collisionActor);
+             switch (collisionComponent.box.getType())
+             {
+              case CollisionType.LIQUID:
+               BasePhysicsComponent physics = BasePhysicsComponent.get((Actor)item.userData);
+               physics.velocity.scl(0.5f, 0.5f);
+              break;
+             }
+            });
+
+
     DrawingComponent drawingComponent = DrawingComponent.get(actorA);
     if ( result.goalX != moveToX ) { drawingComponent.extrapolationX = false; drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;}
     if ( result.goalY != moveToY ) { drawingComponent.extrapolationY = false; drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;}
+
 
     result.projectedCollisions.items.forEach( item1-> { DrawingComponent.get((Actor)item1.userData).debugCollisionColor = Color.RED;}); //debug
     result.projectedCollisions.others.forEach( other-> { DrawingComponent.get((Actor)other.userData).debugCollisionColor = Color.RED;}); //debug
