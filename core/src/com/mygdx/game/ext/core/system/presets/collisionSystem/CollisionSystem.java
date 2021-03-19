@@ -11,7 +11,7 @@ import com.mygdx.game.ext.core.system.System;
 
 public class CollisionSystem extends System
 {
- private static CollisionFilter collisionFilter = new CollisionFilter() {
+ private static final CollisionFilter collisionFilter = new CollisionFilter() {
   @Override
   public Response filter(Item item, Item other)
   {
@@ -65,15 +65,15 @@ public class CollisionSystem extends System
   type = Type.PHYSICS_SYSTEM;
   priority = 2;
  }
- private BasePhysicsComponent physics;
+
  public void handle()
  {
   // logger.info("Collision System");
   for (int i = 0; i < assignedActors.size; i++)
   {
    Actor actorA = assignedActors.get(i);
-   physics = BasePhysicsComponent.get(actorA);
-   if (physics.velocity.isZero())continue;
+   BasePhysicsComponent physics1 = BasePhysicsComponent.get(actorA);
+   if (physics1.velocity.isZero())continue;
 
    CollisionComponent cc = CollisionComponent.get(actorA);
    if (cc.box.getType() != CollisionType.BODY) continue;
@@ -81,8 +81,8 @@ public class CollisionSystem extends System
    Item<Actor> item = CollisionComponent.get(actorA).item;
 
 
-   float moveToX = physics.position.x + cc.box.offset.x;
-   float moveToY = physics.position.y + cc.box.offset.y;
+   float moveToX = physics1.position.x + cc.box.offset.x;
+   float moveToY = physics1.position.y + cc.box.offset.y;
 
    Response.Result result = world.move(item, moveToX, moveToY, collisionFilter );
    if ( !result.projectedCollisions.isEmpty() )
@@ -112,7 +112,7 @@ public class CollisionSystem extends System
    }
 
    //todo вот тут я говорил что именно [VERY_BIG_FONT]ОТНИМАТЬ[/VERY_BIG_FONT] offset нужно, ну попробуй прибавить и расскажи что получилось...
-   physics.position.set(result.goalX - cc.box.offset.x, result.goalY - cc.box.offset.y);
+   physics1.position.set(result.goalX - cc.box.offset.x, result.goalY - cc.box.offset.y);
   }
  }
 }
