@@ -30,16 +30,16 @@ public class Darkness extends Scene
   );
 
   drawLayer.add(
-          new Hero(0,1),
-          new Ground(0,0),
-          new Ground(38.22f,0),
-          new Npc(15,0)
+          new Hero(5,5)
+          //new Ground(0,0),
+          //new Ground(38.22f,0)
+          //new Npc(15,0)
   );//new Wind(3,2));
   drawLayer.add(
-          new Wind(3,2),
-          new Gem(7,5),
-          new Platform(2,6),
-          new Platform(6,6)
+          //new Wind(3,2),
+          //new Gem(7,5),
+          new Platform(3,6),
+          new Platform(7,6)
   );
 
   Systems.drawingSystem.layers.put(1, drawLayer);

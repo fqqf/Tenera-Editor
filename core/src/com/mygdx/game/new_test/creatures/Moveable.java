@@ -27,7 +27,7 @@ public abstract class Moveable extends Actor
   collisionComponent.box.setPosition(x, y);
   collisionComponent.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
 
-  Systems.collisionManagmentSystem.addActor(this);
   Systems.physicsSystem.addActor(this);
+  Systems.collisionManagmentSystem.addActor(this);
  }
 }

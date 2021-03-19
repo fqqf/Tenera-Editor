@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.dongbat.jbump.Item;
+import com.dongbat.jbump.Rect;
+import com.dongbat.jbump.World;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -17,6 +20,7 @@ import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionManagmentSystem;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.TreeMap;
@@ -104,8 +108,9 @@ public class DrawingSystem extends System
 
 
 
-  // drawActorBox();
+  drawActorBox();
   // drawCollisionBox();
+  showWorldRects(CollisionManagmentSystem.world);
  }
  private void drawCollisionBox()
  {
@@ -124,6 +129,19 @@ public class DrawingSystem extends System
   shapeDrawer.setColor(Color.GRAY);
   shapeDrawer.setDefaultLineWidth(0.02f);
   shapeDrawer.rectangle(basePhysicsComponent.position.x, basePhysicsComponent.position.y, basePhysicsComponent.size.x, basePhysicsComponent.size.y);
+ }
+ private void showWorldRects(World<Actor> world)
+ {
+  java.lang.System.out.println("--------");
+  for (Item item : world.getItems())
+  {
+   shapeDrawer.setColor(Color.PINK);
+   shapeDrawer.setDefaultLineWidth(0.05f);
+   Rect rect = world.getRect(item);
+   shapeDrawer.rectangle(rect.x, rect.y, rect.w, rect.h);
+   java.lang.System.out.println(item.userData.getClass().getSimpleName() + " in World x="+rect.x+",y="+rect.y+",w="+rect.w+",h="+rect.h);
+  }
+  java.lang.System.out.println("--------");
  }
 }
 

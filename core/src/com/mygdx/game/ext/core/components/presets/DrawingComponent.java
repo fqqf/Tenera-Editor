@@ -27,6 +27,7 @@ public class DrawingComponent extends Component<DrawingComponent>
  public long extrapolationOffNanoX = 0;
  public long extrapolationOffNanoY = 0;
 
+
  public DrawingComponent(TextureAtlas.AtlasRegion atlasRegion, Actor actor)
  {
   super(actor);
