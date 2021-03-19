@@ -95,7 +95,7 @@ public class CollisionSystem extends System
              switch (collisionComponent.box.getType())
              {
               case CollisionType.LIQUID:
-               BasePhysicsComponent physics = BasePhysicsComponent.get((Actor)item.userData);
+               BasePhysicsComponent physics = BasePhysicsComponent.get(collisionActor);
                physics.velocity.scl(0.5f, 0.5f);
               break;
              }
