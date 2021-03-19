@@ -129,7 +129,7 @@ public class DrawingSystem extends System
   }
 
 
-  drawActorBox();
+  //drawActorBox();
  }
 
  private void drawActorBox()

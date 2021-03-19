@@ -1,6 +1,5 @@
-<<<<<<< HEAD:core/src/com/mygdx/game/tests/test7/Environment/Grass.java
+/*<<<<<<< HEAD:core/src/com/mygdx/game/tests/test7/Environment/Grass.java
 package com.mygdx.game.tests.test7.Environment;
-/*
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.tests.cur_test.SpriteManager;
 =======

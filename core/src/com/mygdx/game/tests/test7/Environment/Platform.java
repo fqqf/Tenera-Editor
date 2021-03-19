@@ -1,6 +1,6 @@
-<<<<<<< HEAD:core/src/com/mygdx/game/tests/test7/Environment/Platform.java
+/*<<<<<<< HEAD:core/src/com/mygdx/game/tests/test7/Environment/Platform.java
 package com.mygdx.game.tests.test7.Environment;
-/*
+
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.tests.cur_test.Locations.StickmanWorld;
 import com.mygdx.game.tests.cur_test.SpriteManager;

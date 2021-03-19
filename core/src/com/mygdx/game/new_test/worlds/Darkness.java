@@ -47,7 +47,7 @@ public class Darkness extends Scene
             BasePhysicsComponent.get(platform).size.x - CollisionComponent.get(platform).box.x,4)
   );
 
-  effectsLayer.add(new Vignette(0,10-4.06f));
+  effectsLayer.add(new Vignette(0,10-2.06f));
   interfaceLayer.add(new InvisibilityButton(notMovingGrid.unitWidth-10f,notMovingGrid.unitHeight-9.5f));
 
   Systems.drawingSystem.layers.put(1, drawLayer);
