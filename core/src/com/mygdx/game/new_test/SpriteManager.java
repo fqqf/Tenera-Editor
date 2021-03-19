@@ -37,11 +37,16 @@ public class SpriteManager
   textures0.put("invisibility-button", new Texture("test8/invisibility-button.png"));
 
   textures0.put("platform", new Texture("test7/platform.png"));
-
+  init();
+ }
+ public static void init()
+ {
   textures0.forEach(
           (key,value)->
           {
-           textures.put(key, new TextureAtlas.AtlasRegion(value,0,0,value.getWidth(), value.getHeight()));
+           TextureAtlas.AtlasRegion atlasRegion = new TextureAtlas.AtlasRegion(value,0,0,value.getWidth(), value.getHeight());
+           atlasRegion.name = value.toString();
+           textures.put(key, atlasRegion);
           });
 
  }

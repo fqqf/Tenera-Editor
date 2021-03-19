@@ -6,7 +6,6 @@ import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.new_test.Systems;
@@ -25,7 +24,7 @@ public class Darkness extends Scene
   super(name, field, width, height);
 
   addSystem(
-    Systems.collisionManagmentSystem, Systems.physicsSystem,
+    Systems.collisionSystem, Systems.physicsSystem,
     Systems.controlSystem, Systems.drawingSystem,
     Systems.animationSystem
   );
@@ -36,7 +35,7 @@ public class Darkness extends Scene
   interfaceLayer = new Layer(notMovingGrid);
 
   drawLayer.add(
-          new Hero(2,5),
+          new Hero(5,2),
           new Ground(0,0),
           new Ground(38.22f,0));
 

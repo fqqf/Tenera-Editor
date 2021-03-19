@@ -25,7 +25,7 @@ public class EnvironmentObject extends Actor
   collisionComponent.box.setSize(width, height);
   collisionComponent.box.setType(CollisionType.SOLID);
 
-  StickmanWorld.collisionManagmentSystem.addActor(this);
+  StickmanWorld.collisionSystem.addActor(this);
  }
 }
 */

@@ -26,7 +26,8 @@ public class MovingObject extends Actor
   collisionComponent.box.setPosition(position.x, position.y);
   collisionComponent.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
 
-  StickmanWorld.collisionManagmentSystem.addActor(this);
+
+  StickmanWorld.collisionSystem.addActor(this);
   StickmanWorld.physicsSystem.addActor(this);
  }
 }

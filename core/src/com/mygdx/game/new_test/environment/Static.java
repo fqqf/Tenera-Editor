@@ -24,8 +24,7 @@ public abstract class Static extends Actor
   collisionComponent.box.setPosition(x,y);
   collisionComponent.box.setSize(width, height);
   collisionComponent.box.setType(CollisionType.SOLID);
-
-  Systems.collisionManagmentSystem.addActor(this);
+  Systems.collisionSystem.addActor(this);
  }
 }
 

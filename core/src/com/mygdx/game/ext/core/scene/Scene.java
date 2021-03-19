@@ -47,8 +47,8 @@ public abstract class Scene
   callRenderSystems();
   // draw(extrapolation);
 
- }
 
+ }
  // protected void draw(float extrapolation) {}
  void act() {}
  // void handleInput() {}
