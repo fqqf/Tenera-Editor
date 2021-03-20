@@ -68,7 +68,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   {
    nextTickTime += TICK_IN_NANO;
    tick++; TPS++;
-   extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
+   extrapolation = 0;// (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
    calcPhysics();
   } else extrapolation = (inGameTime-(nextTickTime-TICK_IN_NANO)) / (TICK_IN_NANO);
   // handleInput();
@@ -99,6 +99,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
   long delta = TimeUtils.nanoTime() - pauseStartTime;
   nextTickTime += delta;
   inGameTime += delta;
+  renderDelta = (-(realTime - (realTime = TimeUtils.nanoTime())))+delta;
   lateFramesAmount = 0;
  }
 

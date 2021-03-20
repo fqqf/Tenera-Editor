@@ -10,10 +10,10 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1400;
 		config.height = 600;
-	/*	config.pauseWhenBackground = false;
+		config.pauseWhenBackground = true;
 		config.pauseWhenMinimized = true;
-		config.backgroundFPS = 60;
-		config.foregroundFPS = 60;*/
+		config.backgroundFPS = -1;
+		config.foregroundFPS = 60;
 
 		// TODO : create abstraction over LwjglAplication, so you wont have to set config by yourself and call super.create() in ApplicationLoop
 		new LwjglApplication(new Main(), config);

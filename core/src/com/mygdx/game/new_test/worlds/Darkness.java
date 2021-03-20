@@ -35,7 +35,7 @@ public class Darkness extends Scene
   interfaceLayer = new Layer(notMovingGrid);
 
   drawLayer.add(
-          new Hero(5,2),
+          new Hero(2,2),
           new Ground(0,0),
           new Ground(38.22f,0));
 
