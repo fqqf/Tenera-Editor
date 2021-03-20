@@ -16,7 +16,7 @@ public class Hop extends Intangible
   AnimationComponent animationComponent = AnimationComponent.get(this);
 
   animationComponent
-    .addAnimation(new AnimationData(5,5,0.3f, Animation.PlayMode.LOOP,
+    .addAnimation(new AnimationData(5,5,0.1f, Animation.PlayMode.LOOP,
       SpriteManager.textures.get("hop1"),
       SpriteManager.textures.get("hop2"),
       SpriteManager.textures.get("hop3"))
