@@ -7,7 +7,7 @@ import com.mygdx.game.new_test.worlds.Darkness;
 
 public class Main extends ApplicationLoop
 {
- Scene darkness, mountain, village, currentScene;
+ public static Scene darkness, mountain, village, currentScene;
 
  @Override
  public void create()

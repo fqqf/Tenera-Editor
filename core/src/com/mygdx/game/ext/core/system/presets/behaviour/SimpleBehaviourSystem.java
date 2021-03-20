@@ -1,7 +1,7 @@
 package com.mygdx.game.ext.core.system.presets.behaviour;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
 
@@ -20,10 +20,10 @@ public class SimpleBehaviourSystem extends System
  @Override
  protected void loadFields()
  {
-  BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
+  PhysicsComponent physicsComponent = PhysicsComponent.get(actor);
 
-  position = basePhysicsComponent.position;
-  velocity = basePhysicsComponent.velocity;
+  position = physicsComponent.position;
+  velocity = physicsComponent.velocity;
 
  }
 

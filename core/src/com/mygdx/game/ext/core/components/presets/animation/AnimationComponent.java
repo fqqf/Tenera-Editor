@@ -5,7 +5,7 @@ import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
 
-public class AnimationComponent extends Component<AnimationComponent>
+public class AnimationComponent extends Component
 {
 
 // public static class Data
@@ -29,7 +29,6 @@ public class AnimationComponent extends Component<AnimationComponent>
 
  public AnimationComponent(Actor actor)
  {
-  super(actor);
  }
  public AnimationComponent addAnimation(AnimationData... animations)
  {

@@ -9,7 +9,7 @@ import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 
-public class DrawingComponent extends Component<DrawingComponent>
+public class DrawingComponent extends Component
 {
  private static final ComputeableHashMap<DrawingComponent> childList = new ComputeableHashMap<>();
  private static final TextureAtlas.AtlasRegion nullAtlasRegion;
@@ -32,7 +32,6 @@ public class DrawingComponent extends Component<DrawingComponent>
 
  public DrawingComponent(TextureAtlas.AtlasRegion atlasRegion, Actor actor)
  {
-  super(actor);
   this.atlasRegion = atlasRegion;
  }
 

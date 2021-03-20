@@ -7,7 +7,7 @@ import com.mygdx.game.ext.core.components.ComputeableHashMap;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 
-public class CollisionComponent extends Component<CollisionComponent>
+public class CollisionComponent extends Component
 {
  private static final ComputeableHashMap<CollisionComponent> childList = new ComputeableHashMap<>();
 
@@ -16,10 +16,9 @@ public class CollisionComponent extends Component<CollisionComponent>
 
  public CollisionComponent(Actor actor)
  {
-  super(actor);
   item = new Item<>(actor);
-  BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
-  box = new BoundingBox(CollisionType.SOLID).set(basePhysicsComponent.position, basePhysicsComponent.size);
+  BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);
+  box = new BoundingBox(CollisionType.SOLID).set(bodyPropertiesComponent.position, bodyPropertiesComponent.size);
  }
 
  public static CollisionComponent get(Actor actor)

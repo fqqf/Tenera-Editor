@@ -2,7 +2,7 @@ package com.mygdx.game.new_test.worlds;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
@@ -10,14 +10,11 @@ import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.new_test.Systems;
 import com.mygdx.game.new_test.creatures.Hero;
-import com.mygdx.game.new_test.environment.Ground;
-import com.mygdx.game.new_test.environment.InvisibilityButton;
-import com.mygdx.game.new_test.environment.Platform;
-import com.mygdx.game.new_test.environment.Vignette;
+import com.mygdx.game.new_test.environment.*;
 
 public class Darkness extends Scene
 {
- Layer drawLayer, effectsLayer, interfaceLayer;
+ public Layer drawLayer, effectsLayer, interfaceLayer;
 
  public Darkness(String name, ExtendCoordinateGrid field, float width, float height)
  {
@@ -35,6 +32,7 @@ public class Darkness extends Scene
   interfaceLayer = new Layer(notMovingGrid);
 
   drawLayer.add(
+          Systems.controlSystem.getHop(),
           new Hero(2,2),
           new Ground(0,0),
           new Ground(38.22f,0));
@@ -43,8 +41,8 @@ public class Darkness extends Scene
 
   drawLayer.add( // TODO: A position, where we want bounding box to be
           platform,
-          new Platform(BasePhysicsComponent.get(platform).position.x +
-            BasePhysicsComponent.get(platform).size.x - CollisionComponent.get(platform).box.x,4)
+          new Platform(PhysicsComponent.get(platform).position.x +
+            PhysicsComponent.get(platform).size.x - CollisionComponent.get(platform).box.x,4)
   );
 
   effectsLayer.add(new Vignette(0,10-2.06f));

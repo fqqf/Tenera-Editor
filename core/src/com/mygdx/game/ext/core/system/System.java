@@ -18,8 +18,6 @@ public abstract class System
  protected Actor actor;
  protected Group assignedActors = new Group();
 
- SpriteBatch batch;
-
  public void handle() //   layers.forEach((key,layer) -> layer.forEach((actor -> actor.draw(extrapolation))));
  {
   for (Actor actor : assignedActors)

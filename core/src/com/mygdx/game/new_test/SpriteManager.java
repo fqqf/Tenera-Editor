@@ -32,6 +32,10 @@ public class SpriteManager
   textures0.put("gem2", new Texture("test8/gem2.png"));
   textures0.put("gem3", new Texture("test8/gem3.png"));
 
+  textures0.put("hop1", new Texture("test8/hop1.png"));
+  textures0.put("hop2", new Texture("test8/hop2.png"));
+  textures0.put("hop3", new Texture("test8/hop3.png"));
+
   textures0.put("ground", new Texture("test8/ground.png"));
   textures0.put("vignette", new Texture("test8/vignette.png"));
   textures0.put("invisibility-button", new Texture("test8/invisibility-button.png"));

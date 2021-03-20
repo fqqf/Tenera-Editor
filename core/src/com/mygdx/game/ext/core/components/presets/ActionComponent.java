@@ -5,7 +5,7 @@ import com.mygdx.game.ext.core.actor.interfaces.Action;
 import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
 
-public class ActionComponent extends Component<ActionComponent>
+public class ActionComponent extends Component
 {
  private static final Action.Arg1<Actor> defAction = (actor)->{ System.out.println("no action for " + actor.getClass().getSimpleName());};
  private static final ComputeableHashMap<ActionComponent> childList = new ComputeableHashMap<>();
@@ -13,7 +13,6 @@ public class ActionComponent extends Component<ActionComponent>
 
  public ActionComponent(Action.Arg1<Actor> action, Actor actor)
  {
-  super(actor);
   this.action = action;
  }
 

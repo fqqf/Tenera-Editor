@@ -1,11 +1,7 @@
 package com.mygdx.game.ext.core.system.presets;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.ext.core.components.presets.DrawingComponent;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
-import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
-import com.mygdx.game.ext.core.components.presets.CollisionComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.system.System;
 
 public class PhysicsSystem extends System
@@ -20,11 +16,11 @@ public class PhysicsSystem extends System
  @Override
  protected void loadFields()
  {
-  BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
+  PhysicsComponent physicsComponent = PhysicsComponent.get(actor);
 
-  position = basePhysicsComponent.position;
-  velocity = basePhysicsComponent.velocity;
-  speed = basePhysicsComponent.speed;
+  position = physicsComponent.position;
+  velocity = physicsComponent.velocity;
+  speed = physicsComponent.speed;
  }
 
  @Override
@@ -38,10 +34,18 @@ public class PhysicsSystem extends System
  // if (Math.abs(velocity.x)>0.001f) velocity.x-=(velocity.x) / 10f;
  // else velocity.x = 0;
 
-  if (Math.abs(velocity.x) > 1) velocity.x = Math.signum(velocity.x) * 1;
-  if (Math.abs(velocity.y) > 1) velocity.y = Math.signum(velocity.y) * 1;
+  //if (Math.abs(velocity.x) > 1) velocity.x = Math.signum(velocity.x) * 1;
+  //if (Math.abs(velocity.y) > 1) velocity.y = Math.signum(velocity.y) * 1;
+
+ // if (Math.abs(velocity.x)>0.001f) velocity.x*=0.8f;// else velocity.x = 0;
+  //if (Math.abs(velocity.y)>0.001f) velocity.y*=0.8f;// else velocity.x = 0;
+
+  if (velocity.y>-0.5f) velocity.y = velocity.y - 0.1f; else velocity.y = -0.5f;
+
+  if (Math.abs(velocity.x)!=0 && Math.abs(velocity.x)>0.01f) velocity.x = velocity.x - velocity.x/Math.abs(velocity.x)*0.01f; else velocity.x = 0;
 
   position.add(velocity);
+
   // java.lang.System.out.println("Speed x="+velocity.x + ",y="+velocity.y);
   // velocity.setZero();
  }

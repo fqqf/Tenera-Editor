@@ -5,12 +5,7 @@ import com.mygdx.game.ext.core.actor.interfaces.Func;
 
 import java.lang.invoke.MethodHandles;
 
-public abstract class Component<T extends Component<T>>
+public abstract class Component
 {
- protected final Actor actor;
 
- public Component(Actor actor)
- {
-  this.actor = actor;
- }
 }

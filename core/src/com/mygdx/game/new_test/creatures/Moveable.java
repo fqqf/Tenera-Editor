@@ -2,7 +2,7 @@ package com.mygdx.game.new_test.creatures;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
@@ -16,7 +16,7 @@ public abstract class Moveable extends Actor
   drawingComponent.atlasRegion = texture;
   drawingComponent.useExtrapolation = true;
 
-  BasePhysicsComponent physicsComponent = BasePhysicsComponent.get(this);
+  PhysicsComponent physicsComponent = PhysicsComponent.get(this);
   physicsComponent.position.set(x,y);
   physicsComponent.size.set(width, height);
 

@@ -17,12 +17,12 @@ public class Npc extends Moveable
   AnimationComponent animationComponent = AnimationComponent.get(this);
   animationComponent.userStatic = false;
   animationComponent
-          .addAnimation(new AnimationData(4.22f,7.22f,0.2f, Animation.PlayMode.LOOP,
-                          SpriteManager.textures.get("npc1"),
-                          SpriteManager.textures.get("npc2"),
-                          SpriteManager.textures.get("npc3")
-                  )
-          );
+    .addAnimation(new AnimationData(4.22f, 7.22f, 0.2f, Animation.PlayMode.LOOP,
+        SpriteManager.textures.get("npc1"),
+        SpriteManager.textures.get("npc2"),
+        SpriteManager.textures.get("npc3")
+      )
+    );
 
   CollisionComponent.get(this).box.setType(CollisionType.LIQUID);
 

@@ -3,7 +3,6 @@ package com.mygdx.game.ext.core.system.presets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,20 +11,17 @@ import com.badlogic.gdx.utils.Array;
 import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.World;
-import com.mygdx.game.ext.additional.CameraController;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.components.presets.BasePhysicsComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
+import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
-import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.system.System;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
-import com.mygdx.game.new_test.creatures.Hero;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.TreeMap;
@@ -59,7 +55,7 @@ public class DrawingSystem extends System
   batch.begin();
 
   layers.forEach((key, layer) -> layer.forEach((this::calc)));
-  layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
+ // layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
 
   batch.end();
  }
@@ -82,15 +78,24 @@ public class DrawingSystem extends System
   drawingComponent = DrawingComponent.get(actor);
   texture = drawingComponent.atlasRegion;
 
-  BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor); // TODO: separate in properties and texture;;
-  position = basePhysicsComponent.position;
-  size = basePhysicsComponent.size;
-  velocity = BasePhysicsComponent.get(actor).velocity;
+  if (drawingComponent.useExtrapolation)
+  {
+   PhysicsComponent physicsComponent = PhysicsComponent.get(actor);
+   position = physicsComponent.position;
+   velocity = physicsComponent.velocity;
+   size = physicsComponent.size;
+  } else
+  {
+   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);
+   position = bodyPropertiesComponent.position;
+   size = bodyPropertiesComponent.size;
+  }
+
  }
 
  protected void behave()
  {
-  if (drawingComponent.useExtrapolation)
+  if (drawingComponent.useExtrapolation) // TODO: Упростить
   {
    float extr = ApplicationLoop.instance.extrapolation;
    float valueX, valueY;
@@ -134,10 +139,10 @@ public class DrawingSystem extends System
 
  private void drawActorBox()
  {
-  final BasePhysicsComponent basePhysicsComponent = BasePhysicsComponent.get(actor);
+  final PhysicsComponent physicsComponent = PhysicsComponent.get(actor);
   shapeDrawer.setColor(Color.GRAY);
   shapeDrawer.setDefaultLineWidth(0.02f);
-  shapeDrawer.rectangle(basePhysicsComponent.position.x, basePhysicsComponent.position.y, basePhysicsComponent.size.x, basePhysicsComponent.size.y);
+  shapeDrawer.rectangle(physicsComponent.position.x, physicsComponent.position.y, physicsComponent.size.x, physicsComponent.size.y);
  }
 
  private void showWorldRects(Array<Actor> array, World<Actor> world)
