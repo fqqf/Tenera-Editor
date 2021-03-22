@@ -1,7 +1,6 @@
 package com.mygdx.game.new_test.environment;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.new_test.SpriteManager;
@@ -15,14 +14,11 @@ public class Hop extends Intangible
 
   AnimationComponent animationComponent = AnimationComponent.get(this);
 
-  animationComponent
-    .addAnimation(new AnimationData(5,5,0.1f, Animation.PlayMode.LOOP,
-      SpriteManager.textures.get("hop1"),
-      SpriteManager.textures.get("hop2"),
-      SpriteManager.textures.get("hop3"))
-    );
-
-  animationComponent.userStatic = false;
+  animationComponent.animation = new AnimationData(0.1f, Animation.PlayMode.LOOP,
+          SpriteManager.textures.get("hop1"),
+          SpriteManager.textures.get("hop2"),
+          SpriteManager.textures.get("hop3")
+  );
 
   Systems.animationSystem.addActor(this);
  }

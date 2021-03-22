@@ -1,7 +1,10 @@
 package com.mygdx.game.ext.core.system.presets;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
 
 public class AnimationSystem extends System
@@ -9,7 +12,15 @@ public class AnimationSystem extends System
  public AnimationSystem()
  {
   type = Type.RENDER_SYSTEM;
-  priority = 90;
+  priority = 99;
+ }
+ private float delta;
+ @Override
+ public void handle()
+ {
+
+  delta += Gdx.graphics.getDeltaTime();
+  super.handle();
  }
 
  private AnimationComponent animationComponent;
@@ -22,10 +33,7 @@ public class AnimationSystem extends System
  }
  protected void behave()
  {
-  if (drawingComponent.animations.size == 0)
-  {
-   drawingComponent.animations.addAll(animationComponent.animations);
-   drawingComponent.showStatic = animationComponent.userStatic;
-  }
+  TextureAtlas.AtlasRegion texture = animationComponent.animation.getKeyFrame(delta);
+  drawingComponent.texture = texture;
  }
 }

@@ -13,7 +13,7 @@ public abstract class Moveable extends Actor
  public Moveable(float x, float y, float width, float height, TextureAtlas.AtlasRegion texture)
  {
   DrawingComponent drawingComponent = DrawingComponent.get(this);
-  drawingComponent.atlasRegion = texture;
+  drawingComponent.texture = texture;
   drawingComponent.useExtrapolation = true;
 
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);

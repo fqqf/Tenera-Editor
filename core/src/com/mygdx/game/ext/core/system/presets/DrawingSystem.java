@@ -21,7 +21,6 @@ import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.system.System;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.TreeMap;
@@ -42,16 +41,11 @@ public class DrawingSystem extends System
  protected TextureAtlas.AtlasRegion texture;
  protected Vector2 position, size, velocity;
  private DrawingComponent drawingComponent;
-
-
  public TreeMap<Integer, Layer> layers = new TreeMap<>();
-
- private float deltaAccum;
 
  public void handle()
  {
   // logger.info("Drawing System");
-  deltaAccum += Gdx.graphics.getDeltaTime();
   batch.begin();
 
   layers.forEach((key, layer) -> layer.forEach((this::calc)));
@@ -76,7 +70,7 @@ public class DrawingSystem extends System
  protected void loadFields()
  {
   drawingComponent = DrawingComponent.get(actor);
-  texture = drawingComponent.atlasRegion;
+  texture = drawingComponent.texture;
 
   if (drawingComponent.useExtrapolation)
   {
@@ -97,40 +91,19 @@ public class DrawingSystem extends System
  {
   if (drawingComponent.useExtrapolation) // TODO: Упростить
   {
-   float extr = ApplicationLoop.instance.extrapolation;
-   float valueX, valueY;
-   if (drawingComponent.extrapolationX) valueX = velocity.x * extr;
-   else
-   {
-    valueX = 0;
-    if (drawingComponent.extrapolationOffNanoX < ApplicationLoop.instance.inGameTime)
-     drawingComponent.extrapolationX = true;
-   }
-   if (drawingComponent.extrapolationY) valueY = velocity.y * extr;
-   else
-   {
-    valueY = 0;
-    if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime)
-     drawingComponent.extrapolationY = true;
-   }
-   float x = position.x + valueX;
-   float y = position.y + valueY;
+   float valueX = position.x, valueY = position.y;
 
-   if (drawingComponent.showStatic) batch.draw(texture, x, y, size.x, size.y);
-   for (int i = 0; i < drawingComponent.animations.size; i++)
-   {
-    AnimationData animationData = drawingComponent.animations.get(i);
-    batch.draw(animationData.getKeyFrame(deltaAccum), x + animationData.offsetX, y + animationData.offsetY, animationData.width, animationData.height);
-   }
+   if (drawingComponent.extrapolationX) valueX += velocity.x * ApplicationLoop.instance.extrapolation;
+   else if (drawingComponent.extrapolationOffNanoX < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationX = true;
+
+   if (drawingComponent.extrapolationY) valueY += velocity.y * ApplicationLoop.instance.extrapolation;
+   else if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
+
+   batch.draw(texture, valueX, valueY, size.x, size.y);
   }
   else
   {
-   if (drawingComponent.showStatic) batch.draw(texture, position.x, position.y, size.x, size.y);
-   for (int i = 0; i < drawingComponent.animations.size; i++)
-   {
-    AnimationData animationData = drawingComponent.animations.get(i);
-    batch.draw(animationData.getKeyFrame(deltaAccum), position.x + animationData.offsetX, position.y + animationData.offsetY, animationData.width, animationData.height);
-   }
+   batch.draw(texture, position.x, position.y, size.x, size.y);
   }
 
 

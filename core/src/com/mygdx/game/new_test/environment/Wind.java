@@ -14,12 +14,11 @@ public class Wind extends Intangible
 
   AnimationComponent animationComponent = AnimationComponent.get(this);
 
-  animationComponent
-    .addAnimation(new AnimationData(20.63f * 1.2f, 9.86f * 1.2f, 0.3f, Animation.PlayMode.LOOP,
-      SpriteManager.textures.get("wind1"),
-      SpriteManager.textures.get("wind2"),
-      SpriteManager.textures.get("wind3"))
-    );
+  animationComponent.animation = new AnimationData( 0.3f, Animation.PlayMode.LOOP,
+          SpriteManager.textures.get("wind1"),
+          SpriteManager.textures.get("wind2"),
+          SpriteManager.textures.get("wind3")
+  );
 
   Systems.animationSystem.addActor(this);
  }

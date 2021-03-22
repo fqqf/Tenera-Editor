@@ -14,6 +14,6 @@ public abstract class Intangible extends Actor
 
   bodyPropertiesComponent.position.set(x,y);
   bodyPropertiesComponent.size.set(width, height);
-  drawingComponent.atlasRegion = texture;
+  drawingComponent.texture = texture;
  }
 }

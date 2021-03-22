@@ -13,14 +13,11 @@ public class Gem extends Static
   super(x, y, 2.17f, 4.06f, SpriteManager.textures.get("gem1"));
 
   AnimationComponent animationComponent = AnimationComponent.get(this);
-  animationComponent.userStatic = false;
-  animationComponent
-          .addAnimation(new AnimationData(2.17f,4.06f,0.5f, Animation.PlayMode.LOOP,
-                          SpriteManager.textures.get("gem1"),
-                          SpriteManager.textures.get("gem2"),
-                          SpriteManager.textures.get("gem3")
-                  )
-          );
+  animationComponent.animation = new AnimationData(0.5f, Animation.PlayMode.LOOP,
+          SpriteManager.textures.get("gem1"),
+          SpriteManager.textures.get("gem2"),
+          SpriteManager.textures.get("gem3")
+  );
 
   Systems.collisionSystem.remActor(this);
   Systems.animationSystem.addActor(this);
