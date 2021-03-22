@@ -18,8 +18,7 @@ public class AnimationSystem extends System
  @Override
  public void handle()
  {
-
-  delta += Gdx.graphics.getDeltaTime();
+  delta += Gdx.graphics.getDeltaTime(); // TODO : Fix with inGameTime
   super.handle();
  }
 

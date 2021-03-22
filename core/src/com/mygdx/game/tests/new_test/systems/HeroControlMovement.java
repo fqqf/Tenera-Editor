@@ -1,11 +1,10 @@
-package com.mygdx.game.new_test.systems;
-
+package com.mygdx.game.tests.new_test.systems;
+/*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.system.presets.ControlSystem;
-import com.mygdx.game.new_test.creatures.Hero;
-import com.mygdx.game.new_test.environment.Hop;
+import com.mygdx.game.tests.new_test.environment.Hop;
 
 public class HeroControlMovement extends ControlSystem
 {
@@ -44,3 +43,4 @@ public class HeroControlMovement extends ControlSystem
   return hop;
  }
 }
+*/

@@ -1,5 +1,5 @@
-package com.mygdx.game.new_test.environment;
-
+package com.mygdx.game.tests.new_test.environment;
+/*
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
@@ -17,3 +17,4 @@ public abstract class Intangible extends Actor
   drawingComponent.texture = texture;
  }
 }
+*/

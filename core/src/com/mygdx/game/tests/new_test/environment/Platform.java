@@ -1,9 +1,9 @@
-package com.mygdx.game.new_test.environment;
-
+package com.mygdx.game.tests.new_test.environment;
+/*
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
-import com.mygdx.game.new_test.SpriteManager;
-import com.mygdx.game.new_test.Systems;
+import com.mygdx.game.tests.new_test.SpriteManager;
+import com.mygdx.game.tests.new_test.Systems;
 
 public class Platform extends Static
 {
@@ -20,3 +20,4 @@ public class Platform extends Static
   Systems.collisionSystem.updateActor(this);
  }
 }
+*/

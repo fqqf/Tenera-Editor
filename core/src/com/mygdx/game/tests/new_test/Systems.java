@@ -1,8 +1,8 @@
-package com.mygdx.game.new_test;
-
+package com.mygdx.game.tests.new_test;
+/*
 import com.mygdx.game.ext.core.system.presets.*;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
-import com.mygdx.game.new_test.systems.HeroControlMovement;
+import com.mygdx.game.tests.new_test.systems.HeroControlMovement;
 
 public class Systems
 {
@@ -12,3 +12,4 @@ public class Systems
  public static PhysicsSystem physicsSystem = new PhysicsSystem();
  public static DrawingSystem drawingSystem = new DrawingSystem();
 }
+*/

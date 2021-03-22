@@ -1,5 +1,5 @@
-package com.mygdx.game.new_test.worlds;
-
+package com.mygdx.game.tests.new_test.worlds;
+/*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
@@ -8,9 +8,9 @@ import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
-import com.mygdx.game.new_test.Systems;
-import com.mygdx.game.new_test.creatures.Hero;
-import com.mygdx.game.new_test.environment.*;
+import com.mygdx.game.tests.new_test.Systems;
+import com.mygdx.game.tests.new_test.creatures.Hero;
+import com.mygdx.game.tests.new_test.environment.*;
 
 public class Darkness extends Scene
 {
@@ -63,3 +63,4 @@ public class Darkness extends Scene
   super.iterDraw(extrapolation);
  }
 }
+*/

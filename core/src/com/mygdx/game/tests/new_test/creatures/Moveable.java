@@ -1,12 +1,12 @@
-package com.mygdx.game.new_test.creatures;
-
+package com.mygdx.game.tests.new_test.creatures;
+/*
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
-import com.mygdx.game.new_test.Systems;
+import com.mygdx.game.tests.new_test.Systems;
 
 public abstract class Moveable extends Actor
 {
@@ -29,3 +29,4 @@ public abstract class Moveable extends Actor
   Systems.collisionSystem.addActor(this);
  }
 }
+*/

@@ -1,5 +1,5 @@
-package com.mygdx.game.new_test;
-
+package com.mygdx.game.tests.new_test;
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
@@ -62,3 +62,4 @@ public class SpriteManager
   textures0.clear();
  }
 }
+*/

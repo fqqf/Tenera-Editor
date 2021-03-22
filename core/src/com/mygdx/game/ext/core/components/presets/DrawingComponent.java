@@ -3,6 +3,7 @@ package com.mygdx.game.ext.core.components.presets;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
@@ -11,10 +12,17 @@ public class DrawingComponent extends Component
 {
  private static final ComputeableHashMap<DrawingComponent> childList = new ComputeableHashMap<>();
  private static final TextureAtlas.AtlasRegion defaultTexture;
+
+ public Color spriteColor = Color.WHITE; // По default
+ public boolean flipX, flipY;
+
+ public boolean draw = true;
+
+
  static
  {
   Texture texture = new Texture("box.png");
-  defaultTexture = new TextureAtlas.AtlasRegion( texture,0,0, 0, 0);
+  defaultTexture = new TextureAtlas.AtlasRegion(texture, 0, 0, 0, 0);
  }
 
  public TextureAtlas.AtlasRegion texture;

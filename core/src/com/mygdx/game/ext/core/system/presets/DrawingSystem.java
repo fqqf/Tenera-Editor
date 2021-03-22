@@ -63,7 +63,11 @@ public class DrawingSystem extends System
  private void calc(Actor actor)
  {
   this.actor = actor;
+
   loadFields();
+
+  if (!drawingComponent.draw) return;
+
   behave();
  }
 

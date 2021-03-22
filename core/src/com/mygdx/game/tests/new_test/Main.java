@@ -1,9 +1,9 @@
-package com.mygdx.game.new_test;
-
+package com.mygdx.game.tests.new_test;
+/*
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.scene.Scene;
-import com.mygdx.game.new_test.worlds.Darkness;
+import com.mygdx.game.tests.new_test.worlds.Darkness;
 
 public class Main extends ApplicationLoop
 {
@@ -31,3 +31,4 @@ public class Main extends ApplicationLoop
   currentScene.iterPhys();
  }
 }
+*/

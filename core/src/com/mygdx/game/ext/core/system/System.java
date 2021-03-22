@@ -20,6 +20,7 @@ public abstract class System
 
  public void handle() //   layers.forEach((key,layer) -> layer.forEach((actor -> actor.draw(extrapolation))));
  {
+
   for (Actor actor : assignedActors)
   {
    this.actor = actor;

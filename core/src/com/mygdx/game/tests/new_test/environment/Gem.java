@@ -1,10 +1,10 @@
-package com.mygdx.game.new_test.environment;
-
+package com.mygdx.game.tests.new_test.environment;
+/*
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
-import com.mygdx.game.new_test.SpriteManager;
-import com.mygdx.game.new_test.Systems;
+import com.mygdx.game.tests.new_test.SpriteManager;
+import com.mygdx.game.tests.new_test.Systems;
 
 public class Gem extends Static
 {
@@ -23,3 +23,4 @@ public class Gem extends Static
   Systems.animationSystem.addActor(this);
  }
 }
+*/

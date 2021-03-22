@@ -1,13 +1,13 @@
-package com.mygdx.game.new_test.creatures;
+package com.mygdx.game.tests.new_test.creatures;
 
-
+/*
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
-import com.mygdx.game.new_test.SpriteManager;
-import com.mygdx.game.new_test.Systems;
+import com.mygdx.game.tests.new_test.SpriteManager;
+import com.mygdx.game.tests.new_test.Systems;
 
 public class Hero extends Moveable
 {
@@ -32,3 +32,4 @@ public class Hero extends Moveable
   cc.box.offset.set( ph.size.x/2 - cc.box.halfWidth, ph.size.y/2 - cc.box.halfHeight ); // < for test
  }
 }
+*/
