@@ -26,7 +26,7 @@ public class AliceMovementControl extends ControlSystem
   // TODO : Делать flipX модели при нажатии W или D соответственно. Модель получить через this.actor();
   if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {velocity.y=0; speed.y = 0.7f;}
   if (Gdx.input.isKeyPressed(Input.Keys.A)) speed.x = -0.03f;
-  if (Gdx.input.isKeyPressed(Input.Keys.D)) speed.x =  0.03f;
+  if (Gdx.input.isKeyPressed(Input.Keys.D)) { speed.x =  0.03f; DrawingComponent.get(actor).flipX = true; }
 
   if (!speed.isZero())
   {

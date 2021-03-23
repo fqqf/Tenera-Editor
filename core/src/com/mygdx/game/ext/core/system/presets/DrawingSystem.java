@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.dongbat.jbump.Item;
@@ -95,25 +96,26 @@ public class DrawingSystem extends System
  protected void behave()
  {
   batch.setColor(drawingComponent.spriteColor);
+
+  float valueX = position.x, valueY = position.y;
+  float rotate = drawingComponent.flipX ? -10 : 0;
+  drawingComponent.flipX = false;
   if (drawingComponent.useExtrapolation) // TODO: Упростить
   {
-   float valueX = position.x, valueY = position.y;
-
    if (drawingComponent.extrapolationX) valueX += velocity.x * ApplicationLoop.instance.extrapolation;
    else if (drawingComponent.extrapolationOffNanoX < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationX = true;
 
    if (drawingComponent.extrapolationY) valueY += velocity.y * ApplicationLoop.instance.extrapolation;
    else if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
+  }
 
-   batch.draw(texture, valueX, valueY, size.x, size.y);
-  }
-  else
-  {
-   batch.draw(texture, position.x, position.y, size.x, size.y);
-  }
+//   batch.draw(texture, valueX, valueY, size.x, size.y, valueX, valueY,1,1, 2 );
+
+  batch.draw(texture, valueX, valueY, size.x, size.y, size.x,size.y,1,1,rotate );
 
   if (DEBUG) drawActorBox();
  }
+
 
  private void drawActorBox()
  {

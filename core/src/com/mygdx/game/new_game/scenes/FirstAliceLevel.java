@@ -25,7 +25,7 @@ public class FirstAliceLevel extends Scene
 
   drawLayer.setCoordinateGrid(field);
 
-  new InvisibleWall(0,0,100,0.1f);
+  new InvisibleWall(0,1,100,0.1f);
 
   drawLayer.add(new Alice(1,1));
 
