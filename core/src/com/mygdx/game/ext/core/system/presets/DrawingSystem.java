@@ -12,20 +12,22 @@ import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.World;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.system.System;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
+ private static boolean DEBUG = false;
  private final ShapeDrawer shapeDrawer;
 
  public DrawingSystem()
@@ -48,7 +50,7 @@ public class DrawingSystem extends System
   batch.begin();
   Color color = batch.getColor();
   layers.forEach((key, layer) -> layer.forEach((this::calc)));
- // layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
+  if (DEBUG) layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
   batch.setColor(color);
   batch.end();
  }
@@ -110,7 +112,7 @@ public class DrawingSystem extends System
    batch.draw(texture, position.x, position.y, size.x, size.y);
   }
 
-  //drawActorBox();
+  if (DEBUG) drawActorBox();
  }
 
  private void drawActorBox()
