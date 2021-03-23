@@ -46,10 +46,10 @@ public class DrawingSystem extends System
  {
   // logger.info("Drawing System");
   batch.begin();
-
+  Color color = batch.getColor();
   layers.forEach((key, layer) -> layer.forEach((this::calc)));
  // layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
-
+  batch.setColor(color);
   batch.end();
  }
 
@@ -89,10 +89,9 @@ public class DrawingSystem extends System
   }
 
  }
- private Color color;
+
  protected void behave()
  {
-  color = batch.getColor();
   batch.setColor(drawingComponent.spriteColor);
   if (drawingComponent.useExtrapolation) // TODO: Упростить
   {
@@ -110,8 +109,6 @@ public class DrawingSystem extends System
   {
    batch.draw(texture, position.x, position.y, size.x, size.y);
   }
-
-  batch.setColor(color);
 
   //drawActorBox();
  }
