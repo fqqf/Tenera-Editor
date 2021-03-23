@@ -12,18 +12,16 @@ public class DrawingComponent extends Component
 {
  private static final ComputeableHashMap<DrawingComponent> childList = new ComputeableHashMap<>();
  private static final TextureAtlas.AtlasRegion defaultTexture;
-
- public Color spriteColor = Color.WHITE; // По default
- public boolean flipX, flipY;
-
- public boolean draw = true;
-
-
  static
  {
   Texture texture = new Texture("box.png");
   defaultTexture = new TextureAtlas.AtlasRegion(texture, 0, 0, 0, 0);
  }
+
+ public Color spriteColor = Color.WHITE; // По default
+ public boolean flipX, flipY;
+
+ public boolean draw = true;
 
  public TextureAtlas.AtlasRegion texture;
  public boolean useExtrapolation = false;

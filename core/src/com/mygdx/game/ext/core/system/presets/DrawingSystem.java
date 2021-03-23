@@ -16,7 +16,6 @@ import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
-import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.presets.Layer;
@@ -90,9 +89,11 @@ public class DrawingSystem extends System
   }
 
  }
-
+ private Color color;
  protected void behave()
  {
+  color = batch.getColor();
+  batch.setColor(drawingComponent.spriteColor);
   if (drawingComponent.useExtrapolation) // TODO: Упростить
   {
    float valueX = position.x, valueY = position.y;
@@ -110,6 +111,7 @@ public class DrawingSystem extends System
    batch.draw(texture, position.x, position.y, size.x, size.y);
   }
 
+  batch.setColor(color);
 
   //drawActorBox();
  }
