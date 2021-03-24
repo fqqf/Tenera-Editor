@@ -11,10 +11,12 @@ public class CollisionComponent extends Component
 {
  private static final ComputeableHashMap<CollisionComponent> childList = new ComputeableHashMap<>();
 
+ public boolean isStanding = false;
+
  public final BoundingBox box;
  public final Item<Actor> item;
 
- public CollisionComponent(Actor actor)
+ private CollisionComponent(Actor actor)
  {
   item = new Item<>(actor);
   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);

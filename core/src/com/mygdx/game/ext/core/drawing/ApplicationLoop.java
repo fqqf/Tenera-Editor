@@ -54,7 +54,7 @@ public abstract class ApplicationLoop extends ApplicationAdapter
 
   if (renderDelta > ESTIMATED_MAX_FRAME_CALL && ++lateFramesAmount > MAX_TOLERATED_LATE_FRAMES)
   {
-   logger.error("Big delta call time detected (Perhaps resources are not available for this process)");
+   logger.error("Big delta call time detected (Perhaps resources are not available for this process (or ding-dong Kostya forgot to finish freezing dt in extraploation loop :/))");
    lateFramesAmount = 0;
   }
   else

@@ -33,7 +33,7 @@ public class DrawingComponent extends Component
  public Color debugCollisionColor = Color.PINK;
 
 
- public DrawingComponent(TextureAtlas.AtlasRegion texture, Actor actor)
+ private DrawingComponent(TextureAtlas.AtlasRegion texture, Actor actor)
  {
   this.texture = texture;
  }

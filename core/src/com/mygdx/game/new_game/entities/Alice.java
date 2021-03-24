@@ -7,6 +7,7 @@ import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
+import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
@@ -42,6 +43,8 @@ public class Alice extends Actor
   );
 
   Systems.animationSystem.addActor(this);
-  Systems.aliceMovementControl.addActor(this);
+  Systems.aliceBehaviourSystem.setAlice(this);
+
+  JumpComponent.get(this);
  }
 }

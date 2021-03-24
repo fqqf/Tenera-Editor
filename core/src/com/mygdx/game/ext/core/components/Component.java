@@ -7,5 +7,4 @@ import java.lang.invoke.MethodHandles;
 
 public abstract class Component
 {
-
 }

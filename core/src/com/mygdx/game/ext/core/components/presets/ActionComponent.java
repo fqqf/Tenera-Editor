@@ -11,7 +11,7 @@ public class ActionComponent extends Component
  private static final ComputeableHashMap<ActionComponent> childList = new ComputeableHashMap<>();
  public Action.Arg1<Actor> action;
 
- public ActionComponent(Action.Arg1<Actor> action, Actor actor)
+ private ActionComponent(Action.Arg1<Actor> action, Actor actor)
  {
   this.action = action;
  }

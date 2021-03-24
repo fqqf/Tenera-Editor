@@ -50,7 +50,7 @@ public class CollisionSystem extends System
   {
    Item<Actor> item = CollisionComponent.get(actor1).item;
    world.remove(item);
-   }
+  }
  }
 
  public void updateActor(Actor... actors)
@@ -66,7 +66,7 @@ public class CollisionSystem extends System
  public CollisionSystem()
  {
   type = Type.PHYSICS_SYSTEM;
-  priority = 2;
+  priority = 10;
  }
 
  public void handle()
@@ -107,8 +107,7 @@ public class CollisionSystem extends System
 
     DrawingComponent drawingComponent = DrawingComponent.get(actorA);
     if ( result.goalX != moveToX ) { drawingComponent.extrapolationX = false; drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;}
-    if ( result.goalY != moveToY ) { drawingComponent.extrapolationY = false; drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime;}
-
+    if ( result.goalY != moveToY ) { drawingComponent.extrapolationY = false; drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime; }
 
     result.projectedCollisions.items.forEach( item1-> { DrawingComponent.get((Actor)item1.userData).debugCollisionColor = Color.RED;}); //debug
     result.projectedCollisions.others.forEach( other-> { DrawingComponent.get((Actor)other.userData).debugCollisionColor = Color.RED;}); //debug

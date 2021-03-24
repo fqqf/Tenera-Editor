@@ -20,12 +20,13 @@ public class FirstAliceLevel extends Scene
   addSystem(
     Systems.collisionSystem, Systems.drawingSystem,
     Systems.animationSystem, Systems.collisionSystem,
-    Systems.physicsSystem, Systems.aliceMovementControl
+    Systems.physicsSystem, Systems.keyBoardSystem,
+    Systems.aliceBehaviourSystem
   );
 
   drawLayer.setCoordinateGrid(field);
 
-  new InvisibleWall(0,1,100,0.1f);
+  new InvisibleWall(0,0,100,0.1f);
 
   drawLayer.add(new Alice(1,1));
 

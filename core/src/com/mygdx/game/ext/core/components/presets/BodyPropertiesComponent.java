@@ -10,6 +10,8 @@ public class BodyPropertiesComponent extends Component
  public Vector2 position = new Vector2(1,1);
  public Vector2 size = new Vector2(1,1);
 
+
+
  private static final ComputeableHashMap<BodyPropertiesComponent> childList = new ComputeableHashMap<>();
  
  public static BodyPropertiesComponent get(Actor actor)

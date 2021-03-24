@@ -11,5 +11,6 @@ public class Systems
  public static CollisionSystem collisionSystem = new CollisionSystem();
  public static PhysicsSystem physicsSystem = new PhysicsSystem();
  public static DrawingSystem drawingSystem = new DrawingSystem();
- public static AliceMovementControl aliceMovementControl = new AliceMovementControl();
+ public static KeyBoardSystem keyBoardSystem = new KeyBoardSystem();
+ public static AliceBehaviourSystem aliceBehaviourSystem = new AliceBehaviourSystem();
 }

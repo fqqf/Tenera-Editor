@@ -14,11 +14,14 @@ public class PhysicsComponent extends Component
  public Vector2 size;
 
  public Vector2 velocity = new Vector2(0,0);
+
  public Vector2 speed = new Vector2();
+ public Vector2 acceleration = new Vector2();
+ public Vector2 gravity = new Vector2();
 
  public Color color = Color.GREEN; // for dr/aw debug value
 
- public PhysicsComponent(Actor actor)
+ private PhysicsComponent(Actor actor)
  {
   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);
 
