@@ -17,6 +17,8 @@ public class MovingComponent extends Component
  public float getSpeed()
  {
   speed = 0;
+  acc = moveTo;
+  moveTo = 0;
   accSing = Math.signum(acc);
 
   if (!isMoving)
@@ -35,9 +37,11 @@ public class MovingComponent extends Component
   return speed;
  }
 
+ public float moveTo;
+
  public void move(float vel)
  {
-  acc=vel;
+  moveTo+=vel;
   isMoving = true;
  }
 

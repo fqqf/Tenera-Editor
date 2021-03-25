@@ -39,8 +39,8 @@ public class AliceBehaviourSystem extends System
 
 
   if (UP) JumpComponent.get(alice).jump();
-  if (LEFT) { MovingComponent.get(alice).move(-1); DrawingComponent.get(alice).flipX = true; }
-  if (RIGHT) { MovingComponent.get(alice).move(1); DrawingComponent.get(alice).flipX = false; }
+  if (LEFT) { MovingComponent.get(alice).move(-1); if (!RIGHT) DrawingComponent.get(alice).flipX = true;}
+  if (RIGHT) { MovingComponent.get(alice).move(1); if (!LEFT) DrawingComponent.get(alice).flipX = false;}
 
   KeyBoardSystem.UP = false;
   KeyBoardSystem.LEFT = false;
