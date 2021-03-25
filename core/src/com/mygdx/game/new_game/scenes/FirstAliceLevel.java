@@ -3,6 +3,7 @@ package com.mygdx.game.new_game.scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.event.presets.PlaySound;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.ext.core.system.System;
@@ -14,6 +15,7 @@ import com.mygdx.game.new_game.entities.InvisibleWall;
 public class FirstAliceLevel extends Scene
 {
  public static Layer drawLayer = new Layer(null);
+ public Alice alice = new Alice(1,2);
 
  public FirstAliceLevel(String name, ExtendCoordinateGrid field, float width, float height)
  {
@@ -21,9 +23,11 @@ public class FirstAliceLevel extends Scene
   setSceneSystems();
   drawLayer.setCoordinateGrid(field);
 
-  drawLayer.add(new Alice(1, 2), new InvisibleWall(0, 1, 100, 0.1f), new Gear(5,5));
+  drawLayer.add(alice, new InvisibleWall(0, 1, 100, 0.1f), new Gear(5,15));
 
   Systems.drawingSystem.layers.put(1, drawLayer);
+
+  Systems.eventSystem.setMaster(alice).addEvent(new PlaySound());
  }
 
  private void setSceneSystems()
@@ -36,6 +40,7 @@ public class FirstAliceLevel extends Scene
   addSystem(System.Type.PHYSICS_SYSTEM,
     Systems.aliceBehaviourSystem,
     Systems.physicsSystem,
+    Systems.eventSystem,
     Systems.collisionSystem
   );
  }

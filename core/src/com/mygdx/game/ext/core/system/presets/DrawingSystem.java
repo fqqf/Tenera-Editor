@@ -18,7 +18,9 @@ import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
+import com.mygdx.game.ext.core.event.Event;
 import com.mygdx.game.ext.core.group.presets.Layer;
+import com.mygdx.game.ext.core.system.EventSystem;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 import space.earlygrey.shapedrawer.ShapeDrawer;
@@ -115,25 +117,37 @@ public class DrawingSystem extends System
   if (flippedX || flippedY) texture.flip(flippedX, flippedY);
 
   batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x, drawSize.y, drawSize.x,drawSize.y,1,1, 0);
+
+  debug();
+
+ }
+
+ private void debug()
+ {
+  if (Event.eventSystemInstance!=null) drawEvents();
   drawCollisionBox();
   drawTextureBox();
  }
 
+ private void draw(Vector2 position, Vector2 size, Color color)
+ {
+  shapeDrawer.setColor(color);
+  shapeDrawer.setDefaultLineWidth(0.02f);
+  shapeDrawer.rectangle(position.x, position.y, size.x, size.y);
+ }
+
+ private void drawEvents()
+ {
+  Event.eventSystemInstance.events.forEach((event) -> draw(event.position, event.size, Color.GOLD));
+ }
 
  private void drawCollisionBox()
  {
   final PhysicsComponent physicsComponent = PhysicsComponent.get(actor);
-  shapeDrawer.setColor(Color.RED);
-  shapeDrawer.setDefaultLineWidth(0.02f);
-  shapeDrawer.rectangle(physicsComponent.position.x, physicsComponent.position.y, physicsComponent.size.x, physicsComponent.size.y);
+  draw(physicsComponent.position, physicsComponent.size, Color.RED);
  }
 
- private void drawTextureBox()
- {
-  shapeDrawer.setColor(Color.LIME);
-  shapeDrawer.setDefaultLineWidth(0.02f);
-  shapeDrawer.rectangle(drawPosition.x, drawPosition.y, drawSize.x, drawSize.y);
- }
+ private void drawTextureBox() { draw(drawPosition, drawSize, Color.LIME); }
 
  private void showWorldRects(Array<Actor> array, World<Actor> world)
  {

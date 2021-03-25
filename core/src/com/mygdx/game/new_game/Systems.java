@@ -1,5 +1,6 @@
 package com.mygdx.game.new_game;
 
+import com.mygdx.game.ext.core.system.EventSystem;
 import com.mygdx.game.ext.core.system.presets.AnimationSystem;
 import com.mygdx.game.ext.core.system.presets.DrawingSystem;
 import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
@@ -13,4 +14,5 @@ public class Systems
  public static DrawingSystem drawingSystem = new DrawingSystem();
  public static KeyBoardSystem keyBoardSystem = new KeyBoardSystem();
  public static AliceBehaviourSystem aliceBehaviourSystem = new AliceBehaviourSystem();
+ public static EventSystem eventSystem = new EventSystem();
 }
