@@ -25,9 +25,10 @@ public class Alice extends Actor
   physicsComponent.size.set(5.14f/1.3f,6.49f/1.3f);
 
   CollisionComponent cc = CollisionComponent.get(this);
-  cc.box.setType(CollisionType.BODY);
-  cc.box.setPosition(x,y);
-  cc.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
+  cc.collisionType = CollisionType.BODY;
+
+  // cc.box.setPosition(x,y);
+  // cc.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
 
   Systems.physicsSystem.addActor(this);
   Systems.collisionSystem.addActor(this);

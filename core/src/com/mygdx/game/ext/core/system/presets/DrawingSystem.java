@@ -28,7 +28,7 @@ import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
- private static boolean DEBUG = false;
+ private static boolean DEBUG = true;
  private final ShapeDrawer shapeDrawer;
 
  public DrawingSystem()
@@ -111,7 +111,7 @@ public class DrawingSystem extends System
 
 //   batch.draw(texture, valueX, valueY, size.x, size.y, valueX, valueY,1,1, 2 );
 
-  batch.draw(texture, valueX, valueY, size.x, size.y, size.x,size.y,1,1,rotate );
+  batch.draw(texture, valueX, valueY, size.x, size.y, size.x,size.y,1,1, rotate);
 
   if (DEBUG) drawActorBox();
  }

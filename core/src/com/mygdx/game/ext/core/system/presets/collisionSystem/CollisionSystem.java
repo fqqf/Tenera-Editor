@@ -18,7 +18,7 @@ public class CollisionSystem extends System
   {
    Actor actorB = (Actor)other.userData;
    CollisionComponent collisionComponent = CollisionComponent.get(actorB);
-   switch (collisionComponent.box.getType())
+   switch (collisionComponent.collisionType)
    {
     case CollisionType.PLATFORM:
      float speedY = PhysicsComponent.get((Actor) item.userData).velocity.y;
@@ -59,7 +59,7 @@ public class CollisionSystem extends System
   {
    BodyPropertiesComponent bp = BodyPropertiesComponent.get(actor);
    CollisionComponent cc = CollisionComponent.get(actor);
-   world.update(cc.item, bp.position.x + cc.box.offset.x, bp.position.y + cc.box.offset.y, cc.box.width, cc.box.height);
+   world.update(cc.item, bp.position.x, bp.position.y, bp.size.x, bp.size.y);
   }
  }
 
@@ -79,15 +79,14 @@ public class CollisionSystem extends System
    if (physics1.velocity.isZero())continue;
 
    CollisionComponent cc = CollisionComponent.get(actorA);
-   if (cc.box.getType() != CollisionType.BODY) continue;
+   if (cc.collisionType != CollisionType.BODY) continue;
 
    Item<Actor> item = CollisionComponent.get(actorA).item;
 
+   float targetX = physics1.position.x;
+   float targetY = physics1.position.y;
 
-   float moveToX = physics1.position.x + cc.box.offset.x;
-   float moveToY = physics1.position.y + cc.box.offset.y;
-
-   Response.Result result = world.move(item, moveToX, moveToY, collisionFilter);
+   Response.Result result = world.move(item, targetX, targetY, collisionFilter);
    if (!result.projectedCollisions.isEmpty())
    {
     result.projectedCollisions.others.forEach(
@@ -95,7 +94,7 @@ public class CollisionSystem extends System
       {
        Actor collisionActor = (Actor) other.userData;
        CollisionComponent collisionComponent = CollisionComponent.get(collisionActor);
-       switch (collisionComponent.box.getType())
+       switch (collisionComponent.collisionType)
        {
         case CollisionType.LIQUID:
          PhysicsComponent physics = PhysicsComponent.get(collisionActor);
@@ -106,15 +105,13 @@ public class CollisionSystem extends System
 
 
     DrawingComponent drawingComponent = DrawingComponent.get(actorA);
-    if ( result.goalX != moveToX ) { drawingComponent.extrapolationX = false; drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;}
-    if ( result.goalY != moveToY ) { drawingComponent.extrapolationY = false; drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime; }
+    if ( result.goalX != targetX ) { drawingComponent.extrapolationX = false; drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;}
+    if ( result.goalY != targetY ) { drawingComponent.extrapolationY = false; drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime; }
 
     result.projectedCollisions.items.forEach( item1-> { DrawingComponent.get((Actor)item1.userData).debugCollisionColor = Color.RED;}); //debug
     result.projectedCollisions.others.forEach( other-> { DrawingComponent.get((Actor)other.userData).debugCollisionColor = Color.RED;}); //debug
    }
-
-   //todo вот тут я говорил что именно [VERY_BIG_FONT]ОТНИМАТЬ[/VERY_BIG_FONT] offset нужно, ну попробуй прибавить и расскажи что получилось...
-   physics1.position.set(result.goalX - cc.box.offset.x, result.goalY - cc.box.offset.y);
+   physics1.position.set(result.goalX, result.goalY);
   }
  }
 }
