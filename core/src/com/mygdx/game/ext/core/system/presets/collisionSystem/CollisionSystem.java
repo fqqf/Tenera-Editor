@@ -114,8 +114,8 @@ public class CollisionSystem extends System
  }
  private void setColorForDebugBox(final Response.Result result)
  {
-  result.projectedCollisions.items.forEach( item1-> { DrawingComponent.get((Actor)item1.userData).debugCollisionColor = Color.RED;}); //debug
-  result.projectedCollisions.others.forEach( other-> { DrawingComponent.get((Actor)other.userData).debugCollisionColor = Color.RED;}); //debug
+  //result.projectedCollisions.items.forEach( item1-> { DrawingComponent.get((Actor)item1.userData).debugCollisionColor = Color.RED;}); //debug
+ // result.projectedCollisions.others.forEach( other-> { DrawingComponent.get((Actor)other.userData).debugCollisionColor = Color.RED;}); //debug
  }
  private void handleCollisions(final Actor actor, final PhysicsComponent actorPh, final CollisionComponent actorCC, final ArrayList<Item> contacts )
  {

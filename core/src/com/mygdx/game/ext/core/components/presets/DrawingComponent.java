@@ -21,6 +21,7 @@ public class DrawingComponent extends Component
  public Color spriteColor = Color.WHITE; // По default
  public boolean flipX, flipY;
  public final Vector2 offset = new Vector2();
+ public final Vector2 drawSize = new Vector2();
  public boolean draw = true;
 
  public TextureAtlas.AtlasRegion texture;
@@ -36,6 +37,7 @@ public class DrawingComponent extends Component
  private DrawingComponent(TextureAtlas.AtlasRegion texture, Actor actor)
  {
   this.texture = texture;
+  drawSize.set(BodyPropertiesComponent.get(actor).size);
  }
 
  public static DrawingComponent get(Actor actor)

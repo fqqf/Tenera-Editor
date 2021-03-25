@@ -17,7 +17,7 @@ public class MovingComponent extends Component
  public float getSpeed()
  {
   speed = 0;
-  acc = moveTo;
+  if (isMoving) acc = moveTo;
   moveTo = 0;
   accSing = Math.signum(acc);
 
@@ -26,7 +26,6 @@ public class MovingComponent extends Component
    if (acc!=0)
    {
     acc += accSing*PhysicsSystem.FRICTION;
-    System.out.println(acc);
     if (Math.signum(acc) != accSing) acc=0;
    }
   }

@@ -48,8 +48,18 @@ public class KeyBoardSystem extends System
   if (!RIGHT) RIGHT = Gdx.input.isKeyPressed(Input.Keys.D);
   if (!UP) UP = Gdx.input.isKeyJustPressed(Input.Keys.W);
 
-  if (LEFT) { if (!RIGHT) DrawingComponent.get(AliceBehaviourSystem.getAlice()).flipX = true;} // TODO: Move from here to special graphics class.
-  if (RIGHT) {if (!LEFT) DrawingComponent.get(AliceBehaviourSystem.getAlice()).flipX = false;}
+  if (LEFT) {
+   if (!RIGHT) {
+    DrawingComponent.get(AliceBehaviourSystem.getAlice()).flipX = true;
+    DrawingComponent.get(AliceBehaviourSystem.getAlice()).offset.set(0,0);
+   }
+
+  } // TODO: Move from here to special graphics class.
+  if (RIGHT) {if (!LEFT) {
+   DrawingComponent.get(AliceBehaviourSystem.getAlice()).flipX = false;
+   DrawingComponent.get(AliceBehaviourSystem.getAlice()).offset.set(-1.9f,0);
+  }
+  }
  }
 
 

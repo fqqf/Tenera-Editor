@@ -21,6 +21,7 @@ public class CollisionComponent extends Component
  {
   item = new Item<>(actor);
   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);
+
   //box = new BoundingBox(CollisionType.SOLID).set(bodyPropertiesComponent.position, bodyPropertiesComponent.size);
  }
 

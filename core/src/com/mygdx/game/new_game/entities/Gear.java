@@ -1,5 +1,3 @@
-package com.mygdx.game.new_game.entities;
-
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -12,20 +10,17 @@ import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
 
-public class Alice extends Actor
+public class Gear extends Actor
 {
- public Alice(float x, float y)
+ public Gear(float x, float y)
  {
-  PhysicsComponent physicsComponent = PhysicsComponent.get(this);
-  physicsComponent.position.set(x,y);
-  physicsComponent.size.set(2f,6.49f/1.3f);
-
   DrawingComponent drawingComponent = DrawingComponent.get(this);
-  drawingComponent.texture = SpriteManager.textures.get("run_a1");
-  drawingComponent.offset.set(-1.9f,0);
-  drawingComponent.drawSize.set(5.14f/1.3f,6.49f/1.3f);
+  drawingComponent.texture = SpriteManager.textures.get("gear");
   drawingComponent.useExtrapolation = true;
 
+  PhysicsComponent physicsComponent = PhysicsComponent.get(this);
+  physicsComponent.position.set(x,y);
+  physicsComponent.size.set(5.14f/1.3f,6.49f/1.3f);
 
   CollisionComponent cc = CollisionComponent.get(this);
   cc.collisionType = CollisionType.BODY;
@@ -47,7 +42,6 @@ public class Alice extends Actor
   );
 
   Systems.animationSystem.addActor(this);
-  Systems.aliceBehaviourSystem.setAlice(this);
 
   JumpComponent.get(this);
  }

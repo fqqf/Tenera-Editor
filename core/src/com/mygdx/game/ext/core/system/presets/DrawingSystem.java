@@ -76,6 +76,7 @@ public class DrawingSystem extends System
  {
   drawingComponent = DrawingComponent.get(actor);
   texture = drawingComponent.texture;
+  drawSize = drawingComponent.drawSize;
 
   if (drawingComponent.useExtrapolation)
   {
@@ -93,6 +94,7 @@ public class DrawingSystem extends System
  }
 
  private final Vector2 drawPosition = new Vector2();
+ private Vector2 drawSize;
 
  protected void behave()
  {
@@ -112,17 +114,25 @@ public class DrawingSystem extends System
   boolean flippedX = texture.isFlipX() != drawingComponent.flipX, flippedY = texture.isFlipY() != drawingComponent.flipY;
   if (flippedX || flippedY) texture.flip(flippedX, flippedY);
 
-  batch.draw(texture, drawPosition.x, drawPosition.y, size.x, size.y, size.x,size.y,1,1, 0);
-  if (DEBUG) drawActorBox();
+  batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x, drawSize.y, drawSize.x,drawSize.y,1,1, 0);
+  drawCollisionBox();
+  drawTextureBox();
  }
 
 
- private void drawActorBox()
+ private void drawCollisionBox()
  {
   final PhysicsComponent physicsComponent = PhysicsComponent.get(actor);
-  shapeDrawer.setColor(Color.GRAY);
+  shapeDrawer.setColor(Color.RED);
   shapeDrawer.setDefaultLineWidth(0.02f);
   shapeDrawer.rectangle(physicsComponent.position.x, physicsComponent.position.y, physicsComponent.size.x, physicsComponent.size.y);
+ }
+
+ private void drawTextureBox()
+ {
+  shapeDrawer.setColor(Color.LIME);
+  shapeDrawer.setDefaultLineWidth(0.02f);
+  shapeDrawer.rectangle(drawPosition.x, drawPosition.y, drawSize.x, drawSize.y);
  }
 
  private void showWorldRects(Array<Actor> array, World<Actor> world)
