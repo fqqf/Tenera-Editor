@@ -1,6 +1,7 @@
 package com.mygdx.game.ext.core.system.presets;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
 import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;

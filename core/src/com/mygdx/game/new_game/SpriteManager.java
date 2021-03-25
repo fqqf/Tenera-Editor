@@ -17,15 +17,10 @@ public class SpriteManager
   //textures0.put("enemy", new Texture("test8/enemy.png"));
 
 
-  textures0.put("run_a2", new Texture("hitobashira_demo/run_a2.png"));
-  textures0.put("run_a3", new Texture("hitobashira_demo/run_a3.png"));
-  textures0.put("run_a4", new Texture("hitobashira_demo/run_a4.png"));
-  textures0.put("run_a5", new Texture("hitobashira_demo/run_a5.png"));
-  textures0.put("run_a6", new Texture("hitobashira_demo/run_a6.png"));
-
   textures0.put("gear", new Texture("hitobashira_demo/gear.png"));
 
   for (int i = 1; i < 7; i++) textures0.put("run_a"+i, new Texture("hitobashira_demo/run_a"+i+".png"));
+  for (int i = 1; i < 5; i++) textures0.put("stand_a"+i, new Texture("hitobashira_demo/stand_a"+i+".png"));
 
   init();
  }

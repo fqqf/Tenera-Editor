@@ -15,7 +15,7 @@ import com.mygdx.game.new_game.entities.InvisibleWall;
 public class FirstAliceLevel extends Scene
 {
  public static Layer drawLayer = new Layer(null);
- public Alice alice = new Alice(1,2);
+ public Alice alice = new Alice(2,5);
 
  public FirstAliceLevel(String name, ExtendCoordinateGrid field, float width, float height)
  {

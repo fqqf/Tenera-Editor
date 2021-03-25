@@ -1,7 +1,9 @@
 package com.mygdx.game.new_game.entities;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
@@ -15,6 +17,7 @@ import com.mygdx.game.new_game.Systems;
 
 public class Alice extends Actor
 {
+
  public Alice(float x, float y)
  {
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);

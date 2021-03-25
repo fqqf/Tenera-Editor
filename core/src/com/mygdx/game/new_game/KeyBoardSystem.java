@@ -6,12 +6,16 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
+import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.ControlSystem;
+import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
+import com.mygdx.game.new_game.entities.Alice;
 import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class KeyBoardSystem extends System
@@ -51,10 +55,11 @@ public class KeyBoardSystem extends System
   if (LEFT) {
    if (!RIGHT) {
     DrawingComponent.get(AliceBehaviourSystem.getAlice()).flipX = true;
+
     DrawingComponent.get(AliceBehaviourSystem.getAlice()).offset.set(0,0);
    }
 
-  } // TODO: Move from here to special graphics class.
+  } // TODO: Move from here to special graphics class. ( GRAPHIC SWITCHER CLASS )
   if (RIGHT) {if (!LEFT) {
    DrawingComponent.get(AliceBehaviourSystem.getAlice()).flipX = false;
    DrawingComponent.get(AliceBehaviourSystem.getAlice()).offset.set(-1.9f,0);
