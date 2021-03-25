@@ -7,13 +7,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
-import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
 import com.mygdx.game.ext.core.system.System;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 public abstract class Scene
 {
@@ -59,9 +55,9 @@ public abstract class Scene
  // public void iterInput() { callInputSystems(); handleInput(); }
  //private int actStartIndex=0, inputStartIndex=0, graphicsEndIndex=0, actEndIndex=0;
 
- private Map<Integer,Array<System>> getSystemTypeMap(final System.Type systemType)
+ private Array<System> getArrayForSystemType(final System.Type systemType)
  {
-  switch ( systemType )
+  switch (systemType)
   {
    case RENDER_SYSTEM: return renderSystems;
    case PHYSICS_SYSTEM: return physicSystems;
@@ -69,43 +65,25 @@ public abstract class Scene
   throw new IllegalArgumentException("такого быть не должно! " + systemType);
  }
 
- protected void callRenderSystems()
+ protected void callRenderSystems() { for (int i = 0; i < renderSystems.size; i++) renderSystems.get(i).handle(); }
+ protected void callPhysSystems() { for (int i = 0; i < physicSystems.size; i++) physicSystems.get(i).handle(); }
+
+
+ private final Array<System> renderSystems = new Array<>();
+ private final Array<System> physicSystems = new Array<>();
+ public void addSystem(final System.Type systemType, System... systems)
  {
-  // logger.info("callRenderSystems");
-  renderSystems.forEach((prio, array)->array.forEach(System::handle) );
+  Array<System> systemsArray = getArrayForSystemType(systemType);
+  systemsArray.addAll(systems);
+ }
+ public void addSystem(System... systems)
+ {
+  for (System system : systems) getArrayForSystemType(system.getType()).add(system);
  }
 
- protected void callPhysSystems()
- {
-  physicSystems.forEach((prio,array)->array.forEach(System::handle));
- }
-
-// protected void callInputSystems()
-// {
-// inputSystems.forEach((prio,collection)->collection.forEach(System::handle));
-// }
- private final Map<Integer, Array<System>> renderSystems = new TreeMap<>();
- private final Map<Integer, Array<System>> physicSystems = new TreeMap<>();
- //private final Map<Integer, Array<System>> inputSystems = new TreeMap<>();
-
- public void addSystem(System... systems) { for (System system : systems) addSystem(system); }
-
-
- private void addSystem(System system)
- {
-  Map<Integer,Array<System>> sysMap = getSystemTypeMap( system.getType() );
-  Array<System> array;
-  if ( sysMap.containsKey(system.priority) ) array = sysMap.get(system.priority);
-  else { array = new Array<>(5);sysMap.put(system.priority,array); }
-  array.add(system);
- }
 
  public void remSystem(System... systems) { for (System system : systems) remSystem(system); }
- private void remSystem(System system)
- {
-  Map<Integer,Array<System>> sysMap = getSystemTypeMap(system.getType());
-  if ( sysMap.containsKey(system.priority) ) sysMap.get(system.priority).removeValue(system, true);
- }
+ private void remSystem(System system) { getArrayForSystemType(system.getType()).removeValue(system, true); }
 
  protected OrthographicCamera camera;
 
