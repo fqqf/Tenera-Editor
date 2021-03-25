@@ -96,7 +96,8 @@ public class CollisionSystem extends System
     handleCollisions(actorA, actorAPhysics, actorAcc, result.projectedCollisions.others);
     handleExtrapolationBehaviour(actorA,targetX,targetY,result);
     setColorForDebugBox(result);
-   }else{ actorAcc.isStanding = false; }
+   }
+   else{ actorAcc.isStanding = false; }
 
    actorAPhysics.position.set(result.goalX, result.goalY);
   }
@@ -107,8 +108,8 @@ public class CollisionSystem extends System
   DrawingComponent drawingComponent = DrawingComponent.get(actor);
   if (drawingComponent.useExtrapolation)
   {
-   if (result.goalX != targetX) { drawingComponent.extrapolationX = false; drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime; PhysicsComponent.get(actor).velocity.x = 0;}
-   if (result.goalY != targetY) { drawingComponent.extrapolationY = false; drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime; PhysicsComponent.get(actor).velocity.y = 0;}
+   if (result.goalX != targetX) { drawingComponent.extrapolationX = false; drawingComponent.extrapolationOffNanoX = ApplicationLoop.instance.nextTickTime;}
+   if (result.goalY != targetY) { drawingComponent.extrapolationY = false; drawingComponent.extrapolationOffNanoY = ApplicationLoop.instance.nextTickTime; }
   }
  }
  private void setColorForDebugBox(final Response.Result result)
