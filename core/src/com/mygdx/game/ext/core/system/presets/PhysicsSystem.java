@@ -32,7 +32,7 @@ public class PhysicsSystem extends System
  protected void behave()
  {
   position.add(velocity);
-  velocity.set(0,0);
+  velocity.setZero();
 
   count();
 

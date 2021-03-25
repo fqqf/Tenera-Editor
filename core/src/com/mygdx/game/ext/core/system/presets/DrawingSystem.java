@@ -100,8 +100,6 @@ public class DrawingSystem extends System
   drawPosition.set(position);
   if (!drawingComponent.offset.isZero())drawPosition.add(drawingComponent.offset);
 
-  float rotate = drawingComponent.flipX ? -10 : 0;
-  drawingComponent.flipX = false;
   if (drawingComponent.useExtrapolation) // TODO: Упростить
   {
    if (drawingComponent.extrapolationX) drawPosition.x += velocity.x * ApplicationLoop.instance.extrapolation;
@@ -111,8 +109,10 @@ public class DrawingSystem extends System
    else if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
   }
 
-  batch.draw(texture, drawPosition.x, drawPosition.y, size.x, size.y, size.x,size.y,1,1, rotate);
+  boolean flippedX = texture.isFlipX() != drawingComponent.flipX, flippedY = texture.isFlipY() != drawingComponent.flipY;
+  if (flippedX || flippedY) texture.flip(flippedX, flippedY);
 
+  batch.draw(texture, drawPosition.x, drawPosition.y, size.x, size.y, size.x,size.y,1,1, 0);
   if (DEBUG) drawActorBox();
  }
 
