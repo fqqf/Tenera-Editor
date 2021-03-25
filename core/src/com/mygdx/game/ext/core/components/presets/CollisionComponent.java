@@ -16,7 +16,6 @@ public class CollisionComponent extends Component
 
  public final Item<Actor> item;
  public int collisionType = CollisionType.SOLID;
- public boolean inStanding = false;
 
  private CollisionComponent(Actor actor)
  {
