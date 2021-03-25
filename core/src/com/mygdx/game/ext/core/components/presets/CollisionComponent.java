@@ -12,15 +12,16 @@ public class CollisionComponent extends Component
  private static final ComputeableHashMap<CollisionComponent> childList = new ComputeableHashMap<>();
 
  public boolean isStanding = false;
+ //public final BoundingBox box;
 
- public final BoundingBox box;
  public final Item<Actor> item;
+ public int collisionType = CollisionType.SOLID;
 
  private CollisionComponent(Actor actor)
  {
   item = new Item<>(actor);
   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);
-  box = new BoundingBox(CollisionType.SOLID).set(bodyPropertiesComponent.position, bodyPropertiesComponent.size);
+  //box = new BoundingBox(CollisionType.SOLID).set(bodyPropertiesComponent.position, bodyPropertiesComponent.size);
  }
 
  public static CollisionComponent get(Actor actor)

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.dongbat.jbump.Item;
@@ -93,26 +92,27 @@ public class DrawingSystem extends System
 
  }
 
+ private final Vector2 drawPosition = new Vector2();
+
  protected void behave()
  {
   batch.setColor(drawingComponent.spriteColor);
+  drawPosition.set(position);
+  if (!drawingComponent.offset.isZero())drawPosition.add(drawingComponent.offset);
 
-  float valueX = position.x, valueY = position.y;
-  float rotate = drawingComponent.flipX ? -10 : 0;
-  drawingComponent.flipX = false;
   if (drawingComponent.useExtrapolation) // TODO: Упростить
   {
-   if (drawingComponent.extrapolationX) valueX += velocity.x * ApplicationLoop.instance.extrapolation;
+   if (drawingComponent.extrapolationX) drawPosition.x += velocity.x * ApplicationLoop.instance.extrapolation;
    else if (drawingComponent.extrapolationOffNanoX < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationX = true;
 
-   if (drawingComponent.extrapolationY) valueY += velocity.y * ApplicationLoop.instance.extrapolation;
+   if (drawingComponent.extrapolationY) drawPosition.y += velocity.y * ApplicationLoop.instance.extrapolation;
    else if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
   }
 
-//   batch.draw(texture, valueX, valueY, size.x, size.y, valueX, valueY,1,1, 2 );
+  boolean flippedX = texture.isFlipX() != drawingComponent.flipX, flippedY = texture.isFlipY() != drawingComponent.flipY;
+  if (flippedX || flippedY) texture.flip(flippedX, flippedY);
 
-  batch.draw(texture, valueX, valueY, size.x, size.y, size.x,size.y,1,1,rotate );
-
+  batch.draw(texture, drawPosition.x, drawPosition.y, size.x, size.y, size.x,size.y,1,1, 0);
   if (DEBUG) drawActorBox();
  }
 

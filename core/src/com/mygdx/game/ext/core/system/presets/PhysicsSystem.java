@@ -12,6 +12,7 @@ public class PhysicsSystem extends System
 
 
  public static final float GRAVITY_FORCE_VALUE = -0.3f;
+ public static final float FRICTION = -0.2f;
 
  {
   type = Type.PHYSICS_SYSTEM; // PHYSICS_COMPONENT;
@@ -32,7 +33,7 @@ public class PhysicsSystem extends System
  protected void behave()
  {
   position.add(velocity);
-  velocity.set(0,0);
+  velocity.setZero();
 
   count();
 

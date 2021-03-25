@@ -16,9 +16,11 @@ public class InvisibleWall extends Actor
   bodyPropertiesComponent.size.set(width, height);
 
   CollisionComponent collisionComponent = CollisionComponent.get(this);
-  collisionComponent.box.setPosition(x,y);
-  collisionComponent.box.setSize(width, height);
-  collisionComponent.box.setType(CollisionType.SOLID);
+
+  // collisionComponent.box.setPosition(x,y);
+  // collisionComponent.box.setSize(width, height);
+
+  collisionComponent.collisionType = CollisionType.SOLID;
   Systems.collisionSystem.addActor(this);
  }
 

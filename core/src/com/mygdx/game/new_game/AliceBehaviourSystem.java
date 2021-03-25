@@ -1,5 +1,6 @@
 package com.mygdx.game.new_game;
 
+import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
 import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;
 import com.mygdx.game.ext.core.system.System;
@@ -29,7 +30,6 @@ public class AliceBehaviourSystem extends System
  {
   if (alice!=null) behave();
  }
-
  @Override
  protected void behave()
  {
@@ -39,8 +39,8 @@ public class AliceBehaviourSystem extends System
 
 
   if (UP) JumpComponent.get(alice).jump();
-  if (LEFT) MovingComponent.get(alice).move(-1);
-  if (RIGHT) MovingComponent.get(alice).move(1);
+  if (LEFT) { MovingComponent.get(alice).move(-1); DrawingComponent.get(alice).flipX = true; }
+  if (RIGHT) { MovingComponent.get(alice).move(1); DrawingComponent.get(alice).flipX = false; }
 
   KeyBoardSystem.UP = false;
   KeyBoardSystem.LEFT = false;

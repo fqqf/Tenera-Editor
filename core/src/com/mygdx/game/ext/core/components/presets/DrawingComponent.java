@@ -20,7 +20,7 @@ public class DrawingComponent extends Component
 
  public Color spriteColor = Color.WHITE; // По default
  public boolean flipX, flipY;
-
+ public final Vector2 offset = new Vector2();
  public boolean draw = true;
 
  public TextureAtlas.AtlasRegion texture;

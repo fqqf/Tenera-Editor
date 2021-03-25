@@ -9,13 +9,16 @@ public class LF4DComponent extends Component
  protected static final ComputeableHashMap<LF4DComponent> childList = new ComputeableHashMap<>();
 
  protected LF4DComponent(LF4DComponent LF4DComponent) {}
- protected LF4DComponent() {}
+ protected LF4DComponent(Actor actor)
+ {
+  this.actor = actor;
+ }
 
  protected Actor actor;
 
  public static LF4DComponent get(Actor actor)
  {
-  return childList.compute(actor, LF4DComponent::new);
+  return childList.compute(actor, () -> new LF4DComponent(actor));
  }
 
 }

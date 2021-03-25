@@ -6,6 +6,6 @@ public class TODO
  //  updateinGameTime method
  //  replace JumpComponent and everything else with only movementComponent
  //  semi-fixed step
- //  Найти ошибку в формуле JumpComponent
+ //  Найти ошибку в формуле JumpComponent +use formula from saved, and separate gravity from jumping
  //  use priority list instead of int;
 }
