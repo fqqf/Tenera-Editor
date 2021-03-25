@@ -18,6 +18,7 @@ public class CollisionSystem extends System
   {
    Actor actorB = (Actor)other.userData;
    CollisionComponent collisionComponent = CollisionComponent.get(actorB);
+
    switch (collisionComponent.collisionType)
    {
     case CollisionType.PLATFORM:
@@ -113,5 +114,9 @@ public class CollisionSystem extends System
    }
    physics1.position.set(result.goalX, result.goalY);
   }
+ }
+ private void collisionHandle()
+ {
+
  }
 }
