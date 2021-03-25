@@ -8,4 +8,5 @@ public class TODO
  //  semi-fixed step
  //  Найти ошибку в формуле JumpComponent +use formula from saved, and separate gravity from jumping
  //  use priority list instead of int;
+ //  set flipX in Graphics, not in Physics
 }

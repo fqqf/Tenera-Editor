@@ -10,11 +10,16 @@ public class AliceBehaviourSystem extends System
 {
  private boolean UP, LEFT, RIGHT;
 
- private Alice alice;
+ private static Alice alice;
 
- public void setAlice(Alice alice)
+ public static void setAlice(Alice alic)
  {
-  this.alice = alice;
+  alice = alic;
+ }
+
+ public static Alice getAlice()
+ {
+  return alice;
  }
 
  public AliceBehaviourSystem()

@@ -9,6 +9,7 @@ import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
+import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.ControlSystem;
 import com.mygdx.game.new_game.scenes.FirstAliceLevel;
@@ -46,6 +47,9 @@ public class KeyBoardSystem extends System
   if (!LEFT) LEFT = Gdx.input.isKeyPressed(Input.Keys.A);
   if (!RIGHT) RIGHT = Gdx.input.isKeyPressed(Input.Keys.D);
   if (!UP) UP = Gdx.input.isKeyJustPressed(Input.Keys.W);
+
+  if (LEFT) { if (!RIGHT) DrawingComponent.get(AliceBehaviourSystem.getAlice()).flipX = true;} // TODO: Move from here to special graphics class.
+  if (RIGHT) {if (!LEFT) DrawingComponent.get(AliceBehaviourSystem.getAlice()).flipX = false;}
  }
 
 
