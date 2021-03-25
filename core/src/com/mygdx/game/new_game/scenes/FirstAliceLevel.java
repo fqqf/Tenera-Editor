@@ -20,7 +20,7 @@ public class FirstAliceLevel extends Scene
   setSceneSystems();
   drawLayer.setCoordinateGrid(field);
 
-  drawLayer.add(new Alice(1,2),new InvisibleWall(0,1,100,0.1f));
+  drawLayer.add(new Alice(1, 2), new InvisibleWall(0, 1, 100, 0.1f));
 
   Systems.drawingSystem.layers.put(1, drawLayer);
  }
@@ -28,14 +28,14 @@ public class FirstAliceLevel extends Scene
  private void setSceneSystems()
  {
   addSystem(System.Type.RENDER_SYSTEM,
-          Systems.keyBoardSystem,
-          Systems.aliceBehaviourSystem,
-          Systems.animationSystem,
-          Systems.drawingSystem
+    Systems.keyBoardSystem,
+    Systems.animationSystem,
+    Systems.drawingSystem
   );
   addSystem(System.Type.PHYSICS_SYSTEM,
-          Systems.physicsSystem,
-          Systems.collisionSystem
+    Systems.aliceBehaviourSystem,
+    Systems.physicsSystem,
+    Systems.collisionSystem
   );
  }
 
@@ -48,7 +48,6 @@ public class FirstAliceLevel extends Scene
   drawGrid();
 
   super.iterDraw(extrapolation);
-
  }
 
  @Override

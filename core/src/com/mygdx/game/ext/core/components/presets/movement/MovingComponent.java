@@ -1,28 +1,44 @@
 package com.mygdx.game.ext.core.components.presets.movement;
 
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
+import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
 
 public class MovingComponent extends Component
 {
  private float speed = 0;
  private float acc = 0;
 
+ private boolean isMoving = false;
+
+ private float accSing;
+
  public float getSpeed()
  {
   speed = 0;
+  accSing = Math.signum(acc);
+
+  if (!isMoving)
+  {
+   if (acc!=0)
+   {
+    acc += accSing*PhysicsSystem.FRICTION;
+    System.out.println(acc);
+    if (Math.signum(acc) != accSing) acc=0;
+   }
+  }
+
   speed += acc;
 
-  acc = 0;
-
+  isMoving = false;
   return speed;
  }
 
  public void move(float vel)
  {
-  acc+=vel;
+  acc=vel;
+  isMoving = true;
  }
 
  protected static final ComputeableHashMap<MovingComponent> childList = new ComputeableHashMap<>();

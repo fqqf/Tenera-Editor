@@ -2,6 +2,7 @@ package com.mygdx.game.ext.core.components.presets.movement;
 
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
+import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
 
 public class JumpComponent extends LF4DComponent // TODO: где-то в формуле допущена ошибка (v=v0+at или s=vot+(at*t)/2)
@@ -26,6 +27,8 @@ public class JumpComponent extends LF4DComponent // TODO: где-то в фор�
 
  public void jump()
  {
+  if (!CollisionComponent.get(actor).isStanding) return;
+
   time = 0; speed = 0;
   isActive = true;
  }
@@ -45,8 +48,9 @@ public class JumpComponent extends LF4DComponent // TODO: где-то в фор�
   isActive = false;
  }
 
- private JumpComponent()
+ public JumpComponent(Actor actor)
  {
+  super(actor);
   configure(5,5);
  }
 
@@ -57,5 +61,5 @@ public class JumpComponent extends LF4DComponent // TODO: где-то в фор�
 
  protected static final ComputeableHashMap<JumpComponent> childList = new ComputeableHashMap<>();
 
- public static JumpComponent get(Actor actor) { return childList.compute(actor, JumpComponent::new); }
+ public static JumpComponent get(Actor actor) { return childList.compute(actor, () -> new JumpComponent(actor)); }
 }

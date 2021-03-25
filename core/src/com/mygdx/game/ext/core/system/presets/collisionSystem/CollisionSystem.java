@@ -131,7 +131,7 @@ public class CollisionSystem extends System
     Rect otherRect = world.getRect(cc.item);
     float topYOther = otherRect.y + otherRect.h;
     actorCC.isStanding = actorRect.y - actorPh.velocity.y > topYOther;
-    java.lang.System.out.println("is Standing=" + actorCC.isStanding);
+    //java.lang.System.out.println("is Standing=" + actorCC.isStanding);
    }
 
    switch (cc.collisionType)
