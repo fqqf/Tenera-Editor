@@ -8,6 +8,7 @@ import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.new_game.Systems;
 import com.mygdx.game.new_game.entities.Alice;
+import com.mygdx.game.new_game.entities.Gear;
 import com.mygdx.game.new_game.entities.InvisibleWall;
 
 public class FirstAliceLevel extends Scene
@@ -20,7 +21,7 @@ public class FirstAliceLevel extends Scene
   setSceneSystems();
   drawLayer.setCoordinateGrid(field);
 
-  drawLayer.add(new Alice(1, 2), new InvisibleWall(0, 1, 100, 0.1f));
+  drawLayer.add(new Alice(1, 2), new InvisibleWall(0, 1, 100, 0.1f), new Gear(5,5));
 
   Systems.drawingSystem.layers.put(1, drawLayer);
  }

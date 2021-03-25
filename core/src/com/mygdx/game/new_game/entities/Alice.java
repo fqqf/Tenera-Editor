@@ -9,6 +9,7 @@ import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
+import com.mygdx.game.new_game.AliceBehaviourSystem;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
 
@@ -37,7 +38,7 @@ public class Alice extends Actor
   Systems.collisionSystem.addActor(this);
 
   AnimationComponent animationComponent = AnimationComponent.get(this);
-  animationComponent.animation = new AnimationData(0.09f, Animation.PlayMode.LOOP,
+  animationComponent.animation = new AnimationData(0.08f, Animation.PlayMode.LOOP,
     SpriteManager.textures.get("run_a1"),
     SpriteManager.textures.get("run_a2"),
     SpriteManager.textures.get("run_a3"),
@@ -47,7 +48,7 @@ public class Alice extends Actor
   );
 
   Systems.animationSystem.addActor(this);
-  Systems.aliceBehaviourSystem.setAlice(this);
+  AliceBehaviourSystem.setAlice(this);
 
   JumpComponent.get(this);
  }

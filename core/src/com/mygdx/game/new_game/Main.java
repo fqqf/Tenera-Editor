@@ -16,8 +16,6 @@ public class Main extends ApplicationLoop
   System.out.println("here?");
   firstAliceLevel = new FirstAliceLevel("first-alice-level",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
 
-
-
   currentScene = firstAliceLevel;
  }
 
