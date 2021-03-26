@@ -30,7 +30,9 @@ public class CollisionSystem extends System
      float topPlatform = otherRect.y + otherRect.h;
      if (itemRect.y - speedY < topPlatform) return Response.cross;
      else return Response.slide;
-    case CollisionType.LIQUID:
+
+     case CollisionType.LIQUID:
+     case CollisionType.BODY:
      return Response.cross;
     default:
      return Response.slide;

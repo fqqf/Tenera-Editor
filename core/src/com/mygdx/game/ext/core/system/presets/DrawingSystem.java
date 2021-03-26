@@ -29,7 +29,7 @@ import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
- private static boolean DEBUG = false;
+ private static boolean DEBUG = true;
  private final ShapeDrawer shapeDrawer;
 
  public DrawingSystem()
@@ -125,7 +125,7 @@ public class DrawingSystem extends System
  private void debug()
  {
   if (Event.eventSystemInstance!=null) drawEvents();
-  drawCollisionBox();
+  // drawCollisionBox();
   drawTextureBox();
  }
 
