@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class SpriteManager
 {
- private final static HashMap<String, Texture> textures0 = new HashMap<>();
+ private final static HashMap<String, Texture> textures0 = new HashMap<>(); // TODO: Remove from static
  public final static HashMap<String, TextureAtlas.AtlasRegion> textures = new HashMap<>();
 
  static
@@ -17,8 +17,9 @@ public class SpriteManager
 //  textures0.put("platform", new Texture("test8/platform.png"));
   //textures0.put("enemy", new Texture("test8/enemy.png"));
 
-  for (int i = 1; i < 7; i++) textures0.put("run_a"+i, new Texture("hitobashira_demo/run_a"+i+".png"));
   for (int i = 1; i < 5; i++) textures0.put("stand_a"+i, new Texture("hitobashira_demo/stand_a"+i+".png"));
+  for (int i = 1; i < 7; i++) textures0.put("run_a"+i, new Texture("hitobashira_demo/run_a"+i+".png"));
+  for (int i = 1; i < 8; i++) textures0.put("fight_a"+i, new Texture("hitobashira_demo/fight_a"+i+".png"));
 
   textures0.put("background", new Texture("hitobashira_demo/background/background.png"));
 
@@ -29,8 +30,6 @@ public class SpriteManager
   for (String str: item) textures0.put(str, new Texture("hitobashira_demo/items/"+str+".png"));
 
   textures0.put("vignetteRect", new Texture("hitobashira_demo/effects/vignetteRect.png"));
-
-
 
   init();
  }

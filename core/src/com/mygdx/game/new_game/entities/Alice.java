@@ -78,11 +78,44 @@ public class Alice extends Actor
 
   JumpComponent.get(this);
 
+  FirstAliceLevel.alicel.add(new FightAnimation(this));
+ }
+
+ public class FightAnimation extends Actor
+ {
+  public FightAnimation(Alice alice)
+  {
+   fightAnimation = this;
+
+   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(this);
+
+   bodyPropertiesComponent.position = DrawingComponent.get(alice).drawPosition;
+   bodyPropertiesComponent.size.set(8.47f/1.3f, 6.81f/1.3f);
+
+   DrawingComponent drawingComponent = DrawingComponent.get(this);
+   drawingComponent.texture = SpriteManager.textures.get("fight_a1");
+   drawingComponent.offset.set(0.5f,0);
+
+   AnimationComponent animationComponent = AnimationComponent.get(this);
+   animationComponent.animation = new AnimationData(0.08f, Animation.PlayMode.LOOP,
+     SpriteManager.textures.get("fight_a1"),
+     SpriteManager.textures.get("fight_a2"),
+     SpriteManager.textures.get("fight_a3"),
+     SpriteManager.textures.get("fight_a4"),
+     SpriteManager.textures.get("fight_a5"),
+     SpriteManager.textures.get("fight_a6"),
+     SpriteManager.textures.get("fight_a7")
+   );
+
+   Systems.animationSystem.addActor(this);
+  }
  }
 
  private Array<Heart> hearts = new Array<>();;
 
  private Heart heart;
+
+ public FightAnimation fightAnimation;
 
  public void removeHeart()
  {

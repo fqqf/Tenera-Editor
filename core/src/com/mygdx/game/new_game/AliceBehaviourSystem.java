@@ -53,6 +53,11 @@ public class AliceBehaviourSystem extends System
   KeyBoardSystem.RIGHT = false;
 
   DrawingComponent drawingComponent = DrawingComponent.get(alice);
+  DrawingComponent fightAnimationDrawingComponent = DrawingComponent.get(alice.fightAnimation);
+
+  fightAnimationDrawingComponent.flipX = DrawingComponent.get(alice).flipX;
+
+  fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.9f : 0.5f;
 
   if (ApplicationLoop.instance.inGameTime<alice.invisibilityStartTime+1_000_000_000L) drawingComponent.draw = !drawingComponent.draw;
   else drawingComponent.draw = true;
