@@ -40,7 +40,8 @@ public class FirstAliceLevel extends Scene
   addSystem(System.Type.PHYSICS_SYSTEM,
     Systems.aliceBehaviourSystem,
     Systems.physicsSystem,
-    // Systems.eventSystem,
+    Systems.eventSystem,
+    // Systems.gravitySystem,
     Systems.collisionSystem
   );
  }

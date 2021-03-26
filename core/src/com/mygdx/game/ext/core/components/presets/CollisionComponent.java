@@ -11,7 +11,7 @@ public class CollisionComponent extends Component
 {
  public static final Action.Arg1<Actor> liquidTouch = actor->{ PhysicsComponent.get(actor).velocity.scl(0.5f, 0.5f); };
  public static final Action.Arg1<Actor> defaultTouch = actor->{  };
- private static final ComputeableHashMap<CollisionComponent> childList = new ComputeableHashMap<>();
+ public static final ComputeableHashMap<CollisionComponent> childList = new ComputeableHashMap<>(); // public for more fast access
 
  public boolean isStanding = false;
  //public final BoundingBox box;
