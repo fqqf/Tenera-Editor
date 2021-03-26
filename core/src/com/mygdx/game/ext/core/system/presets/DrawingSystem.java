@@ -29,7 +29,7 @@ import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
- private static boolean DEBUG = true;
+ public static boolean DEBUG = true;
  private final ShapeDrawer shapeDrawer;
 
  public DrawingSystem()

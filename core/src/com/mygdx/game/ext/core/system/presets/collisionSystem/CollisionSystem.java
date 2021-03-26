@@ -9,6 +9,7 @@ import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
+import com.mygdx.game.ext.core.system.presets.DrawingSystem;
 
 import java.util.ArrayList;
 
@@ -116,8 +117,11 @@ public class CollisionSystem extends System
  }
  private void setColorForDebugBox(final Response.Result result)
  {
-  //result.projectedCollisions.items.forEach( item1-> { DrawingComponent.get((Actor)item1.userData).debugCollisionColor = Color.RED;}); //debug
- // result.projectedCollisions.others.forEach( other-> { DrawingComponent.get((Actor)other.userData).debugCollisionColor = Color.RED;}); //debug
+  if (false && DrawingSystem.DEBUG)
+  {
+   result.projectedCollisions.items.forEach( item1-> { DrawingComponent.get((Actor)item1.userData).debugCollisionColor = Color.RED;}); //debug
+   result.projectedCollisions.others.forEach( other-> { DrawingComponent.get((Actor)other.userData).debugCollisionColor = Color.RED;}); //debug
+  }
  }
  private void handleCollisions(final Actor actor, final PhysicsComponent actorPh, final CollisionComponent actorCC, final ArrayList<Item> contacts )
  {
@@ -133,16 +137,8 @@ public class CollisionSystem extends System
     Rect otherRect = world.getRect(cc.item);
     float topYOther = otherRect.y + otherRect.h;
     actorCC.isStanding = actorRect.y - actorPh.velocity.y > topYOther;
-    //java.lang.System.out.println("is Standing=" + actorCC.isStanding);
    }
-
-   switch (cc.collisionType)
-   {
-    case CollisionType.LIQUID:
-     //PhysicsComponent physics = PhysicsComponent.get(actor);
-     actorPh.velocity.scl(0.5f, 0.5f);
-     break;
-   }
+   cc.touch.invoke(actor);
   }
 
  }

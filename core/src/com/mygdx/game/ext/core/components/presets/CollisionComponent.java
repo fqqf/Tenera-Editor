@@ -2,13 +2,15 @@ package com.mygdx.game.ext.core.components.presets;
 
 import com.dongbat.jbump.Item;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.actor.interfaces.Action;
 import com.mygdx.game.ext.core.components.Component;
 import com.mygdx.game.ext.core.components.ComputeableHashMap;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.BoundingBox;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 
 public class CollisionComponent extends Component
 {
+ public static final Action.Arg1<Actor> liquidTouch = actor->{ PhysicsComponent.get(actor).velocity.scl(0.5f, 0.5f); };
+ public static final Action.Arg1<Actor> defaultTouch = actor->{  };
  private static final ComputeableHashMap<CollisionComponent> childList = new ComputeableHashMap<>();
 
  public boolean isStanding = false;
@@ -16,7 +18,7 @@ public class CollisionComponent extends Component
 
  public final Item<Actor> item;
  public int collisionType = CollisionType.SOLID;
-
+ public Action.Arg1<Actor> touch = defaultTouch;
  private CollisionComponent(Actor actor)
  {
   item = new Item<>(actor);

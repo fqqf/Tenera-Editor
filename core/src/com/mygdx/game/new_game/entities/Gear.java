@@ -1,6 +1,7 @@
 package com.mygdx.game.new_game.entities;
 
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.actor.interfaces.Action;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
@@ -10,6 +11,7 @@ import com.mygdx.game.new_game.Systems;
 
 public class Gear extends Actor
 {
+ private static final Action.Arg1<Actor> touch = actor->{ System.out.println("Oh, fuck, " + actor.getClass().getSimpleName() + " touched me... mmmm... i need more.."); };
  public Gear(float x, float y)
  {
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);
@@ -25,6 +27,7 @@ public class Gear extends Actor
 
   CollisionComponent cc = CollisionComponent.get(this);
   cc.collisionType = CollisionType.BODY;
+  cc.touch = touch;
 
   // cc.box.setPosition(x,y);
   // cc.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
