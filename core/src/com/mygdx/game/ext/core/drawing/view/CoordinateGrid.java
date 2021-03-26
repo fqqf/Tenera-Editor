@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.ext.additional.CameraController;
 
-import java.lang.reflect.Field;
 
 public abstract class CoordinateGrid
 {
  public CameraController cameraController;
 
  public Monitor monitor;
- public Field field;
+ public CoordinateGrid field;
 
  public float unitWidth, unitHeight;
  public float notIntegerUnitWidth; // TODO: Find better name {unitWidth = Math.ceil(notIntegerUnitWidth)}

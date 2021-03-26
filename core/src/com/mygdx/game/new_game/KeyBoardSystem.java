@@ -75,13 +75,15 @@ public class KeyBoardSystem extends System
   BodyPropertiesComponent bp = BodyPropertiesComponent.get(alice);
   PhysicsComponent pc = PhysicsComponent.get(alice);
 
-  posx = -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+5;
+  DrawingComponent dc = DrawingComponent.get(alice);
 
-  World<Actor> world = CollisionSystem.world;
+
+  posx = (dc.extrapolationX) ? -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+5 : -bp.position.x+5;
 
   Systems.collisionSystem.updateActor(posx,0,alice);
 
-  if (posx>-0.1f) posx = -0.1f;
+  if (posx>-0.1f) posx = -0.1f; // TODO: MOVE EVERYTHING FROM HERE TO AliceBehaviourSystem analogue
+  if (posx<-200f+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth) posx = -200f+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth;
 
   cameraController.setPosition(posx,0);
  }

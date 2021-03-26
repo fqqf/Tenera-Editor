@@ -2,6 +2,7 @@ package com.mygdx.game.new_game.entities;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Logger;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.actor.interfaces.Action;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
@@ -21,6 +22,8 @@ import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class Alice extends Actor
 {
+ Logger logger = new Logger("ALICE",Logger.INFO);
+
  private int heartAmount;
 
  public long invisibilityStartTime;
@@ -33,7 +36,6 @@ public class Alice extends Actor
 
  private void takeDamage()
  {
-  System.out.println("touched him");
   invisibilityStartTime = ApplicationLoop.instance.inGameTime;
   removeHeart();
  }
@@ -87,6 +89,14 @@ public class Alice extends Actor
   heart = hearts.pop();
   FirstAliceLevel.interfaceL.remAll(heart);
   sort();
+
+  logger.info("Alice has lost one heart ("+hearts.size+" left)");
+
+  if (hearts.size==0)
+  {
+   logger.error("Здесь игра должна заново вызывать putActors(), а старых удалить. Грубо говоря, перезапустить уровень. Если я забыла это реализовать, пожалуйста, сделай это");
+   System.exit(1);
+  }
  }
 
  public void addHeart()

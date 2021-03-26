@@ -26,7 +26,7 @@ public class SpawnGear extends Event
   BodyPropertiesComponent bp = BodyPropertiesComponent.get(alice);
   FirstAliceLevel.npc.add(gear = new Gear(bp.position.x+20, bp.position.y+10));
 
-  eventSystemInstance.events.pop();
+  eventSystemInstance.removeList.add(this);
   eventSystemInstance.playingNow.add(this);
  }
 
@@ -37,7 +37,6 @@ public class SpawnGear extends Event
  public void continuePlaying()
  {
   PhysicsComponent physicsComponent = PhysicsComponent.get(gear);
-  DrawingComponent drawingComponent = DrawingComponent.get(gear);
 
   // TODO:  drawingComponent.rotate
 
@@ -45,7 +44,7 @@ public class SpawnGear extends Event
 
   if (gear.touchedAlice)
   {
-   eventSystemInstance.playingNow.pop();
+   eventSystemInstance.removeList.add(this);
    FirstAliceLevel.npc.remAll(gear);
    Systems.collisionSystem.remActor(gear);
   }

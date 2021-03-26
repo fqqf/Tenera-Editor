@@ -8,6 +8,9 @@ import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.event.Event;
 import com.mygdx.game.ext.core.group.presets.Layer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 /** if Master steps in event boundaries it starts continuously call event.play on that event */
 public class EventSystem extends System
@@ -23,8 +26,9 @@ public class EventSystem extends System
   Event.eventSystemInstance = this;
  }
 
- public final Array<Event> events = new Array<>();
- public final Array<Event> playingNow = new Array<>();
+ public final ArrayList<Event> events = new ArrayList<>();
+ public final ArrayList<Event> playingNow = new ArrayList<>();
+ public final ArrayList<Event> removeList = new ArrayList<>();
 
  private Actor master;
 
@@ -40,11 +44,19 @@ public class EventSystem extends System
      && position.x + size.x > event.position.x
      && position.y < event.position.y + event.size.y
      && position.y + size.y > event.position.y)
-
-   event.play();
+   {
+    event.play();
+   }
   }
 
+  events.removeAll(removeList);
+  removeList.clear();
+
   playingNow.forEach((Event::continuePlaying)); // For continious event, which must be called outside its own boundaries.
+
+  playingNow.removeAll(removeList);
+  removeList.clear();
+
  }
 
  public EventSystem setMaster(Actor master)
@@ -73,7 +85,7 @@ public class EventSystem extends System
 
  public void addEvent(Event... events)
  {
-  this.events.addAll(events);
+  this.events.addAll(Arrays.asList(events));
  }
 
 }

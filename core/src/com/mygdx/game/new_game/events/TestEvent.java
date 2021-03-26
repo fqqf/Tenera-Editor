@@ -1,10 +1,10 @@
-package com.mygdx.game.ext.core.event.presets;
+package com.mygdx.game.new_game.events;
 
 import com.mygdx.game.ext.core.event.Event;
 
-public class PlaySound extends Event
+public class TestEvent extends Event
 {
- public PlaySound(float x, float y)
+ public TestEvent(float x, float y)
  {
   super(x, y);
  }
@@ -12,8 +12,7 @@ public class PlaySound extends Event
  @Override
  public void play()
  {
-  System.out.println("poop");
-
+  System.out.println("ой");
   eventSystemInstance.events.remove(this);
  }
 }

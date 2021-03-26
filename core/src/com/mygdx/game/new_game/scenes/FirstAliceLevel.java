@@ -56,12 +56,13 @@ public class FirstAliceLevel extends Scene
   drawGrid();
 
   super.iterDraw(extrapolation);
+
  }
 
  private void putActors()
  {
   alicel.add(alice);
-  grass.add(new InvisibleWall(0,0,1000,0.1f),new InvisibleWall(0,0,0.1f,15));
+  grass.add(new InvisibleWall(0,0,1000,0.1f),new InvisibleWall(0,0,0.1f,15), new InvisibleWall(200,0,0.1f,15));
 
   for (int i = 0; i < 100; i++) grass.add(new Grass(i*11.73f,0));
 
@@ -84,7 +85,7 @@ public class FirstAliceLevel extends Scene
   alice.addHeart();
   alice.addHeart();
 
-  Systems.eventSystem.setMaster(alice).addEvent(new PlaySound(10,10), new SpawnGear(30,0));
+  Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0));
  }
 
  private void configureLayers()

@@ -3,6 +3,7 @@ package com.mygdx.game.new_game;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
 import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.new_game.entities.Alice;
 
@@ -51,6 +52,9 @@ public class AliceBehaviourSystem extends System
   KeyBoardSystem.LEFT = false;
   KeyBoardSystem.RIGHT = false;
 
+  DrawingComponent drawingComponent = DrawingComponent.get(alice);
 
+  if (ApplicationLoop.instance.inGameTime<alice.invisibilityStartTime+1_000_000_000L) drawingComponent.draw = !drawingComponent.draw;
+  else drawingComponent.draw = true;
  }
 }
