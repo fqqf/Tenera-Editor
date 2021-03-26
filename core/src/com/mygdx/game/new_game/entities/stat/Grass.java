@@ -1,12 +1,9 @@
-package com.mygdx.game.new_game.entities.environment;
+package com.mygdx.game.new_game.entities.stat;
 
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
-import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.new_game.SpriteManager;
-import com.mygdx.game.new_game.Systems;
 
 public class Grass extends Actor
 {

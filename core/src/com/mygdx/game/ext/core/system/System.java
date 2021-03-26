@@ -16,7 +16,7 @@ public abstract class System
  public int priority = 0;
  protected  Type type = Type.NONE;
  protected Actor actor;
- protected Group assignedActors = new Group();
+ public Group assignedActors = new Group();
 
  public void handle() //   layers.forEach((key,layer) -> layer.forEach((actor -> actor.draw(extrapolation))));
  {

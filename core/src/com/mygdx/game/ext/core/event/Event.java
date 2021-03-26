@@ -7,8 +7,16 @@ public abstract class Event
 {
  public static EventSystem eventSystemInstance;
 
- public Vector2 position = new Vector2(10,5);
+ public Vector2 position = new Vector2(30,5);
  public Vector2 size = new Vector2(2,2);
 
  public abstract void play();
+
+ public Event(float x, float y)
+ {
+  position.x = x;
+  position.y = y;
+ }
+
+ public void continuePlaying() {}
 }

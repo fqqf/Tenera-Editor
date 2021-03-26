@@ -19,7 +19,7 @@ public class DrawingComponent extends Component
   defaultTexture = new TextureAtlas.AtlasRegion(texture, 0, 0, 0, 0);
  }
 
- public Color spriteColor = Color.WHITE; // По default
+ public Color spriteColor = new Color(Color.WHITE); // По default
  public boolean flipX, flipY;
  public final Vector2 offset = new Vector2();
  public final Vector2 drawSize = new Vector2();

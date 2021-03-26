@@ -1,6 +1,5 @@
-package com.mygdx.game.new_game.entities.environment;
+package com.mygdx.game.new_game.entities.stat;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.new_game.SpriteManager;
 
 public class Bush extends Envy

@@ -51,8 +51,9 @@ public class PhysicsSystem extends System
  private void countGravity()
  {
   JumpComponent jumpComponent = JumpComponent.get(actor);
+  PhysicsComponent physicsComponent = PhysicsComponent.get(actor);
 
-  if (!jumpComponent.isActive()) {velocity.y+=GRAVITY_FORCE_VALUE; return;}
+  if (!jumpComponent.isActive()) {velocity.y+=GRAVITY_FORCE_VALUE+physicsComponent.personalGravity.y; return;}
   jumpComponent.iter();
 
   velocity.y += jumpComponent.speed;

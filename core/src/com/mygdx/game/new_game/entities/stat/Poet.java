@@ -1,4 +1,4 @@
-package com.mygdx.game.new_game.entities.environment;
+package com.mygdx.game.new_game.entities.stat;
 
 import com.mygdx.game.new_game.SpriteManager;
 

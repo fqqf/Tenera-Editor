@@ -1,6 +1,8 @@
 package com.mygdx.game.ext.core.system.presets.collisionSystem;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.dongbat.jbump.*;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
@@ -8,8 +10,12 @@ import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
+import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
+import com.mygdx.game.ext.core.group.Group;
+import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.DrawingSystem;
+import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 import java.util.ArrayList;
 
@@ -48,6 +54,9 @@ public class CollisionSystem extends System
   for (Actor actor1 : actors) world.add(CollisionComponent.get(actor1).item, 0, 0, 0,0);
   updateActor(actors);
  }
+
+
+
  @Override
  public void remActor(Actor... actors)
  {
@@ -61,11 +70,25 @@ public class CollisionSystem extends System
 
  public void updateActor(Actor... actors)
  {
+
   for (Actor actor : actors)
   {
    BodyPropertiesComponent bp = BodyPropertiesComponent.get(actor);
    CollisionComponent cc = CollisionComponent.get(actor);
+
    world.update(cc.item, bp.position.x, bp.position.y, bp.size.x, bp.size.y);
+  }
+ }
+
+ public void updateActor(float xoff, float yoff, Actor... actors)
+ {
+
+  for (Actor actor : actors)
+  {
+   BodyPropertiesComponent bp = BodyPropertiesComponent.get(actor);
+   CollisionComponent cc = CollisionComponent.get(actor);
+
+   world.update(cc.item, bp.position.x+xoff, bp.position.y+yoff, bp.size.x, bp.size.y);
   }
  }
 

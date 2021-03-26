@@ -7,7 +7,7 @@ public class CameraController
 {
  private ExtendViewport viewport;
  private OrthographicCamera camera;
- private float cameraX, cameraY;
+ public float cameraX, cameraY;
  private final float originWidth, originHeight;
  private float curWidth, curHeight;
 

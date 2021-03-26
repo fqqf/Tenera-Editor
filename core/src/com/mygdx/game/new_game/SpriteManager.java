@@ -3,6 +3,7 @@ package com.mygdx.game.new_game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SpriteManager
@@ -16,14 +17,21 @@ public class SpriteManager
 //  textures0.put("platform", new Texture("test8/platform.png"));
   //textures0.put("enemy", new Texture("test8/enemy.png"));
 
-
-  textures0.put("gear", new Texture("hitobashira_demo/gear.png"));
-
   for (int i = 1; i < 7; i++) textures0.put("run_a"+i, new Texture("hitobashira_demo/run_a"+i+".png"));
   for (int i = 1; i < 5; i++) textures0.put("stand_a"+i, new Texture("hitobashira_demo/stand_a"+i+".png"));
 
-  textures0.put("grass", new Texture("hitobashira_demo/environment/grass.png"));
   textures0.put("background", new Texture("hitobashira_demo/background/background.png"));
+
+  String[] env = {"bush", "cross", "gates", "girl", "haunted", "poet", "stump", "tower", "tree1", "tree2", "tree3", "grass"};
+  String[] item = {"fake_heart", "gear", "ghost", "heart"};
+
+  for (String str: env) textures0.put(str, new Texture("hitobashira_demo/environment/"+str+".png"));
+  for (String str: item) textures0.put(str, new Texture("hitobashira_demo/items/"+str+".png"));
+
+  textures0.put("vignetteRect", new Texture("hitobashira_demo/effects/vignetteRect.png"));
+
+
+
   init();
  }
  public static void init()

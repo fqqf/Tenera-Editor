@@ -12,7 +12,7 @@ public class Background extends Actor
   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(this);
 
   bodyPropertiesComponent.position.set(0,0);
-  bodyPropertiesComponent.size.set(30,12);
+  bodyPropertiesComponent.size.set(50,12);
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
   drawingComponent.texture = SpriteManager.textures.get("background");

@@ -103,7 +103,12 @@ public class DrawingSystem extends System
 
  protected void behave()
  {
-  batch.setColor(drawingComponent.spriteColor);
+  if (!(drawingComponent.spriteColor.a==1
+    &&
+    drawingComponent.spriteColor.r==1 &&
+  drawingComponent.spriteColor.g==1 &&
+  drawingComponent.spriteColor.b==1)) batch.setColor(drawingComponent.spriteColor);
+
   drawPosition.set(position);
   if (!drawingComponent.offset.isZero())drawPosition.add(drawingComponent.offset);
 
@@ -120,7 +125,7 @@ public class DrawingSystem extends System
   if (flippedX || flippedY) texture.flip(flippedX, flippedY);
 
   batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x, drawSize.y, drawSize.x,drawSize.y,1,1, 0);
-
+  batch.setColor(Color.WHITE);
   //debug();
 
  }

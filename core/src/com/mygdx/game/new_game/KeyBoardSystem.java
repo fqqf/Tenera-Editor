@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
+import com.dongbat.jbump.World;
 import com.mygdx.game.ext.additional.CameraController;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
@@ -17,6 +18,7 @@ import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.ControlSystem;
 import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 import com.mygdx.game.new_game.entities.Alice;
 import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
@@ -74,6 +76,10 @@ public class KeyBoardSystem extends System
   PhysicsComponent pc = PhysicsComponent.get(alice);
 
   posx = -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+5;
+
+  World<Actor> world = CollisionSystem.world;
+
+  Systems.collisionSystem.updateActor(posx,0,alice);
 
   if (posx>-0.1f) posx = -0.1f;
 

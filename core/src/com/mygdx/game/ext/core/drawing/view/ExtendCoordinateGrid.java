@@ -16,9 +16,6 @@ import com.mygdx.game.ext.additional.CameraController;
 
 public class ExtendCoordinateGrid extends CoordinateGrid
 {
- public CameraController cameraController;
-
-
  public ExtendCoordinateGrid(String name, float unitHeight) // TODO: move main functionality to CoordinateGrid
  {
   super(name);

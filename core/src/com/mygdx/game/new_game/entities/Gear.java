@@ -11,17 +11,22 @@ import com.mygdx.game.new_game.Systems;
 
 public class Gear extends Actor
 {
- private static final Action.Arg1<Actor> touch = actor->{ };
+ public boolean touchedAlice = false;
+
+ private Action.Arg1<Actor> touch = actor->{
+  if (actor.getClass().getSimpleName().equals("Alice")) touchedAlice = true;
+ };
  public Gear(float x, float y)
  {
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);
   physicsComponent.position.set(x,y);
-  physicsComponent.size.set(1,1);
+  physicsComponent.size.set(3.5f,3.5f);
+  physicsComponent.personalGravity.y = -0.9f;
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
   drawingComponent.texture = SpriteManager.textures.get("gear");
   drawingComponent.offset.set(0,0);
-  drawingComponent.drawSize.set(1,1);
+  drawingComponent.drawSize.set(3.5f,3.5f);
   drawingComponent.useExtrapolation = true;
 
 

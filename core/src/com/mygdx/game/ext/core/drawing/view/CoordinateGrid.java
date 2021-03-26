@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 
 public abstract class CoordinateGrid
 {
+ public CameraController cameraController;
+
  public Monitor monitor;
  public Field field;
 

@@ -24,7 +24,7 @@ public class EventSystem extends System
  }
 
  public final Array<Event> events = new Array<>();
- private final Array<Event> playingNow = new Array<>();
+ public final Array<Event> playingNow = new Array<>();
 
  private Actor master;
 
@@ -44,7 +44,7 @@ public class EventSystem extends System
    event.play();
   }
 
-  playingNow.forEach((Event::play)); // For continious event, which must be called outside its own boundaries.
+  playingNow.forEach((Event::continuePlaying)); // For continious event, which must be called outside its own boundaries.
  }
 
  public EventSystem setMaster(Actor master)
