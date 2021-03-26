@@ -17,5 +17,6 @@ public class DesktopLauncher {
 
 		// TODO : create abstraction over LwjglAplication, so you wont have to set config by yourself and call super.create() in ApplicationLoop
 		new LwjglApplication(new Main(), config);
+
 	}
 }

@@ -13,6 +13,7 @@ import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.World;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
+
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
@@ -29,7 +30,7 @@ import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
- public static boolean DEBUG = true;
+ public static boolean DEBUG = false;
  private final ShapeDrawer shapeDrawer;
 
  public DrawingSystem()
@@ -51,14 +52,15 @@ public class DrawingSystem extends System
   // logger.info("Drawing System");
   batch.begin();
   Color color = batch.getColor();
-  layers.forEach((key, layer) -> layer.forEach((this::calc)));
+  layers.forEach((key, layer) -> iterateLayer(layer));
   if (DEBUG) layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
+  if (DEBUG) debug();
   batch.setColor(color);
   batch.end();
  }
 
  private void iterateLayer(Layer layer)
- {
+ { ;
   batch.setProjectionMatrix(layer.getCoordinateGrid().camera.combined);
   layer.forEach(this::calc);
  }
@@ -79,6 +81,7 @@ public class DrawingSystem extends System
   drawingComponent = DrawingComponent.get(actor);
   texture = drawingComponent.texture;
   drawSize = drawingComponent.drawSize;
+  drawPosition = drawingComponent.drawPosition;
 
   if (drawingComponent.useExtrapolation)
   {
@@ -95,7 +98,7 @@ public class DrawingSystem extends System
 
  }
 
- private final Vector2 drawPosition = new Vector2();
+ private Vector2 drawPosition;
  private Vector2 drawSize;
 
  protected void behave()
@@ -118,7 +121,7 @@ public class DrawingSystem extends System
 
   batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x, drawSize.y, drawSize.x,drawSize.y,1,1, 0);
 
-  debug();
+  //debug();
 
  }
 
@@ -138,6 +141,7 @@ public class DrawingSystem extends System
 
  private void drawEvents()
  {
+  batch.setProjectionMatrix(Event.eventSystemInstance.coordGrid);
   Event.eventSystemInstance.events.forEach((event) -> draw(event.position, event.size, Color.GOLD));
  }
 
@@ -153,7 +157,7 @@ public class DrawingSystem extends System
  {
   for (Actor actor1 : array)
   {
-   if (!CollisionComponent.has(actor1))continue;
+   if (!CollisionComponent.has(actor1))continue; // TODO: Using Has is expensive. Will be fixed in task #40
    Item item = CollisionComponent.get(actor1).item;
    if (world.hasItem(item))
    {

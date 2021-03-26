@@ -12,6 +12,7 @@ public class DrawingComponent extends Component
 {
  private static final ComputeableHashMap<DrawingComponent> childList = new ComputeableHashMap<>();
  private static final TextureAtlas.AtlasRegion defaultTexture;
+ public Vector2 drawPosition = new Vector2(0,0);
  static
  {
   Texture texture = new Texture("box.png");

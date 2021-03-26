@@ -1,15 +1,23 @@
 package com.mygdx.game.ext.core.system;
 
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.event.Event;
+import com.mygdx.game.ext.core.group.presets.Layer;
 
 
 /** if Master steps in event boundaries it starts continuously call event.play on that event */
 public class EventSystem extends System
 {
+
+ public Matrix4 coordGrid;
+ public void setLayer(Layer layer)
+ {
+  coordGrid = layer.getCoordinateGrid().camera.combined;
+ }
  {
   type = Type.PHYSICS_SYSTEM; // PHYSICS_COMPONENT;
   Event.eventSystemInstance = this;

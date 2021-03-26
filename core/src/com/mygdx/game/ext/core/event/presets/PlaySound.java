@@ -11,10 +11,10 @@ public class PlaySound extends Event
  {
   for (int i = 0, j=0; i < 5; i++, j+=2)
   {
-   Systems.drawingSystem.layers.get(1).add(new Gear(4+j,5+i));
+   Systems.drawingSystem.layers.get(6).add(new Gear(4+j,5+i));
   }
 
-  Systems.drawingSystem.layers.get(1).add(new Gear(5,3));
+  Systems.drawingSystem.layers.get(6).add(new Gear(5,3));
 
   eventSystemInstance.events.pop();
  }

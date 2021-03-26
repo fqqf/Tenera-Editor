@@ -22,6 +22,8 @@ public class SpriteManager
   for (int i = 1; i < 7; i++) textures0.put("run_a"+i, new Texture("hitobashira_demo/run_a"+i+".png"));
   for (int i = 1; i < 5; i++) textures0.put("stand_a"+i, new Texture("hitobashira_demo/stand_a"+i+".png"));
 
+  textures0.put("grass", new Texture("hitobashira_demo/environment/grass.png"));
+  textures0.put("background", new Texture("hitobashira_demo/background/background.png"));
   init();
  }
  public static void init()

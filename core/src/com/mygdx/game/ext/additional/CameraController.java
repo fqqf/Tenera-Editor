@@ -26,6 +26,7 @@ public class CameraController
   cameraX = x; cameraY = y;
   camera.position.x = curWidth/2-x;
   camera.position.y = curHeight/2-y;
+  camera.update();
  }
 
  public void move(float x, float y)

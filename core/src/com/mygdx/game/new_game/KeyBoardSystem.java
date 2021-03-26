@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.ext.additional.CameraController;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -12,6 +13,7 @@ import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.ControlSystem;
 import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
@@ -26,6 +28,7 @@ public class KeyBoardSystem extends System
  }
 
  public static boolean LEFT, RIGHT, UP;
+ public CameraController cameraController;
 
  @Override
  protected void loadFields()
@@ -65,8 +68,19 @@ public class KeyBoardSystem extends System
    DrawingComponent.get(AliceBehaviourSystem.getAlice()).offset.set(-1.9f,0);
   }
   }
+
+  Alice alice = AliceBehaviourSystem.getAlice();
+  BodyPropertiesComponent bp = BodyPropertiesComponent.get(alice);
+  PhysicsComponent pc = PhysicsComponent.get(alice);
+
+  posx = -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+5;
+
+  if (posx>-0.1f) posx = -0.1f;
+
+  cameraController.setPosition(posx,0);
  }
 
+ float posx;
 
  /*
  @Override

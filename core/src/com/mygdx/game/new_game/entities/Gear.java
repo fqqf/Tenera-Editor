@@ -11,7 +11,7 @@ import com.mygdx.game.new_game.Systems;
 
 public class Gear extends Actor
 {
- private static final Action.Arg1<Actor> touch = actor->{ System.out.println("Oh, fuck, " + actor.getClass().getSimpleName() + " touched me... mmmm... i need more.."); };
+ private static final Action.Arg1<Actor> touch = actor->{ };
  public Gear(float x, float y)
  {
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);

@@ -28,6 +28,7 @@ public class JumpComponent extends LF4DComponent // TODO: где-то в фор�
  public void jump()
  {
   if (!CollisionComponent.get(actor).isStanding) return;
+  CollisionComponent.get(actor).isStanding = false;
 
   time = 0; speed = 0;
   isActive = true;

@@ -14,7 +14,7 @@ public class Main extends ApplicationLoop
  {
   super.create();
   System.out.println("here?");
-  firstAliceLevel = new FirstAliceLevel("first-alice-level",new ExtendCoordinateGrid("coordinate-grid", 12),100,100);
+  firstAliceLevel = new FirstAliceLevel("first-alice-level",new ExtendCoordinateGrid("coordinate-grid", 12),1000,1000);
 
   currentScene = firstAliceLevel;
  }
