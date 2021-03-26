@@ -56,6 +56,7 @@ public class AliceBehaviourSystem extends System
   DrawingComponent fightAnimationDrawingComponent = DrawingComponent.get(alice.fightAnimation);
 
   fightAnimationDrawingComponent.flipX = DrawingComponent.get(alice).flipX;
+  fightAnimationDrawingComponent.draw = false;
 
   fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.9f : 0.5f;
 
