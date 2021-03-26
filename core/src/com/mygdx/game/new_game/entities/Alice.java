@@ -1,7 +1,7 @@
 package com.mygdx.game.new_game.entities;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.actor.interfaces.Action;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
@@ -11,14 +11,33 @@ import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.new_game.AliceBehaviourSystem;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
+import com.mygdx.game.new_game.entities.item.Heart;
+import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class Alice extends Actor
 {
- private static final Action.Arg1<Actor> touch = actor->{ };
+ private int heartAmount;
+
+ public long invisibilityStartTime;
+
+ private Action.Arg1<Actor> touch = actor->{
+  if (actor.getClass().getSimpleName().equals("Gear")) {
+   if (ApplicationLoop.instance.inGameTime>invisibilityStartTime+1_000_000_000L)takeDamage();
+ }
+ };
+
+ private void takeDamage()
+ {
+  System.out.println("touched him");
+  invisibilityStartTime = ApplicationLoop.instance.inGameTime;
+  removeHeart();
+ }
+
  public Alice(float x, float y)
  {
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);
@@ -56,5 +75,39 @@ public class Alice extends Actor
   AliceBehaviourSystem.setAlice(this);
 
   JumpComponent.get(this);
+
+ }
+
+ private Array<Heart> hearts = new Array<>();;
+
+ private Heart heart;
+
+ public void removeHeart()
+ {
+  heart = hearts.pop();
+  FirstAliceLevel.interfaceL.remAll(heart);
+  sort();
+ }
+
+ public void addHeart()
+ {
+  heart = new Heart(0,12-2.5f);
+  hearts.add(heart);
+  FirstAliceLevel.interfaceL.add(heart);
+  sort();
+ }
+
+
+ int i;
+ private void sort()
+ {
+  i = 0;
+  for (Heart heartz: hearts)
+  {
+   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(heartz);
+
+   bodyPropertiesComponent.position.x = i*1.8f+0.5f+0.2f*i;
+   i++;
+  }
  }
 }

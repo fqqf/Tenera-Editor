@@ -29,6 +29,7 @@ public class FirstAliceLevel extends Scene
  public static Layer cutscene = new Layer(null);
  public static Layer environment = new Layer(null);
  public static Layer events = new Layer(null);
+ public static Layer interfaceL = new Layer(null);
 
  public Alice alice = new Alice(2,5);
 
@@ -79,6 +80,10 @@ public class FirstAliceLevel extends Scene
   background.add(vignette);
   effects.add(vignetteTop);
 
+  alice.addHeart();
+  alice.addHeart();
+  alice.addHeart();
+
   Systems.eventSystem.setMaster(alice).addEvent(new PlaySound(10,10), new SpawnGear(30,0));
  }
 
@@ -93,6 +98,7 @@ public class FirstAliceLevel extends Scene
   cutscene.setCoordinateGrid(field);
   environment.setCoordinateGrid(field);
   events.setCoordinateGrid(field);
+  interfaceL.setCoordinateGrid(cameraGrid);
 
   Systems.drawingSystem.layers.put(4, background);
   Systems.drawingSystem.layers.put(5, environment);
@@ -100,6 +106,7 @@ public class FirstAliceLevel extends Scene
   Systems.drawingSystem.layers.put(7, alicel);
   Systems.drawingSystem.layers.put(8, grass);
   Systems.drawingSystem.layers.put(9, effects);
+  Systems.drawingSystem.layers.put(10, interfaceL);
 
   Systems.eventSystem.setLayer(events);
  }

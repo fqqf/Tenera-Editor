@@ -1,12 +1,14 @@
 package com.mygdx.game.new_game.events;
 
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
+import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.event.Event;
 import com.mygdx.game.new_game.AliceBehaviourSystem;
+import com.mygdx.game.new_game.Systems;
 import com.mygdx.game.new_game.entities.Alice;
-import com.mygdx.game.new_game.entities.Gear;
+import com.mygdx.game.new_game.entities.item.Gear;
 import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class SpawnGear extends Event
@@ -45,6 +47,7 @@ public class SpawnGear extends Event
   {
    eventSystemInstance.playingNow.pop();
    FirstAliceLevel.npc.remAll(gear);
+   Systems.collisionSystem.remActor(gear);
   }
 
  }

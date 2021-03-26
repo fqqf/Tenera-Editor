@@ -1,4 +1,4 @@
-package com.mygdx.game.new_game.entities;
+package com.mygdx.game.new_game.entities.item;
 
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.actor.interfaces.Action;
