@@ -31,6 +31,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class FirstAliceLevel extends Scene
 {
+ public static boolean gameOver = false;
  private static final Array<Layer> allLayer = new Array<>();
 
  public static Layer npc = new Layer(null);
@@ -81,7 +82,7 @@ public class FirstAliceLevel extends Scene
   }
   else if (SpriteManager.asset.update())
   {
-   alice = new Alice(this::initScene);
+   alice = new Alice(()->{gameOver = true;});
    initScene();
   }
   else
@@ -90,6 +91,7 @@ public class FirstAliceLevel extends Scene
     bitmapFont.draw(batch,"Loading... " + (int)(SpriteManager.asset.getProgress()*100) +"%", 600,300);
     batch.end();
    }
+  if (gameOver) initScene();
  }
 
  private void clearScene()
@@ -100,10 +102,12 @@ public class FirstAliceLevel extends Scene
    for (System system : systems) system.remActor(layer);
    layer.clear();
   }
+  CollisionSystem.world.reset();
  }
 
  private void initScene()
  {
+  gameOver = false;
   clearScene();
   alice.init(7,5);
   alice.initHearts(1);
