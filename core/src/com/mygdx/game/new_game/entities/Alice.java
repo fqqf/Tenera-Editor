@@ -45,9 +45,13 @@ public class Alice extends Actor
   removeHeart();
  }
  private final Action onDead;
- public Alice(float x, float y,Action onDead)
+ public Alice(Action onDead)
  {
   this.onDead = onDead;
+  //init(x, y);
+ }
+ public void init(float x,float y)
+ {
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);
   physicsComponent.position.set(x,y);
   physicsComponent.size.set(2f,6.49f/1.3f);
@@ -73,7 +77,7 @@ public class Alice extends Actor
 
   AnimationComponent animationComponent = AnimationComponent.get(this);
   animationComponent.animation = new AnimationData(0.08f, Animation.PlayMode.LOOP,
-    SpriteManager.getAnimations("alice_run", 6)
+          SpriteManager.getAnimations("alice_run", 6)
   );
 
   Systems.animationSystem.addActor(this);
@@ -83,7 +87,6 @@ public class Alice extends Actor
 
   FirstAliceLevel.alicel.add(new FightAnimation(this));
  }
-
  public class FightAnimation extends Actor
  {
   public FightAnimation(Alice alice)
@@ -125,6 +128,13 @@ public class Alice extends Actor
 
  public FightAnimation fightAnimation;
 
+ public void initHearts(int hearts)
+ {
+  for (Heart heart : this.hearts) FirstAliceLevel.interfaceL.remAll(heart);
+  this.hearts.clear();
+  for (int i = 0; i < hearts; i++) addHeart();
+  sort();
+ }
  public void removeHeart()
  {
   heart = hearts.pop();

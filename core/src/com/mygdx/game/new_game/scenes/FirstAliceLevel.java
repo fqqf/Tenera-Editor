@@ -5,8 +5,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
+import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
+import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
@@ -15,6 +18,7 @@ import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.DrawingSystem;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
 import com.mygdx.game.new_game.entities.Alice;
@@ -46,7 +50,7 @@ public class FirstAliceLevel extends Scene
  }
 
  private final BitmapFont bitmapFont = new BitmapFont();
-
+ private Alice alice;
  public FirstAliceLevel(String name, CoordinateGrid field, float width, float height)
  {
   super(name, field, width, height);
@@ -75,7 +79,11 @@ public class FirstAliceLevel extends Scene
    drawGrid();
    super.iterDraw(extrapolation);
   }
-  else if (SpriteManager.asset.update()) initScene();
+  else if (SpriteManager.asset.update())
+  {
+   alice = new Alice(this::initScene);
+   initScene();
+  }
   else
    {
     batch.begin();
@@ -89,10 +97,7 @@ public class FirstAliceLevel extends Scene
   Array<System> systems = getSystems();
   for (Layer layer : allLayer)
   {
-   for (System system : systems)
-   {
-    system.remActor(layer);
-   }
+   for (System system : systems) system.remActor(layer);
    layer.clear();
   }
  }
@@ -100,8 +105,12 @@ public class FirstAliceLevel extends Scene
  private void initScene()
  {
   clearScene();
-  Alice alice = new Alice(2,5, this::initScene);
+  alice.init(7,5);
+  alice.initHearts(3);
+  CollisionSystem.world.update(CollisionComponent.get(alice).item,3,5);
+
   alicel.add(alice);
+
   grass.add(
           new InvisibleWall(0,0,1000,0.1f),
           new InvisibleWall(0,0,0.1f,15),
@@ -124,9 +133,7 @@ public class FirstAliceLevel extends Scene
   background.add(vignette);
   effects.add(vignetteTop);
 
-  alice.addHeart();
-  alice.addHeart();
-  alice.addHeart();
+
   Systems.drawingSystem.setMaster(alice);
   Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0));
  }
