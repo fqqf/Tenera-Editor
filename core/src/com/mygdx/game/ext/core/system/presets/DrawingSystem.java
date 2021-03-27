@@ -78,6 +78,7 @@ public class DrawingSystem extends System
 
   this.actor = actor;
   loadFields();
+
   float delta = master.position.x - position.x;
   //drawingComponent.draw =  delta > -30 && delta < 30; // тут что-то не то
   if (!drawingComponent.draw) return;

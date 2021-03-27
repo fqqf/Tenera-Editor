@@ -159,19 +159,13 @@ public class FirstAliceLevel extends Scene
   T actor;
   try
   {
-   actor = type.getConstructor(float.class, float.class).newInstance(0,0);
+   actor = type.getConstructor(float.class, float.class).newInstance(x,y);
   }
-  catch (InstantiationException e)
-  {
-   e.printStackTrace();
-   throw new Error(e);
-  }
-  catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
+  catch (InstantiationException  | NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
   {
    e.printStackTrace();
    throw new Error();
   }
-  PhysicsComponent.get(actor).position.set(x,y);
   return actor;
  }
 
