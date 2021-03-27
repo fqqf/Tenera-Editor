@@ -20,7 +20,7 @@ public class Gear extends Actor
  {
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);
   physicsComponent.position.set(x,y);
-  physicsComponent.size.set(3.3f,3.3f);
+  physicsComponent.size.set(3.3f-0.6f,3.3f-0.4f);
   physicsComponent.personalGravity.y = -0.9f;
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
