@@ -3,32 +3,31 @@ package com.mygdx.game.ext.core.data;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.ext.core.actor.interfaces.Action;
-import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.scene.Scene;
 
-@Deprecated
-public class AssetLoadScene extends Scene
-{ //todo не хочу по 100 раз переписывать xD не зная как именно ты хочешь это имплементировать xD мож ты систему хочешь... хотя смысл
+public class AssetLoaderScene extends Scene
+{
 	private Action.Arg1<AssetManager> onLoaded;
 	private AssetManager assetManager;
 	private AssetLoader assetLoader;
 	private boolean ready;
-	public AssetLoadScene(String name, ExtendCoordinateGrid field, float width, float height)
+	public AssetLoaderScene(CoordinateGrid field, float width, float height)
 	{
-		super(name, field, width, height);
+		super("Loader", field, width, height);
 	}
-	public AssetLoadScene assetManager(final AssetManager assetManager)
+	public AssetLoaderScene setAssetToLoad(final AssetManager assetManager)
 	{
 		this.assetManager = assetManager;
 		return this;
 	}
-	public AssetLoadScene setActionOnLoaded(final Action.Arg1<AssetManager> onLoaded)
+	public AssetLoaderScene setActionOnLoaded(final Action.Arg1<AssetManager> onLoaded)
 	{
 		this.onLoaded = onLoaded;
 		return this;
 	}
 
-	public AssetLoadScene ready()
+	public AssetLoaderScene ready()
 	{
 		if (assetManager==null)throw new Error("Not ready! assetManager is null!");
 		if (onLoaded==null)throw new Error("Not ready! onLoaded is null!");

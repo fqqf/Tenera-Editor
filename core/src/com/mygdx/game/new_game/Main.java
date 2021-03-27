@@ -7,17 +7,31 @@ import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class Main extends ApplicationLoop
 {
- public static Scene firstAliceLevel, currentScene;
+ public static Scene currentScene;
 
  @Override
  public void create()
  {
   super.create();
   System.out.println("here?");
-  firstAliceLevel = new FirstAliceLevel("first-alice-level",new ExtendCoordinateGrid("coordinate-grid", 12),1000,1000);
-
-  currentScene = firstAliceLevel;
+  currentScene = new FirstAliceLevel("first-alice-level",new ExtendCoordinateGrid("coordinate-grid", 12),1000,1000);
  }
+
+ private void load()
+ {
+//  Asset asset = new Asset();
+//  FirstAliceLevel.setResourceToAsset(asset);
+//  CoordinateGrid coordinateGrid = new ExtendCoordinateGrid("coordinate-grid", 12);
+//  currentScene = new AssetLoaderScene(coordinateGrid, 1000,1000)
+//          .setAssetToLoad(asset)
+//          .setActionOnLoaded(
+//                  a->
+//                  {
+//                   currentScene = new FirstAliceLevel(asset,"first-alice-level",coordinateGrid,1000,1000);
+//                  })
+//          .ready();
+ }
+
 
  @Override
  public void drawGraphics()

@@ -1,11 +1,14 @@
 package com.mygdx.game.new_game.scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.mygdx.game.ext.core.actor.interfaces.Action;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.data.Asset;
+import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.event.presets.PlaySound;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.ext.core.system.System;
@@ -32,19 +35,27 @@ public class FirstAliceLevel extends Scene
  public static Layer interfaceL = new Layer(null);
 
  public Alice alice = new Alice(2,5);
+ private final Asset asset = new Asset();
+ private final BitmapFont bitmapFont = new BitmapFont();
 
- public FirstAliceLevel(String name, ExtendCoordinateGrid field, float width, float height)
+ public FirstAliceLevel(String name, CoordinateGrid field, float width, float height)
  {
   super(name, field, width, height);
-
   setSceneSystems();
   configureLayers();
-
   DrawingSystem.DEBUG = true;
-
-  putActors();
-
   Systems.keyBoardSystem.cameraController = field.cameraController;
+
+  loadResource();
+ }
+
+ private void loadResource()
+ {
+  asset.load("hitobashira_demo/atlas/atlas.txt", TextureAtlas.class);
+ }
+ private void initScene()
+ {
+  putActors();
  }
 
  @Override
@@ -53,10 +64,18 @@ public class FirstAliceLevel extends Scene
   Gdx.gl.glClearColor(0.32156f, 0.32156f, 0.32156f, 1);
   Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-  drawGrid();
-
-  super.iterDraw(extrapolation);
-
+  if (asset.isLoaded)
+  {
+   drawGrid();
+   super.iterDraw(extrapolation);
+  }
+  else if (asset.update()) initScene();
+  else
+   {
+    batch.begin();
+    bitmapFont.draw(batch,"Loading... " + asset.getProgress() +"%", 5,5);
+    batch.end();
+   }
  }
 
  private void putActors()

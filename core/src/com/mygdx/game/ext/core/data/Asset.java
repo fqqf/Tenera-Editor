@@ -2,30 +2,56 @@ package com.mygdx.game.ext.core.data;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
 public class Asset extends AssetManager
 {
- private final ObjectMap<Integer, String> resourceMap = new ObjectMap<>();
+ private final ObjectMap<String,TextureAtlas.AtlasRegion> textures = new ObjectMap<>();
+ public boolean isLoaded;
 
- public <T> void load(String fileName, Class<T> type, int resId)
+ @Override
+ public synchronized boolean update()
  {
-  if (resourceMap.containsKey(resId)) throw new IllegalArgumentException("this resId is already in use!");
-  else resourceMap.put(resId, fileName);
-  load(fileName, type);
+  boolean loaded = super.update();
+  if (loaded) handleOnLoaded();
+  return loaded;
  }
 
- public TextureAtlas.AtlasRegion getAtlasRegion(String name, int resId)
+ private void handleOnLoaded()
  {
-  String fileName = resourceMap.get(resId);
-  TextureAtlas ta = super.get(fileName);
-  return ta.findRegion(name);
+  Array<TextureAtlas> array = new Array<>();
+  getAll(TextureAtlas.class, array);
+  for (TextureAtlas atlas : array)
+  {
+   putTexturesByName(atlas, textures);
+  }
+  isLoaded = true;
+ }
+ private void putTexturesByName(TextureAtlas atlas, ObjectMap<String,TextureAtlas.AtlasRegion> map )
+ {
+  Array<TextureAtlas.AtlasRegion> regions = atlas.getRegions();
+  for (TextureAtlas.AtlasRegion region : regions)
+  {
+   if (map.containsKey(region.name)) throw new Error("дублирование имени текстуры!");
+   map.put(region.name, region);
+  }
  }
 
+ public TextureAtlas.AtlasRegion getTexture(String name) { return textures.get(name); }
+ public Array<TextureAtlas.AtlasRegion> getAnimations(String animationName, int frames)
+ {
+  Array<TextureAtlas.AtlasRegion> array = new Array<>(frames);
+  for (int i = 0; i < frames; i++)
+  {
+   array.add( getTexture(animationName+"/"+i) );
+  }
+  return array;
+ }
  @Override
  public synchronized void dispose()
  {
-  resourceMap.clear();
+  textures.clear();
   super.dispose();
  }
 }
