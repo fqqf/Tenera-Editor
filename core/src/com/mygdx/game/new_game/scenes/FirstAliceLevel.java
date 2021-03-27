@@ -234,6 +234,8 @@ public class FirstAliceLevel extends Scene
   Systems.drawingSystem.layers.put(9, effects);
   Systems.drawingSystem.layers.put(10, interfaceL);
 
+  Systems.drawingSystem.setMasterIds(5, 6, 8, 10);
+
   Systems.eventSystem.setLayer(events);
  }
 
