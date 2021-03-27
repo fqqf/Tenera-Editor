@@ -1,21 +1,15 @@
 package com.mygdx.game.ext.core.system.presets.collisionSystem;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.dongbat.jbump.*;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
-import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
-import com.mygdx.game.ext.core.group.Group;
-import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.DrawingSystem;
-import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 import java.util.ArrayList;
 
@@ -161,6 +155,7 @@ public class CollisionSystem extends System
     float topYOther = otherRect.y + otherRect.h;
     actorCC.isStanding = actorRect.y - actorPh.velocity.y > topYOther;
    }
+   actorCC.touch.invoke(collisionActor);
    cc.touch.invoke(actor);
   }
 
