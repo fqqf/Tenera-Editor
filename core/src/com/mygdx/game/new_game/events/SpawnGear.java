@@ -47,6 +47,7 @@ public class SpawnGear extends Event
    eventSystemInstance.removeNowList.add(this);
    FirstAliceLevel.npc.remAll(gear);
    Systems.collisionSystem.remActor(gear);
+   System.out.println("remove gear");
   }
 
  }

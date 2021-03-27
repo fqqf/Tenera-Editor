@@ -92,15 +92,25 @@ public class FirstAliceLevel extends Scene
     bitmapFont.draw(batch,"Loading... " + (int)(SpriteManager.asset.getProgress()*100) +"%", 600,300);
     batch.end();
    }
-  if (gameOver) initScene();
+  if (gameOver)
+  {
+   java.lang.System.out.println("Game over");
+   initScene();
+  }
  }
 
  private void clearScene()
  {
+  java.lang.System.out.println("Clear scene");
+
   Array<System> systems = getSystems();
+
   for (Layer layer : allLayer)
   {
-   for (System system : systems) system.remActor(layer);
+   for (System system : systems)
+   {
+    system.remActor(layer);
+   }
    layer.clear();
   }
   CollisionSystem.world.reset();

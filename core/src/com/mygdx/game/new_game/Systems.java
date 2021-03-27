@@ -8,11 +8,11 @@ import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 
 public class Systems
 {
- public static AnimationSystem animationSystem = new AnimationSystem();
- public static CollisionSystem collisionSystem = new CollisionSystem();
- public static PhysicsSystem physicsSystem = new PhysicsSystem();
- public static DrawingSystem drawingSystem = new DrawingSystem();
- public static KeyBoardSystem keyBoardSystem = new KeyBoardSystem();
- public static AliceBehaviourSystem aliceBehaviourSystem = new AliceBehaviourSystem();
- public static EventSystem eventSystem = new EventSystem();
+ public static final AnimationSystem animationSystem = new AnimationSystem();
+ public static final CollisionSystem collisionSystem = new CollisionSystem();
+ public static final PhysicsSystem physicsSystem = new PhysicsSystem();
+ public static final DrawingSystem drawingSystem = new DrawingSystem();
+ public static final KeyBoardSystem keyBoardSystem = new KeyBoardSystem();
+ public static final AliceBehaviourSystem aliceBehaviourSystem = new AliceBehaviourSystem();
+ public static final EventSystem eventSystem = new EventSystem();
 }

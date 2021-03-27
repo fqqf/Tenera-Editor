@@ -1,6 +1,7 @@
 package com.mygdx.game.ext.core.system.presets.collisionSystem;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Array;
 import com.dongbat.jbump.*;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
@@ -10,6 +11,7 @@ import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.DrawingSystem;
+import com.mygdx.game.new_game.Systems;
 
 import java.util.ArrayList;
 
@@ -55,11 +57,18 @@ public class CollisionSystem extends System
  public void remActor(Actor... actors)
  {
   super.remActor(actors);
-  for (Actor actor1 : actors)
-  {
-   Item<Actor> item = CollisionComponent.get(actor1).item;
-   world.remove(item);
-  }
+  for (Actor actor1 : actors) removeItemFromWorld(CollisionComponent.get(actor1).item);
+ }
+
+ @Override
+ public void remActor(Array<Actor> actors)
+ {
+  super.remActor(actors);
+  for (Actor actor1 : actors) removeItemFromWorld(CollisionComponent.get(actor1).item);
+ }
+ private void removeItemFromWorld(Item<Actor> item)
+ {
+  if (world.hasItem(item)) world.remove(item);
  }
 
  public void updateActor(Actor... actors)
@@ -123,6 +132,8 @@ public class CollisionSystem extends System
   }
  }
 
+
+
  private void handleExtrapolationBehaviour(final Actor actor, final float targetX, final float targetY, final Response.Result result)
  {
   DrawingComponent drawingComponent = DrawingComponent.get(actor);
@@ -156,8 +167,8 @@ public class CollisionSystem extends System
     actorCC.isStanding = actorRect.y - actorPh.velocity.y > topYOther;
    }
    // java.lang.System.out.println("handle collision " + actor.getClass().getSimpleName() + " + " + collisionActor.getClass().getSimpleName());
-   actorCC.touch.invoke(collisionActor);
    cc.touch.invoke(actor);
+   actorCC.touch.invoke(collisionActor);
   }
 
  }

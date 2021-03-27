@@ -14,19 +14,24 @@ public class Gear extends Actor
  public boolean touchedAlice = false;
 
  private Action.Arg1<Actor> touch = actor->{
-  if (actor.getClass().getSimpleName().equals("Alice")) touchedAlice = true;
+  if (actor.getClass().getSimpleName().equals("Alice"))
+  {
+   touchedAlice = true;
+   System.out.println("gear touched alice");
+  }
+
  };
  public Gear(float x, float y)
  {
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);
   physicsComponent.position.set(x,y);
-  physicsComponent.size.set(3.3f-0.6f,3.3f-0.4f);
+  physicsComponent.size.set(3f,3f);
   physicsComponent.personalGravity.y = -0.9f;
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
   drawingComponent.texture = SpriteManager.get("gear");
   drawingComponent.offset.set(0,0);
-  drawingComponent.drawSize.set(3.3f,3.3f);
+  drawingComponent.drawSize.set(3f,3f);
   drawingComponent.useExtrapolation = true;
 
 

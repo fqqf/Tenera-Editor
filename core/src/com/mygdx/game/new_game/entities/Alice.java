@@ -143,12 +143,11 @@ public class Alice extends Actor
   FirstAliceLevel.interfaceL.remAll(heart);
   sort();
 
-  logger.info("Alice has lost one heart ("+hearts.size+" left)");
+  // logger.info("Alice has lost one heart ("+hearts.size+" left)");
 
   if (hearts.size==0)
   {
    logger.info("Alice has died");
-
 
    onDead.invoke();
 
@@ -163,7 +162,7 @@ public class Alice extends Actor
   hearts.add(heart);
   FirstAliceLevel.interfaceL.add(heart);
   sort();
-  logger.info("Alice has got one heart ("+hearts.size+" left)");
+  // logger.info("Alice has got one heart ("+hearts.size+" left)");
  }
 
 
