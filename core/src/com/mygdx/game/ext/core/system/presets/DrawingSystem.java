@@ -124,7 +124,7 @@ public class DrawingSystem extends System
 
   batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x/2, drawSize.y/2, drawSize.x,drawSize.y,1,1, drawingComponent.rotate);
   batch.setColor(Color.WHITE);
-  debug();
+//  debug();
 
  }
 

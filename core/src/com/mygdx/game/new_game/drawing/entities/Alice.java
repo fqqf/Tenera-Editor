@@ -1,4 +1,4 @@
-package com.mygdx.game.new_game.entities;
+package com.mygdx.game.new_game.drawing.entities;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.Array;
@@ -13,12 +13,11 @@ import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
-import com.mygdx.game.new_game.AliceBehaviourSystem;
+import com.mygdx.game.new_game.systems.AliceBehaviourSystem;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
-import com.mygdx.game.new_game.entities.item.Heart;
+import com.mygdx.game.new_game.drawing.item.Heart;
 import com.mygdx.game.new_game.events.UseSword;
 import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
@@ -33,7 +32,7 @@ public class Alice extends Actor
  private Action.Arg1<Actor> touch =
          actor->
          {
-          if (actor.getClass().getSimpleName().equals("Gear"))
+          if (actor.getClass().getSimpleName().equals("Gear") | actor.getClass().getSimpleName().equals("Ghost"))
           {
            if (ApplicationLoop.instance.inGameTime>invisibilityStartTime+1_000_000_000L)takeDamage();
           }
@@ -118,10 +117,12 @@ public class Alice extends Actor
 
    Systems.animationSystem.addActor(this);
    useSword = new UseSword(0,0, alice);
+   swordBox = new SwordBox(alice);
   }
  }
 
  public UseSword useSword;
+ public SwordBox swordBox;
 
  private Array<Heart> hearts = new Array<>();;
 
@@ -131,7 +132,6 @@ public class Alice extends Actor
 
  public void initHearts(int hearts)
  {
-  logger.info("init heartz");
   for (Heart heart : this.hearts) FirstAliceLevel.interfaceL.remAll(heart);
   this.hearts.clear();
   for (int i = 0; i < hearts; i++) addHeart();
@@ -176,6 +176,42 @@ public class Alice extends Actor
 
    bodyPropertiesComponent.position.x = i*1.8f+0.5f+0.2f*i;
    i++;
+  }
+ }
+
+
+
+ public class SwordBox extends Actor
+ {
+  private Action.Arg1<Actor> touch2 =
+    actor->
+    {
+     if (actor.getClass().getSimpleName().equals("Ghost"))
+     {
+      if (UseSword.isPlaying && UseSword.frame>2) ((Ghost)actor).alive = false; // TODO: use component for this
+     }
+    };
+  public SwordBox(Alice alice)
+  {
+   swordBox = this;
+
+
+   PhysicsComponent physicsComponent = PhysicsComponent.get(this);
+   physicsComponent.position.set(5,5);
+   physicsComponent.size.set(3.1f, 1);
+   physicsComponent.useGravity = false;
+
+   DrawingComponent.get(swordBox).draw = false;
+
+   CollisionComponent cc = CollisionComponent.get(this);
+   cc.collisionType = CollisionType.BODY;
+   cc.touch = touch2;
+
+   // cc.box.setPosition(x,y);
+   // cc.box.setSize(physicsComponent.size.x, physicsComponent.size.y);
+
+   Systems.physicsSystem.addActor(this);
+   Systems.collisionSystem.addActor(this);
   }
  }
 }

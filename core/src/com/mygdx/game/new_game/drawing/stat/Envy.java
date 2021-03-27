@@ -1,4 +1,4 @@
-package com.mygdx.game.new_game.entities.stat;
+package com.mygdx.game.new_game.drawing.stat;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.ext.core.actor.Actor;

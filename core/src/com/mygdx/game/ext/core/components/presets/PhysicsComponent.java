@@ -14,6 +14,7 @@ public class PhysicsComponent extends Component
  public Vector2 position;
  public Vector2 size;
  public Vector2 personalGravity = new Vector2(0,0);
+ public boolean useGravity = true;
 
  public Vector2 velocity = new Vector2(0,0);
 

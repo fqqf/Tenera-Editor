@@ -1,7 +1,7 @@
-package com.mygdx.game.new_game.entities.item;
+package com.mygdx.game.new_game.drawing.item;
 
 import com.mygdx.game.new_game.SpriteManager;
-import com.mygdx.game.new_game.entities.stat.Envy;
+import com.mygdx.game.new_game.drawing.stat.Envy;
 
 public class Heart extends Envy
 {

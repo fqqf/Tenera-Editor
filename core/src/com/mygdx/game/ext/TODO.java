@@ -24,4 +24,8 @@ public class TODO
   движок не подходит, слои, мастер
 
   */
+
+ // ECS ENTITY BUILDER
+ // REMOVE ASSIGNED ACTORS FROM SYSTEMS . USE EVENT-ALIKE FOR SYSTEMS WITHOUT COMPONENT
+ // TODO: UNECCESARY SYSTEMS PRIORITY LSIT (now its just must-have priority number)
 }

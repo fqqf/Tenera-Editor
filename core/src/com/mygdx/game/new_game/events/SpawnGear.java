@@ -1,14 +1,13 @@
 package com.mygdx.game.new_game.events;
 
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
-import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.event.Event;
-import com.mygdx.game.new_game.AliceBehaviourSystem;
+import com.mygdx.game.new_game.systems.AliceBehaviourSystem;
 import com.mygdx.game.new_game.Systems;
-import com.mygdx.game.new_game.entities.Alice;
-import com.mygdx.game.new_game.entities.item.Gear;
+import com.mygdx.game.new_game.drawing.entities.Alice;
+import com.mygdx.game.new_game.drawing.item.Gear;
 import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class SpawnGear extends Event
@@ -40,6 +39,7 @@ public class SpawnGear extends Event
 
   // TODO:  drawingComponent.rotate
 
+  if (physicsComponent.position.x < 1) gear.touchedAlice = true;
   physicsComponent.velocity.x=-0.9f;
   DrawingComponent.get(gear).rotate += physicsComponent.velocity.x * -50;
   if (gear.touchedAlice)
@@ -47,7 +47,6 @@ public class SpawnGear extends Event
    eventSystemInstance.removeNowList.add(this);
    FirstAliceLevel.npc.remAll(gear);
    Systems.collisionSystem.remActor(gear);
-   System.out.println("remove gear");
   }
 
  }

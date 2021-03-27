@@ -1,4 +1,4 @@
-package com.mygdx.game.new_game.entities.background;
+package com.mygdx.game.new_game.drawing.background;
 
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;

@@ -103,6 +103,7 @@ public class CollisionSystem extends System
 
  public void handle()
  {
+  if (!play) return;
   // logger.info("Collision System");
   for (int i = 0; i < assignedActors.size; i++)
   {

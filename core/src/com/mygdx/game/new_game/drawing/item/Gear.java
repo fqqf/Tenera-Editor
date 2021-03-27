@@ -1,4 +1,4 @@
-package com.mygdx.game.new_game.entities.item;
+package com.mygdx.game.new_game.drawing.item;
 
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.actor.interfaces.Action;
@@ -17,7 +17,6 @@ public class Gear extends Actor
   if (actor.getClass().getSimpleName().equals("Alice"))
   {
    touchedAlice = true;
-   System.out.println("gear touched alice");
   }
 
  };

@@ -18,10 +18,11 @@ public abstract class System
  protected  Type type = Type.NONE;
  protected Actor actor;
  public Group assignedActors = new Group();
+ public boolean play = true;
 
  public void handle() //   layers.forEach((key,layer) -> layer.forEach((actor -> actor.draw(extrapolation))));
  {
-
+  if (!play) return;
   for (Actor actor : assignedActors)
   {
    this.actor = actor;

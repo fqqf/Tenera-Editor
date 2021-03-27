@@ -1,11 +1,13 @@
-package com.mygdx.game.new_game;
+package com.mygdx.game.new_game.systems;
 
+import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
 import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
-import com.mygdx.game.new_game.entities.Alice;
+import com.mygdx.game.new_game.drawing.entities.Alice;
 
 public class AliceBehaviourSystem extends System
 {
@@ -62,6 +64,8 @@ public class AliceBehaviourSystem extends System
 
    if (!alice.useSword.isPlaying)if (ApplicationLoop.instance.inGameTime<alice.invisibilityStartTime+1_000_000_000L) drawingComponent.draw = !drawingComponent.draw;
   else drawingComponent.draw = true;
+
+
 
   if (BUTTON)
   {

@@ -1,11 +1,8 @@
 package com.mygdx.game.new_game;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.data.Asset;
-
-import java.util.HashMap;
 
 public class SpriteManager
 {

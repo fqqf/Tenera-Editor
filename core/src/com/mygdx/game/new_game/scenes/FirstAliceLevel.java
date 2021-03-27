@@ -5,15 +5,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
-import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
+import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
+import com.mygdx.game.ext.core.event.Event;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.ext.core.system.System;
@@ -21,16 +20,25 @@ import com.mygdx.game.ext.core.system.presets.DrawingSystem;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
-import com.mygdx.game.new_game.entities.Alice;
-import com.mygdx.game.new_game.entities.InvisibleWall;
-import com.mygdx.game.new_game.entities.background.Background;
-import com.mygdx.game.new_game.entities.stat.*;
+import com.mygdx.game.new_game.drawing.entities.Alice;
+import com.mygdx.game.new_game.drawing.InvisibleWall;
+import com.mygdx.game.new_game.drawing.background.Background;
+import com.mygdx.game.new_game.drawing.cutscene.CutsceneImage;
+import com.mygdx.game.new_game.drawing.cutscene.CutsceneText;
+import com.mygdx.game.new_game.drawing.entities.Ghost;
+import com.mygdx.game.new_game.drawing.stat.*;
 import com.mygdx.game.new_game.events.SpawnGear;
+import com.mygdx.game.new_game.events.SpawnGhost;
+import com.mygdx.game.new_game.events.cutscenes.Cutscene;
+import com.mygdx.game.new_game.events.cutscenes.Greeting;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class FirstAliceLevel extends Scene
 {
+ public static CutsceneImage cutsceneImage, cutsceneBackground;
+ public static CutsceneText cutsceneText;
+
  public static boolean gameOver = false;
  private static final Array<Layer> allLayer = new Array<>();
 
@@ -40,6 +48,7 @@ public class FirstAliceLevel extends Scene
  public static Layer effects = new Layer(null);
  public static Layer grass = new Layer(null);
  public static Layer cutscene = new Layer(null);
+ public static Layer cutscene_b = new Layer(null);
  public static Layer environment = new Layer(null);
  public static Layer events = new Layer(null);
  public static Layer interfaceL = new Layer(null);
@@ -47,7 +56,7 @@ public class FirstAliceLevel extends Scene
  static
  { // это такая мега некрасивая архиектура сейчас
   allLayer.add(npc);allLayer.add(alicel);allLayer.add(background);allLayer.add(effects);allLayer.add(grass);
-  allLayer.add(cutscene);allLayer.add(environment);allLayer.add(events);allLayer.add(interfaceL);
+  allLayer.add(cutscene);allLayer.add(environment);allLayer.add(events);allLayer.add(interfaceL); allLayer.add(cutscene_b);
  }
 
  private final BitmapFont bitmapFont = new BitmapFont();
@@ -62,6 +71,8 @@ public class FirstAliceLevel extends Scene
   Systems.drawingSystem.cameraController = field.cameraController;
 
   loadResource();
+
+
  }
 
  private void loadResource()
@@ -94,14 +105,13 @@ public class FirstAliceLevel extends Scene
    }
   if (gameOver)
   {
-   java.lang.System.out.println("Game over");
+   ApplicationLoop.logger.info("GAME OVER");
    initScene();
   }
  }
 
  private void clearScene()
  {
-  java.lang.System.out.println("Clear scene");
 
   Array<System> systems = getSystems();
 
@@ -121,7 +131,7 @@ public class FirstAliceLevel extends Scene
   gameOver = false;
   clearScene();
   alice.init(7,5);
-  alice.initHearts(1);
+  alice.initHearts(4);
   CollisionSystem.world.update(CollisionComponent.get(alice).item,3,5);
 
   alicel.add(alice);
@@ -129,10 +139,10 @@ public class FirstAliceLevel extends Scene
   grass.add(
           new InvisibleWall(0,0,1000,0.1f),
           new InvisibleWall(0,0,0.1f,15),
-          new InvisibleWall(200,0,0.1f,15)
+          new InvisibleWall(600,0,0.1f,15)
   );
 
-  for (int i = 0; i < 100; i++) grass.add(new Grass(i*11.73f,0));
+  for (int i = 0; i < 60; i++) grass.add(new Grass(i*11.73f,0));
 
   background.add(new Background());
 
@@ -147,21 +157,25 @@ public class FirstAliceLevel extends Scene
 
   background.add(vignette);
   effects.add(vignetteTop);
+  cutscene.add(cutsceneImage=new CutsceneImage(), cutsceneText=new CutsceneText());
+  cutscene_b.add(cutsceneBackground=new CutsceneImage());
+  alicel.add(alice.swordBox);
+  Cutscene.set(cutsceneImage, cutsceneBackground, cutsceneText);
 
   Systems.drawingSystem.setMaster(alice);
 
   Systems.eventSystem.reset();
-  Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0));
+  Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0), new Greeting(7,5));
+  SpawnGhost sp = new SpawnGhost(-10,-10);
+  sp.play();
  }
 
 
  private Class<? extends Actor>[] environments =
          new Class[]{
                  Cross.class,
-                 Tower.class,
                  Stump.class,
                  TreeA.class,
-                 Haunted.class,
                  TreeC.class,
                  TreeB.class};
  private <T extends Actor> T create(Class<T> type, float x, float y)
@@ -220,10 +234,11 @@ public class FirstAliceLevel extends Scene
   effects.setCoordinateGrid(cameraGrid);
   grass.setCoordinateGrid(field);
   alicel.setCoordinateGrid(field);
-  cutscene.setCoordinateGrid(field);
+  cutscene.setCoordinateGrid(cameraGrid);
   environment.setCoordinateGrid(field);
   events.setCoordinateGrid(field);
   interfaceL.setCoordinateGrid(cameraGrid);
+  cutscene_b.setCoordinateGrid(cameraGrid);
 
 
   Systems.drawingSystem.layers.put(4, background);
@@ -233,6 +248,8 @@ public class FirstAliceLevel extends Scene
   Systems.drawingSystem.layers.put(8, grass);
   Systems.drawingSystem.layers.put(9, effects);
   Systems.drawingSystem.layers.put(10, interfaceL);
+  Systems.drawingSystem.layers.put(11, cutscene_b);
+  Systems.drawingSystem.layers.put(12, cutscene);
 
   Systems.eventSystem.setLayer(events);
  }
@@ -242,6 +259,7 @@ public class FirstAliceLevel extends Scene
 
   addSystem(System.Type.RENDER_SYSTEM,
     Systems.keyBoardSystem,
+    Systems.cutsceneKeyBoardSystem,
     Systems.animationSystem,
     Systems.drawingSystem
   );

@@ -1,25 +1,15 @@
-package com.mygdx.game.new_game;
+package com.mygdx.game.new_game.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.math.Vector2;
-import com.dongbat.jbump.World;
 import com.mygdx.game.ext.additional.CameraController;
-import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
-import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
-import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
-import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
-import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
-import com.mygdx.game.ext.core.system.presets.ControlSystem;
-import com.mygdx.game.ext.core.system.presets.PhysicsSystem;
-import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
-import com.mygdx.game.new_game.entities.Alice;
+import com.mygdx.game.new_game.Systems;
+import com.mygdx.game.new_game.drawing.entities.Alice;
 import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class KeyBoardSystem extends System
@@ -41,6 +31,7 @@ public class KeyBoardSystem extends System
  @Override
  public void handle()
  {
+  if (!play) return;
   behave();
  }
 
@@ -81,15 +72,24 @@ public class KeyBoardSystem extends System
 
   DrawingComponent dc = DrawingComponent.get(alice);
 
+  PhysicsComponent bpa = PhysicsComponent.get(alice.swordBox);
+
 
   fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.95f : 0.5f;
+
+  if (dc.flipX)
+   bpa.position.set(dc.drawPosition.x-3, dc.drawPosition.y+2);
+  else
+   bpa.position.set(dc.drawPosition.x+4, dc.drawPosition.y+2);
+
+
 
   posx = (dc.extrapolationX) ? -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+ 6.5f : -bp.position.x+6.5f;
 
   //Systems.collisionSystem.updateActor(posx,0,alice);
 
   if (posx>-0.1f) posx = -0.1f; // TODO: MOVE EVERYTHING FROM HERE TO AliceBehaviourSystem analogue
-  if (posx<-200f+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth) posx = -200f+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth;
+  if (posx<-600+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth) posx = -600+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth;
 
   cameraController.setPosition(posx,0);
  }
