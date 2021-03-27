@@ -84,7 +84,7 @@ public class KeyBoardSystem extends System
 
   fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.95f : 0.5f;
 
-  posx = (dc.extrapolationX) ? -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+5 : -bp.position.x+5;
+  posx = (dc.extrapolationX) ? -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+ 6.5f : -bp.position.x+6.5f;
 
   Systems.collisionSystem.updateActor(posx,0,alice);
 

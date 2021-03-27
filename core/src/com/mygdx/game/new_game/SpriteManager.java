@@ -23,6 +23,8 @@ public class SpriteManager
 
   textures0.put("background", new Texture("hitobashira_demo/background/background.png"));
 
+  // TODO: ВАЖНО!!! НУЖНО ТАКЖЕ ПЕРЕНЕСТИ ВСЕ ИЗ ПАПКИ hitobashira_demo/cutscenes
+
   String[] env = {"bush", "cross", "gates", "girl", "haunted", "poet", "stump", "tower", "tree1", "tree2", "tree3", "grass"};
   String[] item = {"fake_heart", "gear", "ghost", "heart"};
 
