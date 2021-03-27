@@ -57,7 +57,6 @@ public class AliceBehaviourSystem extends System
   DrawingComponent fightAnimationDrawingComponent = DrawingComponent.get(alice.fightAnimation);
 
   fightAnimationDrawingComponent.flipX = DrawingComponent.get(alice).flipX;
-  fightAnimationDrawingComponent.draw = true;
 
   fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.95f : 0.5f;
 
@@ -67,6 +66,7 @@ public class AliceBehaviourSystem extends System
   if (BUTTON)
   {
    alice.useSword.play();
+   KeyBoardSystem.BUTTON = false;
   }
  }
 }

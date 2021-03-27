@@ -72,12 +72,17 @@ public class KeyBoardSystem extends System
   }
   }
 
+
+
   Alice alice = AliceBehaviourSystem.getAlice();
+  DrawingComponent fightAnimationDrawingComponent = DrawingComponent.get(alice.fightAnimation);
   BodyPropertiesComponent bp = BodyPropertiesComponent.get(alice);
   PhysicsComponent pc = PhysicsComponent.get(alice);
 
   DrawingComponent dc = DrawingComponent.get(alice);
 
+
+  fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.95f : 0.5f;
 
   posx = (dc.extrapolationX) ? -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+5 : -bp.position.x+5;
 

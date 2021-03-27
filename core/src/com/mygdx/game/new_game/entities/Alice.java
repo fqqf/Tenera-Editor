@@ -96,6 +96,7 @@ public class Alice extends Actor
    DrawingComponent drawingComponent = DrawingComponent.get(this);
    drawingComponent.texture = SpriteManager.textures.get("fight_a1");
    drawingComponent.offset.set(0.5f,0);
+   drawingComponent.draw = false;
 
    AnimationComponent animationComponent = AnimationComponent.get(this);
    animationComponent.animation = new AnimationData(0.08f, Animation.PlayMode.LOOP,

@@ -29,6 +29,7 @@ public class EventSystem extends System
  public final ArrayList<Event> events = new ArrayList<>();
  public final ArrayList<Event> playingNow = new ArrayList<>();
  public final ArrayList<Event> removeList = new ArrayList<>();
+ public final ArrayList<Event> removeNowList = new ArrayList<>();
 
  private Actor master;
 
@@ -54,8 +55,8 @@ public class EventSystem extends System
 
   playingNow.forEach((Event::continuePlaying)); // For continious event, which must be called outside its own boundaries.
 
-  playingNow.removeAll(removeList);
-  removeList.clear();
+  playingNow.removeAll(removeNowList);
+  removeNowList.clear();
 
  }
 

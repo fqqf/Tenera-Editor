@@ -44,7 +44,7 @@ public class SpawnGear extends Event
 
   if (gear.touchedAlice)
   {
-   eventSystemInstance.removeList.add(this);
+   eventSystemInstance.removeNowList.add(this);
    FirstAliceLevel.npc.remAll(gear);
    Systems.collisionSystem.remActor(gear);
   }
