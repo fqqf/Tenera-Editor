@@ -133,7 +133,6 @@ public class FirstAliceLevel extends Scene
   background.add(vignette);
   effects.add(vignetteTop);
 
-
   Systems.drawingSystem.setMaster(alice);
   Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0));
  }

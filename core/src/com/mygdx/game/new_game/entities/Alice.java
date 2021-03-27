@@ -13,6 +13,7 @@ import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationData;
 import com.mygdx.game.ext.core.components.presets.movement.JumpComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.new_game.AliceBehaviourSystem;
 import com.mygdx.game.new_game.SpriteManager;
@@ -130,6 +131,7 @@ public class Alice extends Actor
 
  public void initHearts(int hearts)
  {
+  logger.info("init heartz");
   for (Heart heart : this.hearts) FirstAliceLevel.interfaceL.remAll(heart);
   this.hearts.clear();
   for (int i = 0; i < hearts; i++) addHeart();
@@ -146,6 +148,7 @@ public class Alice extends Actor
   if (hearts.size==0)
   {
    logger.info("Alice has died");
+
 
    onDead.invoke();
 

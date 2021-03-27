@@ -110,6 +110,7 @@ public class CollisionSystem extends System
    float targetY = actorAPhysics.position.y;
 
    Response.Result result = world.move(item, targetX, targetY, collisionFilter);
+   actorAPhysics.position.set(result.goalX, result.goalY);
 
    if (!result.projectedCollisions.isEmpty())
    {
@@ -119,7 +120,6 @@ public class CollisionSystem extends System
    }
    else{ actorAcc.isStanding = false; }
 
-   actorAPhysics.position.set(result.goalX, result.goalY);
   }
  }
 
