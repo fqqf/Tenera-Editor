@@ -79,7 +79,7 @@ public class FirstAliceLevel extends Scene
   else
    {
     batch.begin();
-    bitmapFont.draw(batch,"Loading... " + SpriteManager.asset.getProgress() +"%", 5,5);
+    bitmapFont.draw(batch,"Loading... " + (int)(SpriteManager.asset.getProgress()*100) +"%", 600,300);
     batch.end();
    }
  }
