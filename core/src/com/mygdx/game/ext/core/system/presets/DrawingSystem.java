@@ -32,6 +32,11 @@ public class DrawingSystem extends System
 {
  public static boolean DEBUG = false;
  private final ShapeDrawer shapeDrawer;
+ public static PhysicsComponent master;
+ public void setMaster(Actor actor)
+ {
+  master = PhysicsComponent.get(actor);
+ }
 
  public DrawingSystem()
  {
@@ -67,9 +72,11 @@ public class DrawingSystem extends System
 
  private void calc(Actor actor)
  {
-  this.actor = actor;
 
+  this.actor = actor;
   loadFields();
+  float delta = master.position.x - position.x;
+  //drawingComponent.draw =  delta > -30 && delta < 30; // тут что-то не то
   if (!drawingComponent.draw) return;
   behave();
  }

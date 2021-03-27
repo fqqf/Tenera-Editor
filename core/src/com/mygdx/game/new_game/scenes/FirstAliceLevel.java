@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.presets.Layer;
@@ -20,6 +22,8 @@ import com.mygdx.game.new_game.entities.InvisibleWall;
 import com.mygdx.game.new_game.entities.background.Background;
 import com.mygdx.game.new_game.entities.stat.*;
 import com.mygdx.game.new_game.events.SpawnGear;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class FirstAliceLevel extends Scene
 {
@@ -85,7 +89,10 @@ public class FirstAliceLevel extends Scene
   Array<System> systems = getSystems();
   for (Layer layer : allLayer)
   {
-   for (System system : systems) system.remActor(layer);
+   for (System system : systems)
+   {
+    system.remActor(layer);
+   }
    layer.clear();
   }
  }
@@ -105,9 +112,8 @@ public class FirstAliceLevel extends Scene
 
   background.add(new Background());
 
-  environment.addAll(
-    new Cross(60,0), new Tower(100,0), new Stump(68,0), new TreeA(74,0), new Haunted(83,0), new TreeC(90,0), new TreeB(95,0)
-  );
+  generateEnvironment();
+
 
   VignetteRect vignette = new VignetteRect(0,0);
   VignetteRect vignetteTop = new VignetteRect(0,12-7.11f);
@@ -121,8 +127,72 @@ public class FirstAliceLevel extends Scene
   alice.addHeart();
   alice.addHeart();
   alice.addHeart();
-
+  Systems.drawingSystem.setMaster(alice);
   Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0));
+ }
+
+
+ private Class<? extends Actor>[] environments =
+         new Class[]{
+                 Cross.class,
+                 Tower.class,
+                 Stump.class,
+                 TreeA.class,
+                 Haunted.class,
+                 TreeC.class,
+                 TreeB.class};
+ private <T extends Actor> T create(Class<T> type, float x, float y)
+ {
+  T actor;
+  try
+  {
+   actor = type.getConstructor(float.class, float.class).newInstance(0,0);
+  }
+  catch (InstantiationException e)
+  {
+   e.printStackTrace();
+   throw new Error(e);
+  }
+  catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
+  {
+   e.printStackTrace();
+   throw new Error();
+  }
+  PhysicsComponent.get(actor).position.set(x,y);
+  return actor;
+ }
+
+ private void generateEnvironment()
+ {
+  for (int i = 1; i < 10; i++)
+  {
+   environment.addAll(
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(0,20) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(0,20) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(20,40) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(20,40) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(40,60) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(40,60) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(60,70) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(60,70) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(70,80) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(70,80) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(90,95) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(90,95) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(80,100) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(80,100) * i,0)
+   );
+//   environment.addAll(
+//           create(Poet.class, 20,0),
+//           new Cross(60 * i,0),
+//           new Tower(100 * i,0),
+//           new Stump(68 * i,0),
+//           new TreeA(74 * i,0),
+//           new Haunted(83 * i,0),
+//           new TreeC(90 * i,0),
+//           new TreeB(95 * i,0)
+//   );
+  }
  }
 
  private void configureLayers()
