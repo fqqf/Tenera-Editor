@@ -24,7 +24,7 @@ public class Gear extends Actor
   physicsComponent.personalGravity.y = -0.9f;
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
-  drawingComponent.texture = SpriteManager.textures.get("gear");
+  drawingComponent.texture = SpriteManager.get("gear");
   drawingComponent.offset.set(0,0);
   drawingComponent.drawSize.set(3.5f,3.5f);
   drawingComponent.useExtrapolation = true;

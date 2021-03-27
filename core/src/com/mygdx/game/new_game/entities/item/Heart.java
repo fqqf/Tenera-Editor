@@ -7,6 +7,6 @@ public class Heart extends Envy
 {
  public Heart(float x, float y)
  {
-  super(x, y, 1.8f, 1.9f, SpriteManager.textures.get("heart"));
+  super(x, y, 1.8f, 1.9f, SpriteManager.get("heart"));
  }
 }

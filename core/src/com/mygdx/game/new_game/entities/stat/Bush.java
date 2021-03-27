@@ -6,6 +6,6 @@ public class Bush extends Envy
 {
  public Bush(float x, float y)
  {
-  super(x, y, 4.42f, 3.57f, SpriteManager.textures.get("bush"));
+  super(x, y, 4.42f, 3.57f, SpriteManager.get("bush"));
  }
 }

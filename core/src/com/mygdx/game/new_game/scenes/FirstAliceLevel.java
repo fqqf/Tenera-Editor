@@ -13,6 +13,7 @@ import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.DrawingSystem;
+import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
 import com.mygdx.game.new_game.entities.Alice;
 import com.mygdx.game.new_game.entities.InvisibleWall;
@@ -34,8 +35,8 @@ public class FirstAliceLevel extends Scene
  public static Layer events = new Layer(null);
  public static Layer interfaceL = new Layer(null);
 
- public Alice alice = new Alice(2,5);
- private final Asset asset = new Asset();
+ public Alice alice;
+ // private final Asset asset = new Asset();
  private final BitmapFont bitmapFont = new BitmapFont();
 
  public FirstAliceLevel(String name, CoordinateGrid field, float width, float height)
@@ -51,10 +52,12 @@ public class FirstAliceLevel extends Scene
 
  private void loadResource()
  {
-  asset.load("hitobashira_demo/atlas/atlas.txt", TextureAtlas.class);
+  SpriteManager.asset.load("hitobashira_demo/atlas/atlas.txt", TextureAtlas.class);
  }
  private void initScene()
  {
+  //SpriteManager.asset = asset;
+  alice = new Alice(2,5);
   putActors();
  }
 
@@ -64,16 +67,16 @@ public class FirstAliceLevel extends Scene
   Gdx.gl.glClearColor(0.32156f, 0.32156f, 0.32156f, 1);
   Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-  if (asset.isLoaded)
+  if (SpriteManager.asset.isLoaded)
   {
    drawGrid();
    super.iterDraw(extrapolation);
   }
-  else if (asset.update()) initScene();
+  else if (SpriteManager.asset.update()) initScene();
   else
    {
     batch.begin();
-    bitmapFont.draw(batch,"Loading... " + asset.getProgress() +"%", 5,5);
+    bitmapFont.draw(batch,"Loading... " + SpriteManager.asset.getProgress() +"%", 5,5);
     batch.end();
    }
  }
@@ -81,7 +84,11 @@ public class FirstAliceLevel extends Scene
  private void putActors()
  {
   alicel.add(alice);
-  grass.add(new InvisibleWall(0,0,1000,0.1f),new InvisibleWall(0,0,0.1f,15), new InvisibleWall(200,0,0.1f,15));
+  grass.add(
+          new InvisibleWall(0,0,1000,0.1f),
+          new InvisibleWall(0,0,0.1f,15),
+          new InvisibleWall(200,0,0.1f,15)
+  );
 
   for (int i = 0; i < 100; i++) grass.add(new Grass(i*11.73f,0));
 

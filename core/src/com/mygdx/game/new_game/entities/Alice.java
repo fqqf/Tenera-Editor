@@ -48,7 +48,9 @@ public class Alice extends Actor
   physicsComponent.size.set(2f,6.49f/1.3f);
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
-  drawingComponent.texture = SpriteManager.textures.get("run_a1");
+
+  drawingComponent.texture = SpriteManager.get("alice_run/0");
+
   drawingComponent.offset.set(-1.9f,0);
   drawingComponent.drawSize.set(5.14f/1.3f,6.49f/1.3f);
   drawingComponent.useExtrapolation = true;
@@ -66,12 +68,7 @@ public class Alice extends Actor
 
   AnimationComponent animationComponent = AnimationComponent.get(this);
   animationComponent.animation = new AnimationData(0.08f, Animation.PlayMode.LOOP,
-    SpriteManager.textures.get("run_a1"),
-    SpriteManager.textures.get("run_a2"),
-    SpriteManager.textures.get("run_a3"),
-    SpriteManager.textures.get("run_a4"),
-    SpriteManager.textures.get("run_a5"),
-    SpriteManager.textures.get("run_a6")
+    SpriteManager.getAnimations("alice_run", 6)
   );
 
   Systems.animationSystem.addActor(this);
@@ -94,19 +91,20 @@ public class Alice extends Actor
    bodyPropertiesComponent.size.set(8.47f/1.3f, 6.81f/1.3f);
 
    DrawingComponent drawingComponent = DrawingComponent.get(this);
-   drawingComponent.texture = SpriteManager.textures.get("fight_a1");
+   drawingComponent.texture = SpriteManager.get("alice_fight/0");
    drawingComponent.offset.set(0.5f,0);
    drawingComponent.draw = false;
 
    AnimationComponent animationComponent = AnimationComponent.get(this);
    animationComponent.animation = new AnimationData(0.08f, Animation.PlayMode.LOOP,
-     SpriteManager.textures.get("fight_a1"),
-     SpriteManager.textures.get("fight_a2"),
-     SpriteManager.textures.get("fight_a3"),
-     SpriteManager.textures.get("fight_a4"),
-     SpriteManager.textures.get("fight_a5"),
-     SpriteManager.textures.get("fight_a6"),
-     SpriteManager.textures.get("fight_a7")
+           SpriteManager.getAnimations("alice_fight",7)
+//     SpriteManager.textures.get("fight_a1"),
+//     SpriteManager.textures.get("fight_a2"),
+//     SpriteManager.textures.get("fight_a3"),
+//     SpriteManager.textures.get("fight_a4"),
+//     SpriteManager.textures.get("fight_a5"),
+//     SpriteManager.textures.get("fight_a6"),
+//     SpriteManager.textures.get("fight_a7")
    );
 
    Systems.animationSystem.addActor(this);

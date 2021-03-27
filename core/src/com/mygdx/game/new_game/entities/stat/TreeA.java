@@ -6,6 +6,6 @@ public class TreeA extends Envy
 {
  public TreeA(float x, float y)
  {
-  super(x, y, 5.52f, 7.36f, SpriteManager.textures.get("tree1"));
+  super(x, y, 5.52f, 7.36f, SpriteManager.get("tree1"));
  }
 }

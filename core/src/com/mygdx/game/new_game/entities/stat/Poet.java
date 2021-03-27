@@ -6,6 +6,6 @@ public class Poet extends Envy
 {
  public Poet(float x, float y)
  {
-  super(x, y, 3.31f, 3.63f, SpriteManager.textures.get("poet"));
+  super(x, y, 3.31f, 3.63f, SpriteManager.get("poet"));
  }
 }

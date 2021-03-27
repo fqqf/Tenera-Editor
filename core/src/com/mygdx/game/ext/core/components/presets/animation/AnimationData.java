@@ -11,6 +11,10 @@ public class AnimationData extends Animation<TextureAtlas.AtlasRegion>
  {
   super(frameDuration, new Array<>(keyFrames), playMode);
  }
+ public AnimationData(float frameDuration, PlayMode playMode, Array<TextureAtlas.AtlasRegion> keyFrames)
+ {
+  super(frameDuration, keyFrames, playMode);
+ }
 
  public TextureAtlas.AtlasRegion update(float delta)
  {

@@ -15,7 +15,7 @@ public class Grass extends Actor
   bodyPropertiesComponent.size.set(11.75f, 1.71f);
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
-  drawingComponent.texture = SpriteManager.textures.get("grass");
+  drawingComponent.texture = SpriteManager.get("grass");
 
   // collisionComponent.box.setPosition(x,y);
   // collisionComponent.box.setSize(width, height);

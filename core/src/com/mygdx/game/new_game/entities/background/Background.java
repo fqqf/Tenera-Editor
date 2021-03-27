@@ -15,7 +15,7 @@ public class Background extends Actor
   bodyPropertiesComponent.size.set(50,12);
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
-  drawingComponent.texture = SpriteManager.textures.get("background");
+  drawingComponent.texture = SpriteManager.get("background");
 
   // collisionComponent.box.setPosition(x,y);
   // collisionComponent.box.setSize(width, height);
