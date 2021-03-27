@@ -70,9 +70,7 @@ public class DrawingSystem extends System
   this.actor = actor;
 
   loadFields();
-
   if (!drawingComponent.draw) return;
-
   behave();
  }
 
@@ -96,6 +94,7 @@ public class DrawingSystem extends System
    size = bodyPropertiesComponent.size;
   }
 
+  calculateDrawPosition();
  }
 
  private Vector2 drawPosition;
@@ -109,6 +108,17 @@ public class DrawingSystem extends System
   drawingComponent.spriteColor.g==1 &&
   drawingComponent.spriteColor.b==1)) batch.setColor(drawingComponent.spriteColor);
 
+  boolean flippedX = texture.isFlipX() != drawingComponent.flipX, flippedY = texture.isFlipY() != drawingComponent.flipY;
+  if (flippedX || flippedY) texture.flip(flippedX, flippedY);
+
+  batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x, drawSize.y, drawSize.x,drawSize.y,1,1, 0);
+  batch.setColor(Color.WHITE);
+  //debug();
+
+ }
+
+ private void calculateDrawPosition()
+ {
   drawPosition.set(position);
   if (!drawingComponent.offset.isZero())drawPosition.add(drawingComponent.offset);
 
@@ -120,14 +130,6 @@ public class DrawingSystem extends System
    if (drawingComponent.extrapolationY) drawPosition.y += velocity.y * ApplicationLoop.instance.extrapolation;
    else if (drawingComponent.extrapolationOffNanoY < ApplicationLoop.instance.inGameTime) drawingComponent.extrapolationY = true;
   }
-
-  boolean flippedX = texture.isFlipX() != drawingComponent.flipX, flippedY = texture.isFlipY() != drawingComponent.flipY;
-  if (flippedX || flippedY) texture.flip(flippedX, flippedY);
-
-  batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x, drawSize.y, drawSize.x,drawSize.y,1,1, 0);
-  batch.setColor(Color.WHITE);
-  //debug();
-
  }
 
  private void debug()

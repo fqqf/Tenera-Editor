@@ -18,6 +18,7 @@ import com.mygdx.game.new_game.AliceBehaviourSystem;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
 import com.mygdx.game.new_game.entities.item.Heart;
+import com.mygdx.game.new_game.events.UseSword;
 import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class Alice extends Actor
@@ -108,8 +109,11 @@ public class Alice extends Actor
    );
 
    Systems.animationSystem.addActor(this);
+   useSword = new UseSword(0,0, alice);
   }
  }
+
+ public UseSword useSword;
 
  private Array<Heart> hearts = new Array<>();;
 
@@ -127,6 +131,7 @@ public class Alice extends Actor
 
   if (hearts.size==0)
   {
+   logger.info("Alice has died");
    logger.error("Здесь игра должна заново вызывать putActors(), а старых удалить. Грубо говоря, перезапустить уровень. Если я забыла это реализовать, пожалуйста, сделай это");
    System.exit(1);
   }
@@ -138,6 +143,7 @@ public class Alice extends Actor
   hearts.add(heart);
   FirstAliceLevel.interfaceL.add(heart);
   sort();
+  logger.info("Alice has got one heart ("+hearts.size+" left)");
  }
 
 

@@ -29,7 +29,7 @@ public class KeyBoardSystem extends System
   type = System.Type.RENDER_SYSTEM;
  }
 
- public static boolean LEFT, RIGHT, UP;
+ public static boolean LEFT, RIGHT, UP, BUTTON;
  public CameraController cameraController;
 
  @Override
@@ -56,6 +56,7 @@ public class KeyBoardSystem extends System
   if (!LEFT) LEFT = Gdx.input.isKeyPressed(Input.Keys.A);
   if (!RIGHT) RIGHT = Gdx.input.isKeyPressed(Input.Keys.D);
   if (!UP) UP = Gdx.input.isKeyJustPressed(Input.Keys.W);
+  if (!BUTTON) BUTTON = Gdx.input.isButtonJustPressed(Input.Buttons.LEFT);
 
   if (LEFT) {
    if (!RIGHT) {

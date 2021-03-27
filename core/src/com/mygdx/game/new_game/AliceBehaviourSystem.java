@@ -9,7 +9,7 @@ import com.mygdx.game.new_game.entities.Alice;
 
 public class AliceBehaviourSystem extends System
 {
- private boolean UP, LEFT, RIGHT;
+ private boolean UP, LEFT, RIGHT, BUTTON;
 
  private static Alice alice;
 
@@ -42,6 +42,7 @@ public class AliceBehaviourSystem extends System
   UP    = KeyBoardSystem.UP; // TODO: PUT THIS BLOCK
   LEFT  = KeyBoardSystem.LEFT;
   RIGHT = KeyBoardSystem.RIGHT;
+  BUTTON = KeyBoardSystem.BUTTON;
 
 
   if (UP) JumpComponent.get(alice).jump();
@@ -56,11 +57,16 @@ public class AliceBehaviourSystem extends System
   DrawingComponent fightAnimationDrawingComponent = DrawingComponent.get(alice.fightAnimation);
 
   fightAnimationDrawingComponent.flipX = DrawingComponent.get(alice).flipX;
-  fightAnimationDrawingComponent.draw = false;
+  fightAnimationDrawingComponent.draw = true;
 
-  fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.9f : 0.5f;
+  fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.95f : 0.5f;
 
-  if (ApplicationLoop.instance.inGameTime<alice.invisibilityStartTime+1_000_000_000L) drawingComponent.draw = !drawingComponent.draw;
+   if (!alice.useSword.isPlaying)if (ApplicationLoop.instance.inGameTime<alice.invisibilityStartTime+1_000_000_000L) drawingComponent.draw = !drawingComponent.draw;
   else drawingComponent.draw = true;
+
+  if (BUTTON)
+  {
+   alice.useSword.play();
+  }
  }
 }
