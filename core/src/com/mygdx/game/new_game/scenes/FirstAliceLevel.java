@@ -59,6 +59,7 @@ public class FirstAliceLevel extends Scene
   configureLayers();
   DrawingSystem.DEBUG = true;
   Systems.keyBoardSystem.cameraController = field.cameraController;
+  Systems.drawingSystem.cameraController = field.cameraController;
 
   loadResource();
  }

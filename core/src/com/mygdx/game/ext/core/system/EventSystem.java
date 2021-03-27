@@ -17,10 +17,12 @@ public class EventSystem extends System
 {
 
  public Matrix4 coordGrid;
+
  public void setLayer(Layer layer)
  {
   coordGrid = layer.getCoordinateGrid().camera.combined;
  }
+
  {
   type = Type.PHYSICS_SYSTEM; // PHYSICS_COMPONENT;
   Event.eventSystemInstance = this;
@@ -57,7 +59,6 @@ public class EventSystem extends System
 
   playingNow.removeAll(removeNowList);
   removeNowList.clear();
-
  }
 
  public EventSystem setMaster(Actor master)
@@ -94,5 +95,6 @@ public class EventSystem extends System
   playingNow.clear();
   events.clear();
  }
+
 
 }

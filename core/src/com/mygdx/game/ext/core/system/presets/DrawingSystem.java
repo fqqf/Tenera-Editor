@@ -1,6 +1,7 @@
 package com.mygdx.game.ext.core.system.presets;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.World;
+import com.mygdx.game.ext.additional.CameraController;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 
@@ -30,6 +32,7 @@ import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
+ public CameraController cameraController;
  public static boolean DEBUG = false;
  private final ShapeDrawer shapeDrawer;
  public static PhysicsComponent master;
@@ -58,7 +61,7 @@ public class DrawingSystem extends System
   batch.begin();
   Color color = batch.getColor();
   layers.forEach((key, layer) -> iterateLayer(layer));
-  if (DEBUG) layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
+  //if (DEBUG) layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
   if (DEBUG) debug();
   batch.setColor(color);
   batch.end();
@@ -120,7 +123,7 @@ public class DrawingSystem extends System
 
   batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x/2, drawSize.y/2, drawSize.x,drawSize.y,1,1, drawingComponent.rotate);
   batch.setColor(Color.WHITE);
-  //debug();
+  debug();
 
  }
 
@@ -142,14 +145,14 @@ public class DrawingSystem extends System
  private void debug()
  {
   if (Event.eventSystemInstance!=null) drawEvents();
-  // drawCollisionBox();
-  drawTextureBox();
+   drawCollisionBox(); // TODO: adds collision (FIX!)
+ // drawTextureBox();
  }
 
  private void draw(Vector2 position, Vector2 size, Color color)
  {
   shapeDrawer.setColor(color);
-  shapeDrawer.setDefaultLineWidth(0.02f);
+  shapeDrawer.setDefaultLineWidth(0.05f);
   shapeDrawer.rectangle(position.x, position.y, size.x, size.y);
  }
 
@@ -161,8 +164,9 @@ public class DrawingSystem extends System
 
  private void drawCollisionBox()
  {
+  if (!PhysicsComponent.has(actor)) return; // TODO: has is expensive. Fix
   final PhysicsComponent physicsComponent = PhysicsComponent.get(actor);
-  draw(physicsComponent.position, physicsComponent.size, Color.RED);
+  draw(physicsComponent.position, physicsComponent.size, Color.PINK);
  }
 
  private void drawTextureBox() { draw(drawPosition, drawSize, Color.LIME); }
@@ -177,10 +181,10 @@ public class DrawingSystem extends System
    {
     DrawingComponent drawingComponent = DrawingComponent.get(actor1);
     shapeDrawer.setColor(drawingComponent.debugCollisionColor);
-    drawingComponent.debugCollisionColor = Color.PINK;
+    drawingComponent.debugCollisionColor = Color.LIME;
     shapeDrawer.setDefaultLineWidth(0.03f);
     Rect rect = world.getRect(item);
-    shapeDrawer.rectangle(rect.x, rect.y, rect.w, rect.h);
+    shapeDrawer.rectangle(rect.x+cameraController.cameraX, rect.y+cameraController.cameraY, rect.w, rect.h);
    }
   }
  }
