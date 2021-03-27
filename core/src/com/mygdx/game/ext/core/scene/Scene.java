@@ -85,6 +85,13 @@ public abstract class Scene
 
  public void remSystem(System... systems) { for (System system : systems) remSystem(system); }
  private void remSystem(System system) { getArrayForSystemType(system.getType()).removeValue(system, true); }
+ protected Array<System> getSystems()
+ {
+  Array<System> systems = new Array<>(physicSystems.size + renderSystems.size);
+  systems.addAll(physicSystems);
+  systems.addAll(renderSystems);
+  return systems;
+ }
 
  protected OrthographicCamera camera;
 

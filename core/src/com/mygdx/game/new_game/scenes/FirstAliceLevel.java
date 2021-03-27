@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.mygdx.game.ext.core.actor.interfaces.Action;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
-import com.mygdx.game.ext.core.data.Asset;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.presets.Layer;
@@ -23,7 +23,7 @@ import com.mygdx.game.new_game.events.SpawnGear;
 
 public class FirstAliceLevel extends Scene
 {
- public static Layer drawLayer = new Layer(null);
+ private static final Array<Layer> allLayer = new Array<>();
 
  public static Layer npc = new Layer(null);
  public static Layer alicel = new Layer(null);
@@ -35,8 +35,12 @@ public class FirstAliceLevel extends Scene
  public static Layer events = new Layer(null);
  public static Layer interfaceL = new Layer(null);
 
- public Alice alice;
- // private final Asset asset = new Asset();
+ static
+ { // это такая мега некрасивая архиектура сейчас
+  allLayer.add(npc);allLayer.add(alicel);allLayer.add(background);allLayer.add(effects);allLayer.add(grass);
+  allLayer.add(cutscene);allLayer.add(environment);allLayer.add(events);allLayer.add(interfaceL);
+ }
+
  private final BitmapFont bitmapFont = new BitmapFont();
 
  public FirstAliceLevel(String name, CoordinateGrid field, float width, float height)
@@ -54,12 +58,7 @@ public class FirstAliceLevel extends Scene
  {
   SpriteManager.asset.load("hitobashira_demo/atlas/atlas.txt", TextureAtlas.class);
  }
- private void initScene()
- {
-  //SpriteManager.asset = asset;
-  alice = new Alice(2,5);
-  putActors();
- }
+
 
  @Override
  public void iterDraw(float extrapolation)
@@ -81,8 +80,20 @@ public class FirstAliceLevel extends Scene
    }
  }
 
- private void putActors()
+ private void clearScene()
  {
+  Array<System> systems = getSystems();
+  for (Layer layer : allLayer)
+  {
+   for (System system : systems) system.remActor(layer);
+   layer.clear();
+  }
+ }
+
+ private void initScene()
+ {
+  clearScene();
+  Alice alice = new Alice(2,5, this::initScene);
   alicel.add(alice);
   grass.add(
           new InvisibleWall(0,0,1000,0.1f),
@@ -116,7 +127,7 @@ public class FirstAliceLevel extends Scene
 
  private void configureLayers()
  {
-  ExtendCoordinateGrid cameraGrid = new ExtendCoordinateGrid("camera-grid",12);
+  CoordinateGrid cameraGrid = new ExtendCoordinateGrid("camera-grid",12);
   npc.setCoordinateGrid(field);
   background.setCoordinateGrid(cameraGrid);
   effects.setCoordinateGrid(cameraGrid);
@@ -126,6 +137,7 @@ public class FirstAliceLevel extends Scene
   environment.setCoordinateGrid(field);
   events.setCoordinateGrid(field);
   interfaceL.setCoordinateGrid(cameraGrid);
+
 
   Systems.drawingSystem.layers.put(4, background);
   Systems.drawingSystem.layers.put(5, environment);
@@ -140,6 +152,7 @@ public class FirstAliceLevel extends Scene
 
  private void setSceneSystems()
  {
+
   addSystem(System.Type.RENDER_SYSTEM,
     Systems.keyBoardSystem,
     Systems.animationSystem,

@@ -24,7 +24,7 @@ public class SpawnGear extends Event
  {
   Alice alice = AliceBehaviourSystem.getAlice();
   BodyPropertiesComponent bp = BodyPropertiesComponent.get(alice);
-  FirstAliceLevel.npc.add(gear = new Gear(bp.position.x+20, bp.position.y+10));
+  FirstAliceLevel.npc.add(gear = new Gear(bp.position.x+20, bp.position.y+10));// вот за такое хочется больно и сильно бить по рукам :)
 
   eventSystemInstance.removeList.add(this);
   eventSystemInstance.playingNow.add(this);

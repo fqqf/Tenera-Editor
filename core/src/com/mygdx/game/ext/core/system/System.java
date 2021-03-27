@@ -3,6 +3,7 @@ package com.mygdx.game.ext.core.system;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
@@ -49,6 +50,10 @@ public abstract class System
  public void remActor(Actor... actors)
  {
   assignedActors.remAll(actors);
+ }
+ public void remActor(Array<Actor> actors)
+ {
+  assignedActors.removeAll(actors, true);
  }
 }
 

@@ -29,20 +29,25 @@ public class Alice extends Actor
 
  public long invisibilityStartTime;
 
- private Action.Arg1<Actor> touch = actor->{
-  if (actor.getClass().getSimpleName().equals("Gear")) {
-   if (ApplicationLoop.instance.inGameTime>invisibilityStartTime+1_000_000_000L)takeDamage();
- }
- };
+ private Action.Arg1<Actor> touch =
+         actor->
+         {
+          if (actor.getClass().getSimpleName().equals("Gear"))
+          {
+           if (ApplicationLoop.instance.inGameTime>invisibilityStartTime+1_000_000_000L)takeDamage();
+          }
+         };
+
 
  private void takeDamage()
  {
   invisibilityStartTime = ApplicationLoop.instance.inGameTime;
   removeHeart();
  }
-
- public Alice(float x, float y)
+ private final Action onDead;
+ public Alice(float x, float y,Action onDead)
  {
+  this.onDead = onDead;
   PhysicsComponent physicsComponent = PhysicsComponent.get(this);
   physicsComponent.position.set(x,y);
   physicsComponent.size.set(2f,6.49f/1.3f);
@@ -131,8 +136,11 @@ public class Alice extends Actor
   if (hearts.size==0)
   {
    logger.info("Alice has died");
-   logger.error("Здесь игра должна заново вызывать putActors(), а старых удалить. Грубо говоря, перезапустить уровень. Если я забыла это реализовать, пожалуйста, сделай это");
-   System.exit(1);
+
+   onDead.invoke();
+
+   //logger.error("Здесь игра должна заново вызывать putActors(), а старых удалить. Грубо говоря, перезапустить уровень. Если я забыла это реализовать, пожалуйста, сделай это");
+   //System.exit(1);
   }
  }
 
