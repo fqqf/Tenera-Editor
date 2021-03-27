@@ -41,7 +41,7 @@ public class SpawnGear extends Event
   // TODO:  drawingComponent.rotate
 
   physicsComponent.velocity.x=-0.9f;
-
+  DrawingComponent.get(gear).rotate += physicsComponent.velocity.x * -50;
   if (gear.touchedAlice)
   {
    eventSystemInstance.removeNowList.add(this);

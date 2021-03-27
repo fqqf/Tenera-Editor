@@ -111,7 +111,7 @@ public class DrawingSystem extends System
   boolean flippedX = texture.isFlipX() != drawingComponent.flipX, flippedY = texture.isFlipY() != drawingComponent.flipY;
   if (flippedX || flippedY) texture.flip(flippedX, flippedY);
 
-  batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x, drawSize.y, drawSize.x,drawSize.y,1,1, 0);
+  batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x/2, drawSize.y/2, drawSize.x,drawSize.y,1,1, drawingComponent.rotate);
   batch.setColor(Color.WHITE);
   //debug();
 

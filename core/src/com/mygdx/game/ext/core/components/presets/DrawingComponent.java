@@ -31,6 +31,7 @@ public class DrawingComponent extends Component
  public boolean extrapolationY = true;
  public long extrapolationOffNanoX = 0;
  public long extrapolationOffNanoY = 0;
+ public int rotate;
 
  public Color debugCollisionColor = Color.PINK;
 
