@@ -18,7 +18,7 @@ public class AnimationSystem extends System
  @Override
  public void handle()
  {
-  delta += Gdx.graphics.getDeltaTime(); // TODO : Fix with inGameTime
+  delta = Gdx.graphics.getDeltaTime(); // TODO : Fix with inGameTime -> нет работает некорректно, я проверял
   super.handle();
  }
 
@@ -32,7 +32,7 @@ public class AnimationSystem extends System
  }
  protected void behave()
  {
-  TextureAtlas.AtlasRegion texture = animationComponent.animation.getKeyFrame(delta);
+  TextureAtlas.AtlasRegion texture = animationComponent.animation.update(delta);
   drawingComponent.texture = texture;
  }
 }
