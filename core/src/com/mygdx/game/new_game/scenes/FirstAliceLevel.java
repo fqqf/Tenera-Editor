@@ -106,7 +106,7 @@ public class FirstAliceLevel extends Scene
  {
   clearScene();
   alice.init(7,5);
-  alice.initHearts(3);
+  alice.initHearts(1);
   CollisionSystem.world.update(CollisionComponent.get(alice).item,3,5);
 
   alicel.add(alice);
@@ -134,6 +134,8 @@ public class FirstAliceLevel extends Scene
   effects.add(vignetteTop);
 
   Systems.drawingSystem.setMaster(alice);
+
+  Systems.eventSystem.reset();
   Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0));
  }
 

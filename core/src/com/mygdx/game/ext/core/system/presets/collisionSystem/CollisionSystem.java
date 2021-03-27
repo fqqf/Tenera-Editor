@@ -134,7 +134,7 @@ public class CollisionSystem extends System
  }
  private void setColorForDebugBox(final Response.Result result)
  {
-  if (false && DrawingSystem.DEBUG)
+  if (DrawingSystem.DEBUG)
   {
    result.projectedCollisions.items.forEach( item1-> { DrawingComponent.get((Actor)item1.userData).debugCollisionColor = Color.RED;}); //debug
    result.projectedCollisions.others.forEach( other-> { DrawingComponent.get((Actor)other.userData).debugCollisionColor = Color.RED;}); //debug

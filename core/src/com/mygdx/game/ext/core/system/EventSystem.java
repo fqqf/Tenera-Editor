@@ -89,4 +89,10 @@ public class EventSystem extends System
   this.events.addAll(Arrays.asList(events));
  }
 
+ public void reset()
+ {
+  playingNow.clear();
+  events.clear();
+ }
+
 }
