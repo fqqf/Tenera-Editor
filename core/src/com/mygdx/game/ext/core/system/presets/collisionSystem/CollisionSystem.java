@@ -155,7 +155,7 @@ public class CollisionSystem extends System
     float topYOther = otherRect.y + otherRect.h;
     actorCC.isStanding = actorRect.y - actorPh.velocity.y > topYOther;
    }
-   java.lang.System.out.println("handle collision " + actor.getClass().getSimpleName() + " + " + collisionActor.getClass().getSimpleName());
+   // java.lang.System.out.println("handle collision " + actor.getClass().getSimpleName() + " + " + collisionActor.getClass().getSimpleName());
    actorCC.touch.invoke(collisionActor);
    cc.touch.invoke(actor);
   }
