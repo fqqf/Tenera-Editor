@@ -90,7 +90,7 @@ public class KeyBoardSystem extends System
 
 
   if (posx>-0.1f) posx = -0.1f; // TODO: MOVE EVERYTHING FROM HERE TO AliceBehaviourSystem analogue
-  if (posx<-600+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth) posx = -600+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth;
+  if (posx<-580+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth) posx = -580+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth;
 
   cameraController.setPosition(posx,0);
  }

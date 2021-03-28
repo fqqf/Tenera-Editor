@@ -28,6 +28,7 @@ public class Ending extends Cutscene
   seen = true;
 
   super.play();
+  image.drawingComponent.draw = true;
   background.drawingComponent.spriteColor.set(Color.GRAY);
   image.drawingComponent.texture = SpriteManager.get("d3_1");
   image.drawingComponent.drawSize.set(6.07f*2.3f, 3.90f*2.3f);
@@ -43,7 +44,6 @@ public class Ending extends Cutscene
  {
   if (cutsceneKeyBoardSystem.MOUSE_LEFT())
   {
-   System.out.println("suddenly, i am here :/");
    switch (stage)
    {
     case 0:

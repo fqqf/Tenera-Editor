@@ -17,7 +17,7 @@ public class FakeHeart extends Heart
   DrawingComponent drawingComponent = DrawingComponent.get(this);
   drawingComponent.texture = SpriteManager.get("fake_heart");
   drawingComponent.drawSize.set(1.85f,2.51f);
-  drawingComponent.spriteColor.set(.4f,.4f,.4f,1);
+  drawingComponent.spriteColor.set(.3f,.3f,.3f,1);
  }
 
  @Override

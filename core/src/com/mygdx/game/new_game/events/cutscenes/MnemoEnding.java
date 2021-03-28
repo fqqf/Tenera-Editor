@@ -21,6 +21,7 @@ public class MnemoEnding extends Cutscene
  public MnemoEnding(float x, float y)
  {
   super(x, y);
+  size.y+=5;
  }
 
  BodyPropertiesComponent bp;
@@ -34,6 +35,8 @@ public class MnemoEnding extends Cutscene
   stage = 1;
   bp = BodyPropertiesComponent.get(ghost);
   pc = PhysicsComponent.get(ghost);
+  image.drawingComponent.draw = false;
+  text.drawingComponent.draw = false;
  }
 
  private long lt = 0;
@@ -88,6 +91,7 @@ public class MnemoEnding extends Cutscene
     break;
    case 8:
     DrawingComponent.get(ghost).spriteColor.a = 0f;
+    DrawingComponent.get(ghost).spriteColor.set(1,1,1,0);
     DrawingComponent.get(ghost).texture = SpriteManager.get("girl");
     stage = 9;
     break;

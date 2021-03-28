@@ -64,13 +64,13 @@ public class DrawingSystem extends System
  {
   // logger.info("Drawing System");
   for (int i = 0; i < masterIds.size; i++) drawingChekOff(layers.get(masterIds.get(i)));
-  drawingChekOff(FirstAliceLevel.events);
+ // drawingChekOff(FirstAliceLevel.events);
 
   batch.begin();
   Color color = batch.getColor();
   layers.forEach((key, layer) -> iterateLayer(layer));
   //if (DEBUG) layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
-  if (DEBUG) debug();
+  //if (DEBUG) debug();
   batch.setColor(color);
   batch.end();
  }

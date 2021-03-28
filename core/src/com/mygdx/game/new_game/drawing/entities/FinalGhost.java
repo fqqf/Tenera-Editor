@@ -42,7 +42,7 @@ public class FinalGhost extends Actor
   drawingComponent.drawSize.set(2.14f*1.3f,2.06f*1.3f);
   drawingComponent.useExtrapolation = true;
 
-  drawingComponent.spriteColor.set(Color.YELLOW);
+  drawingComponent.spriteColor.set(.78f, .78f,0,1);
 
   CollisionComponent cc = CollisionComponent.get(this);
   cc.collisionType = CollisionType.BODY;

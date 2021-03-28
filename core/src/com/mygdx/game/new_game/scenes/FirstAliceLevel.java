@@ -132,8 +132,8 @@ public class FirstAliceLevel extends Scene
 
 
   assert alice != null;
-  alice.init(530,5);
-  alice.initHearts(10);
+  alice.init(7,5);
+  alice.initHearts(6);
   alice.useSword.reset();
   Systems.eventSystem.removeList.add(alice.useSword);
   Systems.eventSystem.events.removeAll(Systems.eventSystem.removeList);
@@ -182,9 +182,20 @@ public class FirstAliceLevel extends Scene
   Systems.drawingSystem.setMaster(alice);
 
   Systems.eventSystem.reset();
-  Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0), new Greeting(7,5), new MeetingAlice2(215,0), new Ending(45,45));
+
+  for (int i = 2; i < 15; i++)
+  {
+   Systems.eventSystem.addEvent(new SpawnGear((float)(30*i+(100*Math.random())),0));
+  }
+
+  Systems.eventSystem.setMaster(alice).addEvent(
+    new Greeting(7,5), new MeetingAlice2(215,0), new Ending(45,45));
   if (mnemoEnding==null) mnemoEnding = new MnemoEnding(550,0.1f);
   npc.add(new FinalGhost(550,0.1f));
+  environment.add(new Bush(470,0.1f));
+  environment.add(new Bush(530,0.1f));
+  environment.add(new Cross(500,0.1f));
+  environment.add(new Stump(560,0.1f));
 
 
   SpawnGhost sp = new SpawnGhost(-10,-10);
@@ -220,17 +231,21 @@ public class FirstAliceLevel extends Scene
  private void generateEnvironment()
  {
 
-  generateObjects(0, 20, 20, 1, environments);
-  generateObjects(20, 50, 20, 2, environments);
-  generateObjects(50, 90, 20, 4, environments);
-  generateObjects(50, 90, 20, 5, environments);
-  generateObjects(400, 500, 20, 3, environments);
-  generateObjects(110, 150, 20, 5, TreeA.class, TreeB.class, TreeB.class);
-  generateObjects(110, 200, 20, 6, TreeA.class, TreeB.class, TreeB.class);
+  generateObjects(0,20,40, 1, environments);
+  generateObjects(20, 50,40, 2, environments);
+  generateObjects(50, 90,40, 4, environments);
+  generateObjects(50, 90,40, 5, environments);
+  generateObjects(400, 500,40, 3, environments);
+  generateObjects(110, 150,40, 4,5, TreeA.class, TreeB.class);
+  generateObjects(110, 150, 60, 0,1, TreeC.class);
+  generateObjects(110, 200,40, 4,6, TreeA.class, TreeB.class);
+  generateObjects(110, 200, 60, 0,1, TreeC.class);
+  generateObjects(200, 300, 40, 2, Cross.class);
 
-  generateObjects(230, 600, 20, 3,5, TreeA.class, TreeB.class, TreeB.class);
+  generateObjects(230, 600,40, 3,5, TreeA.class, TreeB.class);
+  generateObjects(230, 600, 60, 0,1, TreeC.class);
   generateObjects(300, 400, 40, 3,5, Bush.class);
-  generateObjects(100, 600, 100, 0,1, FakeHeart.class, Heart.class);
+  generateObjects(50, 600, 100, 0,2, FakeHeart.class, Heart.class);
   generateObjects(230, 600, 50, 1,2, FakeTree.class);
  }
 

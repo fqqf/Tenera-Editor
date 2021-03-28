@@ -13,6 +13,7 @@ public class MeetingAlice2 extends Cutscene
  public MeetingAlice2(float x, float y)
  {
   super(x, y);
+  size.y+=5;
  }
 
  @Override

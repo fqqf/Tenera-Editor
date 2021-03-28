@@ -10,7 +10,7 @@ import com.mygdx.game.new_game.systems.AliceBehaviourSystem;
 public class Greeting extends Cutscene
 {
  public static boolean seen = false;
- public static final boolean SHOW = false;
+ public static final boolean SHOW = true;
 
  public Greeting(float x, float y)
  {
