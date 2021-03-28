@@ -199,7 +199,7 @@ public class Alice extends Actor
    PhysicsComponent physicsComponent = PhysicsComponent.get(this);
    physicsComponent.position.set(5,5);
    physicsComponent.size.set(3.1f, 1);
-   physicsComponent.useGravity = false;
+   physicsComponent.useGravity = true;
 
    DrawingComponent.get(swordBox).draw = false;
 
