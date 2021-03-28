@@ -26,6 +26,7 @@ import com.mygdx.game.new_game.drawing.cutscene.CutsceneImage;
 import com.mygdx.game.new_game.drawing.cutscene.CutsceneText;
 import com.mygdx.game.new_game.drawing.stat.*;
 import com.mygdx.game.new_game.events.SpawnGear;
+import com.mygdx.game.new_game.events.SpawnGhost;
 import com.mygdx.game.new_game.events.cutscenes.Cutscene;
 import com.mygdx.game.new_game.events.cutscenes.Greeting;
 
@@ -125,9 +126,8 @@ public class FirstAliceLevel extends Scene
  {
   gameOver = false;
   clearScene();
-  alice.init(7,5);
-  alice.initHearts(4);
-  CollisionSystem.world.update(CollisionComponent.get(alice).item,3,5);
+  alice.init(2,2);
+  alice.initHearts(3);
 
   alicel.add(alice);
 
@@ -162,9 +162,8 @@ public class FirstAliceLevel extends Scene
   Systems.eventSystem.reset();
   Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0), new Greeting(7,5));
 
-  //SpawnGhost sp = new SpawnGhost(-10,-10);
-  //sp.play();
-
+  SpawnGhost sp = new SpawnGhost(-10,-10);
+  sp.play();
  }
 
 
@@ -192,15 +191,15 @@ public class FirstAliceLevel extends Scene
 
  private void generateEnvironment()
  {
-  generateObjects(1, 2, 2, 1, FakeTree.class);
-
   generateObjects(0, 20, 20, 1, environments);
   generateObjects(20, 50, 20, 2, environments);
   generateObjects(50, 100, 20, 4, environments);
   generateObjects(50, 100, 20, 5, environments);
   generateObjects(100, 150, 20, 5, TreeA.class, TreeB.class, TreeB.class);
   generateObjects(100, 220, 20, 6, TreeA.class, TreeB.class, TreeB.class);
-  generateObjects(230, 600, 50, 1,2, FakeHeart.class, Heart.class);
+
+  generateObjects(230, 600, 20, 3,5, TreeA.class, TreeB.class, TreeB.class);
+  generateObjects(230, 600, 100, 0,1, FakeHeart.class, Heart.class);
   generateObjects(230, 600, 50, 1,2, FakeTree.class);
  }
 
@@ -212,7 +211,8 @@ public class FirstAliceLevel extends Scene
   if (environments.length==0){throw new IllegalArgumentException("Забыл указать классы?");}
   for (float i = from; i < to; i += step )
   {
-   for (int j = 0; j < maxDensityInStep; j++) environment.add(createRandomInstance((Class<? extends Actor>[]) environments, i,i+step));
+   int density = MathUtils.random(maxDensityInStep, maxDensityInStep);
+   for (int j = 0; j < density; j++) environment.add(createRandomInstance((Class<? extends Actor>[]) environments, i,i+step));
   }
  }
  private Actor createRandomInstance(Class<? extends Actor>[] environments, float minX, float maxX)
