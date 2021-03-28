@@ -244,6 +244,8 @@ public class FirstAliceLevel extends Scene
   Systems.drawingSystem.layers.put(11, cutscene_b);
   Systems.drawingSystem.layers.put(12, cutscene);
 
+  Systems.drawingSystem.setMasterIds(5, 6, 8, 10);
+
   Systems.eventSystem.setLayer(events);
  }
 

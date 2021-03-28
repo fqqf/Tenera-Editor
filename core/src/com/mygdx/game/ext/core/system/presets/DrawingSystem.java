@@ -22,6 +22,7 @@ import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.event.Event;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.system.System;
+
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.TreeMap;
@@ -32,11 +33,16 @@ public class DrawingSystem extends System
  public static boolean DEBUG = false;
  private final ShapeDrawer shapeDrawer;
  public static PhysicsComponent master;
+ public static final Array<Integer> masterIds = new Array<>();
  public void setMaster(Actor actor)
  {
   master = PhysicsComponent.get(actor);
  }
-
+ public void setMasterIds(Integer... ids)
+ {
+  DrawingSystem.masterIds.clear();
+  DrawingSystem.masterIds.addAll(ids);
+ }
  public DrawingSystem()
  {
   batch = Monitor.instance.getBatch();
@@ -54,6 +60,7 @@ public class DrawingSystem extends System
  public void handle()
  {
   // logger.info("Drawing System");
+  for (int i = 0; i < masterIds.size; i++) drawingChekOff(layers.get(masterIds.get(i)));
   batch.begin();
   Color color = batch.getColor();
   layers.forEach((key, layer) -> iterateLayer(layer));
@@ -61,6 +68,17 @@ public class DrawingSystem extends System
   if (DEBUG) debug();
   batch.setColor(color);
   batch.end();
+ }
+
+ private static final int BLOCKS = 30;
+ private void drawingChekOff(Array<Actor> actors)
+ {
+  for (int i = 0; i < actors.size; i++)
+  {
+   Actor actor = actors.get(i);
+   float delta = master.position.x - BodyPropertiesComponent.get(actor).position.x;
+   DrawingComponent.get(actor).draw = delta > -BLOCKS && delta < BLOCKS;
+  }
  }
 
  private void iterateLayer(Layer layer)
@@ -71,12 +89,8 @@ public class DrawingSystem extends System
 
  private void calc(Actor actor)
  {
-
   this.actor = actor;
   loadFields();
-
-  float delta = master.position.x - position.x;
-  //drawingComponent.draw =  delta > -30 && delta < 30; // тут что-то не то
   if (!drawingComponent.draw) return;
   behave();
  }
