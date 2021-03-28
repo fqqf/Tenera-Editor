@@ -51,7 +51,7 @@ public class EventSystem extends System
     event.play();
    }
   }
-
+ // java.lang.System.out.println(events);
   events.removeAll(removeList);
   removeList.clear();
 

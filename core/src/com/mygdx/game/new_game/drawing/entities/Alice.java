@@ -88,11 +88,26 @@ public class Alice extends Actor
   AliceBehaviourSystem.setAlice(this);
 
   JumpComponent.get(this);
-
-  FirstAliceLevel.alicel.add(new FightAnimation(this));
+  if (fightAnimation==null) new FightAnimation(this);
+  else
+  {
+   Systems.animationSystem.addActor(fightAnimation);
+   fightAnimation.init();
+   Systems.physicsSystem.addActor(swordBox);
+   Systems.collisionSystem.addActor(swordBox);
+  }
+  FirstAliceLevel.alicel.add(fightAnimation);
  }
  public class FightAnimation extends Actor
  {
+  private void init()
+  {
+   DrawingComponent drawingComponent = DrawingComponent.get(this);
+   drawingComponent.texture = SpriteManager.get("alice_fight/0");
+   drawingComponent.offset.set(0.5f,0);
+   drawingComponent.draw = false;
+  }
+
   public FightAnimation(Alice alice)
   {
    fightAnimation = this;
@@ -120,8 +135,12 @@ public class Alice extends Actor
    );
 
    Systems.animationSystem.addActor(this);
-   useSword = new UseSword(0,0, alice);
-   swordBox = new SwordBox(alice);
+   if (useSword==null)
+   {
+    useSword = new UseSword(0,0, alice);
+    swordBox = new SwordBox(alice);
+
+   }
   }
  }
 

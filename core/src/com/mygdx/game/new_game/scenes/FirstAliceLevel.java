@@ -14,6 +14,7 @@ import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
+import com.mygdx.game.ext.core.system.EventSystem;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.ext.core.system.presets.DrawingSystem;
 import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
@@ -30,6 +31,7 @@ import com.mygdx.game.new_game.events.SpawnGhost;
 import com.mygdx.game.new_game.events.UseSword;
 import com.mygdx.game.new_game.events.cutscenes.Cutscene;
 import com.mygdx.game.new_game.events.cutscenes.Greeting;
+import com.mygdx.game.new_game.systems.KeyBoardSystem;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -102,8 +104,8 @@ public class FirstAliceLevel extends Scene
    }
   if (gameOver)
   {
-   ApplicationLoop.logger.info("GAME OVER");
    initScene();
+
   }
  }
 
@@ -123,18 +125,22 @@ public class FirstAliceLevel extends Scene
   CollisionSystem.world.reset();
  }
 
+ public static boolean FIRST;
  private void initScene()
  {
   gameOver = false;
   clearScene();
 
-  DrawingComponent.get(alice).draw = false;
 
-
+  assert alice != null;
   alice.init(7,5);
-  alice.initHearts(3);
-
+  alice.initHearts(1);
   alice.useSword.reset();
+  Systems.eventSystem.removeList.add(alice.useSword);
+  Systems.eventSystem.events.removeAll(Systems.eventSystem.removeList);
+
+  UseSword.isPlaying = false;
+  FIRST = true;
 
   alicel.add(alice);
 
@@ -172,6 +178,7 @@ public class FirstAliceLevel extends Scene
   SpawnGhost sp = new SpawnGhost(-10,-10);
   sp.play();
  }
+
 
 
  private Class<? extends Actor>[] environments =

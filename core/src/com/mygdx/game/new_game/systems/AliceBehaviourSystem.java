@@ -8,10 +8,13 @@ import com.mygdx.game.ext.core.components.presets.movement.MovingComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.system.System;
 import com.mygdx.game.new_game.drawing.entities.Alice;
+import com.mygdx.game.new_game.events.UseSword;
+import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class AliceBehaviourSystem extends System
 {
  private boolean UP, LEFT, RIGHT, BUTTON;
+
 
  private static Alice alice;
 
@@ -38,9 +41,16 @@ public class AliceBehaviourSystem extends System
  {
   if (alice!=null) behave();
  }
+
  @Override
  protected void behave()
  {
+  if (FirstAliceLevel.FIRST)
+  {
+   FirstAliceLevel.FIRST = false;
+   return;
+  }
+
   UP    = KeyBoardSystem.UP; // TODO: PUT THIS BLOCK
   LEFT  = KeyBoardSystem.LEFT;
   RIGHT = KeyBoardSystem.RIGHT;
@@ -62,9 +72,8 @@ public class AliceBehaviourSystem extends System
 
   fightAnimationDrawingComponent.offset.x = (fightAnimationDrawingComponent.flipX) ? -2.95f : 0.5f;
 
-   if (!alice.useSword.isPlaying)if (ApplicationLoop.instance.inGameTime<alice.invisibilityStartTime+1_000_000_000L) drawingComponent.draw = !drawingComponent.draw;
+   if (!UseSword.isPlaying)if (ApplicationLoop.instance.inGameTime<alice.invisibilityStartTime+1_000_000_000L) drawingComponent.draw = !drawingComponent.draw;
   else drawingComponent.draw = true;
-
 
 
   if (BUTTON)
@@ -72,5 +81,7 @@ public class AliceBehaviourSystem extends System
    alice.useSword.play();
    KeyBoardSystem.BUTTON = false;
   }
+
+ // java.lang.System.out.println(DrawingComponent.get(alice.fightAnimation).draw);
  }
 }

@@ -4,6 +4,7 @@ import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.animation.AnimationComponent;
 import com.mygdx.game.ext.core.event.Event;
 import com.mygdx.game.new_game.drawing.entities.Alice;
+import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 
 public class UseSword extends Event
 {
@@ -22,6 +23,7 @@ public class UseSword extends Event
  {
   if (isPlaying) return;
   eventSystemInstance.playingNow.add(this);
+  System.out.println("first "+eventSystemInstance.playingNow);
   isPlaying = true;
 
   DrawingComponent.get(alice).draw = false;
@@ -30,6 +32,7 @@ public class UseSword extends Event
   AnimationComponent.get(alice.fightAnimation).animation.delta = 0;
 
   swordBox = alice.swordBox;
+
  }
 
  Alice.SwordBox swordBox;
@@ -37,11 +40,13 @@ public class UseSword extends Event
  @Override
  public void continuePlaying()
  {
+
   frame = AnimationComponent.get(alice.fightAnimation).animation.getCurrentFrameIndex();
 
   if (frame==6)
   {
    reset();
+
   }
  }
 
