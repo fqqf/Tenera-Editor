@@ -1,4 +1,4 @@
-package com.mygdx.game.new_game.drawing.stat;
+package com.mygdx.game.new_game.drawing.item;
 
 import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
@@ -6,6 +6,7 @@ import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.new_game.Main;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.drawing.entities.Alice;
+import com.mygdx.game.new_game.drawing.stat.Heart;
 import com.mygdx.game.new_game.events.UseSword;
 
 public class FakeHeart extends Heart
@@ -16,6 +17,7 @@ public class FakeHeart extends Heart
   DrawingComponent drawingComponent = DrawingComponent.get(this);
   drawingComponent.texture = SpriteManager.get("fake_heart");
   drawingComponent.drawSize.set(1.85f,2.51f);
+  drawingComponent.spriteColor.set(.4f,.4f,.4f,1);
  }
 
  @Override

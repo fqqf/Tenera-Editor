@@ -1,6 +1,7 @@
 package com.mygdx.game.new_game.events.cutscenes;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.components.presets.PhysicsComponent;
 import com.mygdx.game.new_game.SpriteManager;
@@ -20,6 +21,9 @@ public class Ending extends Cutscene
  @Override
  public void play()
  {
+
+  BodyPropertiesComponent.get(AliceBehaviourSystem.getAlice()).position.set(10,3);
+
   if (seen | (!SHOW)) {  eventSystemInstance.removeList.add(this); return;}
   seen = true;
 
@@ -32,14 +36,14 @@ public class Ending extends Cutscene
   text.drawingComponent.draw = false;
  }
 
- int stage;
+ private int stage;
 
  @Override
  public void continuePlaying()
  {
-
   if (cutsceneKeyBoardSystem.MOUSE_LEFT())
   {
+   System.out.println("suddenly, i am here :/");
    switch (stage)
    {
     case 0:
@@ -111,5 +115,11 @@ public class Ending extends Cutscene
 
 
   PhysicsComponent.get(AliceBehaviourSystem.getAlice()).velocity.set(0,0);
+ }
+
+ @Override
+ protected void end()
+ {
+  System.out.println("do you understand me?");
  }
 }

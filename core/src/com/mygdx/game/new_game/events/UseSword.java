@@ -23,7 +23,6 @@ public class UseSword extends Event
  {
   if (isPlaying) return;
   eventSystemInstance.playingNow.add(this);
-  System.out.println("first "+eventSystemInstance.playingNow);
   isPlaying = true;
 
   DrawingComponent.get(alice).draw = false;

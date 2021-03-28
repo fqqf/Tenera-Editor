@@ -1,4 +1,4 @@
-package com.mygdx.game.new_game.drawing.stat;
+package com.mygdx.game.new_game.drawing.item;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
@@ -11,6 +11,7 @@ import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
 import com.mygdx.game.new_game.drawing.entities.Alice;
+import com.mygdx.game.new_game.drawing.stat.Envy;
 import com.mygdx.game.new_game.events.UseSword;
 
 public class FakeTree extends Envy

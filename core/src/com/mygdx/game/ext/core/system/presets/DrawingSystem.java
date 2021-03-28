@@ -31,6 +31,7 @@ import java.util.TreeMap;
 
 public class DrawingSystem extends System
 {
+ public static boolean EXTRAPOLATE = true;
  public CameraController cameraController;
  public static boolean DEBUG = false;
  private final ShapeDrawer shapeDrawer;
@@ -74,7 +75,7 @@ public class DrawingSystem extends System
   batch.end();
  }
 
- private static final int BLOCKS = 30;
+ private static final int BLOCKS = 40;
  private void drawingChekOff(Array<Actor> actors)
  {
   for (int i = 0; i < actors.size; i++)
@@ -112,6 +113,7 @@ public class DrawingSystem extends System
    position = physicsComponent.position;
    velocity = physicsComponent.velocity;
    size = physicsComponent.size;
+   if (!EXTRAPOLATE) ApplicationLoop.instance.extrapolation = 0;
   } else
   {
    BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);
@@ -137,6 +139,7 @@ public class DrawingSystem extends System
   if (flippedX || flippedY) texture.flip(flippedX, flippedY);
 
   batch.draw(texture, drawPosition.x, drawPosition.y, drawSize.x/2, drawSize.y/2, drawSize.x,drawSize.y,1,1, drawingComponent.rotate);
+
   batch.setColor(Color.WHITE);
 //  debug();
 

@@ -51,11 +51,11 @@ public class SpawnGhost extends Event
   if (!play) return;
   curTime = ApplicationLoop.instance.inGameTime;
 
-  if (ApplicationLoop.instance.inGameTime>estTime && (!(bp.position.x>200 && bp.position.x<230)))
+  if (ApplicationLoop.instance.inGameTime>estTime && (!(bp.position.x>200 && bp.position.x<230) && (!(bp.position.x>580 && bp.position.x<600))))
   {
    estTime = ApplicationLoop.instance.inGameTime+(long) (Math.random()*3_500_000_000L+1_000_000_000L);
 
-   sign = (Math.random()>0.5f) ? -1 : 1;
+   sign = (Math.random()>0.1f) ? 1 : -1;
 
    FirstAliceLevel.environment.add(ghostz = new Ghost((float) (bp.position.x+30*sign+sign*20*Math.random()), 0.1f));
    arrayList.add(ghostz);
@@ -71,7 +71,7 @@ public class SpawnGhost extends Event
   {
    PhysicsComponent physicsComponent = PhysicsComponent.get(ghost);
 
-   if (physicsComponent.position.y < 0.5f) physicsComponent.velocity.y += 3f;
+   if (physicsComponent.position.y < 0.5f) physicsComponent.velocity.y += 1.3f;
    physicsComponent.velocity.x=-ghost.sign*0.7f;
 
    if (!ghost.alive | curTime>ghost.dieTime | physicsComponent.position.x<1)
