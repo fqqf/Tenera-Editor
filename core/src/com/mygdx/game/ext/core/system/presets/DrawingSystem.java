@@ -23,6 +23,8 @@ import com.mygdx.game.ext.core.event.Event;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.system.System;
 
+import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionSystem;
+import com.mygdx.game.new_game.scenes.FirstAliceLevel;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.TreeMap;
@@ -61,6 +63,8 @@ public class DrawingSystem extends System
  {
   // logger.info("Drawing System");
   for (int i = 0; i < masterIds.size; i++) drawingChekOff(layers.get(masterIds.get(i)));
+  drawingChekOff(FirstAliceLevel.events);
+
   batch.begin();
   Color color = batch.getColor();
   layers.forEach((key, layer) -> iterateLayer(layer));
