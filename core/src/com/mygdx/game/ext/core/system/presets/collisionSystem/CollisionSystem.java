@@ -68,7 +68,15 @@ public class CollisionSystem extends System
  }
  private void removeItemFromWorld(Item<Actor> item)
  {
-  if (world.hasItem(item)) world.remove(item);
+  String text;
+  if (world.hasItem(item))
+  {
+   world.remove(item);
+   text = item.userData.getClass().getSimpleName() + " removed!";
+  }
+  else text = item.userData.getClass().getSimpleName() + " not in world!";
+
+  logger.info("removeItemFromWorld: " + text);
  }
 
  public void updateActor(Actor... actors)

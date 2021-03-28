@@ -86,7 +86,8 @@ public class KeyBoardSystem extends System
 
   posx = (dc.extrapolationX) ? -bp.position.x-pc.velocity.x* ApplicationLoop.instance.extrapolation+ 6.5f : -bp.position.x+6.5f;
 
-  //Systems.collisionSystem.updateActor(posx,0,alice);
+  // Systems.collisionSystem.updateActor(posx,0,alice);
+
 
   if (posx>-0.1f) posx = -0.1f; // TODO: MOVE EVERYTHING FROM HERE TO AliceBehaviourSystem analogue
   if (posx<-600+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth) posx = -600+FirstAliceLevel.npc.getCoordinateGrid().notIntegerUnitWidth;

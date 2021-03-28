@@ -34,11 +34,15 @@ public class Alice extends Actor
          {
           if (actor.getClass().getSimpleName().equals("Gear") | actor.getClass().getSimpleName().equals("Ghost"))
           {
-           if (ApplicationLoop.instance.inGameTime>invisibilityStartTime+1_000_000_000L)takeDamage();
+           damage();
+           // if (ApplicationLoop.instance.inGameTime>invisibilityStartTime+1_000_000_000L)takeDamage();
           }
          };
 
-
+ public void damage()
+ {
+  if (ApplicationLoop.instance.inGameTime>invisibilityStartTime+1_000_000_000L)takeDamage();
+ }
  private void takeDamage()
  {
   invisibilityStartTime = ApplicationLoop.instance.inGameTime;

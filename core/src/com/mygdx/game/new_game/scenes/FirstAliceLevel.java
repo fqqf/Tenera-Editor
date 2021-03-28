@@ -12,7 +12,6 @@ import com.mygdx.game.ext.core.components.presets.DrawingComponent;
 import com.mygdx.game.ext.core.drawing.ApplicationLoop;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.ExtendCoordinateGrid;
-import com.mygdx.game.ext.core.event.Event;
 import com.mygdx.game.ext.core.group.presets.Layer;
 import com.mygdx.game.ext.core.scene.Scene;
 import com.mygdx.game.ext.core.system.System;
@@ -25,7 +24,6 @@ import com.mygdx.game.new_game.drawing.InvisibleWall;
 import com.mygdx.game.new_game.drawing.background.Background;
 import com.mygdx.game.new_game.drawing.cutscene.CutsceneImage;
 import com.mygdx.game.new_game.drawing.cutscene.CutsceneText;
-import com.mygdx.game.new_game.drawing.entities.Ghost;
 import com.mygdx.game.new_game.drawing.stat.*;
 import com.mygdx.game.new_game.events.SpawnGear;
 import com.mygdx.game.new_game.events.SpawnGhost;
@@ -72,8 +70,6 @@ public class FirstAliceLevel extends Scene
   Systems.drawingSystem.cameraController = field.cameraController;
 
   loadResource();
-
-
  }
 
  private void loadResource()
@@ -131,11 +127,12 @@ public class FirstAliceLevel extends Scene
  {
   gameOver = false;
   clearScene();
+
   DrawingComponent.get(alice).draw = false;
-  alice.init(7,5);
-  alice.initHearts(1);
   alice.useSword.reset();
-  CollisionSystem.world.update(CollisionComponent.get(alice).item,3,5);
+
+  alice.init(7,5);
+  alice.initHearts(3);
 
   alicel.add(alice);
 
@@ -169,6 +166,7 @@ public class FirstAliceLevel extends Scene
 
   Systems.eventSystem.reset();
   Systems.eventSystem.setMaster(alice).addEvent(new SpawnGear(10,0),new SpawnGear(40,0), new SpawnGear(20,0), new Greeting(7,5));
+
   SpawnGhost sp = new SpawnGhost(-10,-10);
   sp.play();
  }
@@ -198,37 +196,34 @@ public class FirstAliceLevel extends Scene
 
  private void generateEnvironment()
  {
-  for (int i = 1; i < 10; i++)
-  {
-   environment.addAll(
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(0,20) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(0,20) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(20,40) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(20,40) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(40,60) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(40,60) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(60,70) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(60,70) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(70,80) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(70,80) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(90,95) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(90,95) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(80,100) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(80,100) * i,0)
-   );
-//   environment.addAll(
-//           create(Poet.class, 20,0),
-//           new Cross(60 * i,0),
-//           new Tower(100 * i,0),
-//           new Stump(68 * i,0),
-//           new TreeA(74 * i,0),
-//           new Haunted(83 * i,0),
-//           new TreeC(90 * i,0),
-//           new TreeB(95 * i,0)
-//   );
-  }
+  generateObjects(0, 20, 20, 1, environments);
+  generateObjects(20, 50, 20, 2, environments);
+  generateObjects(50, 100, 20, 4, environments);
+  generateObjects(50, 100, 20, 5, environments);
+  generateObjects(100, 150, 20, 5, TreeA.class, TreeB.class, TreeB.class);
+  generateObjects(100, 220, 20, 6, TreeA.class, TreeB.class, TreeB.class);
+
+  generateObjects(230, 600, 20, 3,5, TreeA.class, TreeB.class, TreeB.class);
+  generateObjects(230, 600, 100, 0,1, FakeHeart.class, Heart.class);
+  generateObjects(230, 600, 50, 1,2, FakeTree.class);
  }
 
+
+ private void generateObjects(float from, float to, int step, int maxDensityInStep, Class<?>... environments)
+ { generateObjects(from, to, step, maxDensityInStep, maxDensityInStep, environments); }
+ private void generateObjects(float from, float to, int step, int minDensityInStep, int maxDensityInStep, Class<?>... environments)
+ {
+  if (environments.length==0){throw new IllegalArgumentException("Забыл указать классы?");}
+  for (float i = from; i < to; i += step )
+  {
+   int density = MathUtils.random(maxDensityInStep, maxDensityInStep);
+   for (int j = 0; j < density; j++) environment.add(createRandomInstance((Class<? extends Actor>[]) environments, i,i+step));
+  }
+ }
+ private Actor createRandomInstance(Class<? extends Actor>[] environments, float minX, float maxX)
+ {
+  return create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(minX,maxX),0);
+ }
  private void configureLayers()
  {
   CoordinateGrid cameraGrid = new ExtendCoordinateGrid("camera-grid",12);
@@ -253,6 +248,8 @@ public class FirstAliceLevel extends Scene
   Systems.drawingSystem.layers.put(10, interfaceL);
   Systems.drawingSystem.layers.put(11, cutscene_b);
   Systems.drawingSystem.layers.put(12, cutscene);
+
+  Systems.drawingSystem.setMasterIds(5, 6, 8, 10);
 
   Systems.eventSystem.setLayer(events);
  }
@@ -279,5 +276,12 @@ public class FirstAliceLevel extends Scene
  public void iterPhys()
  {
   super.iterPhys();
+ }
+
+ @Override
+ protected void deleteActors()
+ {
+  // for (int i = 0; i < allLayer.size; i++) allLayer.get(i).addAll(actorsForDelete);
+  super.deleteActors();
  }
 }

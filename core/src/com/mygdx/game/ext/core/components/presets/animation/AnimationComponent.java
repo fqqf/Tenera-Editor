@@ -14,7 +14,7 @@ public class AnimationComponent extends Component
  private static final AnimationData defaultAnimation = new AnimationData(1000f, Animation.PlayMode.LOOP, new TextureAtlas.AtlasRegion(new Texture(0,0, Pixmap.Format.Alpha),0,0,0,0));
  public AnimationData animation = defaultAnimation;
 
- public AnimationComponent(Actor actor) { }
+ public AnimationComponent(Actor actor) { actor.addComponent(childList); }
 
  public static AnimationComponent get(Actor actor)
  {

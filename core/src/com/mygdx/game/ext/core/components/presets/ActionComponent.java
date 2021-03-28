@@ -14,6 +14,7 @@ public class ActionComponent extends Component
  private ActionComponent(Action.Arg1<Actor> action, Actor actor)
  {
   this.action = action;
+  actor.addComponent(childList);
  }
 
  public static ActionComponent get(Actor actor)
