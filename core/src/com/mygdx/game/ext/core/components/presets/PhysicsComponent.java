@@ -25,6 +25,7 @@ public class PhysicsComponent extends Component
 
  private PhysicsComponent(Actor actor)
  {
+  actor.addComponent(childList);
   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);
 
   position = bodyPropertiesComponent.position;

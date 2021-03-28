@@ -13,9 +13,13 @@ public class BodyPropertiesComponent extends Component
 
 
  private static final ComputeableHashMap<BodyPropertiesComponent> childList = new ComputeableHashMap<>();
- 
+ private BodyPropertiesComponent(Actor actor)
+ {
+  actor.addComponent(childList);
+ }
+
  public static BodyPropertiesComponent get(Actor actor)
  {
-  return childList.compute(actor, BodyPropertiesComponent::new);
+  return childList.compute(actor, ()-> new BodyPropertiesComponent(actor));
  }
 }

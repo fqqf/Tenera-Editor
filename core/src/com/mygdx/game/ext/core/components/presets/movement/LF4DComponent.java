@@ -12,6 +12,7 @@ public class LF4DComponent extends Component
  protected LF4DComponent(Actor actor)
  {
   this.actor = actor;
+  actor.addComponent(childList);
  }
 
  protected Actor actor;

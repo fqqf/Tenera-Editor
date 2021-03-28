@@ -22,6 +22,7 @@ public class CollisionComponent extends Component
  private CollisionComponent(Actor actor)
  {
   item = new Item<>(actor);
+  actor.addComponent(childList);
   BodyPropertiesComponent bodyPropertiesComponent = BodyPropertiesComponent.get(actor);
 
   //box = new BoundingBox(CollisionType.SOLID).set(bodyPropertiesComponent.position, bodyPropertiesComponent.size);

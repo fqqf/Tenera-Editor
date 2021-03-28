@@ -2,6 +2,7 @@ package com.mygdx.game.new_game.drawing.stat;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.BodyPropertiesComponent;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
@@ -10,6 +11,7 @@ import com.mygdx.game.ext.core.system.presets.collisionSystem.CollisionType;
 import com.mygdx.game.new_game.SpriteManager;
 import com.mygdx.game.new_game.Systems;
 import com.mygdx.game.new_game.drawing.entities.Alice;
+import com.mygdx.game.new_game.events.UseSword;
 
 public class FakeTree extends Envy
 {
@@ -24,7 +26,12 @@ public class FakeTree extends Envy
 
   CollisionComponent cc = CollisionComponent.get(this);
   cc.collisionType = CollisionType.BODY;
-  cc.touch = actor-> { if (actor instanceof Alice) ((Alice) actor).damage(); };
+  cc.touch = this::touch;
   Systems.collisionSystem.addActor(this);
+ }
+ private void touch(Actor actor)
+ {
+  if (actor instanceof Alice) ((Alice) actor).damage();
+  else if (actor instanceof Alice.SwordBox && UseSword.isPlaying && UseSword.frame>2) { delete(); } //todo анимация щепок :)
  }
 }

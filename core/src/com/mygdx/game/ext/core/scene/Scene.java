@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ext.core.actor.Actor;
-import com.mygdx.game.ext.core.data.Asset;
 import com.mygdx.game.ext.core.drawing.view.CoordinateGrid;
 import com.mygdx.game.ext.core.drawing.view.Monitor;
 import com.mygdx.game.ext.core.group.Group;
@@ -14,7 +13,7 @@ import com.mygdx.game.ext.core.system.System;
 
 public abstract class Scene
 {
-
+ protected static final Array<Actor> actorsForDelete = new Array<>(20);
  protected final String name;
  protected final Monitor monitor;
  protected SpriteBatch batch;
@@ -25,6 +24,7 @@ public abstract class Scene
 
  public Scene(String name, CoordinateGrid field, float width, float height)
  {
+  actorsForDelete.clear();
   this.name = name; this.field = field;
   this.monitor = field.monitor; this.camera = field.camera;
   this.batch = field.batch; this.liner = field.liner;
@@ -43,8 +43,7 @@ public abstract class Scene
 
   callRenderSystems();
   // draw(extrapolation);
-
-
+  if (actorsForDelete.size > 0) deleteActors();
  }
  // protected void draw(float extrapolation) {}
  void act() {}
@@ -114,4 +113,17 @@ public abstract class Scene
  //private static Array<Actor> tmpArray = new Array<>(true,8);//not thread safe!
  protected Scene addActor(Actor... actors) { this.actors.addAll(Array.with(actors)); return this; }
  protected Actor[] remActor(Actor...actors) {this.actors.removeAll(Array.with(actors),true); return actors;}
+
+ public void addActorForDelete(Actor actor)
+ {
+  actor.deleted = true;
+  actorsForDelete.add(actor);
+ }
+ protected void deleteActors()
+ {
+  for (int i = 0; i < renderSystems.size; i++) renderSystems.get(i).remActor(actorsForDelete);
+  for (int i = 0; i < physicSystems.size; i++) physicSystems.get(i).remActor(actorsForDelete);
+  for (int i = 0; i < actorsForDelete.size; i++) actorsForDelete.get(i).deleteComponents();
+  actorsForDelete.clear();
+ }
 }

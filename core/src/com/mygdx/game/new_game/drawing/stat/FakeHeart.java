@@ -1,8 +1,11 @@
 package com.mygdx.game.new_game.drawing.stat;
 
+import com.mygdx.game.ext.core.actor.Actor;
 import com.mygdx.game.ext.core.components.presets.CollisionComponent;
 import com.mygdx.game.ext.core.components.presets.DrawingComponent;
+import com.mygdx.game.new_game.Main;
 import com.mygdx.game.new_game.SpriteManager;
+import com.mygdx.game.new_game.drawing.entities.Alice;
 
 public class FakeHeart extends Heart
 {
@@ -10,6 +13,16 @@ public class FakeHeart extends Heart
  {
   super(x, y);
   DrawingComponent.get(this).texture = SpriteManager.get("fake_heart");
-  CollisionComponent.get(this).touch = fakeHeart;
+ }
+
+ @Override
+ protected void touch(Actor actor)
+ {
+  if (deleted) return;
+  if (actor instanceof Alice)
+  {
+   ((Alice) actor).damage();
+   delete();
+  }
  }
 }

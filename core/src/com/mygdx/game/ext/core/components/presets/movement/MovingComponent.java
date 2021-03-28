@@ -45,6 +45,9 @@ public class MovingComponent extends Component
  }
 
  protected static final ComputeableHashMap<MovingComponent> childList = new ComputeableHashMap<>();
-
- public static MovingComponent get(Actor actor) { return childList.compute(actor, MovingComponent::new); }
+ private MovingComponent(Actor actor)
+ {
+  actor.addComponent(childList);
+ }
+ public static MovingComponent get(Actor actor) { return childList.compute(actor, ()->new MovingComponent(actor)); }
 }

@@ -40,6 +40,7 @@ public class DrawingComponent extends Component
  {
   this.texture = texture;
   drawSize.set(BodyPropertiesComponent.get(actor).size);
+  actor.addComponent(childList);
  }
 
  public static DrawingComponent get(Actor actor)
