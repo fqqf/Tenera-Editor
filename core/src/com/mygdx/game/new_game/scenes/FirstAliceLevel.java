@@ -129,10 +129,12 @@ public class FirstAliceLevel extends Scene
   clearScene();
 
   DrawingComponent.get(alice).draw = false;
-  alice.useSword.reset();
+
 
   alice.init(7,5);
   alice.initHearts(3);
+
+  alice.useSword.reset();
 
   alicel.add(alice);
 
