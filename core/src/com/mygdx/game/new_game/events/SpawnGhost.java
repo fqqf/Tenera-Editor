@@ -53,7 +53,7 @@ public class SpawnGhost extends Event
 
   if (ApplicationLoop.instance.inGameTime>estTime && (!(bp.position.x>200 && bp.position.x<230)))
   {
-   estTime = ApplicationLoop.instance.inGameTime+(long) (Math.random()*9_000_000_000L+1_000_000_000L);
+   estTime = ApplicationLoop.instance.inGameTime+(long) (Math.random()*3_500_000_000L+1_000_000_000L);
 
    sign = (Math.random()>0.5f) ? -1 : 1;
 

@@ -29,6 +29,7 @@ import com.mygdx.game.new_game.drawing.entities.Ghost;
 import com.mygdx.game.new_game.drawing.stat.*;
 import com.mygdx.game.new_game.events.SpawnGear;
 import com.mygdx.game.new_game.events.SpawnGhost;
+import com.mygdx.game.new_game.events.UseSword;
 import com.mygdx.game.new_game.events.cutscenes.Cutscene;
 import com.mygdx.game.new_game.events.cutscenes.Greeting;
 
@@ -130,8 +131,10 @@ public class FirstAliceLevel extends Scene
  {
   gameOver = false;
   clearScene();
+  DrawingComponent.get(alice).draw = false;
   alice.init(7,5);
-  alice.initHearts(4);
+  alice.initHearts(1);
+  alice.useSword.reset();
   CollisionSystem.world.update(CollisionComponent.get(alice).item,3,5);
 
   alicel.add(alice);

@@ -41,12 +41,17 @@ public class UseSword extends Event
 
   if (frame==6)
   {
-   isPlaying = false;
-   eventSystemInstance.removeNowList.add(this);
-
-   DrawingComponent.get(alice).draw = true;
-   DrawingComponent.get(alice.fightAnimation).draw = false;
-   AnimationComponent.get(alice.fightAnimation).animation.delta = 0;
+   reset();
   }
+ }
+
+ public void reset()
+ {
+  isPlaying = false;
+  eventSystemInstance.removeNowList.add(this);
+
+  DrawingComponent.get(alice).draw = true;
+  DrawingComponent.get(alice.fightAnimation).draw = false;
+  AnimationComponent.get(alice.fightAnimation).animation.delta = 0;
  }
 }
