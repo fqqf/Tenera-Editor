@@ -195,11 +195,17 @@ public class FirstAliceLevel extends Scene
 
  private void generateEnvironment()
  {
+  environment.addAll
+          (
+                  create(FakeTree.class,2,0),
+                  create(Heart.class,2,0),
+                  create(FakeHeart.class,10,0)
+          );
   for (int i = 1; i < 10; i++)
   {
    environment.addAll(
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(0,20) * i,0),
-           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(0,20) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(10,20) * i,0),
+           create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(10,20) * i,0),
            create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(20,40) * i,0),
            create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(20,40) * i,0),
            create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(40,60) * i,0),
@@ -213,16 +219,6 @@ public class FirstAliceLevel extends Scene
            create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(80,100) * i,0),
            create( environments[MathUtils.random(0,environments.length-1)], MathUtils.random(80,100) * i,0)
    );
-//   environment.addAll(
-//           create(Poet.class, 20,0),
-//           new Cross(60 * i,0),
-//           new Tower(100 * i,0),
-//           new Stump(68 * i,0),
-//           new TreeA(74 * i,0),
-//           new Haunted(83 * i,0),
-//           new TreeC(90 * i,0),
-//           new TreeB(95 * i,0)
-//   );
   }
  }
 

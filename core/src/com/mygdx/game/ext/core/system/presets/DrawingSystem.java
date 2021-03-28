@@ -61,7 +61,7 @@ public class DrawingSystem extends System
   batch.begin();
   Color color = batch.getColor();
   layers.forEach((key, layer) -> iterateLayer(layer));
-  //if (DEBUG) layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
+  if (DEBUG) layers.forEach((key, layers) -> showWorldRects(layers, CollisionSystem.world));// debug
   if (DEBUG) debug();
   batch.setColor(color);
   batch.end();
