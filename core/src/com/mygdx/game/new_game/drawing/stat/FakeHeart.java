@@ -13,7 +13,9 @@ public class FakeHeart extends Heart
  public FakeHeart(float x, float y)
  {
   super(x, y);
-  DrawingComponent.get(this).texture = SpriteManager.get("fake_heart");
+  DrawingComponent drawingComponent = DrawingComponent.get(this);
+  drawingComponent.texture = SpriteManager.get("fake_heart");
+  drawingComponent.drawSize.set(1.85f,2.51f);
  }
 
  @Override

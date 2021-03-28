@@ -198,6 +198,9 @@ public class FirstAliceLevel extends Scene
 
  private void generateEnvironment()
  {
+  generateObjects(3, 4, 20, 1, Heart.class);
+  generateObjects(7, 8, 20, 1, FakeHeart.class);
+
   generateObjects(0, 20, 20, 1, environments);
   generateObjects(20, 50, 20, 2, environments);
   generateObjects(50, 100, 20, 4, environments);
