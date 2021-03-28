@@ -17,7 +17,7 @@ public class Heart extends Envy
   super(x, y, 2f, 4f, SpriteManager.get("heart"));
 
   DrawingComponent drawingComponent = DrawingComponent.get(this);
-  drawingComponent.drawSize.set(2f,2f);
+  drawingComponent.drawSize.set(1.85f,2.51f);
   drawingComponent.offset.set(0,2);
 
   CollisionComponent cc = CollisionComponent.get(this);
