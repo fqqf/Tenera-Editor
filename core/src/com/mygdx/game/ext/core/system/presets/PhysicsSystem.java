@@ -58,7 +58,7 @@ public class PhysicsSystem extends System
 
    if (physicsComponent.useGravity)
     velocity.y+=GRAVITY_FORCE_VALUE+physicsComponent.personalGravity.y; else velocity.y = 0;
-
+    return;
   }
   jumpComponent.iter();
 
